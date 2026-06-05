@@ -840,6 +840,21 @@ section {
   font-weight: 600;
 }
 
+.tag-live {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+}
+
+.portfolio-card--live {
+  border-color: rgba(22, 163, 74, 0.35);
+  box-shadow: 0 4px 24px rgba(22, 163, 74, 0.08);
+}
+
+.portfolio-card--live:hover {
+  border-color: rgba(22, 163, 74, 0.55);
+  box-shadow: 0 12px 40px rgba(22, 163, 74, 0.14);
+}
+
 .portfolio-info p {
   font-size: 0.9rem;
   color: var(--text-muted);

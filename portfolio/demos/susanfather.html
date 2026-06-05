@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수산아빠 — 신선 농수산물 온라인 쇼핑몰</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --bg: #f7f9f8;
+  --text: #1a1f1c;
+  --text-muted: #5c6b62;
+  --accent: #1a6b4a;
+  --accent-light: #238f63;
+  --accent-gold: #e8a838;
+  --border: #e2ebe6;
+  --nav-bg: rgba(255,255,255,0.96);
+  --card-bg: #fff;
+  --btn-radius: 12px;
+}
+body { background: var(--bg); color: var(--text); }
+.site-nav { background: var(--nav-bg); border-color: var(--border); }
+.site-nav .logo { color: var(--accent); font-weight: 800; }
+.nav-links a { color: var(--text-muted); }
+.nav-cta { background: var(--accent); }
+.hero {
+  padding: clamp(40px, 6vw, 64px) 0;
+  background: linear-gradient(180deg, #e8f5ef 0%, var(--bg) 100%);
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.hero-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.76rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: clamp(1.85rem, 4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p { color: var(--text-muted); line-height: 1.7; margin-bottom: 22px; }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-primary {
+  padding: 13px 22px;
+  border-radius: var(--btn-radius);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-outline {
+  padding: 13px 22px;
+  border-radius: var(--btn-radius);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  background: #fff;
+}
+.hero-visual {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md, 0 12px 40px rgba(26,107,74,0.14));
+  aspect-ratio: 4/3;
+  background: #ddd;
+}
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+.categories { padding: 48px 0 24px; }
+.categories h2, .products h2 { font-size: 1.35rem; margin-bottom: 20px; }
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.cat {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 12px;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.cat span { display: block; font-size: 1.5rem; margin-bottom: 8px; }
+.products { padding: 24px 0 56px; }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.product {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.product img { aspect-ratio: 1; object-fit: cover; width: 100%; }
+.product-info { padding: 14px; }
+.product-info h3 { font-size: 0.88rem; margin-bottom: 6px; }
+.product-info .price { color: var(--accent); font-weight: 700; font-size: 0.95rem; }
+.product-info .price small { color: var(--text-muted); font-weight: 400; font-size: 0.76rem; }
+.trust {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.live-note {
+  text-align: center;
+  padding: 18px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+@media (max-width: 768px) {
+  .hero-inner, .cat-grid, .product-grid { grid-template-columns: 1fr 1fr; }
+  .hero-visual { display: none; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="logo">수산아빠</div>
+  <div class="nav-links">
+    <a href="#">홈</a>
+    <a href="#">장바구니</a>
+    <a href="#">마이페이지</a>
+    <a href="#" class="nav-cta">베스트</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <div class="hero-badge">산지직송 · susanfather.com</div>
+      <h1>아빠가 고른<br><em>신선 농수산물</em></h1>
+      <p>제철 과일, 신선 채소, 수산물, 쌀·곡물을 산지에서 직송합니다. 당일·익일 배송으로 식탁까지 신선하게.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary" data-toast="데모: 베스트 상품">베스트 보러가기</a>
+        <a href="#" class="btn-outline" data-toast="데모: 회원가입">회원가입</a>
+      </div>
+      <div class="trust">
+        <span>✓ 산지직송</span>
+        <span>✓ 신선 보장</span>
+        <span>✓ 카카오 상담</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&q=80" alt="신선 채소">
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="container">
+    <h2>카테고리</h2>
+    <div class="cat-grid">
+      <div class="cat"><span>🍎</span>제철 과일</div>
+      <div class="cat"><span>🥬</span>신선 채소</div>
+      <div class="cat"><span>🐟</span>수산물</div>
+      <div class="cat"><span>🌾</span>쌀·곡물</div>
+    </div>
+  </div>
+</section>
+
+<section class="products">
+  <div class="container">
+    <h2>베스트 상품</h2>
+    <div class="product-grid">
+      <article class="product">
+        <img src="https://images.unsplash.com/photo-1619566636852-adf3ef000950?w=400&q=80" alt="사과">
+        <div class="product-info"><h3>문경 사과 5kg</h3><p class="price">32,000원 <small>산지직송</small></p></div>
+      </article>
+      <article class="product">
+        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b13a?w=400&q=80" alt="연어">
+        <div class="product-info"><h3>노르웨이 연어</h3><p class="price">18,900원 <small>신선</small></p></div>
+      </article>
+      <article class="product">
+        <img src="https://images.unsplash.com/photo-1595855759920-865aebd56dc3?w=400&q=80" alt="쌀">
+        <div class="product-info"><h3>이천쌀 10kg</h3><p class="price">45,000원 <small>당일발송</small></p></div>
+      </article>
+      <article class="product">
+        <img src="https://images.unsplash.com/photo-1546094097-3a4a1a5301c4?w=400&q=80" alt="토마토">
+        <div class="product-info"><h3>완숙 토마토 3kg</h3><p class="price">12,500원 <small>제철</small></p></div>
+      </article>
+    </div>
+  </div>
+</section>
+<p class="live-note">실제 운영 쇼핑몰 · susanfather.com</p>
+<script src="demo.js"></script>
+</body>
+</html>
