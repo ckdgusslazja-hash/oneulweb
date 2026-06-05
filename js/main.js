@@ -93,66 +93,59 @@ function initShowcaseControls() {
   const container = wrap.querySelector('.showcase-iframe-container');
   if (!iframe || !buttons.length || !container) return;
 
+  const DESKTOP_WIDTH = 1440;
+  const DESKTOP_HEIGHT = 900;
   const MOBILE_WIDTH = 390;
   const MOBILE_HEIGHT = 844;
-  const DESKTOP_HEIGHT = 900;
+  const MOBILE_WIDTH_SM = 320;
+  const MOBILE_HEIGHT_SM = 693;
 
-  const applyIframeViewport = (width, height) => {
-    iframe.style.width = typeof width === 'number' ? `${width}px` : width;
-    iframe.style.height = `${height}px`;
-    iframe.style.transform = '';
-    iframe.style.transformOrigin = '';
+  const scaleIframe = (frameW, frameH) => {
+    const available = container.clientWidth || frameW;
+    const scale = available / frameW;
+    iframe.style.width = `${frameW}px`;
+    iframe.style.height = `${frameH}px`;
+    iframe.style.transform = `scale(${scale})`;
+    iframe.style.transformOrigin = 'top left';
     iframe.setAttribute('scrolling', 'yes');
-  };
-
-  const syncMobileScale = () => {
-    const frameWidth = wrap.classList.contains('mobile-preview')
-      ? Math.min(MOBILE_WIDTH, container.clientWidth || MOBILE_WIDTH)
-      : null;
-    if (!frameWidth) return;
-
-    const frameHeight = window.innerWidth <= 768 ? 693 : MOBILE_HEIGHT;
-    const scale = (container.clientWidth || frameWidth) / frameWidth;
-    if (scale < 0.999) {
-      iframe.style.width = `${frameWidth}px`;
-      iframe.style.height = `${frameHeight}px`;
-      iframe.style.transform = `scale(${scale})`;
-      iframe.style.transformOrigin = 'top left';
-      container.style.height = `${Math.round(frameHeight * scale)}px`;
-    } else {
-      container.style.height = '';
-      applyIframeViewport(frameWidth, frameHeight);
-    }
+    container.style.height = `${Math.round(frameH * scale)}px`;
+    container.scrollTop = 0;
   };
 
   const setDesktop = () => {
     wrap.classList.remove('mobile-preview');
-    container.style.height = '';
-    applyIframeViewport('100%', DESKTOP_HEIGHT);
-    container.scrollTop = 0;
+    scaleIframe(DESKTOP_WIDTH, DESKTOP_HEIGHT);
   };
 
   const setMobile = () => {
     wrap.classList.add('mobile-preview');
-    container.scrollTop = 0;
-    syncMobileScale();
+    const isSmall = window.innerWidth <= 768;
+    scaleIframe(
+      isSmall ? MOBILE_WIDTH_SM : MOBILE_WIDTH,
+      isSmall ? MOBILE_HEIGHT_SM : MOBILE_HEIGHT
+    );
+  };
+
+  const syncActive = () => {
+    if (wrap.classList.contains('mobile-preview')) setMobile();
+    else setDesktop();
   };
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      if (btn.dataset.device === 'mobile') {
-        setMobile();
-      } else {
-        setDesktop();
-      }
+      if (btn.dataset.device === 'mobile') setMobile();
+      else setDesktop();
     });
   });
 
-  window.addEventListener('resize', () => {
-    if (wrap.classList.contains('mobile-preview')) syncMobileScale();
-  });
+  window.addEventListener('resize', syncActive, { passive: true });
+
+  // 초기 로드 시 active 버튼 기준 적용
+  const active = wrap.querySelector('.showcase-controls button.active');
+  if (active?.dataset.device === 'mobile') setMobile();
+  else setDesktop();
 }
 
 // Portfolio filter

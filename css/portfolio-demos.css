@@ -38,7 +38,7 @@
 }
 
 .showcase-iframe-container {
-  height: 720px;
+  min-height: 400px;
   overflow: hidden;
   position: relative;
   background: white;
@@ -46,10 +46,9 @@
 }
 
 .showcase-iframe-container iframe {
-  width: 100%;
-  height: 720px;
   border: none;
   display: block;
+  transform-origin: top left;
 }
 
 /* Mobile preview mode */
@@ -61,7 +60,6 @@
 .showcase-frame-wrap.mobile-preview .showcase-iframe-container {
   max-width: 390px;
   margin: 0 auto;
-  height: 844px;
   overflow: hidden;
   border-radius: 32px;
   border: 10px solid #2a2a2a;
@@ -70,9 +68,7 @@
 }
 
 .showcase-frame-wrap.mobile-preview .showcase-iframe-container iframe {
-  width: 390px;
-  max-width: 100%;
-  height: 844px;
+  /* width/height/transform — JS에서 설정 */
 }
 
 .showcase-frame-wrap.mobile-preview .mockup-bar {
@@ -142,23 +138,9 @@
 }
 
 @media (max-width: 768px) {
-  .showcase-iframe-container {
-    height: 580px;
-  }
-
-  .showcase-iframe-container iframe {
-    height: 580px;
-  }
-
   .showcase-frame-wrap.mobile-preview .showcase-iframe-container {
     max-width: 320px;
-    height: 693px;
     border-width: 8px;
     border-radius: 28px;
-  }
-
-  .showcase-frame-wrap.mobile-preview .showcase-iframe-container iframe {
-    width: 320px;
-    height: 693px;
   }
 }
