@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>넥스젠테크 NEXGEN TECH — 반도체·산업용 센서 B2B 제조</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Noto Sans KR', sans-serif;
+  --font-body: 'Noto Sans KR', sans-serif;
+  --bg: #F4F6F9;
+  --text: #0B1F3A;
+  --text-muted: #5A6B82;
+  --accent: #1B3A6B;
+  --accent-light: #2E5A9E;
+  --accent-steel: #4A6FA5;
+  --accent-cyan: #38BDF8;
+  --accent-text: #fff;
+  --border: #D8E0EC;
+  --nav-bg: rgba(11, 31, 58, 0.96);
+  --footer-bg: #071428;
+  --card-bg: #FFFFFF;
+  --surface: #E8EDF4;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --logo-weight: 800;
+  --title-weight: 700;
+  --footer-text: rgba(255,255,255,0.62);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+/* Nav */
+.site-nav {
+  background: var(--nav-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.site-nav .logo {
+  color: #fff;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.site-nav .logo span {
+  font-size: 0.68em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+  opacity: 0.9;
+}
+
+.nav-links a { color: rgba(255,255,255,0.72); }
+.nav-links a:hover { color: #fff; }
+.nav-cta { background: var(--accent-cyan); color: var(--text); font-weight: 700; }
+.nav-toggle { color: #fff; }
+
+@media (max-width: 768px) {
+  .nav-links { background: var(--nav-bg); border-color: rgba(255,255,255,0.1); }
+  .nav-links a { color: rgba(255,255,255,0.85); }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 85vh, 720px);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(7,20,40,0.92) 0%, rgba(27,58,107,0.78) 45%, rgba(11,31,58,0.55) 100%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(100px, 12vw, 140px) clamp(20px, 4vw, 48px) clamp(80px, 10vw, 120px);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(56,189,248,0.15);
+  border: 1px solid rgba(56,189,248,0.35);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+  border-radius: 2px;
+}
+
+.hero-badge .dot {
+  width: 7px;
+  height: 7px;
+  background: #22D3EE;
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  max-width: 720px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent-cyan);
+}
+
+.hero-lead {
+  font-size: clamp(0.95rem, 2vw, 1.12rem);
+  color: rgba(255,255,255,0.82);
+  line-height: 1.85;
+  max-width: 580px;
+  margin-bottom: 32px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.btn-hero {
+  padding: 15px 30px;
+  background: var(--accent-cyan);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(56,189,248,0.35);
+}
+
+.btn-hero-outline {
+  padding: 15px 30px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.btn-hero-outline:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.6);
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero-tags span {
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  border-radius: 2px;
+}
+
+/* Stats bar */
+.stats-bar {
+  background: var(--accent);
+  color: #fff;
+  padding: clamp(36px, 5vw, 52px) 0;
+  position: relative;
+  border-bottom: 3px solid var(--accent-cyan);
+}
+
+.stats-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.12), transparent);
+  pointer-events: none;
+}
+
+.stats-bar .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  text-align: center;
+  position: relative;
+}
+
+.stat-item strong {
+  display: block;
+  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: var(--accent-cyan);
+}
+
+.stat-item span {
+  font-size: clamp(0.78rem, 1.5vw, 0.9rem);
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+}
+
+.stat-item small {
+  display: block;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+}
+
+/* About */
+.about { background: var(--card-bg); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow: 0 20px 50px rgba(11,31,58,0.12);
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.vision-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.vision-card {
+  padding: 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  border-left: 4px solid var(--accent);
+}
+
+.vision-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.vision-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.values-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.values-strip span {
+  padding: 8px 16px;
+  background: var(--surface);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  border-radius: 2px;
+}
+
+/* Business */
+.business { background: var(--bg); }
+
+.biz-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 3vw, 28px);
+}
+
+.biz-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.biz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(27,58,107,0.12);
+}
+
+.biz-card .biz-head {
+  padding: clamp(24px, 3vw, 32px);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  color: #fff;
+}
+
+.biz-card .biz-num {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.biz-card .biz-head h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.biz-card .biz-head p {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.biz-card .biz-body {
+  padding: clamp(20px, 3vw, 28px);
+}
+
+.biz-card .biz-body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.biz-card .biz-body li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.65;
+}
+
+.biz-card .biz-body li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-cyan);
+  border-radius: 1px;
+}
+
+.biz-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.biz-tags span {
+  padding: 4px 10px;
+  background: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-steel);
+  border-radius: 2px;
+}
+
+/* Technology */
+.tech { background: var(--card-bg); }
+
+.tech .info-grid { grid-template-columns: repeat(4, 1fr); }
+
+.tech .info-box {
+  text-align: left;
+  padding: clamp(24px, 3vw, 32px);
+  border-top: 3px solid var(--accent);
+  transition: border-color 0.25s;
+}
+
+.tech .info-box:hover { border-top-color: var(--accent-cyan); }
+
+.tech .info-box .icon {
+  width: 48px;
+  height: 48px;
+  background: var(--surface);
+  border-radius: var(--card-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+.tech .info-box h4 { font-size: 1rem; margin-bottom: 10px; }
+
+.tech .info-box p { font-size: 0.85rem; line-height: 1.75; }
+
+.rd-banner {
+  margin-top: clamp(40px, 6vw, 56px);
+  padding: clamp(28px, 4vw, 40px);
+  background: linear-gradient(135deg, var(--accent) 0%, #0F2847 100%);
+  border-radius: var(--card-radius);
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.rd-banner h3 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.rd-banner p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.8;
+}
+
+.rd-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.rd-metric {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--card-radius);
+}
+
+.rd-metric strong {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-bottom: 4px;
+}
+
+.rd-metric span { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+
+/* Global */
+.global { background: var(--bg); }
+
+.global-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(24px, 4vw, 40px);
+  align-items: start;
+}
+
+.map-box {
+  aspect-ratio: 16/10;
+  background: linear-gradient(145deg, #1B3A6B 0%, #2E5A9E 50%, #4A6FA5 100%);
+  border: 1px solid var(--border);
+}
+
+.map-box::before {
+  background:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.map-pin strong { color: var(--accent); }
+.map-pin span { color: var(--text-muted); }
+
+.country-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.country-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  transition: border-color 0.25s;
+}
+
+.country-item:hover { border-color: var(--accent-steel); }
+
+.country-flag {
+  width: 44px;
+  height: 32px;
+  background: var(--surface);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.country-item h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 2px; }
+.country-item p { font-size: 0.8rem; color: var(--text-muted); }
+
+/* IR */
+.ir { background: var(--card-bg); }
+
+.ir-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+  margin-bottom: clamp(32px, 5vw, 48px);
+}
+
+.ir-card {
+  padding: clamp(24px, 3vw, 32px);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+}
+
+.ir-card .ir-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.ir-card strong {
+  display: block;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.ir-card .ir-change {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #059669;
+}
+
+.ir-card .ir-change.down { color: #DC2626; }
+
+.ir-docs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.ir-doc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  transition: background 0.25s;
+}
+
+.ir-doc:hover { background: var(--surface); }
+
+.ir-doc-info h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
+.ir-doc-info span { font-size: 0.78rem; color: var(--text-muted); }
+
+.ir-doc .dl-btn {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  white-space: nowrap;
+  transition: opacity 0.25s;
+}
+
+.ir-doc .dl-btn:hover { opacity: 0.88; }
+
+/* News */
+.news { background: var(--bg); }
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.news-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(11,31,58,0.1);
+}
+
+.news-card .news-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.news-card .news-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.news-card:hover .news-img img { transform: scale(1.05); }
+
+.news-card .news-body { padding: clamp(18px, 2.5vw, 24px); }
+
+.news-cat {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(27,58,107,0.08);
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+
+.news-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-date { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Careers */
+.careers {
+  background: linear-gradient(135deg, var(--accent) 0%, #0F2847 100%);
+  color: #fff;
+}
+
+.careers-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+
+.careers h2 { color: #fff; }
+
+.careers .section-desc { color: rgba(255,255,255,0.78); max-width: none; }
+
+.perk-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 28px 0;
+}
+
+.perk-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--card-radius);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.perk-item .perk-icon { font-size: 1.2rem; }
+
+.open-roles {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 3vw, 32px);
+}
+
+.open-roles h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.role-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+
+.role-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.role-row strong { font-size: 0.95rem; }
+.role-row span { font-size: 0.8rem; opacity: 0.7; }
+
+.role-row a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  white-space: nowrap;
+}
+
+/* Partners */
+.partners {
+  padding: clamp(40px, 6vw, 56px) 0;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.partners .logo-strip span {
+  border-color: var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 10px 22px;
+}
+
+/* Contact */
+.contact { background: var(--bg); }
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: start;
+}
+
+.contact-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.contact-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.contact-detail .ci-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--card-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-detail strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.contact-detail p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.contact-hours {
+  margin-top: 28px;
+  padding: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+
+.contact-hours h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+/* History timeline */
+.history { background: var(--card-bg); }
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  position: relative;
+  margin-top: 8px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--border);
+}
+
+.tl-item {
+  text-align: center;
+  position: relative;
+  padding-top: 48px;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border: 3px solid var(--card-bg);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--accent);
+  z-index: 1;
+}
+
+.tl-year {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.tl-item p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  padding: 0 8px;
+}
+
+/* CTA */
+.cta-band {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.cta-band .btn-primary { background: var(--accent); }
+
+/* Footer extras */
+.footer-cert {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-cert span {
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.08);
+  font-size: 0.7rem;
+  border-radius: 2px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.6);
+  transition: background 0.25s, color 0.25s;
+}
+
+.footer-social a:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .tech .info-grid { grid-template-columns: repeat(2, 1fr); }
+  .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .ir-grid { grid-template-columns: repeat(2, 1fr); }
+  .timeline { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .timeline::before { display: none; }
+}
+
+@media (max-width: 900px) {
+  .about-grid,
+  .global-layout,
+  .careers-grid,
+  .contact-layout,
+  .rd-banner { grid-template-columns: 1fr; }
+  .biz-grid { grid-template-columns: 1fr; }
+  .ir-docs { grid-template-columns: 1fr; }
+  .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .vision-cards { grid-template-columns: 1fr; }
+  .tech .info-grid { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .perk-list { grid-template-columns: 1fr; }
+  .rd-metrics { grid-template-columns: 1fr 1fr; }
+  .timeline { grid-template-columns: 1fr; }
+  .tl-item { text-align: left; padding: 16px 0 16px 32px; border-left: 2px solid var(--border); }
+  .tl-item::before { left: -9px; top: 18px; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav" id="top">
+  <a href="#top" class="logo">넥스젠테크 <span>NEXGEN TECH</span></a>
+  <button class="nav-toggle" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#about">회사소개</a>
+    <a href="#business">사업분야</a>
+    <a href="#technology">기술력</a>
+    <a href="#ir">IR</a>
+    <a href="#careers">채용</a>
+    <a href="#news">뉴스</a>
+    <a href="#contact" class="nav-cta">문의</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80" alt="반도체 제조 공장 및 첨단 장비">
+  </div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> KOSDAQ 상장 · B2B 정밀 제조</div>
+    <h1>정밀 반도체 부품과<br><em>산업용 센서</em>의 글로벌 파트너</h1>
+    <p class="hero-lead">1998년 설립 이래 반도체 패키징 부품, 산업용 센서, 정밀 금속 가공 분야에서 국내외 280여 고객사와 함께 성장해 온 B2B 제조 기업입니다. 품질·납기·기술력으로 신뢰를 증명합니다.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-hero">사업 제휴 문의</a>
+      <a href="#business" class="btn-hero-outline">사업분야 보기</a>
+    </div>
+    <div class="hero-tags">
+      <span>반도체 부품</span>
+      <span>산업용 센서</span>
+      <span>정밀 금속</span>
+      <span>ISO 9001 · IATF 16949</span>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stat-item">
+      <strong>2,840억</strong>
+      <span>2024 연결 매출</span>
+      <small>전년 대비 +12.4%</small>
+    </div>
+    <div class="stat-item">
+      <strong>1,247명</strong>
+      <span>전 세계 임직원</span>
+      <small>R&D 인력 18%</small>
+    </div>
+    <div class="stat-item">
+      <strong>386건</strong>
+      <span>등록 특허</span>
+      <small>국내·해외 포함</small>
+    </div>
+    <div class="stat-item">
+      <strong>38개국</strong>
+      <span>수출 거점</span>
+      <small>매출의 62% 해외</small>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80" alt="넥스젠테크 연구·생산 시설">
+      </div>
+      <div>
+        <div class="section-label">About NEXGEN</div>
+        <h2 class="section-title">기술로 연결하는<br>산업의 미래</h2>
+        <p class="section-desc">넥스젠테크는 반도체·자동차·로봇·에너지 산업이 요구하는 초정밀 부품과 센서를 설계·개발·量産하는 Total Solution Provider입니다. 경기 화성 R&D센터와 충남 천안·베트남·폴란드 생산기지를 통해 글로벌 공급망을 운영합니다.</p>
+        <div class="vision-cards">
+          <div class="vision-card">
+            <h4>비전 Vision</h4>
+            <p>정밀 제조 기술로 글로벌 산업 혁신을 선도하는 Asia No.1 B2B 파트너</p>
+          </div>
+          <div class="vision-card">
+            <h4>미션 Mission</h4>
+            <p>고객의 제품 경쟁력을 높이는 최적의 부품·센서 솔루션을 적기에 제공</p>
+          </div>
+        </div>
+        <div class="values-strip">
+          <span>고객중심</span>
+          <span>기술혁신</span>
+          <span>품질제일</span>
+          <span>상생협력</span>
+          <span>지속가능경영</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- History -->
+<section class="history">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">History</div>
+      <h2 class="section-title">넥스젠테크 성장 여정</h2>
+      <p class="section-desc">27년간 축적된 제조 노하우와 R&D 투자로 글로벌 B2B 기업으로 도약했습니다.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1998</div>
+        <p>화성 본사 설립<br>정밀 금속 가공 시작</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2008</div>
+        <p>반도체 부품 사업부 신설<br>삼성·SK 협력 시작</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2015</div>
+        <p>산업용 센서 사업 진출<br>베트남 공장 가동</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2020</div>
+        <p>KOSDAQ 상장<br>매출 2,000억 돌파</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025</div>
+        <p>폴란드 EU 거점 오픈<br>차세대 MEMS 양산</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Business -->
+<section class="business" id="business">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Business Areas</div>
+      <h2 class="section-title">4대 핵심 사업분야</h2>
+      <p class="section-desc">반도체·센서·정밀가공·시스템 통합까지, 고객 산업에 맞춘 맞춤형 B2B 솔루션을 제공합니다.</p>
+    </div>
+    <div class="biz-grid">
+      <article class="biz-card">
+        <div class="biz-head">
+          <div class="biz-num">DIVISION 01</div>
+          <h3>반도체 패키징 부품</h3>
+          <p>Lead Frame, Substrate, Heat Spreader 등 패키징 핵심 소재</p>
+        </div>
+        <div class="biz-body">
+          <ul>
+            <li>고밀도·초박형 Lead Frame 양산 (0.1mm 이하 두께)</li>
+            <li>FC-BGA·SiP용 고열전도 Substrate 개발</li>
+            <li>메모리·파운드리 Tier-1 고객사 15社 공급</li>
+            <li>월 4,200만 pcs 생산 CAPA (화성·천안)</li>
+          </ul>
+          <div class="biz-tags"><span>메모리</span><span>시스템반도체</span><span>先端 패키징</span></div>
+        </div>
+      </article>
+      <article class="biz-card">
+        <div class="biz-head">
+          <div class="biz-num">DIVISION 02</div>
+          <h3>산업용 센서</h3>
+          <p>압력·온도·위치·진동 센서 및 IoT 모듈</p>
+        </div>
+        <div class="biz-body">
+          <ul>
+            <li>자동차 EV 배터리·파워트레인용 압력센서</li>
+            <li>스마트팩토리 진동·온도 모니터링 솔루션</li>
+            <li>±0.05% FS 정밀도 달성 (자체 보정 알고리즘)</li>
+            <li>글로벌 Tier-1 완성차 8社 납품 실적</li>
+          </ul>
+          <div class="biz-tags"><span>EV</span><span>로봇</span><span>에너지</span></div>
+        </div>
+      </article>
+      <article class="biz-card">
+        <div class="biz-head">
+          <div class="biz-num">DIVISION 03</div>
+          <h3>정밀 금속·플라스틱</h3>
+          <p>CNC, MIM, 사출·다이캐스팅 일체형 가공</p>
+        </div>
+        <div class="biz-body">
+          <ul>
+            <li>5축 CNC · μm 단위 공차 가공 (자동차·의료)</li>
+            <li>스테인리스·티타늄 MIM 양산 라인</li>
+            <li>클린룸 Class 1,000 사출 성형</li>
+            <li>고객 도면 기반 Proto → 양산 원스톱</li>
+          </ul>
+          <div class="biz-tags"><span>CNC</span><span>MIM</span><span>사출</span></div>
+        </div>
+      </article>
+      <article class="biz-card">
+        <div class="biz-head">
+          <div class="biz-num">DIVISION 04</div>
+          <h3>시스템·모듈 통합</h3>
+          <p>센서+제어+통신 패키지 및 ODM 서비스</p>
+        </div>
+        <div class="biz-body">
+          <ul>
+            <li>산업용 센서 모듈 + 펌웨어·앱 통합 패키지</li>
+            <li>반도체 검사 장비용 Probe Card 모듈</li>
+            <li>고객사 Co-Development · JDM 계약 다수</li>
+            <li>ISO 26262 Functional Safety 대응 설계</li>
+          </ul>
+          <div class="biz-tags"><span>ODM</span><span>IoT</span><span>Functional Safety</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Technology -->
+<section class="tech" id="technology">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Technology & R&D</div>
+      <h2 class="section-title">세계 수준의 기술 경쟁력</h2>
+      <p class="section-desc">매출의 7.2%를 R&D에 재투자하며, 차세대 반도체·센서 기술을 선제적으로 개발합니다.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="icon">🔬</div>
+        <h4>차세대 MEMS R&D</h4>
+        <p>화성 R&D센터 Class 100 클린룸에서 초미세 MEMS 센서 프로토타입부터 양산까지 일괄 개발합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">⚙️</div>
+        <h4>스마트 팩토리</h4>
+        <p>AI 비전 검사·예지보전 시스템으로 불량률 0.3% 이하, 설비 가동률 94%를 유지합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🌱</div>
+        <h4>친환경 제조</h4>
+        <p>탄소중립 로드맵 2030 달성을 위해 재생에너지 40% 전환 및 공정 폐수 Zero화를 추진합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🤝</div>
+        <h4>오픈 이노베이션</h4>
+        <p>KAIST·서울대·Fraunhofer 등 12개 기관과 공동연구, 스타트업 기술 투자·M&A를 확대합니다.</p>
+      </div>
+    </div>
+    <div class="rd-banner">
+      <div>
+        <h3>2025 R&D 투자 및 성과</h3>
+        <p>반도체 초미세 패키징과 EV용 고신뢰성 센서에 집중 투자하며, 2026년 신규 양산 라인 3개를 가동할 예정입니다. 정부 산업기술 R&D 과제 8건 수주로 기술 로드맵을 가속화하고 있습니다.</p>
+      </div>
+      <div class="rd-metrics">
+        <div class="rd-metric"><strong>7.2%</strong><span>매출 대비 R&D 비중</span></div>
+        <div class="rd-metric"><strong>224명</strong><span>전문 연구 인력</span></div>
+        <div class="rd-metric"><strong>48건</strong><span>2024 신규 특허</span></div>
+        <div class="rd-metric"><strong>12개</strong><span>공동연구 기관</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Global -->
+<section class="global" id="global">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Global Network</div>
+      <h2 class="section-title">글로벌 생산·영업 거점</h2>
+      <p class="section-desc">아시아·유럽·북미 38개국에 영업·기술·물류 거점을 운영하여 현지 밀착 서비스를 제공합니다.</p>
+    </div>
+    <div class="global-layout">
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>🌏 Global Manufacturing Network</strong>
+          <span>한국 · 베트남 · 폴란드 · 미국 · 중국 · 일본</span>
+        </div>
+      </div>
+      <div class="country-list">
+        <div class="country-item">
+          <div class="country-flag">🇰🇷</div>
+          <div>
+            <h4>대한민국 (본사·R&D)</h4>
+            <p>경기 화성 본사 · 충남 천안 2공장 · R&D센터</p>
+          </div>
+        </div>
+        <div class="country-item">
+          <div class="country-flag">🇻🇳</div>
+          <div>
+            <h4>베트남 (동남아 허브)</h4>
+            <p>호치민 반도체 부품 양산 · 센서 조립</p>
+          </div>
+        </div>
+        <div class="country-item">
+          <div class="country-flag">🇵🇱</div>
+          <div>
+            <h4>폴란드 (EU 거점)</h4>
+            <p>2025년 EU 물류·기술지원 센터 오픈</p>
+          </div>
+        </div>
+        <div class="country-item">
+          <div class="country-flag">🇺🇸</div>
+          <div>
+            <h4>미국 (북미 영업)</h4>
+            <p>실리콘밸리 · 디트로이트 기술·영업 사무소</p>
+          </div>
+        </div>
+        <div class="country-item">
+          <div class="country-flag">🇨🇳</div>
+          <div>
+            <h4>중국 · 일본</h4>
+            <p>상하이 · 도쿄 현지 기술지원 및 품질센터</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partners -->
+<section class="partners">
+  <div class="container">
+    <div class="logo-strip">
+      <span>SAMSUNG</span>
+      <span>SK hynix</span>
+      <span>LG Energy</span>
+      <span>Hyundai</span>
+      <span>BOSCH</span>
+      <span>Infineon</span>
+      <span>TSMC</span>
+      <span>CONTINENTAL</span>
+    </div>
+  </div>
+</section>
+
+<!-- IR -->
+<section class="ir" id="ir">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Investor Relations</div>
+      <h2 class="section-title">투자정보 (IR)</h2>
+      <p class="section-desc">투명한 경영과 지속적인 성장으로 주주 가치를 높이겠습니다. KOSDAQ 상장사 039840</p>
+    </div>
+    <div class="ir-grid">
+      <div class="ir-card">
+        <div class="ir-label">2024 연결 매출</div>
+        <strong>2,840억</strong>
+        <span class="ir-change">▲ 12.4% YoY</span>
+      </div>
+      <div class="ir-card">
+        <div class="ir-label">2024 영업이익</div>
+        <strong>312억</strong>
+        <span class="ir-change">▲ 18.7% YoY</span>
+      </div>
+      <div class="ir-card">
+        <div class="ir-label">2024 당기순이익</div>
+        <strong>248억</strong>
+        <span class="ir-change">▲ 15.2% YoY</span>
+      </div>
+      <div class="ir-card">
+        <div class="ir-label">주당순이익 (EPS)</div>
+        <strong>3,420원</strong>
+        <span class="ir-change">▲ 14.8% YoY</span>
+      </div>
+    </div>
+    <div class="ir-docs">
+      <a href="#" class="ir-doc" data-toast="2024 사업보고서 다운로드 (데모)">
+        <div class="ir-doc-info">
+          <h4>2024 사업보고서</h4>
+          <span>2025.03.28 공시</span>
+        </div>
+        <span class="dl-btn">PDF</span>
+      </a>
+      <a href="#" class="ir-doc" data-toast="2024 연간 실적발표 자료 (데모)">
+        <div class="ir-doc-info">
+          <h4>2024 연간 실적발표</h4>
+          <span>2025.02.14 IR</span>
+        </div>
+        <span class="dl-btn">PDF</span>
+      </a>
+      <a href="#" class="ir-doc" data-toast="2025 1분기 실적발표 예정 (데모)">
+        <div class="ir-doc-info">
+          <h4>2025 1분기 실적발표</h4>
+          <span>2025.05.15 예정</span>
+        </div>
+        <span class="dl-btn">예정</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section class="news" id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">News & Media</div>
+      <h2 class="section-title">뉴스 & 보도자료</h2>
+      <p class="section-desc">넥스젠테크의 최신 소식과 산업 동향을 전해 드립니다.</p>
+    </div>
+    <div class="news-grid">
+      <article class="news-card">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80" alt="반도체 기술">
+        </div>
+        <div class="news-body">
+          <span class="news-cat">보도자료</span>
+          <h3>넥스젠테크, 차세대 MEMS 압력센서 양산 개시</h3>
+          <p>EV 배터리 열관리용 고정밀 센서 국내 완성차 3社에 본격 납품을 시작했습니다.</p>
+          <time class="news-date">2025.05.28</time>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&q=80" alt="글로벌 네트워크">
+        </div>
+        <div class="news-body">
+          <span class="news-cat">공지</span>
+          <h3>폴란드 EU 물류·기술센터 준공식 개최</h3>
+          <p>유럽 고객사 납기 단축 및 현지 기술지원 체계를 강화하는 전략 거점입니다.</p>
+          <time class="news-date">2025.05.10</time>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&q=80" alt="R&D 투자">
+        </div>
+        <div class="news-body">
+          <span class="news-cat">IR</span>
+          <h3>2024년 연결 매출 2,840억 · 영업이익 312억 기록</h3>
+          <p>반도체 부품·산업용 센서 부문 고른 성장으로 역대 최대 실적을 달성했습니다.</p>
+          <time class="news-date">2025.02.14</time>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-img">
+          <img src="https://images.unsplash.com/photo-1532619675605-1ede6c2ed7b0?w=500&q=80" alt="ESG 경영">
+        </div>
+        <div class="news-body">
+          <span class="news-cat">ESG</span>
+          <h3>2024 지속가능경영보고서 발간 · RE100 로드맵 공개</h3>
+          <p>2030 탄소중립 목표와 함께 재생에너지 전환 및 협력사 ESG 평가를 확대합니다.</p>
+          <time class="news-date">2025.04.22</time>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Careers -->
+<section class="careers" id="careers">
+  <div class="container">
+    <div class="careers-grid">
+      <div>
+        <div class="section-label" style="color:var(--accent-cyan)">Careers</div>
+        <h2 class="section-title">넥스젠테크와 함께<br>미래를 만드세요</h2>
+        <p class="section-desc">반도체·센서·제조 분야 최고의 인재와 함께 글로벌 B2B 리더로 성장합니다. 도전과 성장을 지원하는 복지와 문화를 제공합니다.</p>
+        <div class="perk-list">
+          <div class="perk-item"><span class="perk-icon">💰</span> 성과급 · 스톡옵션</div>
+          <div class="perk-item"><span class="perk-icon">🏠</span> 기숙사 · 통근버스</div>
+          <div class="perk-item"><span class="perk-icon">📚</span> MBA · 자격증 지원</div>
+          <div class="perk-item"><span class="perk-icon">🌍</span> 해외 연수·파견</div>
+        </div>
+        <a href="#contact" class="btn btn-primary" data-toast="채용 지원 페이지 (데모)">채용 공고 보기</a>
+      </div>
+      <div class="open-roles">
+        <h4>채용 중인 포지션</h4>
+        <div class="role-row">
+          <div><strong>반도체 PKG 공정 엔지니어</strong><br><span>경기 화성 · 정규직</span></div>
+          <a href="#" data-toast="지원하기 (데모)">지원 →</a>
+        </div>
+        <div class="role-row">
+          <div><strong>MEMS 센서 선행연구원</strong><br><span>경기 화성 R&D · 정규직</span></div>
+          <a href="#" data-toast="지원하기 (데모)">지원 →</a>
+        </div>
+        <div class="role-row">
+          <div><strong>해외영업 (유럽권)</strong><br><span>폴란드 · 파견 2년</span></div>
+          <a href="#" data-toast="지원하기 (데모)">지원 →</a>
+        </div>
+        <div class="role-row">
+          <div><strong>스마트팩토리 SW 개발</strong><br><span>충남 천안 · 정규직</span></div>
+          <a href="#" data-toast="지원하기 (데모)">지원 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container">
+    <div class="section-header center">
+      <h2 class="section-title">B2B 제휴·견적 문의</h2>
+      <p class="section-desc">도면·사양서를 보내주시면 48시간 내 기술 검토 및 견적 회신을 드립니다.</p>
+      <a href="#contact" class="btn btn-primary">지금 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">문의하기</h2>
+      <p class="section-desc">사업 제휴, 견적, 기술 상담, IR, 채용 등 문의 유형을 선택해 주세요.</p>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h3>넥스젠테크 본사</h3>
+        <div class="contact-detail">
+          <div class="ci-icon">📍</div>
+          <div>
+            <strong>주소</strong>
+            <p>경기도 화성시 동탄산단로 128<br>넥스젠테크 타워 12F (18449)</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ci-icon">📞</div>
+          <div>
+            <strong>대표전화</strong>
+            <p>031-123-4567 (평일 09:00–18:00)<br>IR: ir@nexgentech.co.kr</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <strong>이메일</strong>
+            <p>sales@nexgentech.co.kr (영업)<br>careers@nexgentech.co.kr (채용)</p>
+          </div>
+        </div>
+        <div class="contact-hours">
+          <h4>응대 시간</h4>
+          <table class="hours-table">
+            <tr><td>평일</td><td>09:00 – 18:00</td></tr>
+            <tr><td>토요일</td><td>09:00 – 13:00 (영업만)</td></tr>
+            <tr><td>일·공휴일</td><td>휴무</td></tr>
+          </table>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="문의가 접수되었습니다. 담당자가 1~2 영업일 내 연락드리겠습니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="company">회사명 *</label>
+            <input type="text" id="company" name="company" placeholder="(주)고객사명" required>
+          </div>
+          <div class="form-group">
+            <label for="name">담당자명 *</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="email">이메일 *</label>
+            <input type="email" id="email" name="email" placeholder="name@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000">
+          </div>
+          <div class="form-group full">
+            <label for="inquiry-type">문의 유형 *</label>
+            <select id="inquiry-type" name="inquiry-type" required>
+              <option value="">선택해 주세요</option>
+              <option value="sales">사업 제휴·견적</option>
+              <option value="tech">기술·R&D 상담</option>
+              <option value="ir">IR·투자 문의</option>
+              <option value="careers">채용 문의</option>
+              <option value="etc">기타</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">문의 내용 *</label>
+            <textarea id="message" name="message" rows="5" placeholder="제품 사양, 수량, 납기 등 문의 내용을 입력해 주세요." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;background:var(--accent)">문의 접수</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">넥스젠테크 NEXGEN TECH</span>
+      <p>반도체 패키징 부품·산업용 센서·정밀 가공 분야 B2B 제조 기업. 1998년 설립, KOSDAQ 039840.</p>
+      <div class="footer-cert">
+        <span>ISO 9001</span>
+        <span>IATF 16949</span>
+        <span>ISO 14001</span>
+        <span>ISO 45001</span>
+      </div>
+      <div class="footer-social">
+        <a href="#" data-toast="LinkedIn (데모)">in</a>
+        <a href="#" data-toast="YouTube (데모)">YT</a>
+        <a href="#" data-toast="뉴스레터 (데모)">NL</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>회사</h4>
+      <a href="#about">회사소개</a>
+      <a href="#about">비전·미션</a>
+      <a href="#global">글로벌 네트워크</a>
+      <a href="#" data-toast="윤리경영 (데모)">윤리경영</a>
+      <a href="#" data-toast="ESG (데모)">ESG</a>
+    </div>
+    <div class="footer-col">
+      <h4>사업·기술</h4>
+      <a href="#business">사업분야</a>
+      <a href="#technology">기술력·R&D</a>
+      <a href="#" data-toast="품질정책 (데모)">품질정책</a>
+      <a href="#" data-toast="인증현황 (데모)">인증현황</a>
+    </div>
+    <div class="footer-col">
+      <h4>투자·소식</h4>
+      <a href="#ir">IR</a>
+      <a href="#news">뉴스</a>
+      <a href="#careers">채용</a>
+      <a href="#contact">문의</a>
+      <p style="margin-top:12px">IR: ir@nexgentech.co.kr</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NEXGEN TECH Co., Ltd. All rights reserved.</span>
+    <span>대표이사 김태현 · 사업자등록번호 123-45-67890</span>
+    <a href="#" data-toast="개인정보처리방침 (데모)">개인정보처리방침</a>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

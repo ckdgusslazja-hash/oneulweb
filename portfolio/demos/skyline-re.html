@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스카이라인부동산 SKYLINE RE — 프리미엄 부동산개발·투자 전문기업</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #F7F5F2;
+  --text: #1A1A1A;
+  --text-muted: #6B6560;
+  --accent: #2D2D2D;
+  --accent-2: #1A1A1A;
+  --accent-bronze: #B8860B;
+  --accent-gold: #C9A962;
+  --accent-light: #E8E0D4;
+  --accent-text: #fff;
+  --border: #D4CEC4;
+  --nav-bg: rgba(26,26,26,0.96);
+  --footer-bg: #141414;
+  --card-bg: #FFFFFF;
+  --btn-radius: 2px;
+  --card-radius: 4px;
+  --title-weight: 600;
+  --logo-weight: 700;
+  --footer-text: rgba(255,255,255,0.55);
+}
+
+body { background: var(--bg); }
+
+/* Nav */
+.site-nav {
+  background: var(--nav-bg);
+  border-bottom: 1px solid rgba(201,169,98,0.15);
+  color: #fff;
+}
+
+.site-nav .logo {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  gap: 2px;
+  font-family: var(--font-display);
+}
+
+.site-nav .logo strong {
+  font-size: 1.15em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.site-nav .logo span {
+  font-size: 0.5em;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  color: var(--accent-gold);
+  font-family: var(--font-body);
+}
+
+.nav-links a { color: rgba(255,255,255,0.68); }
+.nav-links a:hover { color: var(--accent-gold); }
+.nav-cta { background: var(--accent-bronze); color: #fff; font-weight: 600; letter-spacing: 0.04em; }
+.nav-toggle { color: #fff; }
+
+@media (max-width: 768px) {
+  .nav-links { background: var(--nav-bg); border-color: rgba(201,169,98,0.15); }
+  .nav-links a { color: rgba(255,255,255,0.85); }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(560px, 90vh, 780px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(20,20,20,0.9) 0%, rgba(45,45,45,0.72) 40%, rgba(20,20,20,0.45) 100%);
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: clamp(100px, 12vw, 140px) 0 clamp(80px, 10vw, 120px);
+}
+
+.hero-content { max-width: 720px; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border: 1px solid rgba(201,169,98,0.4);
+  color: var(--accent-gold);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent-gold);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent-gold);
+}
+
+.hero-desc {
+  font-size: clamp(0.92rem, 2vw, 1.08rem);
+  color: rgba(255,255,255,0.78);
+  line-height: 1.9;
+  margin-bottom: 36px;
+  max-width: 560px;
+  font-weight: 300;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-hero-primary {
+  padding: 16px 34px;
+  background: var(--accent-bronze);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+  text-transform: uppercase;
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(184,134,11,0.35);
+}
+
+.btn-hero-outline {
+  padding: 16px 34px;
+  border: 1px solid rgba(201,169,98,0.5);
+  color: var(--accent-gold);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, border-color 0.25s;
+  text-transform: uppercase;
+}
+
+.btn-hero-outline:hover {
+  background: rgba(201,169,98,0.1);
+  border-color: var(--accent-gold);
+}
+
+/* Trust strip */
+.trust-strip {
+  background: var(--accent-2);
+  padding: clamp(24px, 3vw, 32px) 0;
+  border-bottom: 1px solid rgba(201,169,98,0.2);
+}
+
+.trust-strip .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 2vw, 24px);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  justify-content: center;
+  letter-spacing: 0.02em;
+}
+
+.trust-item .ico {
+  width: 1px;
+  height: 20px;
+  background: var(--accent-gold);
+  flex-shrink: 0;
+}
+
+/* Stats */
+.stats-band {
+  background: var(--card-bg);
+  padding: clamp(48px, 6vw, 64px) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 32px);
+}
+
+.stat-item {
+  text-align: center;
+  padding: clamp(16px, 3vw, 24px);
+  border-right: 1px solid var(--border);
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-item .num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-item .num span { font-size: 0.5em; color: var(--accent-bronze); }
+
+.stat-item .lbl {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* About */
+.about-section { background: var(--bg); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 72px);
+  align-items: center;
+}
+
+.about-img {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.about-img-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px;
+  background: linear-gradient(transparent, rgba(20,20,20,0.85));
+  color: #fff;
+}
+
+.about-img-badge strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+  color: var(--accent-gold);
+}
+
+.about-img-badge span { font-size: 0.78rem; opacity: 0.8; letter-spacing: 0.06em; }
+
+.about-text .section-desc { max-width: none; margin-bottom: 20px; }
+
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 32px;
+  border: 1px solid var(--border);
+}
+
+.value-box {
+  padding: 24px 16px;
+  background: var(--card-bg);
+  text-align: center;
+}
+
+.value-box h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-bronze);
+  margin-bottom: 8px;
+}
+
+.value-box p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Business */
+.business-section { background: var(--card-bg); }
+
+.biz-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.biz-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.08);
+}
+
+.biz-card-img { aspect-ratio: 16/10; overflow: hidden; position: relative; }
+.biz-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+.biz-card:hover .biz-card-img img { transform: scale(1.04); }
+
+.biz-card-img .tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 6px 14px;
+  background: var(--accent-2);
+  color: var(--accent-gold);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.biz-card-body { padding: clamp(24px, 3vw, 32px); }
+
+.biz-card-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.biz-card-body p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.biz-card-body ul { display: flex; flex-direction: column; gap: 6px; }
+
+.biz-card-body li {
+  font-size: 0.78rem;
+  color: var(--text);
+  padding-left: 16px;
+  position: relative;
+}
+
+.biz-card-body li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent-bronze);
+  font-size: 0.7rem;
+}
+
+/* Portfolio */
+.portfolio-section { background: var(--bg); }
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.07);
+}
+
+.project-img { aspect-ratio: 16/10; overflow: hidden; }
+.project-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.project-body { padding: 28px; }
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.project-year {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent-bronze);
+  letter-spacing: 0.1em;
+}
+
+.project-scale {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.project-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.project-body p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Investment */
+.invest-section { background: var(--accent-2); color: #fff; }
+
+.invest-section .section-label { color: var(--accent-gold); }
+.invest-section .section-title { color: #fff; }
+.invest-section .section-desc { color: rgba(255,255,255,0.65); }
+
+.invest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.invest-card {
+  padding: clamp(28px, 4vw, 36px);
+  border: 1px solid rgba(201,169,98,0.25);
+  border-radius: var(--card-radius);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.invest-card:hover {
+  border-color: var(--accent-gold);
+  background: rgba(201,169,98,0.06);
+}
+
+.invest-card .ico { font-size: 1.6rem; margin-bottom: 16px; }
+
+.invest-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+
+.invest-card p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.invest-metric {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.invest-metric span { font-size: 0.45em; color: var(--accent-gold); }
+
+.invest-metric-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+/* Rental */
+.rental-section { background: var(--card-bg); }
+
+.rental-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.rental-list { display: flex; flex-direction: column; gap: 0; }
+
+.rental-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.rental-item:first-child { border-top: 1px solid var(--border); }
+
+.rental-item h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.rental-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+.rental-price {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.rental-price strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-bronze);
+}
+
+.rental-price span { font-size: 0.72rem; color: var(--text-muted); }
+
+.rental-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+}
+
+.rental-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.rental-cta {
+  margin-top: 32px;
+  padding: 28px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent-bronze);
+}
+
+.rental-cta h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.rental-cta p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+
+.btn-rental {
+  display: inline-flex;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s;
+}
+
+.btn-rental:hover { background: var(--accent-bronze); }
+
+/* News */
+.news-section { background: var(--bg); }
+
+.news-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+}
+
+.news-thumb { aspect-ratio: 16/9; overflow: hidden; }
+.news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.news-body { padding: 24px; }
+
+.news-cat {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--accent-bronze);
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.news-date { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 10px; }
+
+.news-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+
+.news-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+/* Team */
+.team-section { background: var(--card-bg); }
+
+.team-card {
+  text-align: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.team-card:hover { transform: translateY(-4px); }
+
+.team-photo { aspect-ratio: 3/4; overflow: hidden; }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); }
+
+.team-info { padding: 24px; }
+
+.team-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.team-info .role {
+  font-size: 0.72rem;
+  color: var(--accent-bronze);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.team-info p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* CTA */
+.luxury-cta {
+  background: linear-gradient(135deg, #141414 0%, var(--accent) 50%, #1A1A1A 100%);
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+.luxury-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A962' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.luxury-cta .section-label { color: var(--accent-gold); position: relative; }
+.luxury-cta .section-title { color: #fff; position: relative; font-family: var(--font-display); }
+.luxury-cta .section-desc { color: rgba(255,255,255,0.7); margin: 0 auto 32px; position: relative; }
+
+.btn-luxury {
+  display: inline-flex;
+  padding: 16px 40px;
+  background: transparent;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, color 0.25s;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.btn-luxury:hover {
+  background: var(--accent-gold);
+  color: var(--accent-2);
+}
+
+/* Contact */
+.contact-section { background: var(--card-bg); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.contact-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.contact-detail {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 22px;
+  align-items: flex-start;
+}
+
+.contact-detail .ico {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--accent-bronze);
+}
+
+.contact-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; font-weight: 600; }
+.contact-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.form-card .btn-primary {
+  width: 100%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  letter-spacing: 0.06em;
+}
+
+.form-card .btn-primary:hover { background: var(--accent-bronze); }
+
+.map-box { border: 1px solid var(--border); margin-top: 24px; }
+
+/* Footer */
+.site-footer .footer-brand .logo {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.footer-col a:hover { color: var(--accent-gold); }
+
+.footer-cert { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+
+.footer-cert span {
+  padding: 4px 10px;
+  border: 1px solid rgba(201,169,98,0.25);
+  border-radius: 2px;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.06em;
+}
+
+.section-label { color: var(--accent-bronze); letter-spacing: 0.14em; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .trust-strip .container { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item { border-bottom: 1px solid var(--border); }
+  .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+  .about-grid, .rental-grid, .contact-grid { grid-template-columns: 1fr; }
+  .about-values { grid-template-columns: 1fr; }
+  .invest-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .rental-item { grid-template-columns: 1fr; }
+  .rental-price { text-align: left; }
+}
+
+@media (max-width: 480px) {
+  .trust-strip .container, .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { border-right: none !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" id="top">
+  <a href="#top" class="logo">
+    <strong>스카이라인부동산</strong>
+    <span>SKYLINE RE</span>
+  </a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">회사소개</a>
+    <a href="#business">사업분야</a>
+    <a href="#portfolio">개발실적</a>
+    <a href="#investment">투자정보</a>
+    <a href="#rental">임대안내</a>
+    <a href="#news">뉴스</a>
+    <a href="#contact" class="nav-cta">문의</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80" alt="프리미엄 오피스 타워 전경">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">Premium Real Estate · Since 1996</div>
+      <h1>도시의 가치를<br><em>재정의합니다</em></h1>
+      <p class="hero-desc">1996년 설립 이래 오피스, 주거, 리테일 복합개발과 부동산 투자·자산관리 분야에서 29년간 축적된 개발 역량으로 서울·수도권 핵심 입지의 랜드마크를 만들어왔습니다. 프리미엄 부동산의 새로운 기준을 제시합니다.</p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-hero-primary">개발실적 보기</a>
+        <a href="#contact" class="btn-hero-outline">투자 · 임대 문의</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-item"><div class="ico"></div>건설업 등록 · 부동산개발업</div>
+    <div class="trust-item"><div class="ico"></div>총 42개 프로젝트 · 1,280만㎡</div>
+    <div class="trust-item"><div class="ico"></div>자산운용 AUM 2.4조원</div>
+    <div class="trust-item"><div class="ico"></div>LEED · G-SEED 인증 다수</div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="num">42<span>+</span></div>
+        <div class="lbl">개발 프로젝트</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">1,280<span>만㎡</span></div>
+        <div class="lbl">누적 개발면적</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">2.4<span>조</span></div>
+        <div class="lbl">자산운용 AUM</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">96<span>%</span></div>
+        <div class="lbl">평균 입주율</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80" alt="스카이라인부동산 프리미엄 인테리어">
+        <div class="about-img-badge">
+          <strong>Since 1996</strong>
+          <span>29 Years of Excellence</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">회사소개</h2>
+        <p class="section-desc">스카이라인부동산은 오피스, 주거, 리테일 복합개발과 부동산 투자·자산관리(AM)를 아우르는 종합 부동산개발기업입니다. 서울 강남·여의도·판교를 중심으로 도시 핵심 입지의 프리미엄 자산을 개발·운영합니다.</p>
+        <p class="section-desc">개발(DEVELOPMENT), 투자(INVESTMENT), 자산관리(ASSET MANAGEMENT)의 3대 사업축을 통해 부동산 가치사슬 전 과정을 책임지며, ESG 경영과 스마트 빌딩 기술로 지속가능한 도시 공간을 창조합니다.</p>
+        <div class="about-values">
+          <div class="value-box">
+            <h4>Vision</h4>
+            <p>프리미엄 부동산의 가치를 재정의하는 No.1 개발사</p>
+          </div>
+          <div class="value-box">
+            <h4>Mission</h4>
+            <p>입지·설계·운영의 완벽한 조화로 자산가치 극대화</p>
+          </div>
+          <div class="value-box">
+            <h4>Values</h4>
+            <p>신뢰, 품격, 혁신, 지속가능성</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Business -->
+<section class="business-section" id="business">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Business Areas</div>
+      <h2 class="section-title">사업분야</h2>
+      <p class="section-desc">오피스, 주거, 리테일 개발부터 투자·자산관리까지 부동산 가치사슬 전 영역을 아우릅니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="biz-card">
+        <div class="biz-card-img">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80" alt="오피스 개발">
+          <span class="tag">OFFICE</span>
+        </div>
+        <div class="biz-card-body">
+          <h3>오피스 개발</h3>
+          <p>강남, 여의도, 판교 등 핵심 업무지구의 그레이드 A 오피스 타워를 개발합니다. LEED 인증, 스마트 빌딩, 판테온 서비스로 프리미엄 업무 환경을 제공합니다.</p>
+          <ul>
+            <li>그레이드 A 오피스 타워</li>
+            <li>업무·상업 복합개발</li>
+            <li>리모델링 · 리뉴얼</li>
+            <li>스마트 빌딩 인프라</li>
+          </ul>
+        </div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-img">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt="주거 개발">
+          <span class="tag">RESIDENTIAL</span>
+        </div>
+        <div class="biz-card-body">
+          <h3>주거 개발</h3>
+          <p>프리미엄 아파트, 주상복합, 브랜드 레지던스 등 고급 주거시설을 개발합니다. 입지 선정부터 설계, 브랜딩, 분양, 사후관리까지 통합 서비스를 제공합니다.</p>
+          <ul>
+            <li>프리미엄 아파트 · 주상복합</li>
+            <li>브랜드 레지던스 · 서비스드 레지던스</li>
+            <li>도시재생 · 재개발</li>
+            <li>친환경 · 스마트홈</li>
+          </ul>
+        </div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-img">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=700&q=80" alt="리테일 개발">
+          <span class="tag">RETAIL</span>
+        </div>
+        <div class="biz-card-body">
+          <h3>리테일 · 상업</h3>
+          <p>프리미엄 쇼핑몰, 라이프스타일 복합상가, F&B 테마거리 등 리테일 공간을 기획·개발합니다. 체험형 상업시설과 커뮤니티 중심 상업 공간을 설계합니다.</p>
+          <ul>
+            <li>프리미엄 쇼핑 · 라이프스타일 몰</li>
+            <li>복합상가 · 테마거리</li>
+            <li>호텔 · 레저 복합</li>
+            <li>상업시설 AM · 운영</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section class="portfolio-section" id="portfolio">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Development Portfolio</div>
+      <h2 class="section-title">개발실적</h2>
+      <p class="section-desc">서울·수도권 핵심 입지에서 스카이라인부동산의 개발 역량이 입증된 주요 프로젝트입니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=700&q=80" alt="스카이라인 타워 강남">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-year">2025</span>
+            <span class="project-scale">연면적 185,000㎡</span>
+          </div>
+          <h3>스카이라인 타워 강남</h3>
+          <p>강남대로 핵심 입지 그레이드 A 오피스 타워. 지하 5층·지상 42층, LEED Gold 인증, 판테온 라운지·컨시어지 서비스.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80" alt="스카이라인 레지던스 한남">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-year">2024</span>
+            <span class="project-scale">세대수 248호</span>
+          </div>
+          <h3>스카이라인 레지던스 한남</h3>
+          <p>한남동 프리미엄 브랜드 레지던스. 전세대 대형 평면, 호텔식 컨시어지, 프라이빗 피트니스·스파 시설.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80" alt="스카이라인 오피스 여의도">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-year">2023</span>
+            <span class="project-scale">연면적 128,000㎡</span>
+          </div>
+          <h3>스카이라인 오피스 여의도</h3>
+          <p>여의도 금융중심지 복합 오피스. 금융·법률 기업 42社 입주, 공실률 1.2% 기록. 스마트 빌딩 플랫폼 적용.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1555529902-5261145633bf?w=700&q=80" alt="스카이라인 몰 판교">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-year">2022</span>
+            <span class="project-scale">연면적 86,000㎡</span>
+          </div>
+          <h3>스카이라인 몰 판교</h3>
+          <p>판교 테크노밸리 라이프스타일 복합몰. 프리미엄 F&B 68개 브랜드, 체험형 리테일, 연간 방문객 820만 명.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="스카이라인 파크 서초">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-year">2021</span>
+            <span class="project-scale">세대수 512호</span>
+          </div>
+          <h3>스카이라인 파크 서초</h3>
+          <p>서초구 프리미엄 주상복합. 3.3㎡당 분양가 역대 서초구 최고가 기록. G-SEED 최우수 등급 획득.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80" alt="스카이라인 빌라 청담">
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-year">2020</span>
+            <span class="project-scale">세대수 36호</span>
+          </div>
+          <h3>스카이라인 빌라 청담</h3>
+          <p>청담동 초고급 주거. 전세대 200㎡ 이상, 세대당 전용 엘리베이터, 프라이빗 테라스·정원.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Investment -->
+<section class="invest-section" id="investment">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Investment</div>
+      <h2 class="section-title">투자정보</h2>
+      <p class="section-desc">부동산 펀드, 리츠, 직접투자 등 다양한 투자 상품으로 안정적인 수익과 자산 증식을 제공합니다.</p>
+    </div>
+    <div class="invest-grid">
+      <div class="invest-card">
+        <div class="ico">📊</div>
+        <h3>부동산 펀드</h3>
+        <p>오피스·리테일·물류 등 핵심 자산에 투자하는 부동산 전문 펀드를 운용합니다. 기관·개인 투자자 대상 8개 펀드 운용 중.</p>
+        <div class="invest-metric">8.4<span>%</span></div>
+        <div class="invest-metric-lbl">평균 연 수익률 (최근 3년)</div>
+      </div>
+      <div class="invest-card">
+        <div class="ico">🏛️</div>
+        <h3>리츠 (REITs)</h3>
+        <p>스카이라인리츠(상장)를 통해 안정적 임대수익과 자산가치 상승을 추구합니다. 오피스·리테일 자산 12개 편입, 시가총액 1.2조원.</p>
+        <div class="invest-metric">5.2<span>%</span></div>
+        <div class="invest-metric-lbl">배당수익률 (2024)</div>
+      </div>
+      <div class="invest-card">
+        <div class="ico">🤝</div>
+        <h3>공동개발 · JV</h3>
+        <p>토지보유자, 금융기관, 해외 투자자와 공동개발(JV) 파트너십을 추진합니다. 리스크 분산과 시너지를 극대화하는 협력 모델을 제안합니다.</p>
+        <div class="invest-metric">18<span>건</span></div>
+        <div class="invest-metric-lbl">누적 JV 프로젝트</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rental -->
+<section class="rental-section" id="rental">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Leasing Guide</div>
+      <h2 class="section-title">임대안내</h2>
+      <p class="section-desc">스카이라인부동산이 개발·운영하는 프리미엄 오피스·상업시설의 임대 정보입니다.</p>
+    </div>
+    <div class="rental-grid">
+      <div>
+        <div class="rental-list">
+          <div class="rental-item">
+            <div>
+              <h4>스카이라인 타워 강남 — 오피스</h4>
+              <p>강남대로 382 · 지하철 2호선 강남역 도보 3분 · 전용률 72% · 즉시 입주 가능</p>
+            </div>
+            <div class="rental-price">
+              <strong>28만원</strong>
+              <span>3.3㎡당 / 월</span>
+            </div>
+          </div>
+          <div class="rental-item">
+            <div>
+              <h4>스카이라인 오피스 여의도 — 오피스</h4>
+              <p>여의대로 128 · 5호선 여의도역 연결 · 전용률 75% · 2025.09 입주</p>
+            </div>
+            <div class="rental-price">
+              <strong>22만원</strong>
+              <span>3.3㎡당 / 월</span>
+            </div>
+          </div>
+          <div class="rental-item">
+            <div>
+              <h4>스카이라인 몰 판교 — 리테일</h4>
+              <p>판교역로 240 · 1층 리테일 · 유동인구 일 4.2만 명 · F&B·라이프스타일</p>
+            </div>
+            <div class="rental-price">
+              <strong>35만원</strong>
+              <span>3.3㎡당 / 월</span>
+            </div>
+          </div>
+          <div class="rental-item">
+            <div>
+              <h4>스카이라인 레지던스 한남 — 레지던스</h4>
+              <p>한남동 프리미엄 서비스드 레지던스 · 월세·전세 · 호텔식 컨시어지</p>
+            </div>
+            <div class="rental-price">
+              <strong>문의</strong>
+              <span>맞춤 상담</span>
+            </div>
+          </div>
+        </div>
+        <div class="rental-cta">
+          <h4>임대 상담 안내</h4>
+          <p>임대 조건, 입주 시기, 맞춤 평면 등 상세 안내는 임대관리팀에서 지원합니다. 현장 투어 예약도 가능합니다.</p>
+          <a href="#contact" class="btn-rental">임대 상담 신청</a>
+        </div>
+      </div>
+      <div class="rental-img">
+        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=700&q=80" alt="프리미엄 오피스 인테리어">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section class="news-section" id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">News & Press</div>
+      <h2 class="section-title">뉴스</h2>
+      <p class="section-desc">스카이라인부동산의 최신 프로젝트 소식과 기업 활동을 전해드립니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="강남 타워 준공">
+        </div>
+        <div class="news-body">
+          <span class="news-cat">Project</span>
+          <div class="news-date">2025.05.20</div>
+          <h3>스카이라인 타워 강남 준공 · 입주식 개최</h3>
+          <p>연면적 18.5만㎡ 규모의 그레이드 A 오피스 타워가 준공되었습니다. LEED Gold 인증 획득.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" alt="리츠 배당">
+        </div>
+        <div class="news-body">
+          <span class="news-cat">IR</span>
+          <div class="news-date">2025.04.28</div>
+          <h3>스카이라인리츠 2024 사업보고서 발표</h3>
+          <p>배당수익률 5.2%, 순자산가치(NAV) 전년 대비 8.6% 상승. 3분기 추가 배당 예정.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80" alt="신규 개발">
+        </div>
+        <div class="news-body">
+          <span class="news-cat">Development</span>
+          <div class="news-date">2025.03.15</div>
+          <h3>성수동 복합개발 사업 MOU 체결</h3>
+          <p>성수동 8,200㎡ 부지 오피스·리테일 복합개발 사업 추진. 2028년 준공 목표.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">경영진</h2>
+      <p class="section-desc">부동산 개발·금융·건축 전문가들이 프리미엄 부동산의 가치를 만들어갑니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="대표이사">
+        </div>
+        <div class="team-info">
+          <h3>이스카이</h3>
+          <div class="role">대표이사 · CEO</div>
+          <p>서울대 건축학, Wharton MBA. 28년 부동산 개발 경력. 대한건설협회 공로대상.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="개발총괄">
+        </div>
+        <div class="team-info">
+          <h3>김개발</h3>
+          <div class="role">개발총괄 · CDO</div>
+          <p>연세대 도시공학 석사. 42개 프로젝트 총괄. G-SEED 전문위원.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="투자총괄">
+        </div>
+        <div class="team-info">
+          <h3>박투자</h3>
+          <div class="role">투자총괄 · CIO</div>
+          <p>전 Goldman Sachs VP. AUM 2.4조원 운용. 부동산 펀드 8개 총괄.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="자산관리총괄">
+        </div>
+        <div class="team-info">
+          <h3>정자산</h3>
+          <div class="role">자산관리총괄 · CAO</div>
+          <p>프리미엄 오피스 AM 15년 경력. 평균 입주율 96% 유지.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">임대, 투자, 개발 협력 관련 자주 받는 문의를 정리했습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">오피스 임대 상담은 어떻게 진행되나요?</button>
+        <div class="faq-a">
+          <p>온라인 문의 또는 임대관리팀(02-555-3200)으로 연락주시면 담당자가 배정됩니다. 희망 면적·입주시기·예산을 확인 후 맞춤 평면과 견적을 제안하며, 현장 투어도 예약 가능합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">부동산 펀드 투자 최소 금액은?</button>
+        <div class="faq-a">
+          <p>펀드 유형에 따라 다르지만, 일반적으로 기관투자자 10억원, 개인투자자 1억원부터 참여 가능합니다. 펀드 설명회는 분기 1회 개최하며, IR팀을 통해 상세 자료를 받으실 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">공동개발(JV) 파트너십 조건은?</button>
+        <div class="faq-a">
+          <p>토지보유, 자금조달, 개발역량 중 하나 이상의 강점을 보유한 파트너와 JV를 추진합니다. 사업성 검토 후 개발이익 배분, 역할 분담, 출자 비율을 협의합니다. NDA 체결 후 사업제안서 검토가 가능합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">분양 예정 프로젝트 일정은 어디서 확인하나요?</button>
+        <div class="faq-a">
+          <p>뉴스 섹션과 공식 홈페이지에서 분양 일정을 공지합니다. 관심 프로젝트 등록 시 분양 시작 전 SMS·이메일로 안내드립니다. 분양 문의는 02-555-3210으로 연락주세요.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">ESG · 친환경 인증 건물이 있나요?</button>
+        <div class="faq-a">
+          <p>스카이라인 타워 강남(LEED Gold), 스카이라인 파크 서초(G-SEED 최우수) 등 12개 프로젝트가 친환경 인증을 획득했습니다. 2030년까지 신규 개발 100% G-SEED 1등급 이상을 목표로 합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="luxury-cta cta-band">
+  <div class="container">
+    <div class="section-label">Partnership</div>
+    <h2 class="section-title">프리미엄 부동산의 파트너</h2>
+    <p class="section-desc">토지 공동개발, 투자 참여, 프리미엄 임대 등 다양한 협력 방식을 제안합니다. 스카이라인부동산과 함께 도시의 가치를 만들어가세요.</p>
+    <a href="#contact" class="btn-luxury">투자 · 개발 문의</a>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">문의</h2>
+      <p class="section-desc">임대, 투자, 공동개발, 분양 등 모든 문의를 환영합니다. 전담 매니저가 24시간 내 회신드립니다.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>연락처 · 오시는 길</h3>
+        <div class="contact-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>본사</strong>
+            <span>서울특별시 강남구 테헤란로 521, 스카이라인타워 28층</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>대표전화</strong>
+            <span>02-555-3000 (평일 09:00–18:00)</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">✉️</div>
+          <div>
+            <strong>이메일</strong>
+            <span>contact@skyline-re.co.kr</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">🏢</div>
+          <div>
+            <strong>부서별 문의</strong>
+            <span>임대 02-555-3200 · 투자 02-555-3300 · 개발 02-555-3400</span>
+          </div>
+        </div>
+        <div class="map-box">
+          <div class="map-pin">
+            <strong>스카이라인부동산 본사</strong>
+            <span>강남역 도보 5분 · 방문 상담 사전예약</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="문의가 접수되었습니다. 전담 매니저가 빠른 시일 내에 연락드리겠습니다.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">성함 / 회사명</label>
+              <input type="text" id="name" placeholder="홍길동 / (주)OO자산" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="email">이메일</label>
+              <input type="email" id="email" placeholder="email@company.com" required>
+            </div>
+            <div class="form-group">
+              <label for="type">문의 유형</label>
+              <select id="type" required>
+                <option value="">선택해주세요</option>
+                <option>오피스 · 상업 임대</option>
+                <option>투자 · 펀드 · 리츠</option>
+                <option>공동개발 · JV</option>
+                <option>분양 · 주거</option>
+                <option>기타</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">문의 내용</label>
+              <textarea id="message" rows="5" placeholder="관심 프로젝트, 희망 면적, 투자 규모 등을 자유롭게 작성해주세요." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">문의 접수하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">스카이라인부동산</span>
+      <p>1996년 설립 이래 서울·수도권 핵심 입지의 프리미엄 부동산을 개발·투자·운영해 온 종합 부동산개발기업입니다. 도시의 가치를 재정의하는 신뢰의 파트너입니다.</p>
+      <div class="footer-cert">
+        <span>건설업 등록</span>
+        <span>부동산개발업</span>
+        <span>LEED · G-SEED</span>
+        <span>리츠 운용</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>회사</h4>
+      <a href="#about">회사소개</a>
+      <a href="#news">뉴스</a>
+      <a href="#team">경영진</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>사업</h4>
+      <a href="#business">사업분야</a>
+      <a href="#portfolio">개발실적</a>
+      <a href="#investment">투자정보</a>
+      <a href="#rental">임대안내</a>
+    </div>
+    <div class="footer-col">
+      <h4>문의</h4>
+      <p>02-555-3000</p>
+      <p>contact@skyline-re.co.kr</p>
+      <p>서울 강남구 테헤란로 521</p>
+      <a href="#contact">온라인 문의</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 스카이라인부동산 SKYLINE RE. All rights reserved.</span>
+    <span>사업자등록번호 456-78-90123 · 대표이사 이스카이</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

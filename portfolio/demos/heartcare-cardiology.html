@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>하트케어심장내과 — HEARTCARE CARDIOLOGY | 관상동맥·부정맥·심초음파</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFBFB;
+  --text: #1A0A0A;
+  --text-muted: #6B4F4F;
+  --accent: #B91C1C;
+  --accent-light: #FEE2E2;
+  --accent-dark: #991B1B;
+  --accent-text: #fff;
+  --border: #FECACA;
+  --nav-bg: rgba(255,251,251,0.96);
+  --footer-bg: #1A0A0A;
+  --card-bg: #fff;
+  --btn-radius: 8px;
+  --card-radius: 14px;
+  --footer-text: rgba(255,255,255,0.65);
+}
+
+.site-nav .logo { display: flex; flex-direction: column; line-height: 1.15; color: var(--accent-dark); }
+.site-nav .logo strong { font-size: 1.05em; letter-spacing: -0.02em; }
+.site-nav .logo span { font-size: 0.58em; font-weight: 500; letter-spacing: 0.22em; color: var(--text-muted); }
+.nav-cta { background: var(--accent); }
+
+.emergency-banner {
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+  color: #fff;
+  padding: 14px 0;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.emergency-banner .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.emergency-banner strong { font-size: 1rem; letter-spacing: 0.02em; }
+.emergency-banner a { color: #fff; text-decoration: underline; font-weight: 700; }
+
+.hero {
+  background: linear-gradient(135deg, #FFF5F5 0%, #FEE2E2 40%, #FFFBFB 100%);
+  padding: clamp(60px, 10vw, 100px) 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 55%;
+  height: 160%;
+  background: radial-gradient(ellipse, rgba(185,28,28,0.08), transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 5vw, 60px); align-items: center; position: relative; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; background: #fff; border: 1px solid var(--border);
+  border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+  color: var(--accent-dark); margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(185,28,28,0.1);
+}
+.hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800; line-height: 1.25; margin-bottom: 20px;
+  color: var(--text); letter-spacing: -0.02em;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-grid > div > p { font-size: clamp(0.9rem, 2vw, 1.05rem); color: var(--text-muted); line-height: 1.85; margin-bottom: 32px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-accent { padding: 14px 28px; background: var(--accent); color: #fff; font-weight: 600; font-size: 0.88rem; border-radius: var(--btn-radius); transition: transform 0.25s, box-shadow 0.25s; }
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(185,28,28,0.35); }
+.btn-light { padding: 14px 28px; background: #fff; border: 1.5px solid var(--border); color: var(--text); font-weight: 600; font-size: 0.88rem; border-radius: var(--btn-radius); transition: border-color 0.25s, background 0.25s; }
+.btn-light:hover { border-color: var(--accent); background: var(--accent-light); }
+.hero-visual { position: relative; border-radius: var(--card-radius); overflow: hidden; box-shadow: 0 24px 60px rgba(185,28,28,0.15); }
+.hero-visual img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.hero-stats { position: absolute; bottom: 20px; left: 20px; right: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.hero-stat { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 12px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.8); }
+.hero-stat .num { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--accent); }
+.hero-stat .lbl { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
+
+.trust-strip { background: #fff; border-bottom: 1px solid var(--border); padding: 20px 0; }
+.trust-strip .container { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 4vw, 48px); flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+.trust-item .ico { width: 36px; height: 36px; background: var(--accent-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+.emergency-section { background: var(--accent-dark); color: #fff; padding: clamp(48px, 8vw, 72px) 0; }
+.emergency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 48px); align-items: center; }
+.emergency-section .section-label { color: #FCA5A5; }
+.emergency-section .section-title { color: #fff; }
+.emergency-section .section-desc { color: rgba(255,255,255,0.75); }
+.emergency-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+.emergency-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--card-radius);
+  padding: 24px;
+}
+.emergency-card h4 { font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.emergency-card p { font-size: 0.84rem; color: rgba(255,255,255,0.7); line-height: 1.7; }
+.emergency-hotline {
+  background: #fff;
+  color: var(--accent-dark);
+  border-radius: var(--card-radius);
+  padding: clamp(32px, 5vw, 48px);
+  text-align: center;
+}
+.emergency-hotline .phone {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  margin: 16px 0;
+  letter-spacing: 0.02em;
+}
+.emergency-hotline p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+.emergency-hotline .btn-accent { margin-top: 20px; display: inline-block; }
+
+.treatments { background: var(--bg); }
+.treatment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.treatment-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--card-radius); padding: clamp(24px, 4vw, 32px);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; height: 100%;
+}
+.treatment-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(185,28,28,0.1); border-color: var(--accent); }
+.treatment-card .icon { width: 52px; height: 52px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 18px; }
+.treatment-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+.treatment-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+.treatment-card .tag { display: inline-block; padding: 4px 12px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.72rem; font-weight: 600; border-radius: 50px; }
+
+.screening-section { background: #fff; }
+.package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.package-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.package-card.featured { border-color: var(--accent); box-shadow: 0 12px 40px rgba(185,28,28,0.12); position: relative; }
+.package-card.featured::before {
+  content: '추천';
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  padding: 4px 16px; background: var(--accent); color: #fff;
+  font-size: 0.72rem; font-weight: 700; border-radius: 50px;
+}
+.package-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.package-card .price { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; color: var(--accent); margin: 16px 0; }
+.package-card .price small { font-size: 0.75rem; font-weight: 500; color: var(--text-muted); }
+.package-card ul { margin: 20px 0; }
+.package-card li {
+  font-size: 0.84rem; color: var(--text-muted);
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  display: flex; gap: 8px;
+}
+.package-card li::before { content: '♥'; color: var(--accent); font-size: 0.7rem; flex-shrink: 0; }
+.package-card li:last-child { border-bottom: none; }
+
+.doctors { background: var(--bg); }
+.grid-2-doctors { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 4vw, 32px); max-width: 800px; margin: 0 auto; }
+.doctor-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+.doctor-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(185,28,28,0.1); }
+.doctor-photo { aspect-ratio: 4/3; overflow: hidden; }
+.doctor-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.doctor-card:hover .doctor-photo img { transform: scale(1.04); }
+.doctor-info { padding: clamp(20px, 3vw, 28px); }
+.doctor-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.doctor-info .role { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+.doctor-info .creds { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.doctor-info .spec { display: inline-block; padding: 6px 14px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.75rem; font-weight: 600; border-radius: 6px; }
+
+.equipment { background: #fff; }
+.equipment .info-box { background: var(--bg); border: 1px solid var(--border); text-align: left; padding: clamp(24px, 4vw, 32px); }
+.equipment .info-box .icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 16px; }
+.equipment .info-box h4 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+.equipment .info-box p { font-size: 0.84rem; line-height: 1.75; }
+.equipment .info-grid { grid-template-columns: repeat(4, 1fr); }
+
+.facility-section { background: var(--bg); }
+.facility-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 16px); }
+.facility-item { position: relative; border-radius: var(--card-radius); overflow: hidden; aspect-ratio: 4/3; }
+.facility-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.facility-item:hover img { transform: scale(1.06); }
+.facility-tag { position: absolute; bottom: 12px; left: 12px; padding: 6px 14px; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+
+.process-section { background: #fff; }
+.process-section .process-step::before { background: var(--accent); color: #fff; }
+
+.reviews-section { background: var(--bg); }
+.review-card { border-color: var(--border); height: 100%; }
+.review-card .treatment-tag { display: inline-block; padding: 3px 10px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.7rem; font-weight: 600; border-radius: 4px; margin-bottom: 12px; }
+
+.faq-section { background: #fff; }
+.appointment-section { background: var(--bg); }
+.appoint-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 5vw, 56px); align-items: start; }
+.appoint-info .section-desc { margin-bottom: 32px; }
+.appoint-features { display: flex; flex-direction: column; gap: 20px; }
+.appoint-feature { display: flex; gap: 16px; align-items: flex-start; }
+.appoint-feature .num { width: 40px; height: 40px; background: var(--accent-light); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+.appoint-feature strong { display: block; font-size: 0.92rem; margin-bottom: 4px; }
+.appoint-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+.appoint-grid .btn-accent { width: 100%; margin-top: 8px; padding: 16px; }
+
+.location-section { background: #fff; }
+.location-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(28px, 4vw, 48px); align-items: start; }
+.location-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; }
+.location-detail { display: flex; gap: 14px; margin-bottom: 20px; }
+.location-detail .ico { width: 40px; height: 40px; background: var(--accent-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.location-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+.insurance-box { margin-top: 24px; padding: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--card-radius); }
+.insurance-box h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; color: var(--accent-dark); }
+.insurance-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.insurance-list span { padding: 6px 14px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.75rem; font-weight: 600; border-radius: 6px; }
+.insurance-box p { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; line-height: 1.6; }
+
+.footer-brand .logo { font-family: var(--font-display); font-size: 1.2rem; color: #fff; margin-bottom: 16px; display: block; line-height: 1.3; }
+.footer-brand .logo small { display: block; font-size: 0.65em; letter-spacing: 0.18em; color: rgba(255,255,255,0.5); font-weight: 500; margin-top: 4px; }
+.footer-contact { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+@media (max-width: 900px) {
+  .hero-grid, .emergency-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .treatment-grid, .package-grid { grid-template-columns: repeat(2, 1fr); }
+  .equipment .info-grid { grid-template-columns: repeat(2, 1fr); }
+  .facility-grid { grid-template-columns: repeat(2, 1fr); }
+  .emergency-cards { grid-template-columns: 1fr; }
+  .appoint-grid, .location-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .treatment-grid, .package-grid { grid-template-columns: 1fr; }
+  .equipment .info-grid { grid-template-columns: 1fr; }
+  .grid-2-doctors { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) { .hero-stats { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="emergency-banner">
+  <div class="container">
+    <strong>🚨 심장 응급 증상</strong>
+    <span>가슴 통증·호흡곤란·실신 시 즉시 119 또는 응급실(02-555-9911)로 연락하세요</span>
+  </div>
+</div>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">
+    <strong>하트케어심장내과</strong>
+    <span>HEARTCARE CARDIOLOGY</span>
+  </a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#services">진료과목</a>
+    <a href="#screening">심장검진</a>
+    <a href="#doctors">의료진</a>
+    <a href="#emergency">응급안내</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#appointment" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">역삼역 도보 3분 · 심장내과 전문 14년</div>
+        <h1>당신의 심장을<br><em>정밀하게</em> 지킵니다</h1>
+        <p>하트케어심장내과는 관상동맥질환, 부정맥, 심부전 등 심혈관 질환을 전문으로 진료합니다. 최신 심초음파·심전도·관상동맥 CT 장비와 서울대·연세대 출신 심장내과 전문의 2인이 진단부터 시술·추적 관리까지 책임집니다.</p>
+        <div class="hero-actions">
+          <a href="#appointment" class="btn-accent">심장검진 예약</a>
+          <a href="#screening" class="btn-light">검진 패키지 보기</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80" alt="하트케어심장내과 심초음파 검사">
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">14+</div><div class="lbl">운영 연수</div></div>
+          <div class="hero-stat"><div class="num">22,000+</div><div class="lbl">심장 검사</div></div>
+          <div class="hero-stat"><div class="num">4,500+</div><div class="lbl">시술·수술</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-item"><div class="ico">❤️</div>대한심장학회 정회원 의료진</div>
+    <div class="trust-item"><div class="ico">📊</div>3D 심초음파 · 관상동맥 CT</div>
+    <div class="trust-item"><div class="ico">⚡</div>부정맥 전극도자술(ABLATION)</div>
+    <div class="trust-item"><div class="ico">🚑</div>24시간 응급 연락 체계</div>
+  </div>
+</div>
+
+<section class="emergency-section" id="emergency">
+  <div class="container">
+    <div class="emergency-grid">
+      <div>
+        <div class="section-label">Emergency</div>
+        <h2 class="section-title">심장 응급 증상 안내</h2>
+        <p class="section-desc">아래 증상이 있으면 즉시 119 또는 가까운 응급실을 방문하세요. 본원 응급 연락(02-555-9911)은 진료 시간 중 상담·연계를 지원합니다.</p>
+        <div class="emergency-cards">
+          <div class="emergency-card">
+            <h4>🫀 즉시 119 신고</h4>
+            <p>15분 이상 지속되는 가슴 압박감·쥐어짜는 통증, 왼팔·턱으로 퍼지는 통증, 식은땀·구토 동반 시 심근경색을 의심합니다.</p>
+          </div>
+          <div class="emergency-card">
+            <h4>💨 응급실 방문</h4>
+            <p>갑작스러운 호흡곤란, 다리 부종, 실신, 심한 두근거림·어지러움. 기존 심장 질환자는 증상 악화 시 지체하지 마세요.</p>
+          </div>
+          <div class="emergency-card">
+            <h4>📞 본원 응급 연락</h4>
+            <p>진료 시간(평일 09–18시) 중 02-555-9911로 연락 시 전문의 상담·인근 응급실 연계를 지원합니다. 야간·휴일은 119·응급실을 이용하세요.</p>
+          </div>
+          <div class="emergency-card">
+            <h4>💊 응급 처치</h4>
+            <p>니트로글리세린(혀 아래) 복용 경험이 있으면 사용 가능. 아스피린 300mg 씹어 삼키기는 응급실 도착 전 의료진 지시 후 시행하세요.</p>
+          </div>
+        </div>
+      </div>
+      <div class="emergency-hotline">
+        <div class="section-label" style="color:var(--accent)">Hotline</div>
+        <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px">심장 응급 연락</h3>
+        <div class="phone">02-555-9911</div>
+        <p>평일 09:00 – 18:00<br>토요일 09:00 – 13:00<br><br>생명 위협 시 <strong>119</strong>를 먼저 연락하세요.<br>본원은 응급실이 아닌 상담·연계를 지원합니다.</p>
+        <a href="tel:02-555-9911" class="btn-accent" data-toast="데모: 실제 환경에서는 전화가 연결됩니다">응급 상담 연결</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="treatments" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">진료 과목</h2>
+      <p class="section-desc">관상동맥·부정맥·심부전 등 심혈관 질환의 진단·치료·추적을 전문으로 합니다.</p>
+    </div>
+    <div class="treatment-grid">
+      <div class="treatment-card">
+        <div class="icon">🫀</div>
+        <h3>관상동맥질환</h3>
+        <p>협심증, 심근경색, 관상동맥 스텐트·풍선 확장술(PCI) 전후 관리를 진행합니다. 관상동맥 CT·운동부하검사로 조기 진단하고, 약물·생활습관 교정 프로그램을 병행합니다.</p>
+        <span class="tag">관상동맥 CT</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">⚡</div>
+        <h3>부정맥</h3>
+        <p>심방세동, 발작성 상심실성빈맥(PSVT), 조기수축 등 부정맥을 진단·치료합니다. 24시간 홀터·이벤트 기록기, 전극도자절제술(ABLATION) 상담 및 수술 후 관리를 제공합니다.</p>
+        <span class="tag">전극도자술</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🔊</div>
+        <h3>심초음파</h3>
+        <p>3D 경흉부·경식도 심초음파로 심장 구조·기능·판막 질환을 정밀 평가합니다. 심부전, 판막질환, 선천성 심질환 추적, 수술 전·후 평가에 활용합니다.</p>
+        <span class="tag">3D 심초음파</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">📈</div>
+        <h3>고혈압 · 심부전</h3>
+        <p>고혈압, 수축기·이완기 심부전의 약물 조절과 생활습관 관리를 진행합니다. BNP·심초음파 추적으로 치료 반응을 모니터링하고, 재입원 예방 프로그램을 운영합니다.</p>
+        <span class="tag">심부전 클리닉</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🏃</div>
+        <h3>운동부하검사</h3>
+        <p>러닝머신·약물 부하검사로 운동 시 심전도·혈압 변화를 기록합니다. 흉통 원인 감별, 수술·스텐트 후 안전한 운동량 설정, 직장인 심장검진에 활용합니다.</p>
+        <span class="tag">운동·약물 부하</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🔋</div>
+        <h3>페이스메이커 · ICD</h3>
+        <p>서맥, 전도장애, 심실빈맥에 대한 페이스메이커·제세동기(ICD) 삽입 전 상담과 삽입 후 정기 추적을 진행합니다. 대학병원과 연계한 시술·관리가 가능합니다.</p>
+        <span class="tag">기기 삽입 후 관리</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screening-section" id="screening">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Cardiac Screening</div>
+      <h2 class="section-title">심장 정밀 검진 패키지</h2>
+      <p class="section-desc">가족력·증상·연령에 맞춘 3가지 심장 검진 패키지를 제공합니다.</p>
+    </div>
+    <div class="package-grid">
+      <div class="package-card">
+        <h3>기본 심장검진</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">40대 · 무증상 건강검진</p>
+        <div class="price">280,000<small>원</small></div>
+        <ul>
+          <li>12유도 심전도</li>
+          <li>경흉부 심초음파</li>
+          <li>혈액 (BNP, 지질, 당화혈색소)</li>
+          <li>혈압·맥박·BMI 측정</li>
+          <li>전문의 결과 상담 (40분)</li>
+        </ul>
+        <a href="#appointment" class="btn-light" style="display:block;text-align:center;padding:12px">예약하기</a>
+      </div>
+      <div class="package-card featured">
+        <h3>프리미엄 심장검진</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">가족력·흉통·고위험군</p>
+        <div class="price">680,000<small>원</small></div>
+        <ul>
+          <li>기본 패키지 전 항목</li>
+          <li>관상동맥 CT (저선량)</li>
+          <li>24시간 홀터 모니터</li>
+          <li>운동부하검사 (또는 약물)</li>
+          <li>3D 심초음파</li>
+          <li>전문의 1:1 상담 (60분)</li>
+        </ul>
+        <a href="#appointment" class="btn-accent" style="display:block;text-align:center;padding:12px">예약하기</a>
+      </div>
+      <div class="package-card">
+        <h3>부정맥 집중검진</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">두근거림·실신·어지러움</p>
+        <div class="price">450,000<small>원</small></div>
+        <ul>
+          <li>24~48시간 홀터</li>
+          <li>이벤트 기록기 (필요 시)</li>
+          <li>심초음파 · 심전도</li>
+          <li>전해질·갑상선 검사</li>
+          <li>부정맥 치료 상담</li>
+        </ul>
+        <a href="#appointment" class="btn-light" style="display:block;text-align:center;padding:12px">예약하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="doctors" id="doctors">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Medical Team</div>
+      <h2 class="section-title">의료진 소개</h2>
+      <p class="section-desc">서울대·연세대 출신 심장내과 전문의 2인이 진료와 시술을 책임집니다.</p>
+    </div>
+    <div class="grid-2-doctors">
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80" alt="류재훈 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>류재훈 원장</h3>
+          <div class="role">대표원장 · 관상동맥 · 심초음파</div>
+          <p class="creds">서울대학교 의과대학 졸업<br>서울대병원 심장내과 전문의<br>대한심장학회 정회원</p>
+          <span class="spec">PCI 2,800건+ · 14년 임상</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&q=80" alt="임서진 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>임서진 원장</h3>
+          <div class="role">부정맥 · 전극도자술 · 심부전</div>
+          <p class="creds">연세대학교 의과대학 졸업<br>세브란스병원 심장내과 전문의<br>대한부정맥학회 정회원</p>
+          <span class="spec">ABLATION 1,200건+ · 홀터 전문</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="equipment" id="equipment">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Technology</div>
+      <h2 class="section-title">심장 진단 장비</h2>
+      <p class="section-desc">정확한 진단과 안전한 시술을 위한 최신 심혈관 장비를 갖추고 있습니다.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="icon">🔊</div>
+        <h4>3D 경흉부 심초음파</h4>
+        <p>심실 기능, 판막 질환, 선천성 이상을 고해상도로 평가합니다. 조영제 심초음파로 관상동맥 혈류도 확인합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">📡</div>
+        <h4>관상동맥 CT (CCTA)</h4>
+        <p>저선량 128채널 CT로 관상동맥 협착을 비침습적으로 평가합니다. 흉통·가족력 있는 분의 조기 진단에 활용합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">📊</div>
+        <h4>24시간 홀터 · 이벤트</h4>
+        <p>간헐적 부정맥, 실신, 두근거림의 원인을 찾습니다. 24~48시간 연속 심전도 기록으로 정확한 진단을 돕습니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🏃</div>
+        <h4>운동부하검사실</h4>
+        <p>러닝머신·심전도·혈압 동시 모니터링. 협심증 감별, 스텐트·우회술 후 운동 처방, 직장 검진에 사용합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facility-section" id="facility">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Facility</div>
+      <h2 class="section-title">시설 안내</h2>
+      <p class="section-desc">심장 검사·시술에 최적화된 전용 공간을 운영합니다.</p>
+    </div>
+    <div class="facility-grid">
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1516549656339-1a4e7baaba39?w=600&q=80" alt="심초음파실">
+        <span class="facility-tag">3D 심초음파실</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80" alt="CT 검사실">
+        <span class="facility-tag">관상동맥 CT실</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80" alt="대기실">
+        <span class="facility-tag">프리미엄 대기실</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">진료 · 검진 프로세스</h2>
+      <p class="section-desc">예약부터 결과 상담·추적까지 체계적인 4단계를 운영합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>예약 · 접수</h4>
+        <p>온라인·전화(02-555-8800) 예약. 검진 전 금식·복약 중단 안내를 문자로 보내드립니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>정밀 검사</h4>
+        <p>심전도·심초음파·혈액검사 등 패키지별 검사 진행. 관상동맥 CT·홀터는 예약 시간에 맞춰 시행합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>전문의 상담</h4>
+        <p>검사 결과를 그래프·영상과 함께 설명합니다. 추가 검사·치료·생활습관 계획을 수립합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>추적 관리</h4>
+        <p>고위험 환자는 3~6개월 추적 일정을 잡습니다. 카카오 알림으로 복약·검진을 안내합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">환자 후기</h2>
+      <p class="section-desc">하트케어심장내과를 방문하신 분들의 후기입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <span class="treatment-tag">심장검진</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>아버지 가족력이 있어 프리미엄 검진 받았어요. 관상동맥 CT에서 조기 협착 발견, 스텐트 시술까지 빠르게 연계해 주셨습니다. 류재훈 원장님 설명이 정말 명확했어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김동현</strong><span>프리미엄 검진 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">부정맥</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>심방세동으로 전극도자술 받았는데, 임서진 원장님이 수술 전후 꼼꼼히 관리해 주셨어요. 홀터 검사도 원내에서 편하게 했고, 지금은 약만 복용 중입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이정미</strong><span>ABLATION · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">심초음파</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>다른 병원에서 심잡음 있다고 해서 왔는데, 3D 심초음파로 정확히 진단해 주셨어요. 판막질환 추적 관리도 체계적이고, 직원분들도 친절합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박성준</strong><span>심초음파 · 2025.05</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">운동부하</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>마라톤 준비 중 흉통으로 운동부하검사 받았어요. 협심증은 아니고 안전한 운동량을 알려주셔서 안심하고 훈련 중입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최우진</strong><span>운동부하검사 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">고혈압</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>고혈압 10년째인데, 여기서 약 조절·가정혈압 분석받으니 수치가 안정됐어요. 3개월마다 심초음파로 심장 상태도 확인해 줘서 믿음이 갑니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한영희</strong><span>만성 관리 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">PCI 추적</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>스텐트 삽입 후 1년째 추적 관리받고 있습니다. 검사·상담 일정을 잘 잡아주시고, 응급 연락처도 안내해 주셔서 든든해요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">윤</div>
+          <div><strong>윤태호</strong><span>관상동맥 추적 · 2025.05</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">심장검진·진료 전 많이 물어보시는 질문입니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">심장검진 전 준비사항은?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">관상동맥 CT·혈액검사가 포함된 경우 4~6시간 금식이 필요합니다. 복용 중인 약(특히 메트포르민, 항응고제)은 예약 시 상담해 드립니다. 편한 복장과 운동화(운동부하 시)를 준비해 주세요.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">가슴 통증이 있는데 바로 검진받을 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">급성·심한 흉통은 응급실 방문이 우선입니다. 만성·간헐적 흉통은 당일 예약 상담이 가능하며, 필요 시 관상동맥 CT·운동부하검사를 신속히 진행합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">관상동맥 CT, 방사선 노출이 걱정됩니다.</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">저선량 프로토콜을 사용하며, 진료의가 필요성을 판단 후 시행합니다. 임신·수유 중, 신장 기능 저하 시에는 대체 검사를 안내합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">부정맥, 수술 없이 약으로만 치료 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">증상·빈도·심장 기능에 따라 약물치료가 먼저일 수 있습니다. 약물 조절이 어렵거나 심방세동 등은 전극도자술을 권할 수 있으며, 상담 시 장단점을 설명해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">건강보험이 적용되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">일반 진료·심전도·일부 심초음파는 급여 적용이 가능합니다. 관상동맥 CT, 홀터, 검진 패키지는 비급여이며, 상담 시 비용을 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차가 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">건물 지하 1~2층 주차장 이용 가능, 진료 환자 2시간 무료 주차를 제공합니다. 접수 데스크에서 등록해 드립니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="appointment-section" id="appointment">
+  <div class="container">
+    <div class="appoint-grid">
+      <div class="appoint-info">
+        <div class="section-label">Appointment</div>
+        <h2 class="section-title">온라인 예약</h2>
+        <p class="section-desc">심장검진·진료 예약을 신청해 주세요. 24시간 이내 연락드립니다. 응급 증상 시 119·02-555-9911을 이용하세요.</p>
+        <div class="appoint-features">
+          <div class="appoint-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>검진 전 안내</strong>
+              <span>금식·복약 중단·준비물을 문자로 보내드립니다.</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>당일 검사·상담</strong>
+              <span>패키지별 검사와 전문의 상담을 하루에 완료합니다.</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>추적 관리</strong>
+              <span>고위험 환자 3~6개월 추적 일정을 안내합니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="예약 요청이 접수되었습니다! 24시간 내 연락드릴게요.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="treatment">희망 진료</label>
+            <select id="treatment" name="treatment" required>
+              <option value="">진료·검진을 선택해 주세요</option>
+              <option value="screen-basic">기본 심장검진</option>
+              <option value="screen-premium">프리미엄 심장검진</option>
+              <option value="screen-arrhythmia">부정맥 집중검진</option>
+              <option value="coronary">관상동맥·협심증</option>
+              <option value="arrhythmia">부정맥 상담</option>
+              <option value="echo">심초음파</option>
+              <option value="follow">추적·재진</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">희망 날짜</label>
+            <input type="date" id="date" name="date">
+          </div>
+          <div class="form-group">
+            <label for="time">희망 시간</label>
+            <select id="time" name="time">
+              <option value="">시간 선택</option>
+              <option value="09">오전 9:00</option>
+              <option value="10">오전 10:00</option>
+              <option value="11">오전 11:00</option>
+              <option value="14">오후 2:00</option>
+              <option value="15">오후 3:00</option>
+              <option value="16">오후 4:00</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">증상 · 문의사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="흉통, 두근거림, 가족력, 복용 약물 등을 적어 주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-accent">예약 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길 · 진료시간</h2>
+      <p class="section-desc">역삼역 3번 출구 도보 3분, 지하 주차장 완비.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>하트케어심장내과 HEARTCARE CARDIOLOGY</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 강남구 테헤란로 152, 하트케어타워 6층<br>(역삼역 3번 출구 도보 3분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>예약: 02-555-8800<br>응급 상담: 02-555-9911 (진료시간)<br>카카오톡: @하트케어심장내과</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>교통 안내</strong>
+            <span>지하철 2호선·신분당선 역삼역 3번 출구 도보 3분<br>버스: 역삼역·강남역 정류장<br>주차: 지하 1~2층 (2시간 무료)</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>09:00 – 18:00</td></tr>
+          <tr><td>토요일</td><td>09:00 – 13:00 (검진·예약)</td></tr>
+          <tr><td>점심시간</td><td>13:00 – 14:00</td></tr>
+          <tr><td>일·공휴일</td><td>휴무</td></tr>
+          <tr><td>응급 상담</td><td>평일·토 09:00 – 18:00 (02-555-9911)</td></tr>
+        </table>
+        <div class="insurance-box">
+          <h4>건강보험 · 비급여 안내</h4>
+          <div class="insurance-list">
+            <span>일반·전문 진료</span>
+            <span>심전도·심초음파</span>
+            <span>관상동맥 CT</span>
+            <span>홀터·검진 패키지</span>
+            <span>운동부하검사</span>
+          </div>
+          <p>※ 급여·비급여는 상담 시 안내합니다. 검진 패키지 카드·분할 결제 가능합니다.</p>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>하트케어심장내과</strong>
+          <span>서울 강남구 테헤란로 152</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">하트케어심장내과<small>HEARTCARE CARDIOLOGY</small></a>
+      <p>2011년 개원 이래 강남에서 신뢰받는 심장내과 전문 클리닉입니다. 관상동맥·부정맥·심초음파와 심장검진으로 환자분의 심혈관 건강을 지킵니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 강남구 테헤란로 152, 하트케어타워 6층</span>
+        <span>📞 02-555-8800 (예약) · 02-555-9911 (응급)</span>
+        <span>✉️ info@heartcare-cardio.com</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>진료 과목</h4>
+      <a href="#services">관상동맥질환</a>
+      <a href="#services">부정맥</a>
+      <a href="#services">심초음파</a>
+      <a href="#screening">심장검진</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#emergency">응급 안내</a>
+      <a href="#doctors">의료진 소개</a>
+      <a href="#equipment">진단 장비</a>
+      <a href="#reviews">환자 후기</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>예약 · 상담</h4>
+      <a href="#appointment">온라인 예약</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 09:00 – 18:00</p>
+      <p>토요일 09:00 – 13:00</p>
+      <p>일·공휴일 휴무</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 하트케어심장내과 HEARTCARE CARDIOLOGY. All rights reserved.</span>
+    <span>대표원장 류재훈 · 사업자등록번호 216-88-55678</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

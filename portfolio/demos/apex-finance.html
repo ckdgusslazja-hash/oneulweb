@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>에이펙스금융 APEX FINANCE — 종합금융그룹</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Noto Serif KR', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #0A1628;
+  --bg-elevated: #0F1D32;
+  --surface: #132238;
+  --text: #F1F5F9;
+  --text-muted: #94A3B8;
+  --accent: #C9A227;
+  --accent-light: #E8C547;
+  --accent-text: #0A1628;
+  --navy: #1A3050;
+  --border: rgba(201,162,39,0.15);
+  --border-subtle: rgba(255,255,255,0.08);
+  --nav-bg: rgba(10,22,40,0.94);
+  --footer-bg: #060E1A;
+  --card-bg: #0F1D32;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --footer-text: rgba(255,255,255,0.55);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+.site-nav { border-bottom-color: var(--border-subtle); }
+.site-nav .logo {
+  font-family: var(--font-display);
+  color: var(--text);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+}
+.site-nav .logo span { color: var(--accent); font-weight: 600; }
+.nav-links a { color: var(--text-muted); }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { background: var(--accent); color: var(--accent-text); font-weight: 700; }
+.nav-toggle { color: var(--text); }
+@media (max-width: 768px) {
+  .nav-links { background: var(--nav-bg); border-color: var(--border-subtle); }
+}
+
+.hero {
+  position: relative;
+  padding: clamp(72px, 12vw, 120px) 0 clamp(64px, 10vw, 100px);
+  overflow: hidden;
+  background: linear-gradient(160deg, #060E1A 0%, #0A1628 40%, #132238 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -15%;
+  width: 55%; height: 160%;
+  background: radial-gradient(ellipse, rgba(201,162,39,0.1), transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.4;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(40px, 6vw, 72px);
+  align-items: center;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  border: 1px solid rgba(201,162,39,0.35);
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.28;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-lead {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+.btn-gold {
+  padding: 15px 30px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(201,162,39,0.3);
+}
+.btn-ghost {
+  padding: 15px 30px;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--text);
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  background: rgba(201,162,39,0.06);
+}
+.hero-trust {
+  display: flex;
+  gap: clamp(24px, 4vw, 48px);
+  flex-wrap: wrap;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle);
+}
+.hero-trust-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  color: var(--accent);
+  font-weight: 700;
+}
+.hero-trust-item span { font-size: 0.75rem; color: var(--text-muted); }
+
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  position: relative;
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+}
+.hero-card-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.metric-box {
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  text-align: center;
+}
+.metric-box .val {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.metric-box .lbl { font-size: 0.72rem; color: var(--text-muted); }
+.hero-quote {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-style: italic;
+}
+
+.trust-strip {
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 18px 0;
+}
+.trust-strip .container {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.trust-strip-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.trust-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(20px, 4vw, 40px);
+}
+.trust-items span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.about-section { background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(40px, 6vw, 64px);
+  align-items: center;
+}
+.about-visual {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.about-visual img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.about-visual-badge {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 24px;
+  background: linear-gradient(transparent, rgba(6,14,26,0.95));
+}
+.about-visual-badge strong {
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+.about-visual-badge span { display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+.about-list { margin-top: 24px; }
+.about-list li {
+  padding: 12px 0 12px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  position: relative;
+  line-height: 1.7;
+}
+.about-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 18px;
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.about-list li strong { color: var(--text); }
+
+.divisions-section { background: var(--bg-elevated); }
+.div-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  height: 100%;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.div-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border);
+}
+.div-card .icon {
+  width: 52px; height: 52px;
+  background: rgba(201,162,39,0.1);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+.div-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+.div-card p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+.div-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.div-tags span {
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  border-radius: 3px;
+}
+
+.ir-section { background: var(--bg); }
+.ir-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.ir-stat {
+  text-align: center;
+  padding: 28px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+}
+.ir-stat .val {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.ir-stat .lbl { font-size: 0.82rem; color: var(--text-muted); }
+.ir-stat .chg { font-size: 0.72rem; color: #4ADE80; margin-top: 4px; }
+.ir-chart-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 32px;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.ir-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 180px;
+  padding-top: 20px;
+}
+.ir-bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--accent), rgba(201,162,39,0.3));
+  border-radius: 4px 4px 0 0;
+  min-height: 20%;
+  position: relative;
+}
+.ir-bar span {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.ir-chart-title {
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.products-section { background: var(--bg-elevated); }
+.product-tab-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 40px);
+}
+.product-tab-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.product-tab-card > p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.product-list { display: flex; flex-direction: column; gap: 0; }
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.product-row:last-child { border-bottom: none; }
+.product-row h5 { font-size: 0.95rem; margin-bottom: 4px; }
+.product-row p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+.product-row .yield {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.leadership-section { background: var(--bg); }
+.leader-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.leader-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+.leader-photo { aspect-ratio: 4/5; overflow: hidden; position: relative; }
+.leader-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(15%);
+  transition: filter 0.3s;
+}
+.leader-card:hover .leader-photo img { filter: grayscale(0); }
+.leader-photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(transparent, rgba(10,22,40,0.9));
+}
+.leader-info { padding: 22px; }
+.leader-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.leader-info .role { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+.leader-info .bio { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+
+.news-section { background: var(--bg-elevated); }
+.news-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+.news-thumb { aspect-ratio: 16/9; overflow: hidden; }
+.news-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.news-card:hover .news-thumb img { transform: scale(1.04); }
+.news-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+.news-cat {
+  font-size: 0.68rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.news-body h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; line-height: 1.5; flex: 1; }
+.news-body p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.news-date { font-size: 0.72rem; color: var(--text-muted); opacity: 0.7; }
+
+.faq-section { background: var(--bg); }
+.faq-item {
+  border-color: var(--border-subtle);
+  background: var(--card-bg);
+}
+.faq-q { color: var(--text); }
+.faq-a-inner { color: var(--text-muted); }
+.faq-item.open .faq-q { color: var(--accent); }
+
+.contact-section {
+  background: linear-gradient(180deg, var(--bg-elevated), var(--bg));
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+.consult-features { display: flex; flex-direction: column; gap: 18px; margin-top: 24px; }
+.consult-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.consult-feature .num {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  background: var(--accent);
+  color: var(--accent-text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.consult-feature strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.consult-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+.form-card { background: var(--surface); border-color: var(--border-subtle); }
+.form-group label { color: var(--text); }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--card-bg);
+  border-color: var(--border-subtle);
+  color: var(--text);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--accent); }
+.form-card .btn-gold {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.cta-band {
+  background: linear-gradient(135deg, #132238, #1A3050);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: clamp(48px, 8vw, 72px) 0;
+}
+.cta-band h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  margin-bottom: 12px;
+}
+.cta-band p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+
+.site-footer .footer-brand .logo { color: #fff; }
+.site-footer .footer-brand .logo span { color: var(--accent); }
+.footer-col a:hover { color: var(--accent); }
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+.section-label { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .ir-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .ir-stats, .metrics-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">에이펙스금융 <span>APEX</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#divisions">사업부문</a>
+    <a href="#products">투자상품</a>
+    <a href="#ir">IR실적</a>
+    <a href="#leadership">리더십</a>
+    <a href="#news">뉴스</a>
+    <a href="#contact" class="nav-cta">고객문의</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Comprehensive Financial Group</div>
+        <h1>자산의 가치를<br><em>정점</em>까지 끌어올립니다</h1>
+        <p class="hero-lead">에이펙스금융은 자산운용·투자은행·리테일뱅킹을 아우르는 종합금융그룹입니다. 1998년 설립 이래 AUM 85조 원을 돌파하며, 기관·개인 고객의 장기 자산 성장을 설계해 왔습니다.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-gold">투자 상담 신청</a>
+          <a href="#ir" class="btn-ghost">IR 실적 보기</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item"><strong>85조</strong><span>운용자산(AUM)</span></div>
+          <div class="hero-trust-item"><strong>28년</strong><span>금융 전문 역사</span></div>
+          <div class="hero-trust-item"><strong>AA</strong><span>신용등급(한국신용)</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-label">APEX Performance 2025</div>
+          <div class="metrics-grid">
+            <div class="metric-box"><div class="val">+12.4%</div><div class="lbl">펀드 평균 수익률</div></div>
+            <div class="metric-box"><div class="val">₩2.1조</div><div class="lbl">배당금 지급</div></div>
+            <div class="metric-box"><div class="val">1,240+</div><div class="lbl">기관 고객</div></div>
+            <div class="metric-box"><div class="val">320만</div><div class="lbl">리테일 고객</div></div>
+          </div>
+          <p class="hero-quote">"장기적 관점의 자산 배분과 리스크 관리로 시장 사이클을 넘어선 수익을 추구합니다."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container">
+    <span class="trust-strip-label">Awards & Recognition</span>
+    <div class="trust-items">
+      <span>2025 대한민국 펀드대상</span>
+      <span>Asia Asset Best Asset Manager</span>
+      <span>RE100 금융그룹 선정</span>
+      <span>ISO 27001 인증</span>
+      <span>금융감독원 우수사례</span>
+    </div>
+  </div>
+</div>
+
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92fd1ab?w=800&q=80" alt="에이펙스금융 본사">
+        <div class="about-visual-badge">
+          <strong>서울 IFC 금융허브</strong>
+          <span>글로벌 12개 거점 · 24시간 트레이딩 데스크</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">About APEX</div>
+        <h2 class="section-title">신뢰 위에 쌓은<br>종합금융의 정점</h2>
+        <p class="section-desc">에이펙스금융그룹은 자산운용사·증권·은행·보험 자회사를 통해 기관투자자부터 일반 고객까지 맞춤형 금융 솔루션을 제공합니다. ESG 투자와 디지털 자산 인프라에 선제적으로 투자하며, 미래 금융을 선도합니다.</p>
+        <ul class="about-list">
+          <li><strong>자산운용</strong> — 주식·채권·대체·부동산 펀드, 연기금·기관 전담</li>
+          <li><strong>투자은행</strong> — IPO·M&A·구조화 금융, ECM/DCM 리드</li>
+          <li><strong>리테일</strong> — WM·신탁·연금·ISA, 디지털 뱅킹</li>
+          <li><strong>리스크</strong> — 그룹 통합 ALM·스트레스 테스트 체계</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="divisions-section" id="divisions">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Business Divisions</div>
+      <h2 class="section-title">사업 부문</h2>
+      <p class="section-desc">3대 핵심 사업부문이 시너지를 내며 고객 자산의 전 주기를 관리합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="div-card">
+        <div class="icon">📈</div>
+        <h3>자산운용</h3>
+        <p>국내외 주식·채권·멀티에셋·대체투자 펀드를 운용합니다. 연기금·보험·기업 IRP 등 기관 고객 전담 팀과 개인 랩어카운트를 운영합니다.</p>
+        <div class="div-tags">
+          <span>주식형</span><span>채권형</span><span>REITs</span><span>헤지펀드</span>
+        </div>
+      </div>
+      <div class="div-card">
+        <div class="icon">🏛️</div>
+        <h3>투자은행(IB)</h3>
+        <p>IPO·PO, M&A 자문, 구조화 금융, 프로젝트 파이낸스를 수행합니다. 아시아 크로스보더 딜 네트워크와 ECM/DCM 언더라이팅 역량을 보유합니다.</p>
+        <div class="div-tags">
+          <span>IPO</span><span>M&A</span><span>PF</span><span>ECM</span>
+        </div>
+      </div>
+      <div class="div-card">
+        <div class="icon">💳</div>
+        <h3>리테일·WM</h3>
+        <p>프라이빗뱅킹, 신탁·연금, ISA·IRP, 보험·대출 연계 상품으로 고액자산가와 일반 고객의 라이프플래닝을 지원합니다.</p>
+        <div class="div-tags">
+          <span>PB</span><span>연금</span><span>ISA</span><span>디지털</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Investment Products</div>
+      <h2 class="section-title">투자 상품</h2>
+      <p class="section-desc">투자 성향과 목표에 맞는 상품 라인업을 확인하세요. 과거 수익률은 미래를 보장하지 않습니다.</p>
+    </div>
+    <div class="tabs-wrap" style="max-width:920px;margin:0 auto">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="fund">펀드</button>
+        <button class="tab-btn" data-tab="trust">신탁·연금</button>
+        <button class="tab-btn" data-tab="alt">대체투자</button>
+      </div>
+      <div class="product-tab-card tab-panel active" data-tab="fund">
+        <h4>공모·사모 펀드</h4>
+        <p>글로벌 분산과 국내 테마 전략을 결합한 펀드 라인업입니다. 2025년 기준 운용규모 상위 5개 펀드입니다.</p>
+        <div class="product-list">
+          <div class="product-row">
+            <div><h5>에이펙스 글로벌 밸류</h5><p>미·유럽·아시아 저평가 우량주 장기 보유</p></div>
+            <span class="yield">+14.2%</span>
+          </div>
+          <div class="product-row">
+            <div><h5>에이펙스 AI 테크</h5><p>반도체·클라우드·AI 인프라 집중</p></div>
+            <span class="yield">+22.8%</span>
+          </div>
+          <div class="product-row">
+            <div><h5>에이펙스 배당플러스</h5><p>고배당·배당성장 혼합, 월 분배</p></div>
+            <span class="yield">+9.6%</span>
+          </div>
+          <div class="product-row">
+            <div><h5>에이펙스 채권안정</h5><p>국채·회사채·MMF 단기</p></div>
+            <span class="yield">+4.8%</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-tab-card tab-panel" data-tab="trust">
+        <h4>신탁·연금 상품</h4>
+        <p>은퇴·상속·자산보전 목적의 맞춤형 신탁과 연금 솔루션입니다.</p>
+        <div class="product-list">
+          <div class="product-row">
+            <div><h5>프리미엄 부동산 신탁</h5><p>상업용 부동산 수익권·개발 PF 연계</p></div>
+            <span class="yield">연 6.2%</span>
+          </div>
+          <div class="product-row">
+            <div><h5>에이펙스 IRP 플랜</h5><p>세액공제·운용 수수료 우대</p></div>
+            <span class="yield">맞춤</span>
+          </div>
+          <div class="product-row">
+            <div><h5>가족상속 신탁</h5><p>상속세·증여세 절세 설계</p></div>
+            <span class="yield">맞춤</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-tab-card tab-panel" data-tab="alt">
+        <h4>대체투자</h4>
+        <p>인프라·PE·헤지·디지털 자산 등 비전통 자산 클래스입니다. 적격투자자 전용 상품이 포함됩니다.</p>
+        <div class="product-list">
+          <div class="product-row">
+            <div><h5>인프라 펀드 II</h5><p>국내 toll road·신재생 인프라</p></div>
+            <span class="yield">IRR 11%</span>
+          </div>
+          <div class="product-row">
+            <div><h5>그로스 PE 펀드</h5><p>비상장 테크·헬스케어 성장주</p></div>
+            <span class="yield">IRR 15%</span>
+          </div>
+          <div class="product-row">
+            <div><h5>멀티전략 헤지</h5><p>시장중립·이벤트드리븐</p></div>
+            <span class="yield">+8.4%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ir-section" id="ir">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Investor Relations</div>
+      <h2 class="section-title">IR 실적</h2>
+      <p class="section-desc">2025년 연간 실적 및 주요 재무 지표입니다. 분기별 IR 자료는 투자자 포털에서 확인할 수 있습니다.</p>
+    </div>
+    <div class="ir-stats">
+      <div class="ir-stat">
+        <div class="val">₩85조</div>
+        <div class="lbl">운용자산(AUM)</div>
+        <div class="chg">전년 대비 +8.2%</div>
+      </div>
+      <div class="ir-stat">
+        <div class="val">₩1.42조</div>
+        <div class="lbl">그룹 매출</div>
+        <div class="chg">+6.5%</div>
+      </div>
+      <div class="ir-stat">
+        <div class="val">₩4,280억</div>
+        <div class="lbl">당기순이익</div>
+        <div class="chg">+9.1%</div>
+      </div>
+      <div class="ir-stat">
+        <div class="val">ROE 14.2%</div>
+        <div class="lbl">자기자본이익률</div>
+        <div class="chg">+0.8%p</div>
+      </div>
+    </div>
+    <div class="ir-chart-box">
+      <div class="ir-chart-title">Quarterly Net Income (억 원)</div>
+      <div class="ir-bars">
+        <div class="ir-bar" style="height:55%"><span>Q1'24</span></div>
+        <div class="ir-bar" style="height:68%"><span>Q2</span></div>
+        <div class="ir-bar" style="height:72%"><span>Q3</span></div>
+        <div class="ir-bar" style="height:85%"><span>Q4</span></div>
+        <div class="ir-bar" style="height:78%"><span>Q1'25</span></div>
+        <div class="ir-bar" style="height:92%"><span>Q2</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="leadership-section" id="leadership">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">리더십</h2>
+      <p class="section-desc">글로벌 투자은행·자산운용사 출신 경영진이 그룹 전략을 이끕니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="leader-card">
+        <div class="leader-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="한재민 회장">
+        </div>
+        <div class="leader-info">
+          <h3>한재민 회장</h3>
+          <div class="role">그룹 회장 · CEO</div>
+          <p class="bio">골드만삭스 15년, 전 APAC 대표. 서울대 경제학, 하버드 MBA.</p>
+        </div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="윤서진 부회장">
+        </div>
+        <div class="leader-info">
+          <h3>윤서진 부회장</h3>
+          <div class="role">자산운용 총괄</div>
+          <p class="bio">블랙록 12년, AUM $400B+ 운용 경험. CFA, MIT 금융공학 석사.</p>
+        </div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80" alt="오민수 대표">
+        </div>
+        <div class="leader-info">
+          <h3>오민수 대표</h3>
+          <div class="role">투자은행 부문</div>
+          <p class="bio">JP모건 IB 14년, IPO·M&A 딜 $15B+ 주관. 연세대 법학, CPA.</p>
+        </div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="강미래 대표">
+        </div>
+        <div class="leader-info">
+          <h3>강미래 대표</h3>
+          <div class="role">리테일·WM 부문</div>
+          <p class="bio">신한은행 PB센터장, WM 고객 8,000명+ 관리. 고려대 경영학.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="news-section" id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">News & IR</div>
+      <h2 class="section-title">뉴스</h2>
+      <p class="section-desc">에이펙스금융그룹의 최신 공시·보도자료·시장 인사이트입니다.</p>
+    </div>
+    <div class="grid-4">
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" alt="분기 실적">
+        </div>
+        <div class="news-body">
+          <div class="news-cat">공시</div>
+          <h3>2025년 2분기 연결기준 당기순이익 1,120억 원</h3>
+          <p>전년 동기 대비 9.1% 증가, IB·자산운용 부문 호조가 실적을 견인했습니다.</p>
+          <time class="news-date">2026.05.28</time>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="ESG 펀드">
+        </div>
+        <div class="news-body">
+          <div class="news-cat">상품</div>
+          <h3>에이펙스 ESG 리더스 펀드 출시 — 탄소저감 테마</h3>
+          <p>RE100 기업·녹색채권·클린테크에 투자하는 오픈형 펀드를 6월 10일 모집합니다.</p>
+          <time class="news-date">2026.05.15</time>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80" alt="IPO">
+        </div>
+        <div class="news-body">
+          <div class="news-cat">IB</div>
+          <h3>바이오 스타트업 IPO 주관 — 공모가 상단 확정</h3>
+          <p>에이펙스 IB가 주관한 코스닥 IPO가 42배 기관 경쟁률로 마감되었습니다.</p>
+          <time class="news-date">2026.04.30</time>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" alt="배당">
+        </div>
+        <div class="news-body">
+          <div class="news-cat">IR</div>
+          <h3>2024 사업보고서·지속가능경영보고서 발간</h3>
+          <p>TCFD·SASB 정렬 보고서와 함께 주주환원 정책(배당 35%↑)을 공개했습니다.</p>
+          <time class="news-date">2026.04.12</time>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">투자 상품·계좌 개설·WM 상담에 대한 안내입니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">투자 상담은 어떻게 신청하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">본 페이지 고객문의 양식 또는 대표전화 1588-2500으로 신청하시면, PB/펀드매니저가 1영업일 내 연락드립니다. 방문 상담은 서울·부산 WM센터에서 예약 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">최소 투자 금액은 얼마인가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">공모펀드는 1만 원부터, 사모·대체투자는 상품별 1억~10억 원 이상입니다. 프라이빗뱅킹은 순자산 10억 원 이상 고객을 대상으로 합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">외국인·비거주자도 계좌 개설이 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">외국인등록증(FRC) 또는 여권·거주증명으로 비거주 외국인 계좌 개설이 가능합니다. FATCA·CRS 신고 의무가 적용됩니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">IR 자료는 어디서 볼 수 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">투자자 포털(ir.apex-finance.co.kr)에서 분기·연간 보고서, 실적 발표 자료, 공시를 열람할 수 있습니다. 이메일 알림 신청도 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">디지털 자산(가상자산) 상품도 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">비트코인·이더리움 ETN 및 블록체인 인프라 펀드 등 적격투자자 대상 상품을 제한적으로 운용합니다. 상담 시 투자 적합성을 확인합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="container">
+    <h2>자산 설계, 지금 시작하세요</h2>
+    <p>전문 PB가 30분 무료 상담으로 투자 목표와 포트폴리오 방향을 제안합니다.</p>
+    <a href="#contact" class="btn-gold">투자 상담 예약</a>
+  </div>
+</div>
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Customer Inquiry</div>
+        <h2 class="section-title">고객 문의</h2>
+        <p class="section-desc">투자·WM·IB 관련 문의를 남겨 주시면 담당 부서에서 영업일 기준 24시간 내 회신드립니다.</p>
+        <div class="consult-features">
+          <div class="consult-feature">
+            <span class="num">1</span>
+            <div><strong>상담 접수</strong><span>온라인·전화·방문 예약</span></div>
+          </div>
+          <div class="consult-feature">
+            <span class="num">2</span>
+            <div><strong>맞춤 제안</strong><span>투자성향·목표 기반 포트폴리오</span></div>
+          </div>
+          <div class="consult-feature">
+            <span class="num">3</span>
+            <div><strong>계좌·가입</strong><span>비대면·영업점 선택 가능</span></div>
+          </div>
+        </div>
+        <div class="footer-contact" style="margin-top:28px">
+          <span>📞 1588-2500</span>
+          <span>📧 contact@apex-finance.co.kr</span>
+          <span>📍 서울 영등포구 국제금융로 10 IFC</span>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="문의가 접수되었습니다. 담당자가 24시간 내 연락드리겠습니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" placeholder="name@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="type">문의 유형</label>
+            <select id="type" required>
+              <option value="">선택해 주세요</option>
+              <option>자산운용·펀드</option>
+              <option>프라이빗뱅킹</option>
+              <option>연금·신탁</option>
+              <option>IB·기업금융</option>
+              <option>IR·공시</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">문의 내용</label>
+            <textarea id="message" rows="4" placeholder="투자 목표, 예상 금액, 관심 상품 등을 적어주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-gold">문의 접수하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">에이펙스금융 <span>APEX</span></span>
+      <p>종합금융그룹 — 자산운용·IB·리테일. 신뢰와 전문성으로 고객 자산의 정점을 함께합니다.</p>
+      <div class="footer-contact">
+        <span>금융소비자보호: 1588-2501</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>사업</h4>
+      <a href="#divisions">자산운용</a>
+      <a href="#divisions">투자은행</a>
+      <a href="#divisions">리테일·WM</a>
+      <a href="#products">투자상품</a>
+    </div>
+    <div class="footer-col">
+      <h4>IR</h4>
+      <a href="#ir">실적·공시</a>
+      <a href="#news">뉴스</a>
+      <a href="#leadership">경영진</a>
+    </div>
+    <div class="footer-col">
+      <h4>문의</h4>
+      <a href="#contact">고객문의</a>
+      <p>1588-2500</p>
+      <p>평일 09:00 – 18:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 에이펙스금융 APEX FINANCE GROUP. All rights reserved.</span>
+    <span>금융투자업 등록 · 사업자 107-81-12345</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

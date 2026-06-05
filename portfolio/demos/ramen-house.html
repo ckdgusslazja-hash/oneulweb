@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>면가온 MYEONGAON — 일본식 라멘</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Shippori Mincho', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #1A1512;
+  --text: #F0E8E0;
+  --text-muted: #A89888;
+  --accent: #C0392B;
+  --accent-text: #fff;
+  --border: #2E2620;
+  --nav-bg: rgba(26,21,18,0.96);
+  --footer-bg: #120F0D;
+  --card-bg: #221C18;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --title-weight: 500;
+  --logo-weight: 600;
+}
+
+body { background: var(--bg); }
+
+.site-nav { border-bottom-color: var(--border); }
+.site-nav .logo { color: var(--text); }
+.nav-links a { color: var(--text-muted); }
+.nav-links a:hover { color: var(--text); }
+
+/* Hero */
+.hero {
+  min-height: clamp(520px, 92vh, 780px);
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: stretch;
+  position: relative;
+}
+
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+  order: 2;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, var(--bg) 0%, transparent 35%);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 8vw, 80px);
+  padding-right: clamp(24px, 5vw, 60px);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text .label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.hero-text p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 36px;
+  max-width: 440px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero-stamp {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  color: var(--accent);
+  text-align: center;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  transform: rotate(-12deg);
+}
+
+/* Marquee */
+.marquee {
+  padding: 14px 0;
+  background: var(--accent);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-inner {
+  display: inline-flex;
+  gap: 44px;
+  animation: marquee 26s linear infinite;
+  font-size: 0.76rem;
+  letter-spacing: 0.2em;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* About */
+.about { background: var(--card-bg); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--accent);
+}
+
+.stat span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* Broth */
+.broth-section { background: var(--bg); }
+
+.broth-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.broth-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.broth-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(192,57,43,0.4);
+}
+
+.broth-card .broth-img { aspect-ratio: 16/10; overflow: hidden; }
+.broth-card .broth-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.broth-card .broth-body { padding: 24px; }
+
+.broth-card .type {
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+
+.broth-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.broth-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Menu */
+.menu { background: var(--card-bg); }
+
+.menu-header { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
+.menu-header .section-desc { margin: 0 auto; }
+
+.menu-tabs-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.menu .menu-row { border-bottom-color: var(--border); }
+.menu .menu-row-info p { color: var(--text-muted); }
+.menu .price { color: var(--accent); }
+
+/* Noodle */
+.noodle-section { background: var(--bg); }
+
+.noodle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 64px);
+  align-items: center;
+}
+
+.noodle-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.noodle-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.noodle-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.noodle-specs div {
+  padding: 16px;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  border-left: 3px solid var(--accent);
+}
+
+.noodle-specs strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.noodle-specs span { font-size: 0.88rem; color: var(--text-muted); }
+
+/* Toppings */
+.topping-section { background: var(--card-bg); }
+
+.topping-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.topping-card {
+  text-align: center;
+  padding: 24px 16px;
+  background: var(--bg);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border);
+}
+
+.topping-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+
+.topping-card h4 {
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.topping-card p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Team */
+.team-section { background: var(--bg); }
+
+.team-card { background: var(--card-bg); border-color: var(--border); }
+.team-card .card-body h4 { color: var(--text); }
+.team-card .role { color: var(--accent); }
+.team-card .card-body p { color: var(--text-muted); }
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.gallery-grid img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 4px;
+  transition: transform 0.3s;
+}
+
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* Reviews */
+.reviews-section { background: var(--card-bg); }
+
+.review-card {
+  background: var(--bg);
+  border-color: var(--border);
+}
+
+.review-card blockquote { color: var(--text-muted); }
+.review-author strong { color: var(--text); }
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+.faq-item { background: var(--card-bg); border-color: var(--border); }
+.faq-q { color: var(--text); }
+.faq-a-inner { color: var(--text-muted); }
+
+/* Location */
+.location-section { background: var(--card-bg); }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.hours-table td { color: var(--text-muted); border-color: var(--border); }
+.hours-table td:first-child { color: var(--text); }
+
+.location-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.location-detail-grid h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.location-detail-grid p,
+.location-detail-grid ul {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.location-detail-grid ul li {
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.location-detail-grid ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.map-box { background: var(--bg); border-color: var(--border); }
+
+/* Reserve */
+.reserve-section { background: var(--bg); }
+
+.reserve-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.reserve-intro .section-desc { margin-bottom: 24px; }
+
+.reserve-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 16px 20px;
+  background: var(--card-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+}
+
+.form-card { background: var(--card-bg); border-color: var(--border); }
+.form-group label { color: var(--text-muted); }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-muted); opacity: 0.6; }
+
+.info-box { background: var(--card-bg); border-color: var(--border); }
+.info-box h4 { color: var(--text); }
+.info-box p { color: var(--text-muted); }
+
+.btn-outline {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-visual { height: 50vh; min-height: 320px; order: -1; }
+  .hero-visual::after { background: linear-gradient(180deg, transparent 50%, var(--bg) 100%); }
+  .hero-text { padding: 40px 24px; }
+  .hero-stamp { top: 16px; right: 16px; width: 64px; height: 64px; font-size: 0.6rem; }
+  .about-grid, .noodle-grid, .location-grid, .reserve-wrap { grid-template-columns: 1fr; }
+  .broth-grid { grid-template-columns: 1fr; }
+  .topping-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .location-detail-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stats, .noodle-specs, .topping-grid { grid-template-columns: 1fr; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">면가온</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">스토리</a>
+    <a href="#broth">육수</a>
+    <a href="#menu">메뉴</a>
+    <a href="#noodle">면</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">위치</a>
+    <a href="#reserve" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-text">
+    <div class="label">JAPANESE RAMEN · 성수동</div>
+    <h1>뜨거운 한 그릇,<br>면가온</h1>
+    <p>18시간 우려낸 돈코츠, 12시간 끓인 쇼유 육수. 매일 아침 뽑는 생면. 후쿠오카·도쿄에서 배운 정통 라멘을 성수동 골목에 옮겼습니다.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">메뉴 보기</a>
+      <a href="#reserve" class="btn btn-outline">대기 예약</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=900&q=80" alt="면가온 라멘 한 그릇">
+    <div class="hero-stamp">매일<br>생면<br>제작</div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>18H 돈코츠</span><span>·</span><span>생면 매일 제작</span><span>·</span><span>후쿠오카 정통</span><span>·</span><span>성수동 라멘</span><span>·</span><span>채식 메뉴</span><span>·</span>
+    <span>18H 돈코츠</span><span>·</span><span>생면 매일 제작</span><span>·</span><span>후쿠오카 정통</span><span>·</span><span>성수동 라멘</span><span>·</span><span>채식 메뉴</span><span>·</span>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1557872943-5a5ac412247a?w=700&q=80" alt="면가온 셰프가 라멘을 만드는 모습">
+      </div>
+      <div class="about-content">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">후쿠오카에서 온<br>라멘의 정성</h2>
+        <p class="section-desc">2019년 후쿠오카 현지 라멘야에서 3년간 수습한 셰프 박진우가 2022년 성수동에 면가온을 열었습니다. '온(溫)'은 따뜻함—뜨거운 육수, 정성스러운 한 그릇, 손님을 맞이하는 마음을 담았습니다.</p>
+        <p class="section-desc">돈코츠 육수는 돼지뼈를 18시간 이상 우려내며, 쇼유·미소 육수는 각각 12시간 끓입니다. 면은 매일 아침 5시부터 뽑아 4시간 이내 사용. 일본산 소금·간장·미소만 사용하며, MSG는 넣지 않습니다.</p>
+        <div class="stats">
+          <div class="stat"><strong>18H</strong><span>돈코츠 우림</span></div>
+          <div class="stat"><strong>매일</strong><span>생면 제작</span></div>
+          <div class="stat"><strong>4.9</strong><span>네이버 평점</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Broth -->
+<section class="broth-section" id="broth">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Broth</div>
+      <h2 class="section-title">면가온 3가지 육수</h2>
+      <p class="section-desc">시간과 불로 완성되는 육수. 매일 아침 새로 끓이며, 당일 소진 원칙을 지킵니다.</p>
+    </div>
+    <div class="broth-grid">
+      <div class="broth-card">
+        <div class="broth-img">
+          <img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=500&q=80" alt="돈코츠 라멘">
+        </div>
+        <div class="broth-body">
+          <div class="type">TONKOTSU · 豚骨</div>
+          <h4>돈코츠</h4>
+          <p>돼지뼈 18시간 우림. 크리미하고 진한 풍미. 후쿠오카 이치란 스타일. 기본 토핑: 차슈·파·나루토·반숙 계란.</p>
+        </div>
+      </div>
+      <div class="broth-card">
+        <div class="broth-img">
+          <img src="https://images.unsplash.com/photo-1591814468924-caf88d1232e9?w=500&q=80" alt="쇼유 라멘">
+        </div>
+        <div class="broth-body">
+          <div class="type">SHOYU · 醤油</div>
+          <h4>쇼유</h4>
+          <p>닭·돼지·가다랑어 다시 12시간. 간장 베이스의 깔끔한 맛. 도쿄 스타일. 가벼운 입맛에 추천.</p>
+        </div>
+      </div>
+      <div class="broth-card">
+        <div class="broth-img">
+          <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=80" alt="미소 라멘">
+        </div>
+        <div class="broth-body">
+          <div class="type">MISO · 味噌</div>
+          <h4>미소</h4>
+          <p>홋카이도산 미소·버터·옥수수. 고소하고 묵직한 맛. 겨울 시즌 인기. 매운맛 단계 선택 가능.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <div class="section-label">Menu</div>
+      <h2 class="section-title">면가온 메뉴</h2>
+      <p class="section-desc">기본 라멘 ₩11,000~. 토핑 추가·사이드 메뉴 선택 가능. 라멘 외 음료·사이드 별도.</p>
+    </div>
+    <div class="menu-tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="ramen">라멘</button>
+        <button class="tab-btn" data-tab="special">시그니처</button>
+        <button class="tab-btn" data-tab="side">사이드·음료</button>
+      </div>
+      <div class="tab-panel active" data-tab="ramen">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>돈코츠 라멘</h4>
+              <p>18시간 우린 돼지뼈 육수. 차슈·파·나루토·반숙 계란 기본</p>
+            </div>
+            <span class="price">₩11,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>쇼유 라멘</h4>
+              <p>닭·돼지 다시 12시간. 간장 베이스, 깔끔한 맛</p>
+            </div>
+            <span class="price">₩10,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>미소 라멘</h4>
+              <p>홋카이도 미소·버터. 고소하고 묵직, 매운맛 선택</p>
+            </div>
+            <span class="price">₩11,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>츠케멘</h4>
+              <p>진한 육수에 찍어 먹는 면. 돈코츠·쇼유 중 택1</p>
+            </div>
+            <span class="price">₩12,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>채식 미소 라멘</h4>
+              <p>콩·야채 다시. 비건 친화, 미소·버터·옥수수</p>
+            </div>
+            <span class="price">₩10,500</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="special">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>면가온 시그니처</h4>
+              <p>돈코츠 + 차슈 2장 + 반숙 계란 2개 + 김. 셰프 추천</p>
+            </div>
+            <span class="price">₩14,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>매운 돈코츠</h4>
+              <p>돈코츠 + 고추기름 + 매운 차슈. 매운맛 1~3단계</p>
+            </div>
+            <span class="price">₩12,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>흑마늘 돈코츠</h4>
+              <p>흑마늘 오일 + 돈코츠. 깊고 고소한 풍미</p>
+            </div>
+            <span class="price">₩12,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>차슈멘</h4>
+              <p>차슈 4장 추가. 고기 좋아하시는 분께 추천</p>
+            </div>
+            <span class="price">₩15,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="side">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>차슈 추가</h4>
+              <p>2장. 수육 12시간 숙성</p>
+            </div>
+            <span class="price">₩2,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>반숙 계란</h4>
+              <p>1개. 간장 마리네 48시간</p>
+            </div>
+            <span class="price">₩1,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>교자 (5개)</h4>
+              <p>야채·돼지고기. 구이·수제</p>
+            </div>
+            <span class="price">₩5,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>김밥 (2줄)</h4>
+              <p>차슈·오이·당근. 라멘과 함께</p>
+            </div>
+            <span class="price">₩4,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>하이볼 / 맥주</h4>
+              <p>일본산 하이볼·아사히 생맥주</p>
+            </div>
+            <span class="price">₩6,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Noodle -->
+<section class="noodle-section" id="noodle">
+  <div class="container">
+    <div class="noodle-grid">
+      <div class="noodle-img">
+        <img src="https://images.unsplash.com/photo-1612874742237-6529e86d76d2?w=800&q=80" alt="면가온 생면 제작">
+      </div>
+      <div class="noodle-details">
+        <div class="section-label">Noodle</div>
+        <h2 class="section-title">매일 아침 뽑는 생면</h2>
+        <p class="section-desc">면은 매일 아침 5시부터 제면기로 뽑습니다. 밀가루·물·카놀리(소금)만 사용하며, 알칼리수(간수)로 쫄깃한 식감을 냅니다. 뽑은 면은 4시간 이내 사용, 남은 면은 폐기합니다.</p>
+        <p class="section-desc">돈코츠용은 굵고 쫄깃한 중화면, 쇼유용은 가는 직면, 츠케멘용은 더 굵은 면을 사용합니다. 면 삶기 시간·온도는 육수 종류별로 다르게 조정합니다.</p>
+        <div class="noodle-specs">
+          <div><strong>제면 시간</strong><span>매일 05:00~</span></div>
+          <div><strong>면 종류</strong><span>중화면·직면·굵은면</span></div>
+          <div><strong>유통 기한</strong><span>4시간 이내 사용</span></div>
+          <div><strong>면 추가</strong><span>₩1,500 (대부분)</span></div>
+        </div>
+        <a href="#menu" class="btn btn-primary">메뉴 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Toppings -->
+<section class="topping-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Toppings</div>
+      <h2 class="section-title">정성스러운 토핑</h2>
+      <p class="section-desc">차슈·계란·파까지 직접 만듭니다. 라멘 한 그릇의 완성도를 높이는 디테일.</p>
+    </div>
+    <div class="topping-grid">
+      <div class="topping-card">
+        <div class="icon">🥩</div>
+        <h4>차슈</h4>
+        <p>돼지뼈 12시간 수육. 간장·미림 마리네</p>
+      </div>
+      <div class="topping-card">
+        <div class="icon">🥚</div>
+        <h4>반숙 계란</h4>
+        <p>48시간 간장 숙성. 노른자 반숙</p>
+      </div>
+      <div class="topping-card">
+        <div class="icon">🧅</div>
+        <h4>파·김</h4>
+        <p>국내산 대파. 전복·김 토핑</p>
+      </div>
+      <div class="topping-card">
+        <div class="icon">🍥</div>
+        <h4>나루토</h4>
+        <p>일본산 어묵. 돈코츠 기본 토핑</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">라멘을 만드는 사람들</h2>
+      <p class="section-desc">후쿠오카·도쿄 현지 경험으로 매일 한 그릇에 정성을 담습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="박진우 헤드 셰프">
+        </div>
+        <div class="card-body">
+          <h4>박진우</h4>
+          <div class="role">Head Chef · 후쿠오카</div>
+          <p>후쿠오카 라멘야 3년 수습. 면가온 창업. 육수·면 레시피 총괄.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="타나카 켄지 제면사">
+        </div>
+        <div class="card-body">
+          <h4>田中 健二</h4>
+          <div class="role">Noodle Master · 제면</div>
+          <p>도쿄 제면장 10년. 매일 아침 5시 생면 제작.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" alt="김서연 홀 매니저">
+        </div>
+        <div class="card-body">
+          <h4>김서연</h4>
+          <div class="role">Hall Manager · 홀</div>
+          <p>대기·예약·고객 응대. 일본어·한국어 가능.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">면가온의 밤</h2>
+      <p class="section-desc">뜨거운 육수, 쫄깃한 면, 성수동의 밤 풍경을 담았습니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&q=80" alt="돈코츠 라멘">
+      <img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80" alt="라멘 클로즈업">
+      <img src="https://images.unsplash.com/photo-1591814468924-caf88d1232e9?w=400&q=80" alt="쇼유 라멘">
+      <img src="https://images.unsplash.com/photo-1557872943-5a5ac412247a?w=400&q=80" alt="주방">
+      <img src="https://images.unsplash.com/photo-1612874742237-6529e86d76d2?w=400&q=80" alt="생면">
+      <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&q=80" alt="미소 라멘">
+      <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400&q=80" alt="교자">
+      <img src="https://images.unsplash.com/photo-1555126634-323283e090e0?w=400&q=80" alt="라멘집 인테리어">
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">손님들의 이야기</h2>
+      <p class="section-desc">네이버·인스타그램에서 받은 진솔한 후기를 모았습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>돈코츠 육수가 진짜 크리미해요. 일본 후쿠오카에서 먹었던 맛이 나서 감동. 면도 쫄깃하고 차슈가 부드럽습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김민준</strong><span>네이버 리뷰 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>면가온 시그니처 시켰는데 양도 넉넉하고 맛도 최고. 반숙 계란 2개가 포인트. 성수동 라멘 맛집 인정!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이수아</strong><span>인스타 DM · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>쇼유 라멘이 깔끔해서 좋아요. 돈코츠보다 가벼운 입맛에 딱. 교자도 바삭하고 맛있습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박현서</strong><span>네이버 리뷰 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <blockquote>주말 저녁엔 웨이팅 있어요. 예약 시스템 있으니 미리 예약하세요. 맛은 확실히 worth it!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최지원</strong><span>카카오맵 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>채식 미소 라멘 먹었는데 비건인데도 맛있어요. 미소·버터 조합이 고소하고, 면 식감도 좋습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정예린</strong><span>네이버 리뷰 · 2024.12</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>츠케멘 처음 먹어봤는데 육수가 진해서 면 찍어 먹기 좋아요. 하이볼이랑 같이 먹으니 완벽한 조합.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한도윤</strong><span>인스타 리뷰 · 2024.11</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">방문 전 궁금한 점을 확인해 보세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">웨이팅·예약은 어떻게 하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">주말·저녁(18:00~21:00)은 웨이팅이 있을 수 있습니다. 홈페이지 예약 폼으로 대기 예약 가능(1~4인). 5인 이상은 전화(02-5678-9012)로 문의. 평일 점심은 워크인 가능.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">매운맛 조절이 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">미소 라멘·매운 돈코츠는 1~3단계 매운맛 선택 가능합니다. 기본 돈코츠·쇼유는 순한 맛. 고추기름 추가(₩500)도 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">테이크아웃·배달이 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">테이크아웃 가능(전용 용기 제공). 배달은 배민·쿠팡이츠 제휴. 다만 라멘은 갓 나온 상태가 최고이므로 매장 식사를 권장합니다. 츠케멘은 배달 시 면과 육수 분리 포장.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">채식·비건 메뉴가 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">채식 미소 라멘(₩10,500)이 있습니다. 콩·야채 다시, 미소·버터·옥수수 사용. 계란·차슈 토핑은 제외. 비건 옵션 문의 시 카운터에 말씀해 주세요.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차는 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">매장 앞 골목 2대 무료(1시간). 만차 시 성수동 공영주차장(도보 4분) 이용. 성수역에서 도보 6분이라 대중교통 이용을 권장합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="location-section" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">성수역 2번 출구에서 도보 6분. 골목 안쪽 붉은 간판을 찾아주세요.</p>
+    </div>
+    <div class="location-grid">
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>면가온 MYEONGAON</strong>
+          <span>서울 성동구 성수이로 18길 7</span>
+        </div>
+      </div>
+      <div class="location-info">
+        <h3>매장 정보</h3>
+        <table class="hours-table">
+          <tr><td>월 – 금</td><td>11:30 – 21:30</td></tr>
+          <tr><td>토 – 일</td><td>11:30 – 22:00</td></tr>
+          <tr><td>브레이크타임</td><td>15:00 – 17:00</td></tr>
+          <tr><td>라스트오더</td><td>마감 30분 전</td></tr>
+          <tr><td>정기휴무</td><td>매월 둘째·넷째 월요일</td></tr>
+        </table>
+        <div class="location-detail-grid">
+          <div>
+            <h4>주차</h4>
+            <p>매장 앞 골목 2대 무료(1시간). 만차 시 성수동 공영주차장(도보 4분) 이용.</p>
+          </div>
+          <div>
+            <h4>대중교통</h4>
+            <ul>
+              <li>지하철 2호선 성수역 2번 출구 도보 6분</li>
+              <li>버스 271, 2014 성수역 정류장 하차</li>
+              <li>자전거 거치대 매장 앞 2대</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:20px;font-size:0.9rem;color:var(--text-muted)">문의 · 02-5678-9012 · hello@myeongaon.kr</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reserve -->
+<section class="reserve-section" id="reserve">
+  <div class="container">
+    <div class="reserve-wrap">
+      <div class="reserve-intro">
+        <div class="section-label">Reservation</div>
+        <h2 class="section-title">대기 예약</h2>
+        <p class="section-desc">주말·저녁 시간대 대기 예약을 남겨 주시면 1영업일 내 확인 연락드립니다. 급한 문의는 02-5678-9012로 전화해 주세요.</p>
+        <p class="reserve-note">※ 1~4인 대기 예약만 가능. 5인 이상·당일 예약은 전화로 문의. 예약 시간 10분 경과 시 자동 취소될 수 있습니다.</p>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="예약 요청이 접수되었습니다! 곧 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="date">희망 일시</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="guests">인원</label>
+              <select id="guests" name="guests" required>
+                <option value="">선택</option>
+                <option value="1">1명</option>
+                <option value="2">2명</option>
+                <option value="3">3명</option>
+                <option value="4">4명</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">요청 사항</label>
+              <textarea id="message" name="message" placeholder="희망 시간, 매운맛 단계, 채식 메뉴 등을 적어 주세요." rows="4"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">예약 요청 보내기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">면가온</span>
+      <p>성수동에서 만나는 정통 일본 라멘. 18시간 돈코츠, 매일 생면, 따뜻한 한 그릇. 면가온 MYEONGAON.</p>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#about">스토리</a>
+      <a href="#menu">메뉴</a>
+      <a href="#broth">육수</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#reserve">예약</a>
+    </div>
+    <div class="footer-col">
+      <h4>영업 안내</h4>
+      <p>월–금 11:30–21:30</p>
+      <p>토–일 11:30–22:00</p>
+      <p>브레이크 15:00–17:00</p>
+      <p>둘째·넷째 월 휴무</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>서울 성동구 성수이로 18길 7</p>
+      <p>02-5678-9012</p>
+      <p>hello@myeongaon.kr</p>
+      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 MYEONGAON. All rights reserved.</span>
+    <span>사업자등록번호 567-89-01234</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

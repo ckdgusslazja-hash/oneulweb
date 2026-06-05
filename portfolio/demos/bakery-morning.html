@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모닝베이커리 MORNING BAKERY — 동네 베이커리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Quicksand', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFF9EE;
+  --text: #3D2E1F;
+  --text-muted: #8A7A68;
+  --accent: #E8A838;
+  --accent-text: #3D2E1F;
+  --border: #F0E4D0;
+  --nav-bg: rgba(255,249,238,0.97);
+  --footer-bg: #3D2E1F;
+  --card-bg: #fff;
+  --btn-radius: 24px;
+  --card-radius: 16px;
+  --title-weight: 600;
+  --logo-weight: 700;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 90vh, 740px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,249,238,0.92) 0%, rgba(255,249,238,0.55) 50%, rgba(255,249,238,0.3) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(40px, 8vw, 80px);
+  max-width: 600px;
+}
+
+.hero-content .label {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.hero-content p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero-float {
+  position: absolute;
+  right: clamp(24px, 8vw, 80px);
+  bottom: clamp(40px, 8vw, 80px);
+  z-index: 2;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: 20px 28px;
+  box-shadow: 0 16px 48px rgba(232,168,56,0.2);
+  border: 2px solid var(--accent);
+  text-align: center;
+}
+
+.hero-float strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.hero-float span { font-size: 0.82rem; color: var(--text-muted); }
+
+/* Marquee */
+.marquee {
+  padding: 16px 0;
+  background: var(--accent);
+  color: var(--text);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-inner {
+  display: inline-flex;
+  gap: 44px;
+  animation: marquee 24s linear infinite;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* About */
+.about { background: #fff; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--accent);
+}
+
+.stat span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* Fresh */
+.fresh-section { background: var(--bg); }
+
+.fresh-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.fresh-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: 28px 22px;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: transform 0.3s;
+}
+
+.fresh-card:hover { transform: translateY(-4px); }
+
+.fresh-card .icon { font-size: 2rem; margin-bottom: 12px; }
+
+.fresh-card h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.fresh-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Menu */
+.menu { background: #fff; }
+
+.menu-header { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
+.menu-header .section-desc { margin: 0 auto; }
+
+.menu-tabs-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 40px);
+}
+
+/* Best */
+.best-section { background: var(--bg); }
+
+.best-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.best-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.best-card .best-img { aspect-ratio: 4/3; overflow: hidden; }
+.best-card .best-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.best-card .best-body { padding: 24px; }
+
+.best-card .badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(232,168,56,0.15);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.best-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.best-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Custom */
+.custom-section { background: #fff; }
+
+.custom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 64px);
+  align-items: center;
+}
+
+.custom-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.custom-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.custom-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.custom-list li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--card-radius);
+}
+
+.custom-list .num {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.custom-list h5 { font-size: 0.92rem; margin-bottom: 4px; }
+.custom-list p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+/* Team */
+.team-section { background: var(--bg); }
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.gallery-grid img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* Reviews */
+.reviews-section { background: #fff; }
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* Location */
+.location-section { background: #fff; }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.location-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.location-detail-grid h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.location-detail-grid p,
+.location-detail-grid ul {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.location-detail-grid ul li {
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.location-detail-grid ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* Reserve */
+.reserve-section { background: var(--bg); }
+
+.reserve-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.reserve-intro .section-desc { margin-bottom: 24px; }
+
+.reserve-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 16px 20px;
+  background: var(--card-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+}
+
+.btn-primary { background: var(--accent); color: var(--accent-text); }
+
+@media (max-width: 900px) {
+  .hero-float { display: none; }
+  .about-grid, .custom-grid, .location-grid, .reserve-wrap { grid-template-columns: 1fr; }
+  .fresh-grid { grid-template-columns: repeat(2, 1fr); }
+  .best-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .location-detail-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stats, .fresh-grid { grid-template-columns: 1fr; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">MORNING BAKERY</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">스토리</a>
+    <a href="#menu">메뉴</a>
+    <a href="#best">베스트</a>
+    <a href="#custom">주문제작</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">위치</a>
+    <a href="#reserve" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&q=80" alt="모닝베이커리 갓 구운 빵">
+  </div>
+  <div class="hero-content">
+    <div class="label">NEIGHBORHOOD BAKERY · 망원동</div>
+    <h1>아침 6시,<br>갓 구운 행복</h1>
+    <p>매일 새벽 4시부터 반죽하는 동네 베이커리. 버터 100% 크루아상, 수제 식빵, 시즌 타르트까지. 이웃과 함께하는 따뜻한 아침을 모닝베이커리에서 시작하세요.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">오늘의 빵</a>
+      <a href="#custom" class="btn btn-outline">케이크 주문</a>
+    </div>
+  </div>
+  <div class="hero-float">
+    <strong>오늘 07:30</strong>
+    <span>첫 번째 빵 나왔어요!</span>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>매일 새벽 반죽</span><span>·</span><span>버터 100%</span><span>·</span><span>무첨가 식빵</span><span>·</span><span>망원동 베이커리</span><span>·</span><span>케이크 주문제작</span><span>·</span>
+    <span>매일 새벽 반죽</span><span>·</span><span>버터 100%</span><span>·</span><span>무첨가 식빵</span><span>·</span><span>망원동 베이커리</span><span>·</span><span>케이크 주문제작</span><span>·</span>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=700&q=80" alt="모닝베이커리 파티시에가 빵을 만드는 모습">
+      </div>
+      <div class="about-content">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">이웃을 위한<br>작은 베이커리</h2>
+        <p class="section-desc">2018년 망원동 골목에서 문을 연 모닝베이커리는 '아침 식탁에 올라갈 좋은 빵'이라는 소박한 다짐에서 시작했습니다. 매일 새벽 4시, 파티시에 3명이 직접 반죽·발효·굽기까지 모든 과정을 손으로 합니다.</p>
+        <p class="section-desc">첨가물 없는 식빵, 프랑스산 버터 100% 크루아상, 제철 과일 타르트가 대표 메뉴입니다. 단골 이웃분들의 생일·기념일 케이크 주문도 받으며, 매주 목요일은 '빵 나눔 데이'로 조기 마감된 빵을 이웃에게 나눕니다.</p>
+        <div class="stats">
+          <div class="stat"><strong>20+</strong><span>매일 굽는 빵</span></div>
+          <div class="stat"><strong>6년</strong><span>망원동 단골</span></div>
+          <div class="stat"><strong>4.9</strong><span>네이버 평점</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fresh Promise -->
+<section class="fresh-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Fresh Promise</div>
+      <h2 class="section-title">모닝베이커리 4가지 약속</h2>
+      <p class="section-desc">좋은 재료와 정직한 제법으로, 매일 아침 갓 구운 빵을 전합니다.</p>
+    </div>
+    <div class="fresh-grid">
+      <div class="fresh-card">
+        <div class="icon">🌅</div>
+        <h4>매일 새벽 반죽</h4>
+        <p>전날 밤 11시부터 반죽을 시작해, 아침 6시 30분 첫 빵이 나옵니다. 어제 남은 빵은 판매하지 않습니다.</p>
+      </div>
+      <div class="fresh-card">
+        <div class="icon">🧈</div>
+        <h4>버터 100%</h4>
+        <p>크루아상·파이·쿠키에 프랑스산 AOP 버터만 사용합니다. 마가린·쇼트닝은 일절 사용하지 않습니다.</p>
+      </div>
+      <div class="fresh-card">
+        <div class="icon">🌾</div>
+        <h4>무첨가 식빵</h4>
+        <p>밀가루·물·소금·이스트·꿀만 넣은 식빵. 보존료·유화제 없이 2일 이내 드시기 좋습니다.</p>
+      </div>
+      <div class="fresh-card">
+        <div class="icon">🎂</div>
+        <h4>케이크 주문제작</h4>
+        <p>생일·기념일·돌잔치 케이크를 3일 전 예약으로 제작합니다. 디자인·맛 커스텀 가능.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <div class="section-label">Menu</div>
+      <h2 class="section-title">오늘의 빵</h2>
+      <p class="section-desc">매일 굽는 빵 메뉴. 인기 빵은 오전 11시 전후 조기 마감될 수 있습니다. 세트 구매 시 음료 1잔 무료.</p>
+    </div>
+    <div class="menu-tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="bread">빵</button>
+        <button class="tab-btn" data-tab="pastry">페이스트리</button>
+        <button class="tab-btn" data-tab="cake">케이크·음료</button>
+      </div>
+      <div class="tab-panel active" data-tab="bread">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>모닝 식빵</h4>
+              <p>무첨가 식빵. 촉촉한 식감, 토스트·샌드위치에 최적</p>
+            </div>
+            <span class="price">₩4,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>통밀 사워도우</h4>
+              <p>72시간 발효. 꾸덕한 크러스트, 쫄깃한 크럼</p>
+            </div>
+            <span class="price">₩6,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>바게트</h4>
+              <p>프랑스 전통 제법. 바삭한 껍질, 속은 부드럽게</p>
+            </div>
+            <span class="price">₩3,800</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>호밀빵</h4>
+              <p>호밀 40% 블렌드. 고소하고 건강한 아침 빵</p>
+            </div>
+            <span class="price">₩5,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>치아바타</h4>
+              <p>이탈리안 플랫브레드. 올리브오일·로즈마리</p>
+            </div>
+            <span class="price">₩4,200</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="pastry">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>버터 크루아상</h4>
+              <p>프랑스 AOP 버터 27겹. 바삭하고 버터 향 가득</p>
+            </div>
+            <span class="price">₩4,800</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>아몬드 크루아상</h4>
+              <p>아몬드 크림 필링 + 슬라이스 아몬드 토핑</p>
+            </div>
+            <span class="price">₩5,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>시나몬 롤</h4>
+              <p>시나몬 슈가 + 크림치즈 글레이즈. 따뜻하게 제공</p>
+            </div>
+            <span class="price">₩4,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>에클레어</h4>
+              <p>바닐라·초콜릿·커피 중 택1. 당일 제조</p>
+            </div>
+            <span class="price">₩5,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>시즌 과일 타르트</h4>
+              <p>제철 과일 + 커스터드 크림. 딸기·복숭아·무화과</p>
+            </div>
+            <span class="price">₩6,800</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="cake">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>딸기 생크림 케이크</h4>
+              <p>1호 조각. 국내산 딸기 + 생크림</p>
+            </div>
+            <span class="price">₩7,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>초코 가나슈 케이크</h4>
+              <p>벨기에 커버춰 72%. 진한 초콜릿 풍미</p>
+            </div>
+            <span class="price">₩7,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>모닝 브런치 세트</h4>
+              <p>크루아상 + 식빵 2조각 + 잼·버터 + 아메리카노</p>
+            </div>
+            <span class="price">₩12,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>카페 라떼</h4>
+              <p>에스프레소 + 우유. 빵과 함께 500원 할인</p>
+            </div>
+            <span class="price">₩4,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>유기농 밀크티</h4>
+              <p>홍차 + 우유. 디카페인 옵션 가능</p>
+            </div>
+            <span class="price">₩4,800</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Best Sellers -->
+<section class="best-section" id="best">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Best Sellers</div>
+      <h2 class="section-title">단골이 사랑하는 빵</h2>
+      <p class="section-desc">매일 가장 먼저 마감되는 인기 메뉴. 아침 일찍 방문하시면 만나실 수 있어요.</p>
+    </div>
+    <div class="best-grid">
+      <div class="best-card">
+        <div class="best-img">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=80" alt="버터 크루아상">
+        </div>
+        <div class="best-body">
+          <span class="badge">BEST 1</span>
+          <h4>버터 크루아상</h4>
+          <p>27겹 겹겹이 펴 만든 시그니처. 아침 7시 첫 출고, 11시 전후 마감. 테이크아웃 6개 이상 10% 할인.</p>
+        </div>
+      </div>
+      <div class="best-card">
+        <div class="best-img">
+          <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=500&q=80" alt="모닝 식빵">
+        </div>
+        <div class="best-body">
+          <span class="badge">BEST 2</span>
+          <h4>모닝 식빵</h4>
+          <p>무첨가 5종 재료만. 토스트하면 바삭하고 속은 촉촉. 1봉 8조각, 2일 이내 드시기 권장.</p>
+        </div>
+      </div>
+      <div class="best-card">
+        <div class="best-img">
+          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=500&q=80" alt="시즌 과일 타르트">
+        </div>
+        <div class="best-body">
+          <span class="badge">BEST 3</span>
+          <h4>시즌 과일 타르트</h4>
+          <p>제철 과일로 매달 바뀌는 타르트. 봄 딸기·여름 복숭아·가을 무화과. 당일 소진.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Custom Order -->
+<section class="custom-section" id="custom">
+  <div class="container">
+    <div class="custom-grid">
+      <div class="custom-img">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80" alt="모닝베이커리 주문제작 케이크">
+      </div>
+      <div class="custom-details">
+        <div class="section-label">Custom Order</div>
+        <h2 class="section-title">케이크 주문제작</h2>
+        <p class="section-desc">생일·기념일·돌잔치·회사 행사 케이크를 맞춤 제작합니다. 1호(15cm)·2호(18cm)·3호(21cm) 사이즈, 맛·디자인·토핑 커스텀 가능.</p>
+        <ul class="custom-list">
+          <li>
+            <span class="num">01</span>
+            <div>
+              <h5>상담 & 디자인</h5>
+              <p>전화·카카오톡·예약 폼으로 문의. 레퍼런스 사진과 희망 맛·사이즈를 알려주세요.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num">02</span>
+            <div>
+              <h5>견적 & 예약금</h5>
+              <p>1영업일 내 견적 안내. 예약 확정 시 50% 예약금 입금(계좌이체).</p>
+            </div>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <div>
+              <h5>제작 & 픽업</h5>
+              <p>픽업 3일 전까지 주문. 당일 오전 10시 이후 매장 픽업 또는 배달(망원·합정·연남).</p>
+            </div>
+          </li>
+        </ul>
+        <a href="#reserve" class="btn btn-primary">케이크 주문 문의</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">빵을 만드는 사람들</h2>
+      <p class="section-desc">프랑스·일본 제과 학원 출신 파티시에가 매일 아침을 준비합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" alt="김미래 헤드 파티시에">
+        </div>
+        <div class="card-body">
+          <h4>김미래</h4>
+          <div class="role">Head Pâtissier</div>
+          <p>르꼬르동 블루 졸업. 모닝베이커리 창업. 크루아상·케이크 레시피 총괄.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="박준혁 제빵사">
+        </div>
+        <div class="card-body">
+          <h4>박준혁</h4>
+          <div class="role">Boulanger · 제빵</div>
+          <p>식빵·사워도우·바게트 전문. 매일 새벽 4시 반죽 시작.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="이서연 파티시에">
+        </div>
+        <div class="card-body">
+          <h4>이서연</h4>
+          <div class="role">Pâtissier · 케이크</div>
+          <p>타르트·케이크 주문제작 담당. 시즌 메뉴 R&D.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">베이커리의 아침</h2>
+      <p class="section-desc">갓 구운 빵, 따뜻한 매장, 행복한 이웃들의 모습을 담았습니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80" alt="갓 구운 빵">
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80" alt="크루아상">
+      <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400&q=80" alt="베이커리 내부">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80" alt="생크림 케이크">
+      <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&q=80" alt="식빵">
+      <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&q=80" alt="과일 타르트">
+      <img src="https://images.unsplash.com/photo-1608198093002-4d8304a666a4?w=400&q=80" alt="빵 진열">
+      <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=400&q=80" alt="아침 브런치">
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">이웃들의 이야기</h2>
+      <p class="section-desc">망원동 단골분들의 따뜻한 후기를 모았습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>크루아상이 정말 바삭하고 버터 향이 확실해요. 아침 7시에 가면 갓 나온 거 먹을 수 있어서 행복합니다. 매주 토요일 아침 루틴이에요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김수연</strong><span>네이버 리뷰 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>아이 돌잔치 케이크 주문했는데 디자인도 맛도 완벽했어요. 무첨가 식빵도 촉촉해서 아이 간식으로 좋습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이정민</strong><span>카카오톡 후기 · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>사워도우 빵이 꾸덕하고 맛있어요. 토스트해도 쫄깃함이 살아있습니다. 직원분들이 항상 밝고 친절해요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박현우</strong><span>네이버 리뷰 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <blockquote>시나몬 롤 따뜻하게 주시는 센스! 인기 빵은 11시쯤 마감되니까 일찍 가세요. 브런치 세트 가성비 좋아요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최유진</strong><span>카카오맵 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>딸기 타르트가 제철 딸기로 만들어져서 신선해요. 망원동 이사 온 후 매주 들르는 단골 베이커리입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정다은</strong><span>인스타 DM · 2024.12</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>회사 행사 케이크 20개 주문했는데 일정·맛 모두 만족. 예약 과정도 친절하게 안내해 주셨어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한지훈</strong><span>이메일 후기 · 2024.11</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">방문 전 궁금한 점을 확인해 보세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">빵은 몇 시에 나오나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">첫 빵은 오전 6시 30분, 크루아상·식빵은 7시~7시 30분경 진열 완료됩니다. 인기 메뉴(크루아상·식빵)는 11시 전후 조기 마감될 수 있으니 이른 방문을 권장합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">케이크 주문은 어떻게 하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">픽업 3일 전까지 홈페이지 예약 폼·전화(02-3456-7890)·카카오톡으로 문의해 주세요. 사이즈·맛·디자인을 알려주시면 1영업일 내 견적을 안내드립니다. 예약 확정 시 50% 예약금이 필요합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">어제 남은 빵을 판매하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">아니요. 모닝베이커리는 당일 생산·당일 판매 원칙을 지킵니다. 마감 후 남은 빵은 목요일 '빵 나눔 데이'에 이웃에게 나누거나 폐기합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차·배달이 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">매장 앞 골목 2대 무료 주차 가능(30분). 만차 시 망원동 공영주차장(도보 4분) 이용. 망원·합정·연남 지역 케이크·빵 배달 가능(배달비 별도, 3만원 이상 무료).</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">대량 주문·기업 납품이 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">크루아상·식빵 20개 이상 대량 주문, 회사 간식·행사 케이크 납품을 받습니다. 1주일 전 예약 권장. 전화 또는 예약 폼으로 문의해 주세요.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="location-section" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">망원역 2번 출구에서 도보 5분. 골목 안쪽 노란 간판을 찾아주세요.</p>
+    </div>
+    <div class="location-grid">
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>MORNING BAKERY</strong>
+          <span>서울 마포구 망원로 23길 8</span>
+        </div>
+      </div>
+      <div class="location-info">
+        <h3>매장 정보</h3>
+        <table class="hours-table">
+          <tr><td>월 – 금</td><td>07:00 – 19:00</td></tr>
+          <tr><td>토 – 일</td><td>07:00 – 18:00</td></tr>
+          <tr><td>공휴일</td><td>08:00 – 17:00</td></tr>
+          <tr><td>첫 빵 출고</td><td>06:30 – 07:30</td></tr>
+          <tr><td>빵 나눔 데이</td><td>매주 목 17:00 조기 마감</td></tr>
+        </table>
+        <div class="location-detail-grid">
+          <div>
+            <h4>주차</h4>
+            <p>매장 앞 골목 2대 무료(30분). 승용차 기준. 만차 시 망원동 공영주차장(도보 4분) 이용.</p>
+          </div>
+          <div>
+            <h4>대중교통</h4>
+            <ul>
+              <li>지하철 6호선 망원역 2번 출구 도보 5분</li>
+              <li>버스 271, 7016 망원역 정류장 하차</li>
+              <li>자전거 거치대 매장 앞 2대</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:20px;font-size:0.9rem;color:var(--text-muted)">문의 · 02-3456-7890 · hello@morningbakery.kr</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reserve -->
+<section class="reserve-section" id="reserve">
+  <div class="container">
+    <div class="reserve-wrap">
+      <div class="reserve-intro">
+        <div class="section-label">Reservation</div>
+        <h2 class="section-title">예약 · 문의</h2>
+        <p class="section-desc">케이크 주문제작, 대량 주문, 기업 납품 문의를 남겨 주시면 1영업일 내 연락드립니다. 급한 문의는 02-3456-7890으로 전화해 주세요.</p>
+        <p class="reserve-note">※ 케이크 주문은 픽업 3일 전까지 예약해 주세요. 대량 주문은 1주일 전 예약을 권장합니다.</p>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="문의가 접수되었습니다! 곧 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="date">희망 픽업일</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="type">문의 유형</label>
+              <select id="type" name="type" required>
+                <option value="">선택</option>
+                <option value="cake">케이크 주문제작</option>
+                <option value="bulk">대량 주문</option>
+                <option value="corporate">기업 납품</option>
+                <option value="other">기타 문의</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">문의 내용</label>
+              <textarea id="message" name="message" placeholder="케이크 사이즈·맛·디자인, 수량, 픽업 희망 시간 등을 적어 주세요." rows="4"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">문의 보내기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">MORNING BAKERY</span>
+      <p>망원동에서 매일 아침 갓 구운 빵. 이웃과 함께하는 따뜻한 베이커리, 모닝베이커리.</p>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#about">스토리</a>
+      <a href="#menu">메뉴</a>
+      <a href="#custom">케이크 주문</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#reserve">예약</a>
+    </div>
+    <div class="footer-col">
+      <h4>영업 안내</h4>
+      <p>월–금 07:00–19:00</p>
+      <p>토–일 07:00–18:00</p>
+      <p>첫 빵 06:30–07:30</p>
+      <p>목요일 빵 나눔 데이</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>서울 마포구 망원로 23길 8</p>
+      <p>02-3456-7890</p>
+      <p>hello@morningbakery.kr</p>
+      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 MORNING BAKERY. All rights reserved.</span>
+    <span>사업자등록번호 345-67-89012</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

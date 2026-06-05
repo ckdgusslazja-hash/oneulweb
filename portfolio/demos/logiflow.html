@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>로지스플로우 LOGIFLOW — 3PL 물류·배송·풀필먼트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #F4F6FA;
+  --bg-alt: #E8EDF5;
+  --text: #0C1A2E;
+  --text-muted: #5A6B82;
+  --accent: #F97316;
+  --accent-dark: #EA580C;
+  --accent-light: #FB923C;
+  --navy: #0F2744;
+  --navy-mid: #1A3A5C;
+  --accent-text: #fff;
+  --border: #D4DCE8;
+  --nav-bg: rgba(15,39,68,0.96);
+  --footer-bg: #081828;
+  --card-bg: #FFFFFF;
+  --surface: #EEF2F8;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --logo-weight: 700;
+  --title-weight: 700;
+  --footer-text: rgba(255,255,255,0.58);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+.site-nav {
+  background: var(--nav-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+}
+.site-nav .logo {
+  color: #fff;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.site-nav .logo span {
+  font-size: 0.72em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.nav-links a { color: rgba(255,255,255,0.72); }
+.nav-links a:hover { color: #fff; }
+.nav-cta { background: var(--accent); color: #fff; font-weight: 700; }
+.nav-toggle { color: #fff; }
+@media (max-width: 768px) {
+  .nav-links { background: var(--nav-bg); border-color: rgba(255,255,255,0.1); }
+  .nav-links a { color: rgba(255,255,255,0.9); }
+}
+
+.hero {
+  position: relative;
+  min-height: clamp(520px, 88vh, 740px);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  overflow: hidden;
+}
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(8,24,40,0.94) 0%, rgba(15,39,68,0.82) 50%, rgba(26,58,92,0.6) 100%);
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(249,115,22,0.15);
+  border: 1px solid rgba(249,115,22,0.4);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+  border-radius: 2px;
+}
+.hero-badge .dot {
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.9); }
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-lead {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: rgba(255,255,255,0.82);
+  line-height: 1.85;
+  max-width: 540px;
+  margin-bottom: 32px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+.btn-hero {
+  padding: 15px 30px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(249,115,22,0.35);
+}
+.btn-hero-outline {
+  padding: 15px 30px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, border-color 0.25s;
+}
+.btn-hero-outline:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.6);
+}
+.hero-stats {
+  display: flex;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.hero-stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.hero-stat span { font-size: 0.75rem; color: rgba(255,255,255,0.65); }
+
+.hero-panel {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  backdrop-filter: blur(8px);
+}
+.hero-panel-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.hero-track {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.track-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  font-size: 0.82rem;
+}
+.track-row .status {
+  padding: 4px 10px;
+  background: rgba(249,115,22,0.2);
+  color: var(--accent-light);
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 2px;
+}
+.track-row .status.done { background: rgba(34,197,94,0.2); color: #86EFAC; }
+
+.trust-strip {
+  background: var(--navy);
+  color: #fff;
+  padding: 20px 0;
+  border-bottom: 3px solid var(--accent);
+}
+.trust-strip .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.trust-strip-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.trust-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 36px);
+  align-items: center;
+}
+.trust-logos span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.02em;
+}
+
+.about-section { background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+.about-img { position: relative; border-radius: var(--card-radius); overflow: hidden; }
+.about-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.about-badge {
+  position: absolute;
+  bottom: 20px; left: 20px;
+  background: var(--navy);
+  color: #fff;
+  padding: 16px 20px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--card-radius) 0 0;
+}
+.about-badge strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.about-badge span { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+.about-points { display: flex; flex-direction: column; gap: 18px; margin-top: 28px; }
+.about-point {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.about-point .ico {
+  width: 44px; height: 44px;
+  background: rgba(15,39,68,0.08);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.about-point strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.about-point p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+.services-section { background: var(--surface); }
+.biz-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.biz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15,39,68,0.1);
+}
+.biz-card-img { aspect-ratio: 16/10; overflow: hidden; }
+.biz-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.biz-card:hover .biz-card-img img { transform: scale(1.04); }
+.biz-card-body { padding: clamp(20px, 3vw, 28px); }
+.biz-card-body .tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(249,115,22,0.12);
+  color: var(--accent-dark);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+.biz-card-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--navy);
+}
+.biz-card-body p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+.biz-card-body ul { font-size: 0.8rem; color: var(--text-muted); }
+.biz-card-body li {
+  padding: 4px 0 4px 14px;
+  position: relative;
+  line-height: 1.6;
+}
+.biz-card-body li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 11px;
+  width: 5px; height: 5px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.stats-section {
+  background: var(--navy);
+  color: #fff;
+  padding: clamp(48px, 8vw, 72px) 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+  text-align: center;
+}
+.stat-box .num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-box .num span { font-size: 0.55em; color: rgba(255,255,255,0.7); }
+.stat-box .lbl { font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; }
+.stat-box .sub { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+
+.clients-section { background: var(--bg); }
+.client-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+.client-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: border-color 0.25s, color 0.25s;
+}
+.client-box:hover {
+  border-color: var(--accent);
+  color: var(--navy);
+}
+
+.warehouse-section { background: var(--surface); }
+.wh-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.wh-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15,39,68,0.08);
+}
+.wh-thumb { aspect-ratio: 16/9; overflow: hidden; position: relative; }
+.wh-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.wh-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  padding: 6px 12px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.wh-body { padding: 22px; }
+.wh-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+  color: var(--navy);
+}
+.wh-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.wh-meta strong { color: var(--accent-dark); }
+.wh-body p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; }
+
+.tabs-section { background: var(--bg); }
+.tabs-wrap { max-width: 900px; margin: 0 auto; }
+.service-tab-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 36px);
+}
+.service-tab-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.service-tab-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+.tab-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.tab-feat {
+  padding: 14px;
+  background: var(--surface);
+  border-radius: var(--card-radius);
+  font-size: 0.82rem;
+}
+.tab-feat strong { display: block; color: var(--navy); margin-bottom: 4px; font-size: 0.85rem; }
+.tab-feat span { color: var(--text-muted); line-height: 1.6; }
+
+.news-section { background: var(--surface); }
+.news-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+.news-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(15,39,68,0.08);
+}
+.news-thumb { overflow: hidden; }
+.news-thumb img { width: 100%; height: 100%; min-height: 120px; object-fit: cover; }
+.news-body { padding: 20px 20px 20px 0; display: flex; flex-direction: column; }
+.news-date { font-size: 0.72rem; color: var(--accent-dark); font-weight: 600; margin-bottom: 6px; }
+.news-body h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; line-height: 1.45; flex: 1; }
+.news-body p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+
+.faq-section { background: var(--bg); }
+.faq-item { border-color: var(--border); background: var(--card-bg); }
+.faq-item.open .faq-q { color: var(--navy); }
+
+.careers-section { background: var(--navy); color: #fff; }
+.careers-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: center;
+}
+.careers-grid .section-title { color: #fff; }
+.careers-grid .section-desc { color: rgba(255,255,255,0.7); }
+.career-perks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.career-perk {
+  padding: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--card-radius);
+}
+.career-perk strong { display: block; font-size: 0.85rem; margin-bottom: 4px; color: var(--accent-light); }
+.career-perk span { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.55; }
+.role-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+.role-row h4 { font-size: 0.92rem; }
+.role-row .meta { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-top: 4px; }
+.role-apply {
+  padding: 8px 18px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  transition: all 0.25s;
+}
+.role-apply:hover { background: var(--accent); color: #fff; }
+
+.contact-section { background: var(--surface); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+.contact-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.contact-detail .ico {
+  width: 44px; height: 44px;
+  background: rgba(15,39,68,0.08);
+  border-radius: var(--card-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.contact-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.contact-detail span { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+.form-card { background: var(--card-bg); }
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  margin-top: 8px;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(249,115,22,0.3);
+}
+
+.cta-band {
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: #fff;
+  text-align: center;
+  padding: clamp(48px, 8vw, 72px) 0;
+  border-top: 3px solid var(--accent);
+}
+.cta-band h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.cta-band p { color: rgba(255,255,255,0.75); margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.75; }
+
+.site-footer .footer-brand .logo { color: #fff; font-family: var(--font-display); text-transform: uppercase; }
+.site-footer .footer-brand .logo span { color: var(--accent); }
+.footer-col a:hover { color: var(--accent); }
+.section-label { color: var(--accent-dark); }
+
+@media (max-width: 900px) {
+  .hero-inner, .about-grid, .careers-grid, .contact-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .client-grid { grid-template-columns: repeat(3, 1fr); }
+  .news-card { grid-template-columns: 1fr; }
+  .news-body { padding: 0 20px 20px; }
+  .tab-features { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .stats-grid, .client-grid, .career-perks { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">로지스플로우 <span>LOGIFLOW</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">회사소개</a>
+    <a href="#services">사업영역</a>
+    <a href="#warehouses">물류센터</a>
+    <a href="#clients">주요고객</a>
+    <a href="#careers">채용</a>
+    <a href="#contact" class="nav-cta">문의</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80" alt="물류 창고와 배송">
+  </div>
+  <div class="container hero-inner">
+    <div>
+      <div class="hero-badge"><span class="dot"></span> 3PL · Fulfillment · Last-Mile</div>
+      <h1>물류의 흐름을<br><em>가장 빠르게</em></h1>
+      <p class="hero-lead">로지스플로우는 전국 12개 물류센터와 2,400대 배송 차량을 운영하는 3PL 전문 기업입니다. 창고·배송·풀필먼트·국제물류를 하나의 플랫폼으로 통합해 이커머스와 제조·유통 기업의 공급망을 최적화합니다.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-hero">물류 견적 문의</a>
+        <a href="#services" class="btn-hero-outline">사업영역 보기</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>12</strong><span>전국 물류센터</span></div>
+        <div class="hero-stat"><strong>98.7%</strong><span>당일 출고율</span></div>
+        <div class="hero-stat"><strong>2,400+</strong><span>배송 차량</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-panel">
+        <div class="hero-panel-label">Live Dispatch · 실시간 배차</div>
+        <div class="hero-track">
+          <div class="track-row"><span>LF-2847 · 수도권 당일</span><span class="status">배송중</span></div>
+          <div class="track-row"><span>LF-2841 · 부산 광역</span><span class="status done">배송완료</span></div>
+          <div class="track-row"><span>LF-2839 · 이천 FC 출고</span><span class="status">피킹중</span></div>
+          <div class="track-row"><span>LF-2835 · 인천항 수출</span><span class="status">통관대기</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container">
+    <span class="trust-strip-label">Trusted Partners</span>
+    <div class="trust-logos">
+      <span>Coupang</span>
+      <span>Naver Commerce</span>
+      <span>Amorepacific</span>
+      <span>LG Household</span>
+      <span>Samsung SDS</span>
+      <span>Hyundai Glovis</span>
+    </div>
+  </div>
+</div>
+
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1566576721346-2c394f785ac9?w=800&q=80" alt="로지스플로우 물류센터">
+        <div class="about-badge">
+          <strong>Since 2008</strong>
+          <span>3PL 물류 17년, 누적 4억 건 배송</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">About LOGIFLOW</div>
+        <h2 class="section-title">데이터 기반 물류,<br>고객의 성장을 실현합니다</h2>
+        <p class="section-desc">로지스플로우는 WMS·TMS·OMS를 자체 개발·운영하며, 재고 정확도 99.9%와 전국 익일 배송 네트워크를 갖춘 통합 3PL 파트너입니다. 스타트업부터 대기업까지 물량 규모에 맞는 맞춤형 물류 설계를 제공합니다.</p>
+        <div class="about-points">
+          <div class="about-point">
+            <div class="ico">📦</div>
+            <div>
+              <strong>풀필먼트 원스톱</strong>
+              <p>입고·보관·피킹·포장·배송·반품까지 단일 계약으로 운영 부담을 줄이고, 피크 시즌 인력·공간을 유연하게 확장합니다.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="ico">🌐</div>
+            <div>
+              <strong>글로벌 물류 네트워크</strong>
+              <p>미국·동남아·중국 8개 거점과 제휴 포워더를 통해 해상·항공·특송 국제물류를 통합 관리합니다.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="ico">📊</div>
+            <div>
+              <strong>실시간 물류 대시보드</strong>
+              <p>재고·출고·배송·CS 현황을 API로 연동해 고객사 ERP·OMS와 실시간 동기화합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Business Areas</div>
+      <h2 class="section-title">사업 영역</h2>
+      <p class="section-desc">창고·배송·풀필먼트·국제물류 4대 핵심 사업으로 고객의 공급망 전 과정을 지원합니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="biz-card">
+        <div class="biz-card-img">
+          <img src="https://images.unsplash.com/photo-1553413077-190a85b7c74e?w=600&q=80" alt="창고 보관">
+        </div>
+        <div class="biz-card-body">
+          <span class="tag">Warehouse</span>
+          <h3>창고·보관</h3>
+          <p>상온·냉장·냉동·위험물 구역을 갖춘 멀티존 센터에서 B2B·B2C 재고를 안전하게 보관합니다.</p>
+          <ul>
+            <li>SKU 단위 로케이션 관리</li>
+            <li>순환재고·유통기한 관리</li>
+            <li>크로스독·밴딩 서비스</li>
+          </ul>
+        </div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-img">
+          <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600&q=80" alt="배송">
+        </div>
+        <div class="biz-card-body">
+          <span class="tag">Delivery</span>
+          <h3>배송·라스트마일</h3>
+          <p>전국 당일·익일·새벽 배송과 설치·회수 서비스로 고객 경험을 완성합니다.</p>
+          <ul>
+            <li>수도권 4시간 당일배송</li>
+            <li>전국 익일 98% 도달</li>
+            <li>대형·가구 설치 배송</li>
+          </ul>
+        </div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-img">
+          <img src="https://images.unsplash.com/photo-1580674285054-beddd7a7adfa?w=600&q=80" alt="풀필먼트">
+        </div>
+        <div class="biz-card-body">
+          <span class="tag">Fulfillment</span>
+          <h3>풀필먼트</h3>
+          <p>이커머스·D2C 브랜드를 위한 주문 처리·포장·사은품·개인화 패키징까지 원스톱 운영합니다.</p>
+          <ul>
+            <li>주문 접수 후 2시간 내 출고</li>
+            <li>브랜드 맞춤 패키징</li>
+            <li>반품·교환 CS 대행</li>
+          </ul>
+        </div>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-img">
+          <img src="https://images.unsplash.com/photo-1494412519320-aa4fb448e12e?w=600&q=80" alt="국제물류">
+        </div>
+        <div class="biz-card-body">
+          <span class="tag">Global</span>
+          <h3>국제물류</h3>
+          <p>수출입 통관·FBA·해외 3PL 연계로 K-브랜드의 글로벌 진출을 지원합니다.</p>
+          <ul>
+            <li>항공·해상 LCL/FCL</li>
+            <li>관세·통관 대행</li>
+            <li>해외 반품 허브 운영</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section" id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="num">4.2<span>억+</span></div>
+        <div class="lbl">누적 배송 건수</div>
+        <div class="sub">2008년 설립 이후</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">98.7<span>%</span></div>
+        <div class="lbl">당일 출고율</div>
+        <div class="sub">평일 오후 2시 주문 마감</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">99.9<span>%</span></div>
+        <div class="lbl">재고 정확도</div>
+        <div class="sub">RF·바코드 기반 WMS</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">850<span>+</span></div>
+        <div class="lbl">고객사</div>
+        <div class="sub">이커머스·제조·유통</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="clients-section" id="clients">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Major Clients</div>
+      <h2 class="section-title">주요 고객</h2>
+      <p class="section-desc">국내 대표 이커머스·뷰티·생활용품·전자 기업이 로지스플로우와 함께합니다.</p>
+    </div>
+    <div class="client-grid">
+      <div class="client-box">Coupang</div>
+      <div class="client-box">Naver</div>
+      <div class="client-box">Amorepacific</div>
+      <div class="client-box">LG생활건강</div>
+      <div class="client-box">CJ ENM</div>
+      <div class="client-box">Musinsa</div>
+      <div class="client-box">Kurly</div>
+      <div class="client-box">29CM</div>
+      <div class="client-box">Samsung</div>
+      <div class="client-box">SK Networks</div>
+      <div class="client-box">Hanssem</div>
+      <div class="client-box">Lock&Lock</div>
+    </div>
+  </div>
+</section>
+
+<section class="warehouse-section" id="warehouses">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Logistics Centers</div>
+      <h2 class="section-title">물류센터</h2>
+      <p class="section-desc">전국 12개 거점, 총 42만㎡ 규모의 스마트 물류센터에서 최적의 입지와 온도대를 제공합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="wh-card">
+        <div class="wh-thumb">
+          <img src="https://images.unsplash.com/photo-1553413077-190a85b7c74e?w=600&q=80" alt="이천 메가허브">
+          <span class="wh-badge">Hub</span>
+        </div>
+        <div class="wh-body">
+          <h3>이천 메가허브</h3>
+          <div class="wh-meta">
+            <span>📍 경기 이천</span>
+            <span>📐 <strong>12만㎡</strong></span>
+          </div>
+          <p>수도권 동부 핵심 허브. 상온·냉장·냉동 멀티존, 일 출고 35만 건 처리 가능.</p>
+        </div>
+      </div>
+      <div class="wh-card">
+        <div class="wh-thumb">
+          <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600&q=80" alt="김포 국제물류">
+          <span class="wh-badge">Global</span>
+        </div>
+        <div class="wh-body">
+          <h3>김포 국제물류센터</h3>
+          <div class="wh-meta">
+            <span>📍 경기 김포</span>
+            <span>📐 <strong>6.8만㎡</strong></span>
+          </div>
+          <p>인천공항·인천항 인접. 수출입 통관·크로스독·해외 특송 연계 거점.</p>
+        </div>
+      </div>
+      <div class="wh-card">
+        <div class="wh-thumb">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80" alt="부산 남부허브">
+          <span class="wh-badge">Regional</span>
+        </div>
+        <div class="wh-body">
+          <h3>부산 남부허브</h3>
+          <div class="wh-meta">
+            <span>📍 부산 강서</span>
+            <span>📐 <strong>8.2만㎡</strong></span>
+          </div>
+          <p>영남·호남 권역 배송 거점. 항만 연계 수출 컨테이너 야드 운영.</p>
+        </div>
+      </div>
+      <div class="wh-card">
+        <div class="wh-thumb">
+          <img src="https://images.unsplash.com/photo-1566576721346-2c394f785ac9?w=600&q=80" alt="대전 중부허브">
+          <span class="wh-badge">Hub</span>
+        </div>
+        <div class="wh-body">
+          <h3>대전 중부허브</h3>
+          <div class="wh-meta">
+            <span>📍 대전 대덕</span>
+            <span>📐 <strong>5.4만㎡</strong></span>
+          </div>
+          <p>충청·강원 권역 당일·익일 배송 거점. 제조 B2B 납품 전문 라인 운영.</p>
+        </div>
+      </div>
+      <div class="wh-card">
+        <div class="wh-thumb">
+          <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600&q=80" alt="광주 서부센터">
+          <span class="wh-badge">Regional</span>
+        </div>
+        <div class="wh-body">
+          <h3>광주 서부센터</h3>
+          <div class="wh-meta">
+            <span>📍 광주 광산</span>
+            <span>📐 <strong>4.1만㎡</strong></span>
+          </div>
+          <p>호남 전역 익일 배송. 농수산·신선식품 냉장 전문 존 운영.</p>
+        </div>
+      </div>
+      <div class="wh-card">
+        <div class="wh-thumb">
+          <img src="https://images.unsplash.com/photo-1580674285054-beddd7a7adfa?w=600&q=80" alt="양산 뷰티FC">
+          <span class="wh-badge">Specialty</span>
+        </div>
+        <div class="wh-body">
+          <h3>양산 뷰티 FC</h3>
+          <div class="wh-meta">
+            <span>📍 경남 양산</span>
+            <span>📐 <strong>3.2만㎡</strong></span>
+          </div>
+          <p>화장품·뷰티 전문 풀필먼트. 온도·습도 관리, 브랜드 패키징 특화.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tabs-section" id="solutions">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Service Detail</div>
+      <h2 class="section-title">맞춤 물류 솔루션</h2>
+      <p class="section-desc">업종·물량·배송 권역에 따라 최적화된 운영 모델을 제안합니다.</p>
+    </div>
+    <div class="tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="ecom">이커머스</button>
+        <button class="tab-btn" data-tab="b2b">B2B·제조</button>
+        <button class="tab-btn" data-tab="cold">콜드체인</button>
+        <button class="tab-btn" data-tab="global">글로벌</button>
+      </div>
+      <div class="service-tab-card tab-panel active" data-tab="ecom">
+        <h4>이커머스 풀필먼트</h4>
+        <p>주문 급증 시즌에도 안정적인 출고를 보장합니다. 오전 주문 오후 출고, 저녁 주문 익일 새벽 배송 등 채널별 SLA를 맞춤 설계합니다.</p>
+        <div class="tab-features">
+          <div class="tab-feat"><strong>2시간 피킹</strong><span>주문 접수 후 평균 2시간 내 피킹·포장 완료</span></div>
+          <div class="tab-feat"><strong>멀티채널 OMS</strong><span>자사몰·마켓·SNS 통합 주문 관리</span></div>
+          <div class="tab-feat"><strong>반품 허브</strong><span>검수·재포장·재입고 자동화</span></div>
+          <div class="tab-feat"><strong>피크 대응</strong><span>11.11·블프 시즌 임시 인력·공간 확장</span></div>
+        </div>
+      </div>
+      <div class="service-tab-card tab-panel" data-tab="b2b">
+        <h4>B2B·제조 납품</h4>
+        <p>대량 팔레트 입출고, 납품 일정 관리, 거래처별 라벨·납품서 커스터마이징을 지원합니다.</p>
+        <div class="tab-features">
+          <div class="tab-feat"><strong>VMI 운영</strong><span>거래처 재고 위탁·자동 보충</span></div>
+          <div class="tab-feat"><strong>크로스독</strong><span>보관 없이 당일 분류·배송</span></div>
+          <div class="tab-feat"><strong>납품 스케줄</strong><span>대형마트·백화점 납품 시간 준수</span></div>
+          <div class="tab-feat"><strong>리버스 물류</strong><span>회수·폐기·재활용 물류</span></div>
+        </div>
+      </div>
+      <div class="service-tab-card tab-panel" data-tab="cold">
+        <h4>콜드체인</h4>
+        <p>냉장·냉동·신선식품 전용 차량과 센터로 유통기한·온도 이력을 실시간 추적합니다.</p>
+        <div class="tab-features">
+          <div class="tab-feat"><strong>2~8°C 냉장</strong><span>유제품·신선식품 전용</span></div>
+          <div class="tab-feat"><strong>-18°C 냉동</strong><span>냉동식품·아이스크림</span></div>
+          <div class="tab-feat"><strong>IoT 온도센서</strong><span>차량·센터 온도 실시간 알림</span></div>
+          <div class="tab-feat"><strong>새벽 배송</strong><span>신선식품 새벽 7시 전 도착</span></div>
+        </div>
+      </div>
+      <div class="service-tab-card tab-panel" data-tab="global">
+        <h4>글로벌 물류</h4>
+        <p>해외 D2C·아마존 FBA·동남아 3PL 연계로 K-브랜드의 해외 판매를 지원합니다.</p>
+        <div class="tab-features">
+          <div class="tab-feat"><strong>FBA Prep</strong><span>아마존 입고 라벨·포장 대행</span></div>
+          <div class="tab-feat"><strong>DDP 특송</strong><span>관세 포함 door-to-door</span></div>
+          <div class="tab-feat"><strong>해외 반품</strong><span>현지 허브에서 검수·재발송</span></div>
+          <div class="tab-feat"><strong>통관 대행</strong><span>수출입 서류·HS코드 자문</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="news-section" id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">News</div>
+      <h2 class="section-title">소식 &amp; 실적</h2>
+      <p class="section-desc">로지스플로우의 최신 투자, 센터 확장, 고객 성과 소식입니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&q=80" alt="이천 허브 확장">
+        </div>
+        <div class="news-body">
+          <time class="news-date">2026.05.18</time>
+          <h3>이천 메가허브 3단계 확장 준공 — 일 처리량 50% 증대</h3>
+          <p>수도권 동부 최대 물류 거점이 4.2만㎡ 추가 확장되어 일 출고 35만 건에서 52만 건으로 증가했습니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1494412519320-aa4fb448e12e?w=400&q=80" alt="동남아 거점">
+        </div>
+        <div class="news-body">
+          <time class="news-date">2026.04.22</time>
+          <h3>베트남 호치민 물류 거점 개소 — K-뷰티 수출 특화</h3>
+          <p>동남아 3PL 네트워크 첫 거점으로, 통관·현지 배송·반품 허브를 통합 운영합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&q=80" alt="친환경 차량">
+        </div>
+        <div class="news-body">
+          <time class="news-date">2026.03.10</time>
+          <h3>전기·수소 배송차 400대 도입 — 탄소배출 30% 감축 목표</h3>
+          <p>수도권 라스트마일 배송의 20%를 친환경 차량으로 전환, 2030년 ESG 목표의 일환입니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&q=80" alt="ISO 인증">
+        </div>
+        <div class="news-body">
+          <time class="news-date">2026.02.05</time>
+          <h3>ISO 9001·14001 통합 인증 갱신 및 물류안전 우수기업 선정</h3>
+          <p>품질·환경 경영체계를 전 센터에 적용, 산업안전보건법 준수 A등급을 유지했습니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">3PL 도입·견적·운영에 대해 자주 문의하시는 내용입니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">3PL 도입 시 최소 물량·계약 기간은 어떻게 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">월 3,000건 이상 출고 시 풀필먼트 패키지 적용이 가능하며, 최소 계약 기간은 6개월입니다. 스타트업·신규 브랜드는 3개월 파일럿 프로그램으로 시작할 수 있습니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">견적 산정에 필요한 정보는 무엇인가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">월 평균 출고 건수, SKU 수, 상품 부피·무게, 보관 온도대, 배송 권역, 포장 요구사항을 알려주시면 3영업일 내 상세 견적서를 제공합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">기존 WMS·쇼핑몰과 연동이 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">카페24, Shopify, 메이크샵, 사방넷, 이카운트 등 주요 플랫폼과 API 연동을 지원합니다. 자체 ERP는 REST API 문서를 제공해 드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">반품·교환 처리는 어떻게 운영되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">고객 반품 접수 → 회수 → 검수 → 재입고/폐기 분류까지 표준 프로세스로 운영하며, 검수 결과는 당일 OMS에 반영됩니다. 불량·오배송은 별도 SLA를 적용합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">국제 배송도 같은 계약으로 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">국내 풀필먼트와 별도 또는 통합 계약 모두 가능합니다. 김포 국제물류센터에서 수출 포장·통관 후 항공·해상·특송으로 연계합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="careers-section" id="careers">
+  <div class="container">
+    <div class="careers-grid">
+      <div>
+        <div class="section-label" style="color:var(--accent)">Careers</div>
+        <h2 class="section-title">로지스플로우와 함께할 인재</h2>
+        <p class="section-desc">물류 혁신을 이끄는 현장·IT·운영 전문가를 모십니다. 성과 기반 보상과 성장 기회를 제공합니다.</p>
+        <div class="career-perks" style="margin-top:24px">
+          <div class="career-perk"><strong>성과 인센티브</strong><span>물량·품질 KPI 연동 상여</span></div>
+          <div class="career-perk"><strong>자격증 지원</strong><span>물류관리사·지게차 등</span></div>
+          <div class="career-perk"><strong>복지</strong><span>4대보험·퇴직연금·경조금</span></div>
+          <div class="career-perk"><strong>성장</strong><span>센터장·PM 승진 트랙</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="role-row">
+          <div><h4>물류센터 운영 매니저</h4><p class="meta">이천 · 정규직 · 경력 5년+</p></div>
+          <a href="#" class="role-apply" data-toast="지원 안내 메일을 발송했습니다.">지원하기</a>
+        </div>
+        <div class="role-row">
+          <div><h4>WMS 개발자 (백엔드)</h4><p class="meta">판교 · 정규직 · 경력 3년+</p></div>
+          <a href="#" class="role-apply" data-toast="지원 안내 메일을 발송했습니다.">지원하기</a>
+        </div>
+        <div class="role-row">
+          <div><h4>국제물류 영업</h4><p class="meta">김포 · 정규직 · 경력 2년+</p></div>
+          <a href="#" class="role-apply" data-toast="지원 안내 메일을 발송했습니다.">지원하기</a>
+        </div>
+        <div class="role-row">
+          <div><h4>배송 기사 (수도권)</h4><p class="meta">전 지역 · 계약직 · 경력 무관</p></div>
+          <a href="#" class="role-apply" data-toast="지원 안내 메일을 발송했습니다.">지원하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="container">
+    <h2>물류 비용 20% 절감, 지금 상담하세요</h2>
+    <p>무료 물류 진단으로 현재 비용 구조와 개선 포인트를 분석해 드립니다.</p>
+    <a href="#contact" class="btn-hero">견적 문의하기</a>
+  </div>
+</div>
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">물류 문의</h2>
+        <p class="section-desc">3PL·풀필먼트·국제물류 견적 및 상담을 신청해 주세요. 영업일 기준 24시간 내 담당자가 연락드립니다.</p>
+        <div class="contact-detail">
+          <div class="ico">📍</div>
+          <div><strong>본사</strong><span>경기도 이천시 물류대로 120 로지스플로우타워</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">📞</div>
+          <div><strong>대표전화</strong><span>1588-4200 (평일 09:00–18:00)</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">✉️</div>
+          <div><strong>이메일</strong><span>sales@logiflow.co.kr</span></div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="문의가 접수되었습니다. 물류 담당자가 24시간 내 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="cname">회사명</label>
+            <input type="text" id="cname" placeholder="㈜로지파트너" required>
+          </div>
+          <div class="form-group">
+            <label for="pname">담당자명</label>
+            <input type="text" id="pname" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="cemail">이메일</label>
+            <input type="email" id="cemail" placeholder="name@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="cphone">연락처</label>
+            <input type="tel" id="cphone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="ctype">관심 서비스</label>
+            <select id="ctype" required>
+              <option value="">선택해 주세요</option>
+              <option>창고·보관</option>
+              <option>배송·라스트마일</option>
+              <option>풀필먼트</option>
+              <option>국제물류</option>
+              <option>복합 / 기타</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="cmsg">문의 내용</label>
+            <textarea id="cmsg" rows="4" placeholder="월 출고 건수, SKU 수, 배송 권역 등을 적어주시면 정확한 견적이 가능합니다."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">문의 접수하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">로지스플로우 <span>LOGIFLOW</span></span>
+      <p>3PL 물류·배송·풀필먼트·국제물류 통합 파트너. 데이터와 네트워크로 고객의 공급망을 가속합니다.</p>
+    </div>
+    <div class="footer-col">
+      <h4>사업</h4>
+      <a href="#services">창고·보관</a>
+      <a href="#services">배송</a>
+      <a href="#services">풀필먼트</a>
+      <a href="#services">국제물류</a>
+    </div>
+    <div class="footer-col">
+      <h4>회사</h4>
+      <a href="#about">회사소개</a>
+      <a href="#warehouses">물류센터</a>
+      <a href="#careers">채용</a>
+      <a href="#news">소식</a>
+    </div>
+    <div class="footer-col">
+      <h4>문의</h4>
+      <a href="#contact">견적 문의</a>
+      <p>1588-4200</p>
+      <p>sales@logiflow.co.kr</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 로지스플로우 LOGIFLOW. All rights reserved.</span>
+    <span>사업자등록번호 220-88-12345</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

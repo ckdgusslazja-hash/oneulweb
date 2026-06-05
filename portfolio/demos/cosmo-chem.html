@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>코스모화학 COSMO CHEM — 코팅·접착·특수화학 B2B 소재 전문기업</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #F0F4F8;
+  --text: #0F2440;
+  --text-muted: #5A6F88;
+  --accent: #1B4F8A;
+  --accent-2: #2563EB;
+  --accent-silver: #94A3B8;
+  --accent-light: #E2E8F0;
+  --accent-text: #fff;
+  --border: #CBD5E1;
+  --nav-bg: rgba(15,36,64,0.96);
+  --footer-bg: #071428;
+  --card-bg: #FFFFFF;
+  --surface: #E8EDF4;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --title-weight: 700;
+  --logo-weight: 800;
+  --footer-text: rgba(255,255,255,0.6);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+/* Nav */
+.site-nav {
+  background: var(--nav-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.site-nav .logo {
+  color: #fff;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-display);
+}
+
+.site-nav .logo span {
+  font-size: 0.65em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--accent-silver);
+}
+
+.nav-links a { color: rgba(255,255,255,0.72); }
+.nav-links a:hover { color: #fff; }
+.nav-cta { background: var(--accent-2); color: #fff; font-weight: 700; }
+.nav-toggle { color: #fff; }
+
+@media (max-width: 768px) {
+  .nav-links { background: var(--nav-bg); border-color: rgba(255,255,255,0.1); }
+  .nav-links a { color: rgba(255,255,255,0.85); }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 85vh, 720px);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(7,20,40,0.92) 0%, rgba(27,79,138,0.78) 45%, rgba(15,36,64,0.5) 100%);
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: clamp(100px, 12vw, 140px) 0 clamp(80px, 10vw, 120px);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(37,99,235,0.18);
+  border: 1px solid rgba(148,163,184,0.35);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+  border-radius: 2px;
+}
+
+.hero-badge .dot {
+  width: 7px;
+  height: 7px;
+  background: #60A5FA;
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  max-width: 720px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: #93C5FD;
+}
+
+.hero-desc {
+  font-size: clamp(0.95rem, 2vw, 1.12rem);
+  color: rgba(255,255,255,0.82);
+  line-height: 1.85;
+  max-width: 580px;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+
+.btn-hero {
+  padding: 15px 30px;
+  background: var(--accent-2);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,99,235,0.35);
+}
+
+.btn-hero-outline {
+  padding: 15px 30px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.btn-hero-outline:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.6);
+}
+
+.hero-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.hero-tags span {
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+  border-radius: 2px;
+}
+
+/* Trust strip */
+.trust-strip {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(20px, 3vw, 28px) 0;
+}
+
+.trust-strip .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 2vw, 24px);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  justify-content: center;
+}
+
+.trust-item .ico {
+  width: 36px;
+  height: 36px;
+  background: var(--surface);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Stats */
+.stats-band {
+  background: var(--accent);
+  padding: clamp(40px, 6vw, 56px) 0;
+}
+
+.stats-band::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent-silver), var(--accent-2));
+  margin-bottom: -3px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 32px);
+}
+
+.stat-item {
+  text-align: center;
+  padding: clamp(16px, 3vw, 24px);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-item .num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-item .num span { font-size: 0.55em; color: #93C5FD; }
+
+.stat-item .lbl { font-size: 0.82rem; color: rgba(255,255,255,0.65); font-weight: 500; }
+.stat-item .sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+/* About */
+.about-section { background: #fff; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.vision-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.vision-card {
+  padding: 20px;
+  background: var(--surface);
+  border-left: 3px solid var(--accent-2);
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+}
+
+.vision-card h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-2);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.vision-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+.values-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.values-strip span {
+  padding: 6px 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+/* Catalog */
+.catalog-section { background: var(--bg); }
+
+.catalog-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.catalog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(27,79,138,0.1);
+}
+
+.catalog-img { aspect-ratio: 16/10; overflow: hidden; position: relative; }
+.catalog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.catalog-card:hover .catalog-img img { transform: scale(1.05); }
+
+.catalog-img .tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 5px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.catalog-body { padding: clamp(20px, 3vw, 28px); }
+
+.catalog-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.catalog-body p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.catalog-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.catalog-specs span {
+  padding: 4px 10px;
+  background: var(--surface);
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+/* R&D */
+.rd-section { background: #fff; }
+
+.rd-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.rd-list { display: flex; flex-direction: column; gap: 16px; }
+
+.rd-item {
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-2);
+  border-radius: var(--card-radius);
+}
+
+.rd-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--surface);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.rd-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.rd-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+.rd-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.rd-metric {
+  padding: 24px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--card-radius);
+  text-align: center;
+}
+
+.rd-metric strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #93C5FD;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.rd-metric span { font-size: 0.78rem; opacity: 0.8; }
+
+.rd-banner {
+  padding: 28px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  border-radius: var(--card-radius);
+  color: #fff;
+}
+
+.rd-banner h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.rd-banner p { font-size: 0.82rem; opacity: 0.85; line-height: 1.7; }
+
+/* Global */
+.global-section { background: var(--bg); }
+
+.global-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+
+.global-map {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 16/10;
+}
+
+.global-map img { width: 100%; height: 100%; object-fit: cover; }
+
+.global-offices {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.office-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  transition: box-shadow 0.3s;
+}
+
+.office-card:hover { box-shadow: 0 8px 24px rgba(27,79,138,0.08); }
+
+.office-flag {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: var(--surface);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.office-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+.office-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ESG */
+.esg-section { background: #fff; }
+
+.esg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.esg-card {
+  padding: clamp(28px, 4vw, 36px);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.esg-card:hover { transform: translateY(-4px); border-color: var(--accent-2); }
+
+.esg-card .ico { font-size: 2.2rem; margin-bottom: 16px; }
+
+.esg-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.esg-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
+
+.esg-stat {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent-2);
+}
+
+.esg-stat span { font-size: 0.5em; }
+
+/* Tech docs */
+.docs-section { background: var(--bg); }
+
+.doc-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 28px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.doc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+}
+
+.doc-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--surface);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.doc-card h3 { font-size: 0.98rem; font-weight: 700; margin-bottom: 8px; color: var(--accent); }
+.doc-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
+
+.doc-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.doc-meta span { font-size: 0.72rem; color: var(--text-muted); }
+
+.btn-download {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s;
+}
+
+.btn-download:hover { background: var(--accent-2); }
+
+/* Team */
+.team-section { background: #fff; }
+
+.team-card {
+  text-align: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.team-card:hover { transform: translateY(-4px); }
+
+.team-photo { aspect-ratio: 1; overflow: hidden; }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.team-info { padding: 24px; }
+.team-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.team-info .role { font-size: 0.78rem; color: var(--accent-2); font-weight: 600; margin-bottom: 10px; }
+.team-info p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* CTA */
+.cta-band-section {
+  background: linear-gradient(135deg, #071428 0%, var(--accent) 60%, var(--accent-2) 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.cta-band-section .section-label { color: var(--accent-silver); }
+.cta-band-section .section-title { color: #fff; }
+.cta-band-section .section-desc { color: rgba(255,255,255,0.75); margin: 0 auto 32px; }
+
+.btn-cta {
+  display: inline-flex;
+  padding: 16px 36px;
+  background: var(--accent-2);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37,99,235,0.45);
+}
+
+/* Contact */
+.contact-section { background: #fff; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.contact-info h3 { font-size: 1.15rem; font-weight: 700; color: var(--accent); margin-bottom: 20px; }
+
+.contact-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.contact-detail .ico {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: var(--surface);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.contact-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.contact-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.form-card .btn-primary { width: 100%; background: var(--accent); border: none; cursor: pointer; margin-top: 8px; }
+.form-card .btn-primary:hover { background: var(--accent-2); }
+
+.map-box { border: 1px solid var(--border); margin-top: 24px; }
+
+/* Footer */
+.site-footer .footer-brand .logo { color: #fff; font-family: var(--font-display); }
+.footer-col a:hover { color: #93C5FD; }
+
+.footer-cert { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+
+.footer-cert span {
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.45);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .trust-strip .container { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item { border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+  .about-grid, .rd-grid, .global-layout, .contact-grid { grid-template-columns: 1fr; }
+  .vision-cards { grid-template-columns: 1fr; }
+  .esg-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .rd-metrics { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .trust-strip .container, .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { border-right: none !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" id="top">
+  <a href="#top" class="logo">코스모화학 <span>COSMO CHEM</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">회사소개</a>
+    <a href="#catalog">제품카탈로그</a>
+    <a href="#rd">R&D</a>
+    <a href="#global">글로벌네트워크</a>
+    <a href="#esg">ESG</a>
+    <a href="#docs">기술자료</a>
+    <a href="#contact" class="nav-cta">문의</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1532187863486-abf9db5811c6?w=1920&q=80" alt="화학 연구실 및 산업 소재">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-inner">
+    <div class="hero-badge"><span class="dot"></span> KOSPI 상장 · B2B 특수화학 소재</div>
+    <h1>코팅·접착·특수화학<br><em>소재의 글로벌 리더</em></h1>
+    <p class="hero-desc">1985년 설립 이래 산업용 코팅제, 접착제, 특수화학 소재 분야에서 국내외 420여 제조기업과 함께 성장해 온 B2B 화학 소재 전문기업입니다. 자동차, 전자, 건축, 포장 산업의 핵심 소재를 공급합니다.</p>
+    <div class="hero-actions">
+      <a href="#catalog" class="btn-hero">제품카탈로그</a>
+      <a href="#contact" class="btn-hero-outline">기술 상담 문의</a>
+    </div>
+    <div class="hero-tags">
+      <span>산업용 코팅제</span>
+      <span>구조용 접착제</span>
+      <span>특수화학 소재</span>
+      <span>ISO 9001 · IATF 16949</span>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-item"><div class="ico">🔬</div>기업부설연구소 · 특허 248건</div>
+    <div class="trust-item"><div class="ico">🏭</div>연간 12만톤 생산능력</div>
+    <div class="trust-item"><div class="ico">🌏</div>28개국 수출 · 6개 해외법인</div>
+    <div class="trust-item"><div class="ico">✅</div>IATF 16949 · ISO 14001 인증</div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="num">3,680<span>억</span></div>
+        <div class="lbl">2024 연결 매출</div>
+        <div class="sub">전년 대비 +8.6%</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">248<span>건</span></div>
+        <div class="lbl">등록 특허</div>
+        <div class="sub">국내·해외 포함</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">1,420<span>명</span></div>
+        <div class="lbl">전 세계 임직원</div>
+        <div class="sub">R&D 인력 22%</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">28<span>개국</span></div>
+        <div class="lbl">수출 거점</div>
+        <div class="sub">매출의 58% 해외</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&q=80" alt="코스모화학 연구·생산 시설">
+      </div>
+      <div>
+        <div class="section-label">About COSMO</div>
+        <h2 class="section-title">화학 소재로 연결하는<br>산업의 미래</h2>
+        <p class="section-desc">코스모화학은 자동차, 전자, 건축, 포장, 섬유 산업이 요구하는 고기능 코팅제·접착제·특수화학 소재를 설계·개발·생산하는 Total Solution Provider입니다. 울산 본사, 충남 대산, 중국·베트남·독일 생산기지를 통해 글로벌 공급망을 운영합니다.</p>
+        <div class="vision-cards">
+          <div class="vision-card">
+            <h4>비전 Vision</h4>
+            <p>고기능 화학 소재 기술로 글로벌 산업 혁신을 선도하는 Asia No.1 B2B 파트너</p>
+          </div>
+          <div class="vision-card">
+            <h4>미션 Mission</h4>
+            <p>고객의 제품 성능과 생산 효율을 높이는 최적의 화학 소재 솔루션을 적기에 제공</p>
+          </div>
+        </div>
+        <div class="values-strip">
+          <span>기술혁신</span>
+          <span>품질제일</span>
+          <span>고객중심</span>
+          <span>지속가능경영</span>
+          <span>글로벌 협력</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Catalog -->
+<section class="catalog-section" id="catalog">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product Catalog</div>
+      <h2 class="section-title">제품카탈로그</h2>
+      <p class="section-desc">코팅제, 접착제, 특수화학 소재 등 680여 SKU의 산업용 화학 제품 포트폴리오를 보유하고 있습니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="catalog-card">
+        <div class="catalog-img">
+          <img src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=700&q=80" alt="산업용 코팅제">
+          <span class="tag">COATING</span>
+        </div>
+        <div class="catalog-body">
+          <h3>산업용 코팅제</h3>
+          <p>자동차, 전자, 건축, 목재, 금속 표면 보호용 고기능 코팅제를 생산합니다. 내후성, 내화학성, 내마모성이 뛰어난 수용성·용제형·UV경화형 코팅 라인업을 보유합니다.</p>
+          <div class="catalog-specs">
+            <span>자동차 도장</span>
+            <span>전자부품 코팅</span>
+            <span>방수·방식</span>
+            <span>UV 경화</span>
+          </div>
+        </div>
+      </div>
+      <div class="catalog-card">
+        <div class="catalog-img">
+          <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3780?w=700&q=80" alt="구조용 접착제">
+          <span class="tag">ADHESIVE</span>
+        </div>
+        <div class="catalog-body">
+          <h3>구조용 · 산업용 접착제</h3>
+          <p>에폭시, 폴리우레탄, 실리콘, 아크릴 기반 접착제로 자동차 경량화, 전자 디스플레이, 건축 구조접착에 적용됩니다. 고강도·내열·난연 등 특수 사양 맞춤 개발이 가능합니다.</p>
+          <div class="catalog-specs">
+            <span>구조용 에폭시</span>
+            <span>실링·실리콘</span>
+            <span>핫멜트</span>
+            <span>2K 폴리우레탄</span>
+          </div>
+        </div>
+      </div>
+      <div class="catalog-card">
+        <div class="catalog-img">
+          <img src="https://images.unsplash.com/photo-1613665813447-82a78c468a1d?w=700&q=80" alt="특수화학 소재">
+          <span class="tag">SPECIALTY</span>
+        </div>
+        <div class="catalog-body">
+          <h3>특수화학 소재</h3>
+          <p>윤활제, 방청제, 세정제, 발포제, 난연제 등 특수 기능 화학 소재를 개발·생산합니다. 반도체, 2차전지, 신재생에너지 등 첨단 산업용 소재 수요에 대응합니다.</p>
+          <div class="catalog-specs">
+            <span>2차전지 소재</span>
+            <span>반도체 세정</span>
+            <span>난연·방화</span>
+            <span>친환경 대체</span>
+          </div>
+        </div>
+      </div>
+      <div class="catalog-card">
+        <div class="catalog-img">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&q=80" alt="포장·라벨 소재">
+          <span class="tag">PACKAGING</span>
+        </div>
+        <div class="catalog-body">
+          <h3>포장 · 라벨 소재</h3>
+          <p>라벨 접착제, 라미네이션 접착제, 인쇄잉크, 포장 필름 코팅제 등 포장·인쇄 산업용 소재를 공급합니다. 식품·의약·화장품 포장 규격에 맞는 안전 인증 제품을 제공합니다.</p>
+          <div class="catalog-specs">
+            <span>라벨 접착</span>
+            <span>라미네이션</span>
+            <span>식품포장</span>
+            <span>수축필름</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- R&D -->
+<section class="rd-section" id="rd">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">R&D Center</div>
+      <h2 class="section-title">연구개발</h2>
+      <p class="section-desc">울산 R&D센터와 글로벌 연구 네트워크를 통해 차세대 화학 소재 기술을 선도합니다.</p>
+    </div>
+    <div class="rd-grid">
+      <div class="rd-list">
+        <div class="rd-item">
+          <div class="rd-icon">🧪</div>
+          <div>
+            <h4>소재 합성 · 배합 기술</h4>
+            <p>고분자 합성, 나노분산, 기능성 첨가제 배합 등 핵심 원천기술을 자체 보유합니다. 고객사 요구 물성에 맞춘 맞춤형 레시피 개발이 가능합니다.</p>
+          </div>
+        </div>
+        <div class="rd-item">
+          <div class="rd-icon">🔬</div>
+          <div>
+            <h4>분석 · 시험 인프라</h4>
+            <p>GC-MS, FT-IR, SEM, 열중량분석 등 첨단 분석 장비 120여 대를 보유한 시험센터에서 원료부터 완제품까지 전 과정 품질을 검증합니다.</p>
+          </div>
+        </div>
+        <div class="rd-item">
+          <div class="rd-icon">🌱</div>
+          <div>
+            <h4>친환경 · 바이오 소재</h4>
+            <p>수용성 코팅제, 바이오 기반 접착제, VOC 저감 제품 등 친환경 소재 R&D에 매출의 6.2%를 투자합니다. 2024년 신제품의 38%가 친환경 라인입니다.</p>
+          </div>
+        </div>
+        <div class="rd-item">
+          <div class="rd-icon">🤝</div>
+          <div>
+            <h4>산학 · 글로벌 공동연구</h4>
+            <p>서울대, KAIST, 독일 Fraunhofer 등 12개 기관과 공동연구를 진행하며, 미국·유럽 현지 기술센터와 실시간 협업 체계를 운영합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="rd-metrics">
+          <div class="rd-metric">
+            <strong>312<span>명</span></strong>
+            <span>R&D 전문인력</span>
+          </div>
+          <div class="rd-metric">
+            <strong>6.2<span>%</span></strong>
+            <span>매출 대비 R&D 투자</span>
+          </div>
+          <div class="rd-metric">
+            <strong>248<span>건</span></strong>
+            <span>등록 특허</span>
+          </div>
+          <div class="rd-metric">
+            <strong>42<span>종</span></strong>
+            <span>2024 신제품 출시</span>
+          </div>
+        </div>
+        <div class="rd-banner">
+          <h4>🔬 글로벌 R&D 네트워크</h4>
+          <p>울산 본사 R&D센터(8,500㎡)를 중심으로 미국 실리콘밸리, 독일 뮌헨, 중국 상하이 기술센터를 운영합니다. 고객사 현장 기술지원(TSR) 팀 86명이 전 세계 28개국에서 실시간 기술 서비스를 제공합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Global -->
+<section class="global-section" id="global">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Global Network</div>
+      <h2 class="section-title">글로벌네트워크</h2>
+      <p class="section-desc">6개 해외법인과 28개국 수출 거점으로 전 세계 고객에게 안정적인 화학 소재를 공급합니다.</p>
+    </div>
+    <div class="global-layout">
+      <div class="global-map">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80" alt="글로벌 네트워크">
+      </div>
+      <div class="global-offices">
+        <div class="office-card">
+          <div class="office-flag">🇰🇷</div>
+          <div>
+            <h4>울산 본사 · 대산 공장</h4>
+            <p>연구개발, 생산, 품질관리 허브. 연간 12만톤 생산능력. 자동차·전자 산업 핵심 공급기지.</p>
+          </div>
+        </div>
+        <div class="office-card">
+          <div class="office-flag">🇨🇳</div>
+          <div>
+            <h4>중국 상하이 · 장가항</h4>
+            <p>중국 내 2개 생산법인, 4개 영업소. 현지 자동차·전자 OEM 180여社에 직접 공급.</p>
+          </div>
+        </div>
+        <div class="office-card">
+          <div class="office-flag">🇻🇳</div>
+          <div>
+            <h4>베트남 호치민</h4>
+            <p>동남아 생산·물류 거점. 코팅제·접착제 현지 생산으로 리드타임 40% 단축.</p>
+          </div>
+        </div>
+        <div class="office-card">
+          <div class="office-flag">🇩🇪</div>
+          <div>
+            <h4>독일 뮌헨 · 미국 디트로이트</h4>
+            <p>유럽·북미 기술센터 및 영업법인. 자동차 Tier-1 고객사 현지 기술지원.</p>
+          </div>
+        </div>
+        <div class="office-card">
+          <div class="office-flag">🇯🇵</div>
+          <div>
+            <h4>일본 도쿄 · 오사카</h4>
+            <p>전자·자동차 부품 소재 전문 영업. 정밀 화학 소재 수출 매출의 18% 차지.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESG -->
+<section class="esg-section" id="esg">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">ESG Management</div>
+      <h2 class="section-title">ESG 경영</h2>
+      <p class="section-desc">환경·사회·지배구조를 아우르는 지속가능 경영으로 화학 산업의 미래를 책임집니다.</p>
+    </div>
+    <div class="esg-grid">
+      <div class="esg-card">
+        <div class="ico">🌿</div>
+        <h3>환경 Environment</h3>
+        <p>VOC 배출 32% 감축, 폐수 재이용률 94%, 친환경 소재 매출 비중 확대. 2030 탄소중립 로드맵 수립 및 RE100 참여를 추진합니다.</p>
+        <div class="esg-stat">-32<span>%</span></div>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">VOC 배출 감축 (vs 2019)</p>
+      </div>
+      <div class="esg-card">
+        <div class="ico">🤝</div>
+        <h3>사회 Social</h3>
+        <p>안전보건 경영체계 강화, 협력사 ESG 평가, 지역사회 화학안전 교육. 산업재해율 0.08로 화학업계 평균 대비 1/6 수준을 유지합니다.</p>
+        <div class="esg-stat">0.08</div>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">산업재해율 (2024)</p>
+      </div>
+      <div class="esg-card">
+        <div class="ico">⚖️</div>
+        <h3>지배구조 Governance</h3>
+        <p>사외이사 57%, 이사회 내 ESG委원회 운영, 윤리경영 헬프라인 24시간 운영. 2024 지속가능경영보고서 GRI Standards 준수 발간.</p>
+        <div class="esg-stat">57<span>%</span></div>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">사외이사 비율</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech Docs -->
+<section class="docs-section" id="docs">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Technical Resources</div>
+      <h2 class="section-title">기술자료</h2>
+      <p class="section-desc">제품 카탈로그, MSDS, 기술 백서, 적용 가이드 등 B2B 고객을 위한 기술 자료를 제공합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="doc-card">
+        <div class="doc-icon">📘</div>
+        <h3>2025 제품 종합 카탈로그</h3>
+        <p>코팅제, 접착제, 특수화학 소재 680 SKU 전 제품 사양·적용분야·물성 데이터를 수록한 종합 카탈로그입니다.</p>
+        <div class="doc-meta">
+          <span>PDF · 48MB · 2025.01</span>
+          <a href="#" class="btn-download" data-toast="카탈로그 다운로드가 시작됩니다.">다운로드</a>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📋</div>
+        <h3>MSDS · 안전보건 자료</h3>
+        <p>전 제품 물질안전보건자료(MSDS) 및 GHS 분류 정보. 28개국 언어 버전 제공. 고객 포털에서 실시간 조회 가능.</p>
+        <div class="doc-meta">
+          <span>온라인 · 680종</span>
+          <a href="#" class="btn-download" data-toast="MSDS 포털로 이동합니다.">바로가기</a>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📄</div>
+        <h3>기술 백서 · 적용 가이드</h3>
+        <p>자동차 경량화 접착, 전자부품 코팅, 건축 방수 등 산업별 적용 사례와 기술 백서 32종을 제공합니다.</p>
+        <div class="doc-meta">
+          <span>PDF · 32종</span>
+          <a href="#" class="btn-download" data-toast="기술 백서 목록을 확인합니다.">목록 보기</a>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🎓</div>
+        <h3>기술 세미나 · 교육 자료</h3>
+        <p>연 24회 개최 기술 세미나 발표자료, 코팅·접착 기초 교육 영상, 현장 적용 체크리스트를 제공합니다.</p>
+        <div class="doc-meta">
+          <span>영상 · 18편</span>
+          <a href="#" class="btn-download" data-toast="교육 자료 페이지로 이동합니다.">시청하기</a>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📊</div>
+        <h3>시험성적서 · 인증서</h3>
+        <p>ISO, IATF, REACH, RoHS 등 품질·환경 인증서 및 제품별 시험성적서를 고객 포털에서 열람·다운로드할 수 있습니다.</p>
+        <div class="doc-meta">
+          <span>인증 · 24종</span>
+          <a href="#" class="btn-download" data-toast="인증서 목록을 확인합니다.">열람하기</a>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🌱</div>
+        <h3>ESG · 지속가능경영보고서</h3>
+        <p>2024 지속가능경영보고서, 탄소배출 데이터, 친환경 제품 라인 소개 자료를 투명하게 공개합니다.</p>
+        <div class="doc-meta">
+          <span>PDF · 12MB · 2024</span>
+          <a href="#" class="btn-download" data-toast="ESG 보고서 다운로드가 시작됩니다.">다운로드</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">경영진</h2>
+      <p class="section-desc">화학공학·경영 전문가들이 글로벌 B2B 화학 소재 기업의 성장을 이끌어갑니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="대표이사">
+        </div>
+        <div class="team-info">
+          <h3>박코스모</h3>
+          <div class="role">대표이사 · CEO</div>
+          <p>서울대 화학공학 박사. 35년 특수화학 경력. 대한화학회 공로상 수상.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="CTO">
+        </div>
+        <div class="team-info">
+          <h3>이연구</h3>
+          <div class="role">기술총괄 · CTO</div>
+          <p>KAIST 고분자공학 박사. 특허 68건 보유. R&D센터 총괄.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="영업총괄">
+        </div>
+        <div class="team-info">
+          <h3>김글로벌</h3>
+          <div class="role">영업총괄 · CCO</div>
+          <p>글로벌 영업 22년 경력. 28개국 수출 네트워크 구축.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="생산총괄">
+        </div>
+        <div class="team-info">
+          <h3>정생산</h3>
+          <div class="role">생산총괄 · COO</div>
+          <p>울산·대산 공장 운영 18년. 안전·품질·생산 효율 총괄.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">제품 사양, 기술지원, 샘플 요청 등 B2B 고객 문의를 정리했습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">제품 샘플 요청은 어떻게 하나요?</button>
+        <div class="faq-a">
+          <p>영업 담당자 또는 온라인 문의를 통해 제품명, 적용 분야, 필요 수량을 알려주시면 3~5영업일 내 샘플을 발송합니다. 신규 고객사는 월 3종까지 무료 샘플을 제공합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">맞춤형 소재 개발이 가능한가요?</button>
+        <div class="faq-a">
+          <p>R&D센터에서 고객사 요구 물성(점도, 경화시간, 내열성 등)에 맞춘 맞춤 배합 개발을 지원합니다. NDA 체결 후 시제품 개발, 파일럿 생산, 양산 전환까지 원스톱 서비스를 제공합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">현장 기술지원(TSR)은 어떻게 받나요?</button>
+        <div class="faq-a">
+          <p>전국 86명의 TSR 엔지니어가 고객사 현장 방문, 적용 테스트, 공정 최적화 컨설팅을 제공합니다. 긴급 기술지원은 24시간 핫라인(052-123-9999)으로 접수 가능합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">REACH, RoHS 등 수출 인증은 지원하나요?</button>
+        <div class="faq-a">
+          <p>유럽 REACH, 미국 TSCA, 중국 GB, 일본 화심법 등 주요 국가 화학물질 규제 대응을 지원합니다. 제품별 규제 적합성 확인서(CoC)와 SDS 다국어 버전을 제공합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">최소 주문 수량(MOQ)은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <p>제품 유형에 따라 다르지만, 일반적으로 드럼(200L) 또는 팔레트 단위부터 공급합니다. 전략 고객사·신규 적용 테스트의 경우 소량(20L) 단위 협의도 가능합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band-section cta-band">
+  <div class="container">
+    <div class="section-label">Partnership</div>
+    <h2 class="section-title">기술 파트너십을 제안합니다</h2>
+    <p class="section-desc">자동차, 전자, 건축, 포장 산업의 소재 혁신을 함께할 B2B 파트너를 찾습니다. 제품 하나부터 공동 R&D까지, 코스모화학이 함께합니다.</p>
+    <a href="#contact" class="btn-cta">기술 상담 · 샘플 요청</a>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">문의</h2>
+      <p class="section-desc">제품 문의, 기술 상담, 샘플 요청, 공동 R&D 등 모든 B2B 문의를 환영합니다.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>연락처 · 오시는 길</h3>
+        <div class="contact-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>울산 본사</strong>
+            <span>울산광역시 울주군 온산읍 코스모로 245</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>대표전화</strong>
+            <span>052-123-4567 (평일 09:00–18:00)</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">✉️</div>
+          <div>
+            <strong>이메일</strong>
+            <span>contact@cosmo-chem.co.kr</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">🔬</div>
+          <div>
+            <strong>기술지원 · TSR</strong>
+            <span>기술팀 052-123-4580 · 긴급 052-123-9999</span>
+          </div>
+        </div>
+        <div class="map-box">
+          <div class="map-pin">
+            <strong>코스모화학 울산 본사</strong>
+            <span>울산공항 30분 · 방문 기술상담 사전예약</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="문의가 접수되었습니다. 담당 영업/기술팀에서 연락드리겠습니다.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">성함 / 회사명</label>
+              <input type="text" id="name" placeholder="홍길동 / (주)OO산업" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="email">이메일</label>
+              <input type="email" id="email" placeholder="email@company.com" required>
+            </div>
+            <div class="form-group">
+              <label for="type">문의 유형</label>
+              <select id="type" required>
+                <option value="">선택해주세요</option>
+                <option>제품 · 사양 문의</option>
+                <option>샘플 요청</option>
+                <option>기술 상담 · TSR</option>
+                <option>맞춤 소재 개발</option>
+                <option>기타</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">문의 내용</label>
+              <textarea id="message" rows="5" placeholder="적용 분야, 필요 물성, 예상 수량 등을 작성해주세요." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">문의 접수하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">코스모화학</span>
+      <p>1985년 설립 이래 코팅·접착·특수화학 소재 분야에서 기술 혁신과 품질 제일주의로 글로벌 B2B 파트너의 신뢰를 받아온 화학 소재 전문기업입니다.</p>
+      <div class="footer-cert">
+        <span>ISO 9001</span>
+        <span>IATF 16949</span>
+        <span>ISO 14001</span>
+        <span>KOSPI 상장</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>회사</h4>
+      <a href="#about">회사소개</a>
+      <a href="#rd">R&D</a>
+      <a href="#esg">ESG</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>사업</h4>
+      <a href="#catalog">제품카탈로그</a>
+      <a href="#global">글로벌네트워크</a>
+      <a href="#docs">기술자료</a>
+      <a href="#team">경영진</a>
+    </div>
+    <div class="footer-col">
+      <h4>문의</h4>
+      <p>052-123-4567</p>
+      <p>contact@cosmo-chem.co.kr</p>
+      <p>울산 울주군 온산읍 코스모로 245</p>
+      <a href="#contact">온라인 문의</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 코스모화학 COSMO CHEM. All rights reserved.</span>
+    <span>사업자등록번호 345-67-89012 · 대표이사 박코스모</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

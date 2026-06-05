@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울산부인과 — SEOUL OBGYN | 임신·출산·여성검진 전문</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FDF2F8;
+  --text: #4A1D34;
+  --text-muted: #7A4A62;
+  --accent: #E11D48;
+  --accent-light: #FCE7F3;
+  --accent-dark: #BE123C;
+  --accent-text: #fff;
+  --secondary: #F43F5E;
+  --secondary-light: #FFE4E6;
+  --navy: #4A1D34;
+  --border: #FBCFE8;
+  --nav-bg: rgba(255,255,255,0.97);
+  --footer-bg: #4A1D34;
+  --card-bg: #fff;
+  --btn-radius: 8px;
+  --card-radius: 14px;
+  --footer-text: rgba(255,255,255,0.65);
+  --title-weight: 600;
+}
+
+.site-nav .logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  color: var(--navy);
+}
+
+.site-nav .logo strong {
+  font-size: 1.02em;
+  letter-spacing: -0.02em;
+}
+
+.site-nav .logo span {
+  font-size: 0.55em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.nav-cta { background: var(--accent); }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 88vh, 720px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--navy);
+}
+
+.hero-bg { position: absolute; inset: 0; }
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(74,29,52,0.96) 0%, rgba(74,29,52,0.78) 45%, rgba(225,29,72,0.3) 100%);
+}
+
+.hero-accent-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary), var(--accent));
+  z-index: 2;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(80px, 12vw, 120px) clamp(20px, 4vw, 48px) clamp(60px, 8vw, 80px);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  background: rgba(225,29,72,0.2);
+  border: 1px solid rgba(244,63,94,0.35);
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FDA4AF;
+  margin-bottom: 24px;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #FDA4AF;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #FDA4AF;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: #FDA4AF;
+}
+
+.hero-lead {
+  font-size: clamp(0.92rem, 2vw, 1.08rem);
+  color: rgba(255,255,255,0.78);
+  line-height: 1.85;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-accent {
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(225,29,72,0.4);
+}
+
+.btn-outline-light {
+  padding: 14px 28px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.btn-outline-light:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: #fff;
+}
+
+.hero-stats-panel {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+}
+
+.hero-stats-panel h3 {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FDA4AF;
+  margin-bottom: 20px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.hero-stat {
+  padding: 16px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  border-left: 3px solid var(--secondary);
+}
+
+.hero-stat .num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.hero-stat .lbl {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.6);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.hero-tags span {
+  padding: 6px 12px;
+  background: rgba(225,29,72,0.25);
+  color: #FECDD3;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Trust strip */
+.trust-strip {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+
+.trust-strip .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 40px);
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.trust-item .ico {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+/* Treatments */
+.treatments { background: var(--bg); }
+
+.treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.treatment-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.treatment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.treatment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(225,29,72,0.1);
+  border-color: var(--accent);
+}
+
+.treatment-card:hover::before { opacity: 1; }
+
+.treatment-card .icon {
+  width: 52px;
+  height: 52px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 18px;
+}
+
+.treatment-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.treatment-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.treatment-card .tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--secondary-light);
+  color: var(--accent-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+/* Pregnancy stages */
+.pregnancy-section {
+  background: var(--navy);
+  color: #fff;
+}
+
+.pregnancy-section .section-label { color: #FDA4AF; }
+.pregnancy-section .section-title { color: #fff; }
+.pregnancy-section .section-desc { color: rgba(255,255,255,0.7); }
+
+.preg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+
+.preg-visual {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  position: relative;
+}
+
+.preg-visual img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.preg-visual .overlay-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  padding: 14px 18px;
+  background: rgba(74,29,52,0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  border-left: 4px solid var(--accent);
+}
+
+.preg-visual .overlay-badge strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.preg-visual .overlay-badge span {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.65);
+}
+
+.preg-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.preg-stage {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.preg-stage .week {
+  width: 52px;
+  height: 52px;
+  background: rgba(225,29,72,0.3);
+  border: 1px solid rgba(244,63,94,0.4);
+  color: #FDA4AF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.preg-stage strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.preg-stage p {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+}
+
+.preg-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.preg-pills span {
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #FECDD3;
+}
+
+/* Doctors */
+.doctors { background: #fff; }
+
+.doctor-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(225,29,72,0.08);
+}
+
+.doctor-photo { aspect-ratio: 4/3; overflow: hidden; }
+
+.doctor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.doctor-card:hover .doctor-photo img { transform: scale(1.04); }
+
+.doctor-info { padding: clamp(20px, 3vw, 28px); }
+
+.doctor-info h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.doctor-info .role {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.doctor-info .creds {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.doctor-info .spec {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Delivery rooms */
+.delivery-section { background: var(--accent-light); }
+
+.delivery-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+}
+
+.delivery-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.delivery-gallery .main {
+  grid-row: span 2;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.delivery-gallery .main img,
+.delivery-gallery .sub img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.delivery-gallery .main img { aspect-ratio: 3/4; min-height: 100%; }
+.delivery-gallery .sub { border-radius: var(--card-radius); overflow: hidden; }
+.delivery-gallery .sub img { aspect-ratio: 16/10; }
+
+.delivery-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.delivery-feat {
+  padding: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.delivery-feat .ico { font-size: 1.3rem; margin-bottom: 8px; }
+.delivery-feat strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.delivery-feat span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+
+/* Health packages */
+.packages-section { background: #fff; }
+
+.package-banner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+  background: linear-gradient(135deg, var(--navy) 0%, #6B2D4A 100%);
+  border-radius: var(--card-radius);
+  padding: clamp(32px, 5vw, 48px);
+  color: #fff;
+  margin-bottom: 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+.package-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(225,29,72,0.2), transparent 70%);
+  pointer-events: none;
+}
+
+.package-banner > div { position: relative; z-index: 1; }
+
+.package-banner h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.package-banner p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.package-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.package-card {
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(22px, 3vw, 28px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.package-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px rgba(225,29,72,0.08);
+}
+
+.package-card .label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.package-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.package-card p {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.package-card ul {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.package-card li {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 4px 0;
+  padding-left: 14px;
+  position: relative;
+}
+
+.package-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.7rem;
+}
+
+.package-card .price {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+/* Reviews */
+.reviews-section { background: var(--bg); }
+
+.review-card { border-color: var(--border); height: 100%; }
+
+.review-card .treatment-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+/* FAQ */
+.faq-section { background: #fff; }
+
+/* Appointment */
+.appointment-section { background: var(--bg); }
+
+.appoint-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.appoint-info .section-desc { margin-bottom: 32px; }
+
+.appoint-features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appoint-feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.appoint-feature .num {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.appoint-feature strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.appoint-feature span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.appoint-grid .btn-accent {
+  width: 100%;
+  margin-top: 8px;
+  padding: 16px;
+}
+
+/* Insurance */
+.insurance-section { background: #fff; }
+
+.insurance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 40px);
+}
+
+.insurance-card {
+  padding: clamp(28px, 4vw, 36px);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  background: var(--bg);
+}
+
+.insurance-card.highlight {
+  background: linear-gradient(135deg, var(--accent-light) 0%, #fff 100%);
+  border-color: var(--accent);
+}
+
+.insurance-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--accent-dark);
+}
+
+.insurance-card p {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.insurance-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.insurance-tags span {
+  padding: 8px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  border-radius: 8px;
+}
+
+.insurance-card.highlight .insurance-tags span {
+  background: #fff;
+  border-color: rgba(225,29,72,0.2);
+}
+
+.insurance-note {
+  margin-top: 28px;
+  padding: 18px 22px;
+  background: var(--navy);
+  color: rgba(255,255,255,0.8);
+  border-radius: var(--card-radius);
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+.insurance-note strong { color: #FDA4AF; }
+
+/* Location */
+.location-section { background: var(--bg); }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.location-detail .ico {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.location-detail strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.location-detail span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.footer-brand .logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 16px;
+  display: block;
+  line-height: 1.3;
+}
+
+.footer-brand .logo small {
+  display: block;
+  font-size: 0.55em;
+  letter-spacing: 0.18em;
+  color: #FDA4AF;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+.map-box {
+  background: linear-gradient(135deg, #6B2D4A, #4A1D34);
+}
+
+.map-pin strong { color: #fff; }
+.map-pin span { color: rgba(255,255,255,0.6); }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-stats-panel { margin-top: 8px; }
+  .treatment-grid { grid-template-columns: repeat(2, 1fr); }
+  .preg-grid { grid-template-columns: 1fr; }
+  .delivery-grid { grid-template-columns: 1fr; }
+  .package-banner { grid-template-columns: 1fr; }
+  .package-list { grid-template-columns: 1fr; }
+  .appoint-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+  .insurance-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .treatment-grid { grid-template-columns: 1fr; }
+  .delivery-features { grid-template-columns: 1fr; }
+  .delivery-gallery { grid-template-columns: 1fr; }
+  .delivery-gallery .main { grid-row: span 1; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">
+    <strong>서울산부인과</strong>
+    <span>SEOUL OBGYN</span>
+  </a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#treatments">진료과목</a>
+    <a href="#pregnancy">임신가이드</a>
+    <a href="#doctors">의료진</a>
+    <a href="#delivery">분만실</a>
+    <a href="#packages">검진패키지</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#appointment" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1555252333-9f8e92a65df7?w=1400&q=80" alt="임신 출산 산부인과">
+  </div>
+  <div class="hero-accent-line"></div>
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Women's Health · 임신·출산·여성검진</div>
+        <h1>새 생명과 함께하는<br><em>따뜻한 산부인과</em></h1>
+        <p class="hero-lead">서울산부인과는 임신·출산부터 여성검진·불임 상담까지, 여성의 전 생애 건강을 함께합니다. 대학병원 출신 산부인과 전문의 2인이 프라이빗하고 안전한 진료 환경을 제공합니다.</p>
+        <div class="hero-actions">
+          <a href="#appointment" class="btn-accent">진료 예약하기</a>
+          <a href="#treatments" class="btn-outline-light">진료과목 보기</a>
+        </div>
+        <div class="hero-tags">
+          <span>임신·출산</span>
+          <span>여성검진</span>
+          <span>불임 상담</span>
+        </div>
+      </div>
+      <div class="hero-stats-panel">
+        <h3>Care Excellence</h3>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">15+</div><div class="lbl">운영 연수</div></div>
+          <div class="hero-stat"><div class="num">8,500+</div><div class="lbl">누적 출산</div></div>
+          <div class="hero-stat"><div class="num">98%</div><div class="lbl">산모 만족도</div></div>
+          <div class="hero-stat"><div class="num">4.9</div><div class="lbl">환자 평점</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-item"><div class="ico">👩‍⚕️</div>산부인과 전문의 2인 상주</div>
+    <div class="trust-item"><div class="ico">🏥</div>프라이빗 분만실 3개</div>
+    <div class="trust-item"><div class="ico">🔬</div>3D·4D 초음파 · 유전자 검사</div>
+    <div class="trust-item"><div class="ico">💝</div>산후조리원 연계</div>
+  </div>
+</div>
+
+<!-- Treatments -->
+<section class="treatments" id="treatments">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Treatments</div>
+      <h2 class="section-title">진료 과목</h2>
+      <p class="section-desc">임신·출산·여성검진·불임 4대 전문 영역으로 여성 건강을 종합 관리합니다.</p>
+    </div>
+    <div class="treatment-grid">
+      <div class="treatment-card">
+        <div class="icon">🤰</div>
+        <h3>임신·출산</h3>
+        <p>임신 초기부터 출산까지 단계별 산전 관리. 정기 검진, 태아 초음파, 임신성 당뇨·고혈압 관리, 자연분만·제왕절개 상담을 제공합니다. 산모와 태아의 안전을 최우선으로 합니다.</p>
+        <span class="tag">산전 관리 · 분만 상담</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">👶</div>
+        <h3>분만·산후</h3>
+        <p>프라이빗 분만실에서 편안한 출산 경험. 무통·유도 분만, 제왕절개, 산후 관리까지 원스톱 케어. 산후조리원·소아과 연계로 출산 후에도 연속적인 지원을 제공합니다.</p>
+        <span class="tag">프라이빗 분만실 3개</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🔬</div>
+        <h3>여성검진</h3>
+        <p>자궁경부암·유방암·난소암 검진, HPV·자궁경부 세포 검사, 골밀도·갑상선 검사. 20대부터 폐경기까지 연령별 맞춤 여성 건강 검진 패키지를 운영합니다.</p>
+        <span class="tag">연령별 맞춤 검진</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">💕</div>
+        <h3>불임·난임</h3>
+        <p>불임 원인 정밀 진단, 배란 유도, 인공수정·시험관 시술 상담. 난임 전문 협력 병원과 연계하여 맞춤 치료 로드맵을 설계합니다. 심리 상담 연계도 가능합니다.</p>
+        <span class="tag">난임 전문 연계</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🩺</div>
+        <h3>부인과 질환</h3>
+        <p>생리불순, 다낭성 난소, 자궁근종·난소낭종, 질염·방광염 등 부인과 질환 진료. 최소 침습 수술(복강경) 상담 및 시술 연계를 제공합니다.</p>
+        <span class="tag">복강경 수술 상담</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🌸</div>
+        <h3>폐경·갱년기</h3>
+        <p>갱년기 증상(안면홍조, 수면장애, 골다공증) 관리, 호르몬 대체 요법 상담. 폐경 후 여성 건강을 위한 정기 검진과 생활 습관 가이드를 제공합니다.</p>
+        <span class="tag">갱년기 클리닉</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pregnancy Stages Guide -->
+<section class="pregnancy-section" id="pregnancy">
+  <div class="container">
+    <div class="preg-grid">
+      <div class="preg-visual">
+        <img src="https://images.unsplash.com/photo-1493894473891-10fc1e5dbd22?w=800&q=80" alt="임신 산전 관리">
+        <div class="overlay-badge">
+          <strong>임신 주차별 맞춤 산전 관리</strong>
+          <span>태아 초음파 · 검사 일정을 체계적으로 안내합니다</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Pregnancy Guide</div>
+        <h2 class="section-title">임신 단계별 가이드</h2>
+        <p class="section-desc">임신 초기부터 출산까지, 주차별 검진·검사·주의사항을 안내합니다. 산모와 태아의 건강을 함께 지켜갑니다.</p>
+        <div class="preg-timeline">
+          <div class="preg-stage">
+            <div class="week">1–12<br>주</div>
+            <div>
+              <strong>임신 초기 (1분기)</strong>
+              <p>임신 확인, 태아 심박 확인, 기형아 검사(NT·NIPT) 상담. 입덧·피로 관리, 엽산·영양제 처방. 8~12주 첫 정기 검진.</p>
+            </div>
+          </div>
+          <div class="preg-stage">
+            <div class="week">13–27<br>주</div>
+            <div>
+              <strong>임신 중기 (2분기)</strong>
+              <p>20주 기형아 정밀 초음파, 성별 확인 가능. 임신성 당뇨·빈혈 검사. 태동 시작, 24~28주 포도당 부하 검사. 4주 간격 정기 검진.</p>
+            </div>
+          </div>
+          <div class="preg-stage">
+            <div class="week">28–40<br>주</div>
+            <div>
+              <strong>임신 후기 (3분기)</strong>
+              <p>태아 성장·양수량 모니터링, 분만 방식 상담. 36주 이후 2주 간격 검진. 분만 동의서·입원 준비 안내. 제왕절개·자연분만 선택 상담.</p>
+            </div>
+          </div>
+        </div>
+        <div class="preg-pills">
+          <span>3D·4D 초음파</span>
+          <span>기형아 검사</span>
+          <span>임신성 당뇨</span>
+          <span>분만 상담</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Doctors -->
+<section class="doctors" id="doctors">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Medical Team</div>
+      <h2 class="section-title">산부인과 전문의</h2>
+      <p class="section-desc">대학병원 산부인과 경력의 전문의 2인이 진료합니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80" alt="김서연 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>김서연 원장</h3>
+          <div class="role">대표원장 · 임신·출산·고위험임신</div>
+          <p class="creds">서울대학교 의과대학 졸업<br>서울대병원 산부인과 전문의<br>대한산부인과학회 · 대한모체태아의학회 정회원</p>
+          <span class="spec">누적 출산 4,200건+ · 고위험임신 전문</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&q=80" alt="이하은 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>이하은 원장</h3>
+          <div class="role">여성검진·불임·부인과 질환</div>
+          <p class="creds">연세대학교 의과대학 졸업<br>세브란스병원 산부인과 전문의<br>대한불임학회 · 대한산부인과초음파학회</p>
+          <span class="spec">여성검진 6,500건+ · 불임 상담 전문</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Delivery Rooms -->
+<section class="delivery-section" id="delivery">
+  <div class="container">
+    <div class="delivery-grid">
+      <div class="delivery-gallery">
+        <div class="main">
+          <img src="https://images.unsplash.com/photo-1584820926868-1ac4d0e8e0b0?w=600&q=80" alt="프라이빗 분만실">
+        </div>
+        <div class="sub">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&q=80" alt="신생아실">
+        </div>
+        <div class="sub">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15f508118?w=400&q=80" alt="산후 회복실">
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Delivery Rooms</div>
+        <h2 class="section-title">분만실 · 신생아실</h2>
+        <p class="section-desc">프라이빗 분만실 3개와 신생아실을 갖춘 안전하고 편안한 출산 환경. 가족 분만 동반, 무통 분만 옵션을 제공합니다.</p>
+        <div class="delivery-features">
+          <div class="delivery-feat">
+            <div class="ico">🛏️</div>
+            <strong>프라이빗 분만실</strong>
+            <span>1인 전용 분만실, 가족 동반 가능</span>
+          </div>
+          <div class="delivery-feat">
+            <div class="ico">👶</div>
+            <strong>신생아실</strong>
+            <span>24시간 신생아 모니터링</span>
+          </div>
+          <div class="delivery-feat">
+            <div class="ico">💉</div>
+            <strong>무통·유도 분만</strong>
+            <span>산모 선택에 따른 분만 방식</span>
+          </div>
+          <div class="delivery-feat">
+            <div class="ico">🌸</div>
+            <strong>산후 회복실</strong>
+            <span>출산 후 2시간 회복·모유 수유 지원</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Women's Health Packages -->
+<section class="packages-section" id="packages">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Health Packages</div>
+      <h2 class="section-title">여성 건강 검진 패키지</h2>
+      <p class="section-desc">연령·목적에 맞는 여성 건강 검진 패키지를 제공합니다.</p>
+    </div>
+    <div class="package-banner">
+      <div>
+        <h3>나를 위한 건강 검진,<br>지금이 적기입니다</h3>
+        <p>20대 기초 검진부터 40대 종합 검진, 임신 전·후 검진까지. 부담 없는 가격과 꼼꼼한 결과 상담으로 여성 건강을 지켜드립니다.</p>
+        <a href="#appointment" class="btn-accent">검진 예약하기</a>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80" alt="여성 건강 검진" style="width:100%;border-radius:12px;aspect-ratio:16/10;object-fit:cover;">
+      </div>
+    </div>
+    <div class="package-list">
+      <div class="package-card">
+        <div class="label">Basic</div>
+        <h4>20대 기초 검진</h4>
+        <p>자궁경부 세포 검사, HPV 검사, 골반 초음파, 유방 촉진. 생리불순·질염 상담 포함.</p>
+        <ul>
+          <li>자궁경부암 검진</li>
+          <li>골반 초음파</li>
+          <li>기초 상담</li>
+        </ul>
+        <div class="price">₩120,000~</div>
+      </div>
+      <div class="package-card">
+        <div class="label">Standard</div>
+        <h4>30–40대 종합 검진</h4>
+        <p>기초 검진 + 유방 초음파, 갑상선, 빈혈·당뇨 검사. 임신 전 검진(프리컨셉션) 옵션.</p>
+        <ul>
+          <li>유방·갑상선 초음파</li>
+          <li>혈액·소변 검사</li>
+          <li>결과 상담</li>
+        </ul>
+        <div class="price">₩280,000~</div>
+      </div>
+      <div class="package-card">
+        <div class="label">Premium</div>
+        <h4>40대+ 프리미엄 검진</h4>
+        <p>종합 검진 + 유방 MRI, 골밀도, 호르몬 검사. 갱년기·폐경 상담, 1년 후 재검진 안내.</p>
+        <ul>
+          <li>유방 MRI · 골밀도</li>
+          <li>호르몬·종양표지자</li>
+          <li>1:1 결과 상담</li>
+        </ul>
+        <div class="price">₩450,000~</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">환자 후기</h2>
+      <p class="section-desc">서울산부인과를 방문하신 분들의 생생한 후기입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <span class="treatment-tag">출산 · 자연분만</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>첫아이라 긴장했는데, 김서연 원장님이 차분하게 설명해 주셔서 안심됐어요. 프라이빗 분만실에서 가족과 함께 출산했고, 산후 회복도 잘 챙겨 주셨습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박지현</strong><span>자연분만 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">임신 · 산전관리</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>임신 12주부터 여기서 검진받았어요. 4D 초음파로 아기 얼굴 보는 날이 가장 기대됐고, 주차별 검사 일정도 꼼꼼히 안내해 주셔서 믿고 맡겼습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최수진</strong><span>산전 관리 · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">여성검진</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>30대 종합 검진 패키지 받았어요. 이하은 원장님이 결과 하나하나 설명해 주시고, 다음 검진 시기도 알려 주셔서 건강 관리에 도움이 됐습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한미래</strong><span>종합 검진 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">불임 상담</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>1년 넘게 임신이 안 돼서 상담받았는데, 원인 검사와 치료 방향을 명확히 알려 주셨어요. 시험관 병원 연계도 도와주셔서 지금 8주차입니다. 감사합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정유나</strong><span>불임 상담 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">제왕절개</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>둘째 제왕절개 수술이었는데, 수술 전 상담부터 산후 관리까지 세심했어요. 무통 마취 덕분에 회복도 빨랐고, 산후조리원 연계도 편했습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">윤</div>
+          <div><strong>윤서아</strong><span>제왕절개 · 2025.05</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">부인과 · 생리불순</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>생리불순으로 방문했는데, 초음파로 원인도 바로 확인하고 처방도 맞춰 주셨어요. 여성 전용 대기실이 있어서 편하고, 직원분들도 친절합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">강</div>
+          <div><strong>강예린</strong><span>부인과 진료 · 2025.05</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">진료 전 많이 물어보시는 질문을 모았습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">첫 임신 검진은 언제 받나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">임신 확인 후 8~12주에 첫 정기 검진을 권합니다. 태아 심박 확인, 기형아 검사 상담, 엽산 처방 등을 진행합니다. 입덧이 심하거나 출혈이 있으면 더 일찍 방문해 주세요.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">분만 방식은 어떻게 결정하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">태아 위치·크기, 산모 골반, 이전 출산 이력, 임신 합병증 등을 종합해 상담합니다. 자연분만·제왕절개·유도 분만 각각의 장단점을 설명하고, 산모와 함께 결정합니다. 긴급 상황 시 의료진 판단이 우선입니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">여성검진은 어떤 항목이 포함되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">패키지에 따라 다릅니다. 기초 검진은 자궁경부 세포·HPV, 골반 초음파, 유방 촉진이 포함됩니다. 종합 검진은 유방·갑상선 초음파, 혈액 검사가 추가됩니다. 예약 시 패키지별 상세 항목을 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">불임 상담은 어떻게 진행되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">1년 이상 임신이 되지 않을 때 불임 상담을 권합니다. 남녀 검사(호르몬, 초음파, 정자 검사 등)로 원인을 파악하고, 배란 유도·인공수정·시험관 시술 등 치료 옵션을 설명합니다. 협력 난임 전문 병원과 연계합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">건강보험 적용이 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">산부인과 진료, 산전 검진(급여 기준), 출산(입원·수술), 자궁경부암 검진(국가검진 연계) 등은 건강보험이 적용됩니다. 4D 초음파, 프리미엄 검진 패키지, 불임 시술 일부는 비급여이며 상담 시 비용을 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차와 진료 시간은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">건물 지하 1~2층 주차장 이용 가능하며, 진료 환자 2시간 무료입니다. 평일 09:00–18:30, 토요일 09:00–13:00 운영, 일·공휴일 휴무입니다. 토요일 오전은 예약제로 운영합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Appointment -->
+<section class="appointment-section" id="appointment">
+  <div class="container">
+    <div class="appoint-grid">
+      <div class="appoint-info">
+        <div class="section-label">Appointment</div>
+        <h2 class="section-title">온라인 예약</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 접수 담당자가 연락드립니다. 임신·출산 긴급 문의는 전화(02-555-3910)로 연락해 주세요.</p>
+        <div class="appoint-features">
+          <div class="appoint-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>빠른 예약 확정</strong>
+              <span>접수 후 24시간 이내 진료 일시를 안내해 드립니다.</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>맞춤 상담 연결</strong>
+              <span>임신·출산·검진·불임 담당자가 연결합니다.</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>검진 패키지 안내</strong>
+              <span>연령·목적에 맞는 검진 패키지를 추천해 드립니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="예약 요청이 접수되었습니다! 24시간 내 연락드릴게요.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="treatment">희망 진료</label>
+            <select id="treatment" name="treatment" required>
+              <option value="">진료 과목을 선택해 주세요</option>
+              <option value="pregnancy">임신·출산</option>
+              <option value="delivery">분만·산후</option>
+              <option value="checkup">여성검진</option>
+              <option value="infertility">불임·난임</option>
+              <option value="gynecology">부인과 질환</option>
+              <option value="menopause">폐경·갱년기</option>
+              <option value="consult">초진 상담</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">희망 날짜</label>
+            <input type="date" id="date" name="date">
+          </div>
+          <div class="form-group">
+            <label for="time">희망 시간</label>
+            <select id="time" name="time">
+              <option value="">시간 선택</option>
+              <option value="9">오전 9:00</option>
+              <option value="10">오전 10:00</option>
+              <option value="11">오전 11:00</option>
+              <option value="14">오후 2:00</option>
+              <option value="15">오후 3:00</option>
+              <option value="16">오후 4:00</option>
+              <option value="17">오후 5:00</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">증상 · 문의사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="임신 주차, 검진 목적, 불임 기간 등을 적어 주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-accent">예약 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Insurance -->
+<section class="insurance-section" id="insurance">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Insurance</div>
+      <h2 class="section-title">건강보험 · 비급여 안내</h2>
+      <p class="section-desc">산부인과 진료 항목별 급여·비급여 적용 기준을 투명하게 안내합니다.</p>
+    </div>
+    <div class="insurance-grid">
+      <div class="insurance-card highlight">
+        <h3>건강보험 적용 (급여)</h3>
+        <p>산부인과 초·재진, 산전 검진(급여 기준), 출산(입원·수술), 자궁경부암 검진(국가검진) 및 아래 항목이 건강보험 급여 대상입니다.</p>
+        <div class="insurance-tags">
+          <span>산부인과 진료</span>
+          <span>산전 검진</span>
+          <span>출산·입원</span>
+          <span>자궁경부암 검진</span>
+          <span>초음파 (급여 기준)</span>
+          <span>기형아 검사 (NT)</span>
+          <span>약 처방</span>
+        </div>
+      </div>
+      <div class="insurance-card">
+        <h3>비급여 항목</h3>
+        <p>선택적·프리미엄 검진·시술은 비급여이며, 시술 전 비용을 상담 시 안내합니다. 카드·분할 결제 가능합니다.</p>
+        <div class="insurance-tags">
+          <span>4D 초음파</span>
+          <span>NIPT (무형아 검사)</span>
+          <span>프리미엄 검진 패키지</span>
+          <span>불임 시술 (일부)</span>
+          <span>무통 분만</span>
+          <span>토요일 특진</span>
+        </div>
+      </div>
+    </div>
+    <div class="insurance-note">
+      <strong>안내:</strong> 급여·비급여 구분은 건강보험 심사평가원 기준이며, 개인 상태에 따라 달라질 수 있습니다. 출산비용은 입원·수술 방식에 따라 다르며, 접수·수납 시 상세 안내해 드립니다. 실손보험 청구 서류 발급을 도와드립니다.
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길 · 진료시간</h2>
+      <p class="section-desc">압구정역 2번 출구 도보 3분, 지하 주차장 완비.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>서울산부인과 SEOUL OBGYN</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 강남구 압구정로 152, 서울여성메디컬타워 5층<br>(압구정역 2번 출구 도보 3분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>전화: 02-555-3910<br>카카오톡: @서울산부인과<br>이메일: info@seoulobgyn.co.kr</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>교통 안내</strong>
+            <span>지하철 3호선 압구정역 2번 출구 도보 3분<br>버스: 압구정역·압구정로데오 정류장 하차<br>주차: 지하 1~2층 (진료 환자 2시간 무료)</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>09:00 – 18:30</td></tr>
+          <tr><td>토요일</td><td>09:00 – 13:00 (예약제)</td></tr>
+          <tr><td>점심시간</td><td>13:00 – 14:00</td></tr>
+          <tr><td>일·공휴일</td><td>휴무</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>서울산부인과</strong>
+          <span>서울 강남구 압구정로 152</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">서울산부인과<small>SEOUL OBGYN</small></a>
+      <p>2010년 개원 이래 강남 지역에서 임신·출산·여성 건강을 함께해 왔습니다. 새 생명과 여성의 건강, 서울산부인과가 함께합니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 강남구 압구정로 152, 서울여성메디컬타워 5층</span>
+        <span>📞 02-555-3910</span>
+        <span>✉️ info@seoulobgyn.co.kr</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>진료 과목</h4>
+      <a href="#treatments">임신·출산</a>
+      <a href="#treatments">분만·산후</a>
+      <a href="#treatments">여성검진</a>
+      <a href="#treatments">불임·난임</a>
+      <a href="#treatments">부인과 질환</a>
+      <a href="#treatments">폐경·갱년기</a>
+    </div>
+    <div class="footer-col">
+      <h4>클리닉 안내</h4>
+      <a href="#pregnancy">임신 가이드</a>
+      <a href="#doctors">의료진 소개</a>
+      <a href="#delivery">분만실</a>
+      <a href="#packages">검진 패키지</a>
+      <a href="#reviews">환자 후기</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>예약 · 보험</h4>
+      <a href="#appointment">온라인 예약</a>
+      <a href="#insurance">건강보험 안내</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 09:00 – 18:30</p>
+      <p>토요일 09:00 – 13:00</p>
+      <p>일·공휴일 휴무</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 서울산부인과 SEOUL OBGYN. All rights reserved.</span>
+    <span>대표원장 김서연 · 사업자등록번호 216-88-58340</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

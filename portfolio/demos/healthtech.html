@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>헬스텍 HEALTHTECH — Healthcare IT Platform</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+:root {
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --bg: #F0FDFA;
+  --text: #134E4A;
+  --text-muted: #5EEAD4;
+  --accent: #0D9488;
+  --accent-2: #14B8A6;
+  --accent-text: #fff;
+  --border: rgba(13,148,136,0.15);
+  --nav-bg: rgba(240,253,250,0.94);
+  --footer-bg: #0F3D38;
+  --card-bg: #FFFFFF;
+  --surface: #CCFBF1;
+  --alt-bg: #FFFFFF;
+  --btn-radius: 10px;
+  --card-radius: 16px;
+  --logo-weight: 700;
+  --footer-text: rgba(255,255,255,0.55);
+}
+body { background: var(--bg); color: var(--text); }
+.site-nav { border-bottom-color: var(--border); }
+.site-nav .logo { color: #0D9488; font-weight: 800; letter-spacing: -0.03em; }
+.site-nav .logo span { color: var(--text-muted); font-size: 0.72em; font-weight: 500; margin-left: 6px; }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { background: linear-gradient(135deg, #0D9488, #14B8A6); color: var(--accent-text); }
+.nav-toggle { color: var(--text); }
+@media (max-width: 768px) { .nav-links { background: var(--nav-bg); border-color: var(--border); } }
+
+.hero { position: relative; padding: clamp(48px,8vw,88px) 0 clamp(40px,6vw,64px); overflow: hidden; }
+.hero-mesh { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 10% 0%, rgba(13,148,136,0.1), transparent), radial-gradient(ellipse 50% 40% at 90% 80%, rgba(20,184,166,0.08), transparent); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,64px); align-items: center; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.25); border-radius: 100px; font-size: 0.76rem; color: #0D9488; margin-bottom: 22px; font-weight: 600; }
+.hero-badge .dot { width: 6px; height: 6px; background: #14B8A6; border-radius: 50%; animation: pulse-dot 2s ease infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.1rem,5vw,3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 20px; }
+.hero h1 em { font-style: normal; color: #0D9488; }
+.hero-lead { font-size: clamp(0.92rem,2vw,1.08rem); color: var(--text-muted); line-height: 1.8; max-width: 520px; margin-bottom: 28px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.btn-primary { background: linear-gradient(135deg, #0D9488, #14B8A6); color: var(--accent-text); box-shadow: 0 4px 20px rgba(13,148,136,0.25); }
+.btn-outline { border: 1.5px solid rgba(13,148,136,0.35); color: #0D9488; }
+.btn-outline:hover { background: rgba(13,148,136,0.06); }
+.hero-stats { display: flex; gap: clamp(20px,4vw,40px); flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
+.hero-stat strong { display: block; font-family: var(--font-display); font-size: clamp(1.2rem,2.5vw,1.55rem); font-weight: 800; color: #0D9488; }
+.hero-stat span { font-size: 0.72rem; color: var(--text-muted); }
+
+.product-mock { background: #FFFFFF; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 24px 64px rgba(13,148,136,0.12); }
+.mock-top { padding: 12px 16px; background: #CCFBF1; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid var(--border); }
+.mock-top span { width: 10px; height: 10px; border-radius: 50%; }
+.mock-top span:nth-child(1){background:#EF4444} .mock-top span:nth-child(2){background:#EAB308} .mock-top span:nth-child(3){background:#22C55E}
+.mock-url { margin-left: auto; font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono); }
+.mock-body { padding: clamp(16px,3vw,24px); }
+.mock-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+.mock-metric { background: #F0FDFA; border-radius: 12px; padding: 14px; border: 1px solid var(--border); }
+.mock-metric .lbl { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.mock-metric .val { font-size: 1.15rem; font-weight: 700; color: #0D9488; font-family: var(--font-display); }
+.mock-metric .sub { font-size: 0.66rem; color: #0D9488; margin-top: 4px; }
+.mock-code { background: #F0FDFA; border-radius: 12px; padding: 16px; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.7; color: #134E4A; overflow-x: auto; }
+.mock-code .kw { color: #0D9488; }
+.mock-code .str { color: #047857; }
+.mock-code .cm { color: #6B7280; opacity: 0.7; }
+.mock-rows { display: flex; flex-direction: column; gap: 8px; }
+.mock-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #F0FDFA; border-radius: 8px; font-size: 0.8rem; border: 1px solid var(--border); }
+.mock-row .tag { font-size: 0.65rem; padding: 3px 8px; border-radius: 100px; font-weight: 700; background: rgba(13,148,136,0.1); color: #0D9488; }
+.mock-chart { background: #F0FDFA; border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin-top: 12px; }
+.chart-bars .bar { flex: 1; background: linear-gradient(180deg, #0D9488, #14B8A6); border-radius: 4px 4px 0 0; min-height: 12px; opacity: 0.85; }
+.chart-bars .bar:nth-child(1){height:45%} .chart-bars .bar:nth-child(2){height:72%} .chart-bars .bar:nth-child(3){height:58%}
+.chart-bars .bar:nth-child(4){height:90%} .chart-bars .bar:nth-child(5){height:65%} .chart-bars .bar:nth-child(6){height:78%} .chart-bars .bar:nth-child(7){height:55%}
+
+.trust-strip { padding: 28px 0; background: #FFFFFF; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.trust-inner { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(16px,3vw,32px); justify-content: center; }
+.trust-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.trust-logos { display: flex; flex-wrap: wrap; gap: clamp(20px,4vw,40px); align-items: center; justify-content: center; }
+.trust-logos span { font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: #94A3B8; }
+
+.section-label { color: #0D9488; }
+.alt-section { background: var(--alt-bg); }
+.surface-section { background: var(--surface); }
+
+.bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.bento-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,3vw,32px); transition: box-shadow 0.3s, transform 0.3s; }
+.bento-item:hover { box-shadow: 0 16px 40px rgba(13,148,136,0.1); transform: translateY(-3px); }
+.bento-item.wide { grid-column: span 2; }
+.bento-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.bento-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0D9488; background: rgba(13,148,136,0.1); padding: 4px 10px; border-radius: 100px; margin-bottom: 12px; }
+.bento-item h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.bento-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+.process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; counter-reset: step; }
+.process-step { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 28px 22px; position: relative; }
+.process-step::before { counter-increment: step; content: counter(step); position: absolute; top: -14px; left: 22px; width: 28px; height: 28px; background: linear-gradient(135deg, #0D9488, #14B8A6); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.process-step h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; margin-top: 8px; }
+.process-step p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,5vw,56px); align-items: center; }
+.about-img { position: relative; border-radius: var(--card-radius); overflow: hidden; }
+.about-img img { width: 100%; height: 360px; object-fit: cover; }
+.about-float { position: absolute; bottom: 20px; left: 20px; background: var(--card-bg); padding: 16px 20px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+.about-float strong { display: block; font-size: 1.5rem; font-weight: 800; color: #0D9488; }
+.about-float span { font-size: 0.78rem; color: var(--text-muted); }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.tech-chip { padding: 8px 14px; background: rgba(13,148,136,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: #0D9488; }
+
+.case-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,3vw,32px); height: 100%; transition: box-shadow 0.3s; }
+.case-card:hover { box-shadow: 0 16px 40px rgba(13,148,136,0.1); }
+.case-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; color: #0D9488; margin-bottom: 6px; }
+.case-industry { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 14px; }
+.case-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; }
+.case-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+.case-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.case-metric { text-align: center; padding: 12px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); }
+.case-metric strong { display: block; font-size: 1.2rem; font-weight: 800; color: #0D9488; }
+.case-metric span { font-size: 0.66rem; color: var(--text-muted); }
+
+.integ-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.integ-chip { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); transition: all 0.25s; }
+.integ-chip:hover { border-color: #0D9488; background: rgba(13,148,136,0.1); color: var(--text); }
+.integ-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+.pricing-toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; font-size: 0.88rem; color: var(--text-muted); }
+.pricing-toggle-wrap .active { color: var(--text); font-weight: 600; }
+.pricing-badge-save { font-size: 0.68rem; padding: 3px 10px; background: rgba(13,148,136,0.1); color: #0D9488; border-radius: 100px; font-weight: 700; }
+.pricing-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(28px,4vw,36px); display: flex; flex-direction: column; }
+.pricing-card.featured { border-color: #0D9488; box-shadow: 0 0 48px rgba(13,148,136,0.12); position: relative; }
+.pricing-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,#0D9488,#14B8A6); padding: 4px 16px; border-radius: 100px; font-size: 0.64rem; font-weight: 700; color: #fff; }
+.pricing-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.pricing-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+.pricing-card .price { font-family: var(--font-display); font-size: clamp(2rem,4vw,2.5rem); font-weight: 800; margin-bottom: 6px; color: #0D9488; }
+.pricing-card .price span { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.pricing-billing { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 24px; }
+.pricing-card .btn { width: 100%; margin-bottom: 24px; }
+.pricing-features li { display: flex; gap: 10px; padding: 9px 0; font-size: 0.84rem; color: var(--text-muted); border-bottom: 1px solid var(--border); line-height: 1.5; }
+.pricing-features li::before { content: '✓'; color: #0D9488; font-weight: 700; }
+.pricing-features li.muted { opacity: 0.45; }
+.pricing-features li.muted::before { content: '—'; }
+
+.review-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 24px; height: 100%; transition: transform 0.3s, box-shadow 0.3s; }
+.review-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(13,148,136,0.1); }
+.review-stars { color: #FBBF24; margin-bottom: 12px; }
+.review-card blockquote { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+.review-author { display: flex; gap: 12px; align-items: center; }
+.review-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#0D9488,#14B8A6); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.review-author strong { display: block; font-size: 0.88rem; }
+.review-author span { font-size: 0.75rem; color: var(--text-muted); }
+
+.faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+.faq-q { width: 100%; text-align: left; padding: 18px 22px; font-size: 0.92rem; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
+.faq-q::after { content: '+'; font-size: 1.2rem; color: #0D9488; }
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s; }
+.faq-item.open .faq-a { max-height: 320px; }
+.faq-a-inner { padding: 0 22px 18px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+
+.cta-band { background: linear-gradient(135deg, rgba(13,148,136,0.08), rgba(20,184,166,0.05)); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px,8vw,72px) 0; }
+.cta-band h2 { font-family: var(--font-display); font-size: clamp(1.6rem,4vw,2.2rem); font-weight: 800; margin-bottom: 12px; }
+.cta-band p { color: var(--text-muted); margin-bottom: 28px; }
+
+.contact-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,56px); }
+.contact-info h3 { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; margin-bottom: 16px; }
+.contact-info > p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 32px; }
+.contact-perks { display: flex; flex-direction: column; gap: 16px; }
+.contact-perk { display: flex; gap: 14px; }
+.contact-perk-icon { width: 40px; height: 40px; background: rgba(13,148,136,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.contact-perk strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.contact-perk span { font-size: 0.82rem; color: var(--text-muted); }
+.form-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,4vw,36px); }
+.form-group label { color: var(--text); font-size: 0.84rem; font-weight: 600; }
+.form-group input, .form-group select, .form-group textarea { background: #F0FDFA; border: 1px solid var(--border); color: var(--text); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #0D9488; }
+
+.tabs-wrap .tab-panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 28px; margin-top: 16px; }
+.tab-panel h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: #0D9488; }
+.tab-panel p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+.feature-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.feature-list li { padding: 12px 16px; background: var(--surface); border-radius: 10px; font-size: 0.84rem; font-weight: 600; border: 1px solid var(--border); }
+
+.ht-deep { background: var(--surface); }
+.ht-split { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px,5vw,48px); align-items: center; }
+.ht-hero-img { border-radius: var(--card-radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(13,148,136,0.1); }
+.ht-hero-img img { width: 100%; height: auto; display: block; aspect-ratio: 4/3; object-fit: cover; }
+.ht-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.ht-list li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+.ht-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+.ht-metrics { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.ht-metric { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.ht-metric strong { display: block; font-size: 0.92rem; color: #0D9488; margin-bottom: 6px; }
+.ht-metric span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+.site-footer { background: var(--footer-bg); color: var(--footer-text); }
+.site-footer .logo { color: #fff; }
+.footer-col h4 { color: #fff; }
+.footer-col a:hover { color: #5EEAD4; }
+.footer-newsletter input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 8px; padding: 10px 14px; flex: 1; }
+.footer-newsletter button { background: #0D9488; color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; }
+
+@media (max-width: 1280px) {
+  .hero-grid { gap: clamp(24px,4vw,48px); }
+  .ht-hero-img img { object-position: center 30%; }
+}
+@media (max-width: 1024px) {
+  .integ-grid { grid-template-columns: repeat(3,1fr); }
+  .bento { grid-template-columns: repeat(2,1fr); }
+  .bento-item.wide { grid-column: span 1; }
+  .mock-metrics { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .contact-wrap, .ht-split { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: repeat(2,1fr); }
+  .product-mock { order: -1; }
+}
+@media (max-width: 768px) {
+  .hero h1 { font-size: clamp(1.9rem,8vw,2.6rem); }
+  .trust-logos { gap: 16px; }
+  .ht-metrics { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .process-steps, .integ-grid, .bento, .feature-list, .mock-metrics { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; text-align: center; }
+}
+
+/* Extended component layer */
+.section-header { margin-bottom: clamp(32px, 5vw, 48px); }
+.section-header.center { text-align: center; }
+.section-header.center .section-desc { max-width: 640px; margin-left: auto; margin-right: auto; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3.5vw, 2.25rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.section-desc { font-size: clamp(0.88rem, 2vw, 1rem); color: var(--text-muted); line-height: 1.75; }
+
+.features, .how-section, .tabs-section, #integrations, #pricing, #testimonials, #faq, #contact, #case-studies, #about, #platform {
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 3vw, 24px); }
+@media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.tab-btn {
+  padding: 10px 20px; font-size: 0.84rem; font-weight: 600; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--text-muted); transition: all 0.25s;
+}
+.tab-btn:hover { border-color: #0D9488; color: var(--text); }
+.tab-btn.active { background: linear-gradient(135deg, #0D9488, #14B8A6); color: var(--accent-text); border-color: transparent; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.pricing-features { list-style: none; flex: 1; }
+.pricing-card .btn-sm { padding: 12px 20px; font-size: 0.84rem; border-radius: var(--btn-radius); display: inline-block; text-align: center; }
+
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: clamp(24px, 4vw, 48px); padding: clamp(48px, 6vw, 72px) clamp(20px, 4vw, 48px); max-width: 1200px; margin: 0 auto; }
+.footer-brand p { font-size: 0.84rem; line-height: 1.7; margin-top: 12px; max-width: 280px; }
+.footer-col { display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 0.82rem; color: var(--footer-text); transition: color 0.25s; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 20px clamp(20px, 4vw, 48px); border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; max-width: 1200px; margin: 0 auto; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: span 2; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-brand { grid-column: span 1; } }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: span 2; }
+.form-group input, .form-group select, .form-group textarea { padding: 12px 14px; border-radius: 10px; font-size: 0.88rem; width: 100%; }
+.form-group textarea { min-height: 100px; resize: vertical; }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-group.full { grid-column: span 1; } }
+
+/* Brand accent animations */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.hero-badge .dot { animation: glow-pulse 2s ease infinite, pulse-dot 2s ease infinite; }
+.product-mock { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.product-mock:hover { transform: translateY(-4px); }
+
+/* Code syntax highlight refinements */
+.mock-code .num { color: #047857; }
+.mock-code .fn { color: #0D9488; }
+
+/* Status indicators in mock rows */
+.mock-row .status-ok { color: #22C55E; margin-left: auto; font-size: 0.72rem; font-weight: 600; }
+.mock-row .status-run { color: #0D9488; margin-left: auto; font-size: 0.72rem; font-weight: 600; }
+
+/* Chart label styling */
+.mock-chart .chart-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Deep section copy refinements */
+.ht-copy { display: flex; flex-direction: column; justify-content: center; }
+
+/* Review card quote styling */
+.review-card blockquote { font-style: normal; position: relative; padding-left: 0; }
+.review-card blockquote::before { content: '"'; font-size: 2rem; color: #0D9488; opacity: 0.3; line-height: 0; display: block; margin-bottom: 8px; }
+
+/* CTA band button spacing */
+.cta-band .btn { margin-top: 4px; }
+
+/* Nav scroll shadow enhancement */
+.site-nav { transition: box-shadow 0.3s; }
+
+/* Bento grid gap responsive */
+@media (max-width: 1280px) {
+  .bento { gap: 14px; }
+  .process-steps { gap: 16px; }
+}
+@media (max-width: 768px) {
+  .features, .how-section, .tabs-section, #integrations, #pricing, #testimonials, #faq, #contact, #case-studies, #about, #platform, #security {
+    padding: clamp(40px, 6vw, 64px) 0;
+  }
+}
+
+.security-section { background: #E6FFFA; }
+.security-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
+.security-badge {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(13,148,136,0.06);
+  transition: border-color 0.25s, transform 0.25s;
+}
+.security-badge:hover { border-color: rgba(13,148,136,0.35); transform: translateY(-2px); }
+.security-badge .ico { font-size: 1.8rem; margin-bottom: 12px; }
+.security-badge strong { display: block; font-size: 0.9rem; margin-bottom: 6px; color: #0D9488; }
+.security-badge span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+.security-note {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: rgba(13,148,136,0.08);
+  border: 1px solid rgba(13,148,136,0.15);
+  border-radius: var(--card-radius);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  text-align: center;
+}
+@media (max-width: 900px) { .security-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .security-grid { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">헬스텍 <span>HEALTHTECH</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#product">Product</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-mesh"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge"><span class="dot"></span> v4.5 — FHIR R4 Telemedicine GA</div>
+      <h1>환자 중심<br><em>디지털 헬스케어</em></h1>
+      <p class="hero-lead">EHR, telemedicine, patient portal — unified healthcare IT platform. FHIR R4 compliant, 원격진료·처방·검사연동을 하나의 system에서. 48,000+ active patients.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Request Demo →</a>
+        <a href="#contact" class="btn btn-outline">View Compliance</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>48K+</strong><span>Active patients</span></div>
+        <div class="hero-stat"><strong>120+</strong><span>Clinics onboarded</span></div>
+        <div class="hero-stat"><strong>99.9%</strong><span>Chart sync SLA</span></div>
+      </div>
+    </div>
+    <div class="product-mock" id="product">
+      <div class="mock-top"><span></span><span></span><span></span><span class="mock-url">portal.healthtech.kr/ehr</span></div>
+      <div class="mock-body">
+        <div class="mock-metrics">
+          <div class="mock-metric"><div class="lbl">Active Patients</div><div class="val">48,200</div><div class="sub">12 clinics</div></div>
+          <div class="mock-metric"><div class="lbl">Tele visits</div><div class="val">1,240</div><div class="sub">today</div></div>
+          <div class="mock-metric"><div class="lbl">Chart sync</div><div class="val">99.9%</div><div class="sub">FHIR R4</div></div>
+        </div>
+        <div class="mock-rows">
+          <div class="mock-row"><span class="tag">EHR</span> 환자 김○○ — 차트 업데이트 완료</div>
+          <div class="mock-row"><span class="tag">RX</span> 처방전 전송 — 약국 연동 확인</div>
+          <div class="mock-row"><span class="tag">VIDEO</span> 원격 진료 예약 — 14:30 KST</div>
+          <div class="mock-row"><span class="tag">LAB</span> 혈액검사 결과 — 의사 검토 대기</div>
+        </div>
+        <div class="mock-chart" style="margin-top:14px">
+          <div style="font-size:0.72rem;color:var(--text-muted)">Patient portal engagement (weekly)</div>
+          <div class="chart-bars"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container trust-inner">
+    <span class="trust-label">Trusted by healthcare providers</span>
+    <div class="trust-logos">
+      <span>서울대병원</span>
+      <span>삼성서울병원</span>
+      <span>세브란스</span>
+      <span>강남세브란스</span>
+      <span>분당서울대</span>
+      <span>가톨릭의대</span>
+      <span>연세의료원</span>
+      <span>고려대안암</span>
+    </div>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Healthcare IT에 필요한 모든 것</h2>
+      <p class="section-desc">From EHR to patient engagement — HIPAA/FHIR compliant platform for clinics & hospitals.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-item wide">
+        <div class="bento-icon">📋</div>
+        <span class="bento-tag">EHR · Core</span>
+        <h3>Cloud EHR System</h3>
+        <p>환자 차트, 진료 기록, 처방, 검사 결과 — FHIR R4 기반 cloud EHR. Multi-clinic, specialty templates.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">📹</div>
+        <span class="bento-tag">Telemedicine</span>
+        <h3>Telemedicine Suite</h3>
+        <p>HD video consult, remote monitoring, async messaging. 보험 청구 연동, 처방전 전자발급.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🌐</div>
+        <span class="bento-tag">Portal</span>
+        <h3>Patient Portal</h3>
+        <p>예약, 검사 결과 조회, 처방 리필, secure messaging. Mobile app iOS/Android.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">💊</div>
+        <span class="bento-tag">Pharmacy</span>
+        <h3>Pharmacy Integration</h3>
+        <p>전자처방전 약국 전송, DUR 검토, 복약 알림. 전국 12,000+ 약국 네트워크.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🔬</div>
+        <span class="bento-tag">Lab</span>
+        <h3>Lab & Imaging</h3>
+        <p>검사 의뢰, 결과 자동 수신, PACS 연동. HL7 FHIR, DICOM 표준.</p>
+      </div>
+      <div class="bento-item wide">
+        <div class="bento-icon">🛡️</div>
+        <span class="bento-tag">Compliance</span>
+        <h3>Healthcare Compliance</h3>
+        <p>HIPAA, 개인정보보호법, 의료법 준수. Audit logs, access control, data encryption.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">4단계로 digital healthcare 전환</h2>
+      <p class="section-desc">Onboard, migrate, train, go-live — 평균 clinic onboarding 2주, hospital 6주.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step"><h4>Clinic Onboarding</h4><p>기관 등록, 의료진 계정 생성, specialty template 선택. 2일 내 sandbox ready.</p></div>
+      <div class="process-step"><h4>Data Migration</h4><p>기존 EMR/EHR 데이터 import. HL7/FHIR mapping, patient matching, validation.</p></div>
+      <div class="process-step"><h4>Staff Training</h4><p>의사·간호사·행정 직원 교육. Video guides, live webinar, on-site support.</p></div>
+      <div class="process-step"><h4>Go Live</h4><p>Production 전환, telemedicine 활성화, patient portal launch. 24/7 clinical support.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80" alt="헬스텍 디지털 헬스케어" loading="lazy">
+        <div class="about-float"><strong>120+</strong><span>clinics & hospitals</span></div>
+      </div>
+      <div>
+        <div class="section-label">About HEALTHTECH</div>
+        <h2 class="section-title">환자 경험을<br>디지털로 혁신</h2>
+        <p class="section-desc">2018년 서울에서 시작한 HEALTHTECH는 'paper chart와 fragmented systems'를 해결합니다. EHR + telemedicine + patient portal — clinic과 patient 모두를 위한 healthcare IT.</p>
+        <div class="tech-chips">
+          <span class="tech-chip">FHIR R4</span>
+          <span class="tech-chip">HL7</span>
+          <span class="tech-chip">HIPAA</span>
+          <span class="tech-chip">Telemedicine</span>
+          <span class="tech-chip">DICOM</span>
+          <span class="tech-chip">DUR</span>
+          <span class="tech-chip">모바일앱</span>
+          <span class="tech-chip">ISMS-P</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="case-studies">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">의료기관들이 만든 healthcare impact</h2>
+      <p class="section-desc">병원, 클리닉, 원격진료 — HEALTHTECH로 patient care를 개선한 기관들.</p>
+    </div>
+    <div class="grid-3">
+      <article class="case-card">
+        <div class="case-logo">GreenCare Clinic</div>
+        <div class="case-industry">내과 · 15 providers</div>
+        <h3>차트 작성 시간 50% 단축</h3>
+        <p>Cloud EHR + voice dictation으로 진료 기록 자동화. 환자 대기 시간 20분 → 8분.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>50%</strong><span>Chart time down</span></div>
+          <div class="case-metric"><strong>8min</strong><span>Wait time</span></div>
+          <div class="case-metric"><strong>4.9</strong><span>Patient rating</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">Metro Hospital</div>
+        <div class="case-industry">종합병원 · 200 beds</div>
+        <h3>Telemedicine 3,200 visits/month</h3>
+        <p>원격진료 + 처방 + 검사 연동. 만성질환 환자 재방문율 35% 향상.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>3,200</strong><span>Tele visits/mo</span></div>
+          <div class="case-metric"><strong>35%</strong><span>Return rate up</span></div>
+          <div class="case-metric"><strong>98%</strong><span>Satisfaction</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">KidsWell Pediatrics</div>
+        <div class="case-industry">소아과 · Multi-site</div>
+        <h3>Patient portal 89% adoption</h3>
+        <p>예약·검사결과·예방접종 알림 mobile app. No-show 42% 감소.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>89%</strong><span>Portal adoption</span></div>
+          <div class="case-metric"><strong>42%</strong><span>Less no-show</span></div>
+          <div class="case-metric"><strong>6</strong><span>Clinic sites</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section tabs-section" id="product-tabs">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product Modules</div>
+      <h2 class="section-title">Healthcare 모듈 deep dive</h2>
+      <p class="section-desc">EHR, Telemedicine, Portal, Compliance — 각 모듈의 핵심 기능.</p>
+    </div>
+    <div class="tabs-wrap" style="max-width:920px;margin:0 auto">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="ehr">EHR</button>
+        <button class="tab-btn" data-tab="tele">Telemedicine</button>
+        <button class="tab-btn" data-tab="portal">Portal</button>
+        <button class="tab-btn" data-tab="comp">Compliance</button>
+      </div>
+      <div class="tab-panel active" data-tab="ehr">
+        <h4>Electronic Health Records</h4>
+        <p>FHIR R4 compliant cloud EHR with specialty templates and clinical decision support.</p>
+        <ul class="feature-list">
+          <li>Patient chart & history</li>
+          <li>SOAP note templates</li>
+          <li>e-Prescribing (DUR)</li>
+          <li>Lab order & results</li>
+          <li>ICD-10 / KCD coding</li>
+          <li>Clinical decision support</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="tele">
+        <h4>Telemedicine Platform</h4>
+        <p>Secure video consult with insurance billing and e-prescription integration.</p>
+        <ul class="feature-list">
+          <li>HD video consult</li>
+          <li>Async secure messaging</li>
+          <li>Remote patient monitoring</li>
+          <li>Insurance claim auto</li>
+          <li>e-Prescription issuance</li>
+          <li>Waiting room queue</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="portal">
+        <h4>Patient Portal & App</h4>
+        <p>Self-service portal for appointments, results, and provider communication.</p>
+        <ul class="feature-list">
+          <li>Online appointment booking</li>
+          <li>Test result viewing</li>
+          <li>Prescription refill request</li>
+          <li>Secure provider messaging</li>
+          <li>Immunization records</li>
+          <li>iOS & Android app</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="comp">
+        <h4>Healthcare Compliance</h4>
+        <p>Regulatory compliance, security, and audit for healthcare data.</p>
+        <ul class="feature-list">
+          <li>HIPAA compliance</li>
+          <li>개인정보보호법 / 의료법</li>
+          <li>ISMS-P certification</li>
+          <li>Audit logs & access control</li>
+          <li>Data encryption at rest</li>
+          <li>BAA agreements</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="integrations">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Integrations</div>
+      <h2 class="section-title">Healthcare ecosystem 연동</h2>
+      <p class="section-desc">HIS/EMR, pharmacy, lab, insurance — HL7 FHIR 표준 기반 integration.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-chip"><span class="integ-icon">🏥</span> HIS/EMR</div>
+      <div class="integ-chip"><span class="integ-icon">💊</span> Pharmacy Network</div>
+      <div class="integ-chip"><span class="integ-icon">🔬</span> Lab Systems</div>
+      <div class="integ-chip"><span class="integ-icon">📷</span> PACS/DICOM</div>
+      <div class="integ-chip"><span class="integ-icon">🏛️</span> NHIS</div>
+      <div class="integ-chip"><span class="integ-icon">📱</span> KakaoTalk Alert</div>
+      <div class="integ-chip"><span class="integ-icon">💳</span> Payment Gateway</div>
+      <div class="integ-chip"><span class="integ-icon">📊</span> Tableau BI</div>
+      <div class="integ-chip"><span class="integ-icon">🔐</span> Okta SSO</div>
+      <div class="integ-chip"><span class="integ-icon">📧</span> SMS Gateway</div>
+      <div class="integ-chip"><span class="integ-icon">🐙</span> API Docs</div>
+      <div class="integ-chip"><span class="integ-icon">⚡</span> Webhook Events</div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section ht-deep" id="platform">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product</div>
+      <h2 class="section-title">FHIR-native healthcare platform</h2>
+      <p class="section-desc">EHR, telemedicine, patient portal — HIPAA compliant, Korean healthcare regulations ready.</p>
+    </div>
+    <div class="ht-split">
+      <div class="ht-hero-img"><img src="https://images.unsplash.com/photo-1581595220892-b0739db3a8a2?w=1200&q=80" alt="FHIR-native healthcare platform" loading="lazy"></div>
+      <div class="ht-copy">
+        <ul class="ht-list">
+          <li><strong>FHIR R4 Native</strong>모든 데이터 FHIR R4 표준. Interoperability 보장, vendor lock-in 없음.</li>
+          <li><strong>Telemedicine</strong>보험 청구 연동 원격진료. 처방전 전자발급, DUR 자동 검토.</li>
+          <li><strong>Patient Engagement</strong>Mobile app 89% adoption. 예약·결과·알림 self-service.</li>
+          <li><strong>Clinical Support</strong>24/7 한국어 clinical helpdesk. On-site training 포함.</li>
+        </ul>
+        <div class="ht-metrics">
+          <div class="ht-metric"><strong>FHIR R4 Native</strong><span>모든 데이터 FHIR R4 표준. Interoperability 보장, vendor lock-in 없음.</span></div>
+          <div class="ht-metric"><strong>Telemedicine</strong><span>보험 청구 연동 원격진료. 처방전 전자발급, DUR 자동 검토.</span></div>
+          <div class="ht-metric"><strong>Patient Engagement</strong><span>Mobile app 89% adoption. 예약·결과·알림 self-service.</span></div>
+          <div class="ht-metric"><strong>Clinical Support</strong><span>24/7 한국어 clinical helpdesk. On-site training 포함.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Provider-based healthcare pricing</h2>
+      <p class="section-desc">30-day free trial per clinic. Per-provider monthly or hospital enterprise.</p>
+    </div>
+    <div class="pricing-toggle-wrap">
+      <span class="active">Monthly</span><span>·</span><span>Annual</span>
+      <span class="pricing-badge-save">Save 20%</span>
+    </div>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <h3>Clinic</h3>
+        <p class="pricing-desc">Small clinics & solo practitioners.</p>
+        <div class="price">₩89,000<span>/의사·월</span></div>
+        <p class="pricing-billing">min 1 provider · annual discount</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Start Trial</a>
+        <ul class="pricing-features">
+          <li>Cloud EHR (1 clinic)</li>
+          <li>e-Prescribing + DUR</li>
+          <li>Patient portal</li>
+          <li>Basic telemedicine</li>
+          <li class="muted">Lab integration</li>
+          <li class="muted">Multi-site</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Practice</h3>
+        <p class="pricing-desc">Multi-provider clinics & specialty groups.</p>
+        <div class="price">₩69,000<span>/의사·월</span></div>
+        <p class="pricing-billing">min 3 providers · telemedicine included</p>
+        <a href="#contact" class="btn btn-primary btn-sm">Request Demo</a>
+        <ul class="pricing-features">
+          <li>Unlimited providers</li>
+          <li>Full telemedicine suite</li>
+          <li>Lab & imaging integration</li>
+          <li>Mobile patient app</li>
+          <li>Pharmacy network (12K+)</li>
+          <li>Priority clinical support</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Hospital</h3>
+        <p class="pricing-desc">Hospitals & health systems.</p>
+        <div class="price">Custom<span></span></div>
+        <p class="pricing-billing">per-bed or enterprise · annual</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Contact Sales</a>
+        <ul class="pricing-features">
+          <li>Multi-department EHR</li>
+          <li>HIS/EMR integration</li>
+          <li>Enterprise telemedicine</li>
+          <li>Custom FHIR interfaces</li>
+          <li>ISMS-P + HIPAA audit</li>
+          <li>Dedicated CSM + on-site</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">의료진이 말하는 HEALTHTECH</h2>
+      <p class="section-desc">Physicians, nurses, clinic admins — 4.9/5 on healthcare IT reviews.</p>
+    </div>
+    <div class="grid-4">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"차트 작성이 절반으로 줄었어요. Voice dictation + template이 진료 효율을 크게 높였습니다."</blockquote>
+        <div class="review-author"><div class="review-avatar">JK</div><div><strong>김준혁</strong><span>내과 원장 · GreenCare Clinic</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Telemedicine이 만성질환 관리에 perfect. 환자 재방문율 35% 올랐고, 보험 청구도 자동."</blockquote>
+        <div class="review-author"><div class="review-avatar">PM</div><div><strong>박미영</strong><span>디지털헬스 담당 · Metro Hospital</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Patient portal adoption 89%. No-show 42% 감소 — 소아과 multi-site 운영이 훨씬 수월."</blockquote>
+        <div class="review-author"><div class="review-avatar">SL</div><div><strong>Sarah Lim</strong><span>Clinic Manager · KidsWell</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"FHIR R4 native라 기존 HIS 연동이 smooth. ISMS-P audit도 HEALTHTECH 덕분에 통과."</blockquote>
+        <div class="review-author"><div class="review-avatar">EC</div><div><strong>Emily Cho</strong><span>CIO · Regional Health System</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="security-section" id="security">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Security & Compliance</div>
+      <h2 class="section-title">의료정보 보호 & 인증</h2>
+      <p class="section-desc">병원·의료기관이 요구하는 보안·컴플라이언스를 헬스케어 IT 표준으로 제공합니다.</p>
+    </div>
+    <div class="security-grid">
+      <div class="security-badge">
+        <div class="ico">🏥</div>
+        <strong>HIPAA Ready</strong>
+        <span>PHI 암호화 · access audit · BAA 제공</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">📜</div>
+        <strong>의료법 준수</strong>
+        <span>개인정보보호법 · 의료법 · EMR 인증</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">🔒</div>
+        <strong>Zero Trust</strong>
+        <span>MFA · SSO · 역할 기반 접근 제어</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">☁️</div>
+        <strong>Cloud HITRUST</strong>
+        <span>국내 IDC · DR 이중화 · 99.99% SLA</span>
+      </div>
+    </div>
+    <p class="security-note">환자 데이터 lifecycle 관리, 동의 기반 공유, 감사 대응 리포트 — 디지털 헬스케어에 필요한 trust layer를 platform에 내장했습니다.</p>
+  </div>
+</section>
+
+<section class="surface-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">support@healthtech.kr 또는 clinical helpdesk 1588-0000으로 문의해 주세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" type="button">FHIR R4 표준을 지원하나요?</button><div class="faq-a"><div class="faq-a-inner">모든 patient data가 FHIR R4 resource로 저장·교환. HL7 v2 → FHIR migration tool 제공. 기존 HIS/EMR과 FHIR API로 연동.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">원격진료 보험 청구가 가능한가요?</button><div class="faq-a"><div class="faq-a-inner">건보 원격진료 수가 자동 청구. 처방전 전자발급, DUR 검토, 약국 전송 일괄 처리. 비급여 진료도 지원.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">기존 EMR에서 migration이 가능한가요?</button><div class="faq-a"><div class="faq-a-inner">HL7/FHIR mapping wizard로 patient chart, prescription history, lab results import. Dedicated migration team이 2–6주 내 완료.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">환자 데이터 보안은?</button><div class="faq-a"><div class="faq-a-inner">HIPAA, 개인정보보호법, 의료법 준수. AES-256 encryption, role-based access, audit logs. ISMS-P 인증, BAA agreement 제공.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">약국·검사실 연동은?</button><div class="faq-a"><div class="faq-a-inner">전국 12,000+ 약국 네트워크, 주요 검사실 HL7/FHIR 연동. 처방전 전송, 검사 결과 자동 수신, PACS DICOM viewer.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">교육과 지원은 어떻게 되나요?</button><div class="faq-a"><div class="faq-a-inner">Video onboarding, live webinar, on-site training (Hospital 플랜). 24/7 한국어 clinical helpdesk. 전담 CSM (Practice 이상).</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>지금 바로 digital healthcare를 시작하세요</h2>
+    <p>30-day free trial · FHIR R4 · HIPAA compliant</p>
+    <a href="#contact" class="btn btn-primary">Request Demo →</a>
+  </div>
+</section>
+
+<section class="alt-section" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-label">Contact</div>
+        <h3>Healthcare IT 상담</h3>
+        <p>30분 미팅으로 HEALTHTECH가 귀 기관 workflow에 맞는지 확인해 보세요.</p>
+        <div class="contact-perks">
+          <div class="contact-perk"><span class="contact-perk-icon">🎯</span><div><strong>Workflow Assessment</strong><span>현재 EMR/EHR 분석 & migration plan</span></div></div>
+          <div class="contact-perk"><span class="contact-perk-icon">📅</span><div><strong>Clinical Onboarding</strong><span>2주 clinic onboarding — 전담 clinical trainer</span></div></div>
+          <div class="contact-perk"><span class="contact-perk-icon">🌏</span><div><strong>Nationwide Support</strong><span>Seoul · Busan · Daegu — on-site available</span></div></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="데모 요청 접수! 24시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group"><label for="ht-name">이름</label><input type="text" id="ht-name" placeholder="홍길동" required></div>
+            <div class="form-group"><label for="ht-email">Work Email</label><input type="email" id="ht-email" placeholder="you@company.com" required></div>
+            <div class="form-group"><label for="ht-co">회사명</label><input type="text" id="ht-co" placeholder="HEALTHTECH Inc."></div>
+            <div class="form-group"><label for="ht-size">팀 규모</label><select id="ht-size"><option>1–10명</option><option>11–50명</option><option>51–200명</option><option>200명+</option></select></div>
+            <div class="form-group full"><label for="ht-msg">메시지</label><textarea id="ht-msg" placeholder="기관 유형 (clinic/hospital), 현재 EMR, 관심 모듈 (EHR/Telemedicine/Portal)"></textarea></div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Request Demo →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">헬스텍 HEALTHTECH</a>
+      <p>Healthcare IT platform. EHR, telemedicine, patient portal — Seoul & nationwide.</p>
+      <div class="footer-social" style="display:flex;gap:12px;margin-top:20px">
+        <a href="#" data-toast="Twitter — coming soon" style="color:#fff">X</a>
+        <a href="#" data-toast="LinkedIn — coming soon" style="color:#fff">in</a>
+        <a href="#" data-toast="GitHub — coming soon" style="color:#fff">GH</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="#" data-toast="About — demo">About</a><a href="#case-studies">Customers</a><a href="#" data-toast="Careers — hiring">Careers</a><a href="#contact">Contact</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="#" data-toast="Docs — demo">Documentation</a><a href="#" data-toast="API — demo">API</a><a href="#" data-toast="Status — operational">Status</a>
+      <form class="footer-newsletter demo-form" data-success="구독 감사합니다!" style="display:flex;gap:8px;margin-top:12px"><input type="email" placeholder="Email" required><button type="submit">→</button></form>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 HEALTHTECH Inc.</span><span><a href="#" data-toast="Privacy — demo">Privacy</a> · <a href="#" data-toast="Terms — demo">Terms</a></span></div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

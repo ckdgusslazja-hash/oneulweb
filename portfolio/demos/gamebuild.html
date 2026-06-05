@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>게임빌드 GAMEBUILD — 인디 게임 스튜디오 & 퍼블리싱</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Inter', sans-serif;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #0D0A14;
+  --text: #F5F0FF;
+  --text-muted: #9B8BB8;
+  --accent: #A855F7;
+  --accent-2: #7C3AED;
+  --accent-text: #fff;
+  --border: rgba(168,85,247,0.15);
+  --nav-bg: rgba(13,10,20,0.94);
+  --footer-bg: #08060F;
+  --card-bg: #16101F;
+  --surface: #120E1A;
+  --btn-radius: 8px;
+  --card-radius: 12px;
+  --logo-weight: 800;
+  --footer-text: rgba(255,255,255,0.5);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  image-rendering: pixelated;
+}
+
+.pixel-text { font-family: var(--font-pixel); font-size: 0.62rem; line-height: 1.8; letter-spacing: 0.02em; }
+
+.site-nav .nav-links a:hover { color: var(--text); }
+.nav-cta { background: linear-gradient(135deg, #A855F7, #7C3AED); }
+
+.hero {
+  position: relative;
+  padding: clamp(48px, 8vw, 80px) 0 clamp(40px, 6vw, 64px);
+  overflow: hidden;
+}
+
+.mesh-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 20%, rgba(168,85,247,0.22), transparent),
+    radial-gradient(ellipse 50% 40% at 85% 70%, rgba(124,58,237,0.16), transparent),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(168,85,247,0.03) 3px, rgba(168,85,247,0.03) 4px);
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(168,85,247,0.12);
+  border: 2px solid rgba(168,85,247,0.35);
+  border-radius: 4px;
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: #C084FC;
+  margin-bottom: 22px;
+  line-height: 1.6;
+}
+
+.hero-badge .dot {
+  width: 8px; height: 8px;
+  background: #22C55E;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, #C084FC, #A855F7, #7C3AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-copy p {
+  font-size: clamp(0.92rem, 2vw, 1.06rem);
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  max-width: 480px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+
+.btn-primary {
+  background: linear-gradient(135deg, #A855F7, #7C3AED);
+  box-shadow: 0 4px 24px rgba(168,85,247,0.45);
+  color: #fff;
+  border-radius: 4px;
+}
+
+.btn-outline { border: 2px solid rgba(168,85,247,0.4); color: var(--text); border-radius: 4px; }
+.btn-outline:hover { border-color: #A855F7; background: rgba(168,85,247,0.08); }
+
+.hero-stats {
+  display: flex;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 2px solid var(--border);
+}
+
+.hero-stat strong {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  color: #C084FC;
+  margin-bottom: 6px;
+}
+
+.hero-stat span { font-size: 0.72rem; color: #6B5B7A; }
+
+/* Game mockup */
+.game-screen {
+  background: #16101F;
+  border: 2px solid rgba(168,85,247,0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), inset 0 0 60px rgba(168,85,247,0.05);
+}
+
+.game-top {
+  padding: 10px 14px;
+  background: #1E1630;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  border-bottom: 2px solid var(--border);
+}
+
+.game-top span { width: 10px; height: 10px; border-radius: 2px; }
+.game-top span:nth-child(1) { background: #EF4444; }
+.game-top span:nth-child(2) { background: #EAB308; }
+.game-top span:nth-child(3) { background: #22C55E; }
+
+.game-url {
+  margin-left: auto;
+  font-family: var(--font-pixel);
+  font-size: 0.42rem;
+  color: #6B5B7A;
+}
+
+.game-viewport {
+  padding: clamp(16px, 3vw, 24px);
+  min-height: 280px;
+  background:
+    linear-gradient(180deg, #1a0f2e 0%, #0d0a14 100%),
+    repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(168,85,247,0.04) 15px, rgba(168,85,247,0.04) 16px);
+  position: relative;
+}
+
+.game-scene {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.pixel-block {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: #2D1F4A;
+}
+
+.pixel-block.purple { background: #7C3AED; }
+.pixel-block.light { background: #C084FC; }
+.pixel-block.dark { background: #1E1630; }
+.pixel-block.green { background: #22C55E; }
+.pixel-block.gold { background: #FBBF24; }
+
+.game-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.5);
+  border: 2px solid rgba(168,85,247,0.25);
+  border-radius: 4px;
+}
+
+.hud-stat {
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  color: #C084FC;
+}
+
+.hud-bar {
+  flex: 1;
+  max-width: 120px;
+  height: 8px;
+  background: #1E1630;
+  border: 1px solid #7C3AED;
+  margin: 0 12px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.hud-bar-fill {
+  height: 100%;
+  width: 72%;
+  background: linear-gradient(90deg, #7C3AED, #C084FC);
+}
+
+.customers-strip {
+  padding: clamp(36px, 5vw, 56px) 0;
+  background: var(--surface);
+  border-top: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+}
+
+.customers-strip .strip-label {
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  color: #6B5B7A;
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+  line-height: 1.8;
+}
+
+.logo-strip { gap: clamp(10px, 2vw, 16px); opacity: 1; }
+
+.logo-strip span {
+  padding: 12px 20px;
+  background: rgba(168,85,247,0.06);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #6B5B7A;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.logo-strip span:hover { border-color: #A855F7; color: #C084FC; }
+
+.section-label { color: #C084FC; font-family: var(--font-pixel); font-size: 0.5rem; letter-spacing: 0.1em; }
+
+.features { background: var(--surface); }
+
+.alt-section { background: var(--bg); }
+.surface-section { background: var(--surface); }
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.bento-item {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.bento-item:hover { border-color: rgba(168,85,247,0.5); transform: translateY(-2px); }
+.bento-item.wide { grid-column: span 2; }
+
+.bento-icon {
+  width: 44px; height: 44px;
+  background: rgba(168,85,247,0.15);
+  border: 2px solid rgba(168,85,247,0.3);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 16px;
+}
+
+.bento-tag {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.42rem;
+  color: #A855F7;
+  margin-bottom: 10px;
+}
+
+.bento-item h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.bento-item p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.game-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.game-card:hover { border-color: #A855F7; transform: translateY(-4px); }
+
+.game-thumb {
+  height: 160px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  padding: 12px;
+}
+
+.game-thumb .px { border-radius: 2px; }
+.game-thumb.style-1 .px:nth-child(odd) { background: #7C3AED; }
+.game-thumb.style-1 .px:nth-child(even) { background: #1E1630; }
+.game-thumb.style-2 .px:nth-child(3n) { background: #22C55E; }
+.game-thumb.style-2 .px:nth-child(3n+1) { background: #0D0A14; }
+.game-thumb.style-2 .px:nth-child(3n+2) { background: #FBBF24; }
+.game-thumb.style-3 .px { background: #C084FC; }
+.game-thumb.style-3 .px:nth-child(4n) { background: #EF4444; }
+
+.game-card-body { padding: 20px; }
+
+.game-tag {
+  font-family: var(--font-pixel);
+  font-size: 0.4rem;
+  color: #A855F7;
+  margin-bottom: 8px;
+}
+
+.game-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.game-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
+
+.game-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.72rem;
+  color: #6B5B7A;
+}
+
+.how-section .process-step::before {
+  background: linear-gradient(135deg, #A855F7, #7C3AED);
+  box-shadow: 0 8px 24px rgba(168,85,247,0.4);
+  border-radius: 4px;
+}
+
+.how-section .process-step h4 { font-weight: 700; color: var(--text); }
+.how-section .process-step p { color: var(--text-muted); }
+
+.case-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.case-card:hover { border-color: rgba(168,85,247,0.45); transform: translateY(-4px); }
+
+.case-industry {
+  font-family: var(--font-pixel);
+  font-size: 0.42rem;
+  color: #A855F7;
+  margin-bottom: 12px;
+}
+
+.case-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; line-height: 1.35; }
+.case-card > p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.75; flex: 1; margin-bottom: 24px; }
+
+.case-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 2px solid var(--border);
+}
+
+.case-metric strong {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: #C084FC;
+  margin-bottom: 4px;
+}
+
+.case-metric span { font-size: 0.68rem; color: #6B5B7A; }
+.case-logo { font-weight: 800; font-size: 0.9rem; color: #52525B; margin-bottom: 16px; }
+
+.integ-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.integ-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.integ-chip:hover { border-color: #A855F7; background: rgba(168,85,247,0.08); color: var(--text); }
+
+.integ-icon {
+  width: 36px; height: 36px;
+  border-radius: 4px;
+  background: #1E1630;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.pricing-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card.featured {
+  border-color: #A855F7;
+  box-shadow: 0 0 48px rgba(168,85,247,0.2);
+  position: relative;
+}
+
+.pricing-card.featured::before {
+  content: 'BEST VALUE';
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #A855F7, #7C3AED);
+  padding: 4px 14px;
+  border-radius: 4px;
+  font-family: var(--font-pixel);
+  font-size: 0.38rem;
+  color: #fff;
+}
+
+.pricing-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.pricing-desc { font-size: 0.8rem; color: #6B5B7A; margin-bottom: 20px; line-height: 1.5; }
+.pricing-card .price { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 6px; }
+.pricing-card .price span { font-size: 0.82rem; color: #6B5B7A; font-weight: 500; }
+.pricing-billing { font-size: 0.75rem; color: #52525B; margin-bottom: 24px; }
+.pricing-card .btn { width: 100%; margin-bottom: 24px; }
+
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.pricing-features li:last-child { border-bottom: none; }
+.pricing-features li::before { content: '▸'; color: #A855F7; font-weight: 700; flex-shrink: 0; }
+.pricing-features li.muted { color: #52525B; }
+.pricing-features li.muted::before { content: '—'; color: #3F3F46; }
+
+.review-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  height: 100%;
+}
+
+.review-card:hover { border-color: rgba(168,85,247,0.4); transform: translateY(-3px); }
+.review-card blockquote { color: #D4C4E8; }
+.review-stars { color: #FBBF24; }
+.review-avatar { background: linear-gradient(135deg, #A855F7, #7C3AED); }
+.review-author strong { color: var(--text); }
+.review-author span { color: #6B5B7A; }
+
+.faq-item { background: var(--card-bg); border-color: var(--border); }
+.faq-q { color: var(--text); }
+.faq-q::after { color: #6B5B7A; }
+.faq-a-inner { color: var(--text-muted); }
+
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.contact-info h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.contact-info > p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 32px; }
+.contact-perks { display: flex; flex-direction: column; gap: 16px; }
+
+.contact-perk {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.contact-perk-icon {
+  width: 40px; height: 40px;
+  background: rgba(168,85,247,0.12);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-perk strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.contact-perk span { font-size: 0.82rem; color: #6B5B7A; line-height: 1.5; }
+
+.form-card { background: var(--card-bg); border-color: var(--border); }
+.form-group label { color: #D4C4E8; }
+.form-group input, .form-group select, .form-group textarea {
+  background: #1E1630;
+  border-color: var(--border);
+  color: var(--text);
+  border-radius: 4px;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #A855F7; }
+
+.cta-band {
+  background: linear-gradient(135deg, rgba(168,85,247,0.18), rgba(124,58,237,0.1));
+  border-top: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+}
+
+.cta-band h2 { font-size: clamp(1.6rem, 4vw, 2.25rem); font-weight: 800; margin-bottom: 12px; }
+.cta-band p { color: var(--text-muted); margin-bottom: 28px; font-size: 1rem; }
+
+.site-footer { background: var(--footer-bg); border-top: 2px solid var(--border); }
+
+.footer-social { display: flex; gap: 12px; margin-top: 20px; }
+
+.footer-social a {
+  width: 36px; height: 36px;
+  border: 2px solid rgba(168,85,247,0.25);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.footer-social a:hover { border-color: #A855F7; color: #fff; }
+
+.footer-newsletter { display: flex; gap: 8px; margin-top: 12px; }
+
+.footer-newsletter input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(168,85,247,0.06);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.82rem;
+}
+
+.footer-newsletter button {
+  padding: 10px 16px;
+  background: #A855F7;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.footer-bottom a { color: rgba(255,255,255,0.45); }
+.footer-bottom a:hover { color: #fff; }
+
+@media (max-width: 1024px) {
+  .integ-grid { grid-template-columns: repeat(3, 1fr); }
+  .games-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .bento { grid-template-columns: 1fr; }
+  .bento-item.wide { grid-column: span 1; }
+  .contact-wrap { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr; }
+  .integ-grid { grid-template-columns: repeat(2, 1fr); }
+  .games-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .integ-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">GAMEBUILD</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#games">Games</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Start Project</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="mesh-bg"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-badge"><span class="dot"></span> NEW — Pixel Quest 2 출시</div>
+        <h1>당신의 아이디어를<br><span>레트로 명작으로</span></h1>
+        <p>인디 게임 개발부터 Steam·Nintendo 퍼블리싱까지. Unity, Godot, Unreal — 12년 경력의 풀스택 게임 스튜디오가 함께합니다.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">프로젝트 문의 →</a>
+          <a href="#games" class="btn btn-outline">포트폴리오 보기</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>47+</strong><span>출시 게임</span></div>
+          <div class="hero-stat"><strong>2.1M</strong><span>누적 다운로드</span></div>
+          <div class="hero-stat"><strong>4.8★</strong><span>Steam 평균</span></div>
+        </div>
+      </div>
+      <div class="game-screen" id="product">
+        <div class="game-top">
+          <span></span><span></span><span></span>
+          <span class="game-url">gamebuild.studio/play</span>
+        </div>
+        <div class="game-viewport">
+          <div class="game-scene">
+            <div class="pixel-block dark"></div><div class="pixel-block purple"></div><div class="pixel-block light"></div><div class="pixel-block dark"></div><div class="pixel-block purple"></div><div class="pixel-block dark"></div><div class="pixel-block light"></div><div class="pixel-block dark"></div>
+            <div class="pixel-block purple"></div><div class="pixel-block dark"></div><div class="pixel-block green"></div><div class="pixel-block green"></div><div class="pixel-block dark"></div><div class="pixel-block purple"></div><div class="pixel-block dark"></div><div class="pixel-block light"></div>
+            <div class="pixel-block dark"></div><div class="pixel-block gold"></div><div class="pixel-block dark"></div><div class="pixel-block purple"></div><div class="pixel-block light"></div><div class="pixel-block purple"></div><div class="pixel-block dark"></div><div class="pixel-block gold"></div>
+            <div class="pixel-block light"></div><div class="pixel-block dark"></div><div class="pixel-block purple"></div><div class="pixel-block dark"></div><div class="pixel-block green"></div><div class="pixel-block dark"></div><div class="pixel-block purple"></div><div class="pixel-block dark"></div>
+          </div>
+          <div class="game-hud">
+            <span class="hud-stat">HP ████░</span>
+            <div class="hud-bar"><div class="hud-bar-fill"></div></div>
+            <span class="hud-stat">LV.12 SCORE 48,200</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="customers-strip" id="partners">
+  <div class="container">
+    <p class="strip-label">PARTNER PLATFORMS & PUBLISHERS</p>
+    <div class="logo-strip">
+      <span>Steam</span>
+      <span>Nintendo</span>
+      <span>PlayStation</span>
+      <span>Xbox</span>
+      <span>Epic Games</span>
+      <span>Apple Arcade</span>
+      <span>Google Play</span>
+      <span>Kakao Games</span>
+    </div>
+  </div>
+</section>
+
+<section class="features surface-section" id="games">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">우리가 만든 게임들</h2>
+      <p class="section-desc">로그라이크, 퍼즐, 액션 RPG — 장르를 넘어 플레이어에게 기억될 경험을 설계합니다.</p>
+    </div>
+    <div class="games-grid">
+      <article class="game-card">
+        <div class="game-thumb style-1">
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+        </div>
+        <div class="game-card-body">
+          <div class="game-tag">ROGUELIKE · 2025</div>
+          <h3>던전 오브 픽셀</h3>
+          <p>프로시저럴 던전과 200+ 아이템 조합. Steam 동시접속 12,000명 돌파.</p>
+          <div class="game-meta"><span>★ 4.9</span><span>·</span><span>320K 판매</span></div>
+        </div>
+      </article>
+      <article class="game-card">
+        <div class="game-thumb style-2">
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+        </div>
+        <div class="game-card-body">
+          <div class="game-tag">PUZZLE · 2024</div>
+          <h3>네온 블록 워즈</h3>
+          <p>협동 퍼즐 게임. Nintendo Switch Indie World 피처링 타이틀.</p>
+          <div class="game-meta"><span>★ 4.7</span><span>·</span><span>180K 판매</span></div>
+        </div>
+      </article>
+      <article class="game-card">
+        <div class="game-thumb style-3">
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+          <div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div><div class="px"></div>
+        </div>
+        <div class="game-card-body">
+          <div class="game-tag">ACTION RPG · 2024</div>
+          <h3>사이버 나이트</h3>
+          <p>사이버펑크 액션 RPG. 한국·일본 동시 출시, 메타크리틱 82점.</p>
+          <div class="game-meta"><span>★ 4.8</span><span>·</span><span>95K 판매</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">게임 개발 풀스택 서비스</h2>
+      <p class="section-desc">기획·아트·프로그래밍·QA·퍼블리싱 — 원스톱 인디 게임 파트너.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-item wide">
+        <div class="bento-icon">🎮</div>
+        <span class="bento-tag">FULL DEV</span>
+        <h3>풀 사이클 게임 개발</h3>
+        <p>GDD부터 출시 후 Live Ops까지. Unity/Godot/Unreal 엔진 전문. 멀티플랫폼 빌드 파이프라인과 CI/CD를 내장한 개발 프로세스로 6~18개월 내 출시를 보장합니다.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🎨</div>
+        <span class="bento-tag">ART</span>
+        <h3>픽셀 & 2D 아트</h3>
+        <p>캐릭터, 타일맵, UI, 애니메이션 — 레트로부터 하이폴리 2D까지.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🔊</div>
+        <span class="bento-tag">AUDIO</span>
+        <h3>사운드 & BGM</h3>
+        <p>8-bit 칩튠부터 오케스트라 OST. 라이선스 클리어 포함.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">📦</div>
+        <span class="bento-tag">PUBLISH</span>
+        <h3>퍼블리싱 & 마케팅</h3>
+        <p>Steam 페이지 최적화, 키워드·태그 전략, 인플루언서 캠페인.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🧪</div>
+        <span class="bento-tag">QA</span>
+        <h3>QA & 로컬라이제이션</h3>
+        <p>한·영·일·중 4개국어 QA. 콘솔 TRC/XR 요구사항 대응.</p>
+      </div>
+      <div class="bento-item wide">
+        <div class="bento-icon">⚡</div>
+        <span class="bento-tag">LIVE OPS</span>
+        <h3>출시 후 운영 & 업데이트</h3>
+        <p>시즌 콘텐츠, 밸런스 패치, 커뮤니티 관리. Discord·Reddit 모더레이션과 패치 노트 자동화까지 — 장기 히트작을 위한 Live Ops 팀이 상주합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section how-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">6단계 게임 개발 파이프라인</h2>
+      <p class="section-desc">애자일 스프린트 기반. 2주 단위 playable build를 공유하며 투명하게 진행합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>Discovery</h4>
+        <p>타깃 유저, 코어 루프, 수익 모델 정의. GDD 초안과 프로토타입 2주 내 완성.</p>
+      </div>
+      <div class="process-step">
+        <h4>Pre-Production</h4>
+        <p>아트 스타일 가이드, 기술 스택 선정, vertical slice 제작.</p>
+      </div>
+      <div class="process-step">
+        <h4>Production</h4>
+        <p>주간 playable build, Jira 연동, 자동화 QA 파이프라인 가동.</p>
+      </div>
+      <div class="process-step">
+        <h4>Launch</h4>
+        <p>플랫폼 심사, 스토어 페이지, 런치 캠페인 — Day-1 패치 준비 완료.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="case-studies">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">함께 만든 성공 스토리</h2>
+      <p class="section-desc">스타트업 팀부터 글로벌 퍼블리셔까지 — GAMEBUILD와 함께한 프로젝트 결과.</p>
+    </div>
+    <div class="grid-3">
+      <article class="case-card">
+        <div class="case-logo">MoonBit Studio</div>
+        <div class="case-industry">ROGUELIKE · 8인 팀</div>
+        <h3>프로토타입에서 Steam 히트까지 14개월</h3>
+        <p>기획만 있던 팀에 풀스택 개발팀 투입. Early Access 1주 만에 Wishlist 50K, 정식 출시 후 320K 판매.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>320K</strong><span>판매량</span></div>
+          <div class="case-metric"><strong>4.9★</strong><span>Steam</span></div>
+          <div class="case-metric"><strong>14mo</strong><span>개발 기간</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">Kakao Games</div>
+        <div class="case-industry">PUBLISHING · 코-데브</div>
+        <h3>모바일 퍼즐 IP 글로벌 론칭</h3>
+        <p>한국 IP를 글로벌 12개국에 현지화 출시. UA 비용 40% 절감, D7 리텐션 2.1배 향상.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>1.2M</strong><span>MAU</span></div>
+          <div class="case-metric"><strong>40%</strong><span>UA 절감</span></div>
+          <div class="case-metric"><strong>12</strong><span>출시 국가</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">Pixel Dreams</div>
+        <div class="case-industry">SOLO DEV · 코-퍼블</div>
+        <h3>1인 개발자의 Nintendo Switch 진출</h3>
+        <p>코딩은 솔로, 아트·QA·퍼블리싱은 GAMEBUILD. Switch Indie World 피처링 타이틀 등극.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>180K</strong><span>판매량</span></div>
+          <div class="case-metric"><strong>Switch</strong><span>Featured</span></div>
+          <div class="case-metric"><strong>9mo</strong><span>개발 기간</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="tech">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Tech Stack</div>
+      <h2 class="section-title">검증된 게임 엔진 & 도구</h2>
+      <p class="section-desc">플랫폼별 최적화된 빌드 파이프라인과 자동화된 QA 인프라.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-chip"><span class="integ-icon">🎯</span> Unity</div>
+      <div class="integ-chip"><span class="integ-icon">⚙️</span> Godot</div>
+      <div class="integ-chip"><span class="integ-icon">🔷</span> Unreal Engine</div>
+      <div class="integ-chip"><span class="integ-icon">🎨</span> Aseprite</div>
+      <div class="integ-chip"><span class="integ-icon">🖌️</span> Spine 2D</div>
+      <div class="integ-chip"><span class="integ-icon">🔊</span> FMOD</div>
+      <div class="integ-chip"><span class="integ-icon">📊</span> PlayFab</div>
+      <div class="integ-chip"><span class="integ-icon">☁️</span> AWS GameLift</div>
+      <div class="integ-chip"><span class="integ-icon">🐙</span> GitHub Actions</div>
+      <div class="integ-chip"><span class="integ-icon">🧪</span> TestFlight</div>
+      <div class="integ-chip"><span class="integ-icon">📈</span> GameAnalytics</div>
+      <div class="integ-chip"><span class="integ-icon">💬</span> Discord SDK</div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">프로젝트 규모별 패키지</h2>
+      <p class="section-desc">고정가 패키지 또는 revenue share 모델. 초기 상담 무료.</p>
+    </div>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <h3>Prototype</h3>
+        <p class="pricing-desc">아이디어 검증용 playable prototype.</p>
+        <div class="price">₩8M<span>부터</span></div>
+        <p class="pricing-billing">4~8주 · 코어 루프 1개</p>
+        <a href="#contact" class="btn btn-outline btn-sm">상담 신청</a>
+        <ul class="pricing-features">
+          <li>GDD & 기술 검토</li>
+          <li>Playable prototype 1종</li>
+          <li>기본 아트 & 사운드</li>
+          <li>주 1회 리뷰 미팅</li>
+          <li>플랫폼 타당성 리포트</li>
+          <li class="muted">퍼블리싱 지원</li>
+          <li class="muted">Live Ops</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Full Dev</h3>
+        <p class="pricing-desc">기획부터 출시까지 풀 사이클 개발.</p>
+        <div class="price">₩45M<span>부터</span></div>
+        <p class="pricing-billing">6~14개월 · 멀티플랫폼</p>
+        <a href="#contact" class="btn btn-primary btn-sm">프로젝트 시작</a>
+        <ul class="pricing-features">
+          <li>풀 사이클 개발 & QA</li>
+          <li>아트·사운드·로컬라이제이션</li>
+          <li>Steam/Switch/모바일 빌드</li>
+          <li>퍼블리싱 & 마케팅 지원</li>
+          <li>출시 후 3개월 패치</li>
+          <li>Revenue share 옵션</li>
+          <li>전담 PM & 주간 리포트</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Co-Publish</h3>
+        <p class="pricing-desc">개발은 클라이언트, 퍼블리싱은 GAMEBUILD.</p>
+        <div class="price">Rev Share</div>
+        <p class="pricing-billing">수익 배분 · 마케팅 비용 분담</p>
+        <a href="#contact" class="btn btn-outline btn-sm">파트너십 문의</a>
+        <ul class="pricing-features">
+          <li>QA & 로컬라이제이션</li>
+          <li>스토어 페이지 최적화</li>
+          <li>인플루언서·PR 캠페인</li>
+          <li>글로벌 12개국 출시</li>
+          <li>Live Ops & 시즌 콘텐츠</li>
+          <li>커뮤니티 관리</li>
+          <li>투명한 수익 리포트</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">파트너들의 이야기</h2>
+      <p class="section-desc">인디 개발자, 스튜디오, 퍼블리셔 — GAMEBUILD와 함께한 팀의 후기.</p>
+    </div>
+    <div class="grid-4">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"프로토타입 단계부터 투명한 커뮤니케이션. 14개월 만에 Steam 베스트셀러가 됐어요. 최고의 파트너입니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">JH</div>
+          <div><strong>정하늘</strong><span>CEO · MoonBit Studio</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"1인 개발로 Switch 진출은 꿈만 같았는데, GAMEBUILD 덕분에 Indie World에 선정됐습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">SK</div>
+          <div><strong>김서연</strong><span>Solo Dev · Pixel Dreams</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"글로벌 12개국 동시 출시, UA 비용 40% 절감. 퍼블리싱 파트너로서 기대 이상이었습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">LW</div>
+          <div><strong>이우진</strong><span>PM · Kakao Games</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"픽셀 아트 퀄리티가 정말 뛰어나요. 우리 IP의 세계관을 완벽하게 시각화해 줬습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">YT</div>
+          <div><strong>윤태호</strong><span>Art Director · Neon Forge</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">hello@gamebuild.studio 또는 Discord로 언제든 문의해 주세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" type="button">어떤 장르의 게임을 개발하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">로그라이크, 퍼즐, 액션 RPG, 시뮬레이션, 카드 게임 등 2D/2.5D 인디 게임을 전문으로 합니다. 3D 프로젝트도 Unreal/Unity 기반으로 진행 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">개발 기간은 보통 얼마나 걸리나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">Prototype 패키지는 4~8주, Full Dev는 6~14개월이 일반적입니다. 프로젝트 규모와 플랫폼 수에 따라 달라지며, 초기 상담에서 상세 일정을 안내해 드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Revenue share 모델은 어떻게 작동하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">Co-Publish 모델에서 개발 비용 대신 출시 후 수익을 배분합니다. 일반적으로 70:30(개발자:GAMEBUILD)이며, 마케팅 비용은 별도 협의합니다. 투명한 월간 수익 리포트를 제공합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">IP 소유권은 누구에게 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">Full Dev 계약 시 IP는 클라이언트에게 귀속됩니다. Co-Publish의 경우 계약 조건에 따라 공동 IP 또는 클라이언트 단독 소유로 협의 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">해외 플랫폼 심사도 대응하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">Steam, Nintendo, PlayStation, Xbox, Epic Games 심사 경험이 풍부합니다. TRC/XR 요구사항 대응, 연령 등급 심사, 현지화 심사까지 전 과정을 지원합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">이미 개발 중인 프로젝트도 협업 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">네, mid-production 합류도 가능합니다. 코드 리뷰 후 아트·QA·퍼블리싱 등 필요한 파트만 지원하는 partial engagement도 제공합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>다음 히트작, 함께 만들어요</h2>
+    <p>무료 초기 상담 · NDA 체결 가능 · 48시간 내 회신</p>
+    <a href="#contact" class="btn btn-primary">프로젝트 문의하기 →</a>
+  </div>
+</section>
+
+<section class="surface-section" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-label">Contact</div>
+        <h3>게임 프로젝트 상담</h3>
+        <p>아이디어 단계부터 출시 후 운영까지 — 30분 화상 미팅으로 GAMEBUILD가 적합한 파트너인지 확인해 보세요.</p>
+        <div class="contact-perks">
+          <div class="contact-perk">
+            <span class="contact-perk-icon">🎯</span>
+            <div><strong>Free Discovery Call</strong><span>GDD 리뷰 & 플랫폼 타당성 분석</span></div>
+          </div>
+          <div class="contact-perk">
+            <span class="contact-perk-icon">📅</span>
+            <div><strong>2-Week Prototype</strong><span>상담 후 2주 내 playable build 제안</span></div>
+          </div>
+          <div class="contact-perk">
+            <span class="contact-perk-icon">🌏</span>
+            <div><strong>Seoul · Tokyo</strong><span>한·일·영 지원 · Discord 상시 오픈</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="프로젝트 문의가 접수되었습니다! 48시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="email">이메일</label>
+              <input type="email" id="email" name="email" placeholder="you@studio.com" required>
+            </div>
+            <div class="form-group">
+              <label for="studio">스튜디오/회사명</label>
+              <input type="text" id="studio" name="studio" placeholder="MoonBit Studio">
+            </div>
+            <div class="form-group">
+              <label for="genre">장르</label>
+              <select id="genre" name="genre">
+                <option value="">선택해 주세요</option>
+                <option>로그라이크</option>
+                <option>퍼즐</option>
+                <option>액션 RPG</option>
+                <option>시뮬레이션</option>
+                <option>기타</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="package">관심 패키지</label>
+              <select id="package" name="package">
+                <option>Prototype</option>
+                <option selected>Full Dev</option>
+                <option>Co-Publish</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">프로젝트 설명</label>
+              <textarea id="message" name="message" placeholder="게임 컨셉, 타깃 플랫폼, 예산·일정 등을 알려주세요."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">문의 보내기 →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">GAMEBUILD</a>
+      <p>인디 게임 스튜디오 & 퍼블리싱 파트너. 아이디어를 플레이어가 사랑하는 명작으로 — Seoul & Tokyo.</p>
+      <div class="footer-social">
+        <a href="#" data-toast="Steam — gamebuild.studio">ST</a>
+        <a href="#" data-toast="Discord — Join our server">DC</a>
+        <a href="#" data-toast="Twitter/X — @gamebuild">X</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <a href="#games">Portfolio</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" data-toast="Careers — We're hiring!">Careers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Games</h4>
+      <a href="#" data-toast="Dungeon of Pixel — Steam">던전 오브 픽셀</a>
+      <a href="#" data-toast="Neon Block Wars — Switch">네온 블록 워즈</a>
+      <a href="#" data-toast="Cyber Knight — PS5">사이버 나이트</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#faq">FAQ</a>
+      <a href="#" data-toast="Dev Blog — portfolio demo">Dev Blog</a>
+      <a href="#" data-toast="Press Kit — download">Press Kit</a>
+      <p style="margin-top:16px;font-size:0.78rem;color:rgba(255,255,255,0.4)">Newsletter</p>
+      <form class="footer-newsletter demo-form" data-success="구독해 주셔서 감사합니다!">
+        <input type="email" placeholder="Email" required aria-label="Newsletter email">
+        <button type="submit">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 GAMEBUILD Studio. All rights reserved.</span>
+    <span>
+      <a href="#" data-toast="Privacy Policy — demo">Privacy</a> ·
+      <a href="#" data-toast="Terms — demo">Terms</a> ·
+      <a href="#" data-toast="Press — media@gamebuild.studio">Press</a>
+    </span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

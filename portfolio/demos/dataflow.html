@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>데이터플로우 DATAFLOW — Big Data & ML Platform</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+:root {
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --bg: #0A1628;
+  --text: #F0F9FF;
+  --text-muted: #67E8F9;
+  --accent: #06B6D4;
+  --accent-2: #22D3EE;
+  --accent-text: #fff;
+  --border: rgba(6,182,212,0.2);
+  --nav-bg: rgba(10,22,40,0.94);
+  --footer-bg: #060E18;
+  --card-bg: #0F1F35;
+  --surface: #0C1A2E;
+  --alt-bg: #0A1628;
+  --btn-radius: 10px;
+  --card-radius: 16px;
+  --logo-weight: 700;
+  --footer-text: rgba(255,255,255,0.55);
+}
+body { background: var(--bg); color: var(--text); }
+.site-nav { border-bottom-color: var(--border); }
+.site-nav .logo { color: #22D3EE; font-weight: 800; letter-spacing: -0.03em; }
+.site-nav .logo span { color: var(--text-muted); font-size: 0.72em; font-weight: 500; margin-left: 6px; }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { background: linear-gradient(135deg, #06B6D4, #22D3EE); color: var(--accent-text); }
+.nav-toggle { color: var(--text); }
+@media (max-width: 768px) { .nav-links { background: var(--nav-bg); border-color: var(--border); } }
+
+.hero { position: relative; padding: clamp(48px,8vw,88px) 0 clamp(40px,6vw,64px); overflow: hidden; }
+.hero-mesh { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 10% 0%, rgba(6,182,212,0.14), transparent), radial-gradient(ellipse 50% 40% at 90% 80%, rgba(34,211,238,0.08), transparent); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,64px); align-items: center; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(6,182,212,0.1); border: 1px solid rgba(34,211,238,0.3); border-radius: 100px; font-size: 0.76rem; color: #22D3EE; margin-bottom: 22px; font-weight: 600; }
+.hero-badge .dot { width: 6px; height: 6px; background: #06B6D4; border-radius: 50%; animation: pulse-dot 2s ease infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.1rem,5vw,3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 20px; }
+.hero h1 em { font-style: normal; background: linear-gradient(135deg, #06B6D4, #22D3EE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-lead { font-size: clamp(0.92rem,2vw,1.08rem); color: var(--text-muted); line-height: 1.8; max-width: 520px; margin-bottom: 28px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.btn-primary { background: linear-gradient(135deg, #06B6D4, #22D3EE); color: var(--accent-text); box-shadow: 0 4px 24px rgba(6,182,212,0.3); }
+.btn-outline { border: 1.5px solid rgba(34,211,238,0.4); color: #22D3EE; }
+.btn-outline:hover { background: rgba(6,182,212,0.08); }
+.hero-stats { display: flex; gap: clamp(20px,4vw,40px); flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
+.hero-stat strong { display: block; font-family: var(--font-display); font-size: clamp(1.2rem,2.5vw,1.55rem); font-weight: 800; color: #22D3EE; }
+.hero-stat span { font-size: 0.72rem; color: var(--text-muted); }
+
+.product-mock { background: #0F1F35; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 24px 64px rgba(6,182,212,0.15); }
+.mock-top { padding: 12px 16px; background: #0C1A2E; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid var(--border); }
+.mock-top span { width: 10px; height: 10px; border-radius: 50%; }
+.mock-top span:nth-child(1){background:#EF4444} .mock-top span:nth-child(2){background:#EAB308} .mock-top span:nth-child(3){background:#22C55E}
+.mock-url { margin-left: auto; font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono); }
+.mock-body { padding: clamp(16px,3vw,24px); }
+.mock-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+.mock-metric { background: #0C1A2E; border-radius: 12px; padding: 14px; border: 1px solid var(--border); }
+.mock-metric .lbl { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.mock-metric .val { font-size: 1.15rem; font-weight: 700; color: #22D3EE; font-family: var(--font-display); }
+.mock-metric .sub { font-size: 0.66rem; color: #06B6D4; margin-top: 4px; }
+.mock-code { background: #060E18; border-radius: 12px; padding: 16px; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.7; color: #CFFAFE; overflow-x: auto; }
+.mock-code .kw { color: #22D3EE; }
+.mock-code .str { color: #FDE68A; }
+.mock-code .cm { color: #64748B; opacity: 0.7; }
+.mock-rows { display: flex; flex-direction: column; gap: 8px; }
+.mock-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #0C1A2E; border-radius: 8px; font-size: 0.8rem; border: 1px solid var(--border); }
+.mock-row .tag { font-size: 0.65rem; padding: 3px 8px; border-radius: 100px; font-weight: 700; background: rgba(6,182,212,0.12); color: #22D3EE; }
+.mock-chart { background: #0C1A2E; border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin-top: 12px; }
+.chart-bars .bar { flex: 1; background: linear-gradient(180deg, #06B6D4, #22D3EE); border-radius: 4px 4px 0 0; min-height: 12px; opacity: 0.85; }
+.chart-bars .bar:nth-child(1){height:45%} .chart-bars .bar:nth-child(2){height:72%} .chart-bars .bar:nth-child(3){height:58%}
+.chart-bars .bar:nth-child(4){height:90%} .chart-bars .bar:nth-child(5){height:65%} .chart-bars .bar:nth-child(6){height:78%} .chart-bars .bar:nth-child(7){height:55%}
+
+.trust-strip { padding: 28px 0; background: #0C1A2E; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.trust-inner { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(16px,3vw,32px); justify-content: center; }
+.trust-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.trust-logos { display: flex; flex-wrap: wrap; gap: clamp(20px,4vw,40px); align-items: center; justify-content: center; }
+.trust-logos span { font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: #3D6B7A; }
+
+.section-label { color: #06B6D4; }
+.alt-section { background: var(--alt-bg); }
+.surface-section { background: var(--surface); }
+
+.bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.bento-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,3vw,32px); transition: box-shadow 0.3s, transform 0.3s; }
+.bento-item:hover { box-shadow: 0 16px 40px rgba(6,182,212,0.12); transform: translateY(-3px); }
+.bento-item.wide { grid-column: span 2; }
+.bento-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.bento-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #06B6D4; background: rgba(6,182,212,0.12); padding: 4px 10px; border-radius: 100px; margin-bottom: 12px; }
+.bento-item h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.bento-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+.process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; counter-reset: step; }
+.process-step { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 28px 22px; position: relative; }
+.process-step::before { counter-increment: step; content: counter(step); position: absolute; top: -14px; left: 22px; width: 28px; height: 28px; background: linear-gradient(135deg, #06B6D4, #22D3EE); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.process-step h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; margin-top: 8px; }
+.process-step p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,5vw,56px); align-items: center; }
+.about-img { position: relative; border-radius: var(--card-radius); overflow: hidden; }
+.about-img img { width: 100%; height: 360px; object-fit: cover; }
+.about-float { position: absolute; bottom: 20px; left: 20px; background: var(--card-bg); padding: 16px 20px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+.about-float strong { display: block; font-size: 1.5rem; font-weight: 800; color: #22D3EE; }
+.about-float span { font-size: 0.78rem; color: var(--text-muted); }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.tech-chip { padding: 8px 14px; background: rgba(6,182,212,0.12); border: 1px solid var(--border); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: #06B6D4; }
+
+.case-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,3vw,32px); height: 100%; transition: box-shadow 0.3s; }
+.case-card:hover { box-shadow: 0 16px 40px rgba(6,182,212,0.12); }
+.case-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; color: #06B6D4; margin-bottom: 6px; }
+.case-industry { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 14px; }
+.case-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; }
+.case-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+.case-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.case-metric { text-align: center; padding: 12px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); }
+.case-metric strong { display: block; font-size: 1.2rem; font-weight: 800; color: #22D3EE; }
+.case-metric span { font-size: 0.66rem; color: var(--text-muted); }
+
+.integ-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.integ-chip { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); transition: all 0.25s; }
+.integ-chip:hover { border-color: #06B6D4; background: rgba(6,182,212,0.12); color: var(--text); }
+.integ-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+.pricing-toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; font-size: 0.88rem; color: var(--text-muted); }
+.pricing-toggle-wrap .active { color: var(--text); font-weight: 600; }
+.pricing-badge-save { font-size: 0.68rem; padding: 3px 10px; background: rgba(6,182,212,0.12); color: #22D3EE; border-radius: 100px; font-weight: 700; }
+.pricing-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(28px,4vw,36px); display: flex; flex-direction: column; }
+.pricing-card.featured { border-color: #06B6D4; box-shadow: 0 0 48px rgba(6,182,212,0.18); position: relative; }
+.pricing-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,#06B6D4,#22D3EE); padding: 4px 16px; border-radius: 100px; font-size: 0.64rem; font-weight: 700; color: #fff; }
+.pricing-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.pricing-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+.pricing-card .price { font-family: var(--font-display); font-size: clamp(2rem,4vw,2.5rem); font-weight: 800; margin-bottom: 6px; color: #22D3EE; }
+.pricing-card .price span { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.pricing-billing { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 24px; }
+.pricing-card .btn { width: 100%; margin-bottom: 24px; }
+.pricing-features li { display: flex; gap: 10px; padding: 9px 0; font-size: 0.84rem; color: var(--text-muted); border-bottom: 1px solid var(--border); line-height: 1.5; }
+.pricing-features li::before { content: '✓'; color: #06B6D4; font-weight: 700; }
+.pricing-features li.muted { opacity: 0.45; }
+.pricing-features li.muted::before { content: '—'; }
+
+.review-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 24px; height: 100%; transition: transform 0.3s, box-shadow 0.3s; }
+.review-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(6,182,212,0.12); }
+.review-stars { color: #FBBF24; margin-bottom: 12px; }
+.review-card blockquote { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+.review-author { display: flex; gap: 12px; align-items: center; }
+.review-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#06B6D4,#22D3EE); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.review-author strong { display: block; font-size: 0.88rem; }
+.review-author span { font-size: 0.75rem; color: var(--text-muted); }
+
+.faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+.faq-q { width: 100%; text-align: left; padding: 18px 22px; font-size: 0.92rem; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
+.faq-q::after { content: '+'; font-size: 1.2rem; color: #06B6D4; }
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s; }
+.faq-item.open .faq-a { max-height: 320px; }
+.faq-a-inner { padding: 0 22px 18px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+
+.cta-band { background: linear-gradient(135deg, rgba(6,182,212,0.1), rgba(34,211,238,0.06)); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px,8vw,72px) 0; }
+.cta-band h2 { font-family: var(--font-display); font-size: clamp(1.6rem,4vw,2.2rem); font-weight: 800; margin-bottom: 12px; }
+.cta-band p { color: var(--text-muted); margin-bottom: 28px; }
+
+.contact-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,56px); }
+.contact-info h3 { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; margin-bottom: 16px; }
+.contact-info > p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 32px; }
+.contact-perks { display: flex; flex-direction: column; gap: 16px; }
+.contact-perk { display: flex; gap: 14px; }
+.contact-perk-icon { width: 40px; height: 40px; background: rgba(6,182,212,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.contact-perk strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.contact-perk span { font-size: 0.82rem; color: var(--text-muted); }
+.form-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,4vw,36px); }
+.form-group label { color: var(--text); font-size: 0.84rem; font-weight: 600; }
+.form-group input, .form-group select, .form-group textarea { background: #0C1A2E; border: 1px solid var(--border); color: var(--text); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #06B6D4; }
+
+.tabs-wrap .tab-panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 28px; margin-top: 16px; }
+.tab-panel h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: #06B6D4; }
+.tab-panel p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+.feature-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.feature-list li { padding: 12px 16px; background: var(--surface); border-radius: 10px; font-size: 0.84rem; font-weight: 600; border: 1px solid var(--border); }
+
+.df-deep { background: var(--surface); }
+.df-split { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px,5vw,48px); align-items: center; }
+.df-hero-img { border-radius: var(--card-radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(6,182,212,0.12); }
+.df-hero-img img { width: 100%; height: auto; display: block; aspect-ratio: 4/3; object-fit: cover; }
+.df-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.df-list li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+.df-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+.df-metrics { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.df-metric { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.df-metric strong { display: block; font-size: 0.92rem; color: #06B6D4; margin-bottom: 6px; }
+.df-metric span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+.site-footer { background: var(--footer-bg); color: var(--footer-text); }
+.site-footer .logo { color: #fff; }
+.footer-col h4 { color: #fff; }
+.footer-col a:hover { color: #22D3EE; }
+.footer-newsletter input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 8px; padding: 10px 14px; flex: 1; }
+.footer-newsletter button { background: #06B6D4; color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; }
+
+@media (max-width: 1280px) {
+  .hero-grid { gap: clamp(24px,4vw,48px); }
+  .df-hero-img img { object-position: center 30%; }
+}
+@media (max-width: 1024px) {
+  .integ-grid { grid-template-columns: repeat(3,1fr); }
+  .bento { grid-template-columns: repeat(2,1fr); }
+  .bento-item.wide { grid-column: span 1; }
+  .mock-metrics { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .contact-wrap, .df-split { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: repeat(2,1fr); }
+  .product-mock { order: -1; }
+}
+@media (max-width: 768px) {
+  .hero h1 { font-size: clamp(1.9rem,8vw,2.6rem); }
+  .trust-logos { gap: 16px; }
+  .df-metrics { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .process-steps, .integ-grid, .bento, .feature-list, .mock-metrics { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; text-align: center; }
+}
+
+/* Extended component layer */
+.section-header { margin-bottom: clamp(32px, 5vw, 48px); }
+.section-header.center { text-align: center; }
+.section-header.center .section-desc { max-width: 640px; margin-left: auto; margin-right: auto; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3.5vw, 2.25rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.section-desc { font-size: clamp(0.88rem, 2vw, 1rem); color: var(--text-muted); line-height: 1.75; }
+
+.features, .how-section, .tabs-section, #integrations, #pricing, #testimonials, #faq, #contact, #case-studies, #about, #platform {
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 3vw, 24px); }
+@media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.tab-btn {
+  padding: 10px 20px; font-size: 0.84rem; font-weight: 600; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--text-muted); transition: all 0.25s;
+}
+.tab-btn:hover { border-color: #06B6D4; color: var(--text); }
+.tab-btn.active { background: linear-gradient(135deg, #06B6D4, #22D3EE); color: var(--accent-text); border-color: transparent; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.pricing-features { list-style: none; flex: 1; }
+.pricing-card .btn-sm { padding: 12px 20px; font-size: 0.84rem; border-radius: var(--btn-radius); display: inline-block; text-align: center; }
+
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: clamp(24px, 4vw, 48px); padding: clamp(48px, 6vw, 72px) clamp(20px, 4vw, 48px); max-width: 1200px; margin: 0 auto; }
+.footer-brand p { font-size: 0.84rem; line-height: 1.7; margin-top: 12px; max-width: 280px; }
+.footer-col { display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 0.82rem; color: var(--footer-text); transition: color 0.25s; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 20px clamp(20px, 4vw, 48px); border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; max-width: 1200px; margin: 0 auto; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: span 2; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-brand { grid-column: span 1; } }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: span 2; }
+.form-group input, .form-group select, .form-group textarea { padding: 12px 14px; border-radius: 10px; font-size: 0.88rem; width: 100%; }
+.form-group textarea { min-height: 100px; resize: vertical; }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-group.full { grid-column: span 1; } }
+
+/* Brand accent animations */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.hero-badge .dot { animation: glow-pulse 2s ease infinite, pulse-dot 2s ease infinite; }
+.product-mock { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.product-mock:hover { transform: translateY(-4px); }
+
+/* Code syntax highlight refinements */
+.mock-code .num { color: #FDE68A; }
+.mock-code .fn { color: #06B6D4; }
+
+/* Status indicators in mock rows */
+.mock-row .status-ok { color: #22C55E; margin-left: auto; font-size: 0.72rem; font-weight: 600; }
+.mock-row .status-run { color: #06B6D4; margin-left: auto; font-size: 0.72rem; font-weight: 600; }
+
+/* Chart label styling */
+.mock-chart .chart-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Deep section copy refinements */
+.df-copy { display: flex; flex-direction: column; justify-content: center; }
+
+/* Review card quote styling */
+.review-card blockquote { font-style: normal; position: relative; padding-left: 0; }
+.review-card blockquote::before { content: '"'; font-size: 2rem; color: #06B6D4; opacity: 0.3; line-height: 0; display: block; margin-bottom: 8px; }
+
+/* CTA band button spacing */
+.cta-band .btn { margin-top: 4px; }
+
+/* Nav scroll shadow enhancement */
+.site-nav { transition: box-shadow 0.3s; }
+
+/* Bento grid gap responsive */
+@media (max-width: 1280px) {
+  .bento { gap: 14px; }
+  .process-steps { gap: 16px; }
+}
+@media (max-width: 768px) {
+  .features, .how-section, .tabs-section, #integrations, #pricing, #testimonials, #faq, #contact, #case-studies, #about, #platform, #security {
+    padding: clamp(40px, 6vw, 64px) 0;
+  }
+}
+
+.security-section { background: var(--surface); }
+.security-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
+.security-badge {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px 20px;
+  text-align: center;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.security-badge:hover { border-color: rgba(6,182,212,0.5); transform: translateY(-2px); }
+.security-badge .ico { font-size: 1.8rem; margin-bottom: 12px; }
+.security-badge strong { display: block; font-size: 0.9rem; margin-bottom: 6px; color: #22D3EE; }
+.security-badge span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+.security-note {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: rgba(6,182,212,0.08);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  text-align: center;
+}
+@media (max-width: 900px) { .security-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .security-grid { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">데이터플로우 <span>DATAFLOW</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#product">Product</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-mesh"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge"><span class="dot"></span> v5.1 — Real-time ML Inference GA</div>
+      <h1>빅데이터를<br><em>insight로 전환</em></h1>
+      <p class="hero-lead">Data pipelines, real-time dashboards, ML models — unified big data platform. Kafka, Spark, dbt, Snowflake를 하나의 orchestration layer에서. 8B+ events/day 처리.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Start Free Trial →</a>
+        <a href="#contact" class="btn btn-outline">Watch Demo</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>8.2B</strong><span>Events / day</span></div>
+        <div class="hero-stat"><strong>340</strong><span>Active pipelines</span></div>
+        <div class="hero-stat"><strong>99.97%</strong><span>Pipeline SLA</span></div>
+      </div>
+    </div>
+    <div class="product-mock" id="product">
+      <div class="mock-top"><span></span><span></span><span></span><span class="mock-url">pipeline.dataflow.io/jobs</span></div>
+      <div class="mock-body">
+        <div class="mock-metrics">
+          <div class="mock-metric"><div class="lbl">Events / day</div><div class="val">8.2B</div><div class="sub">real-time</div></div>
+          <div class="mock-metric"><div class="lbl">Pipelines</div><div class="val">340</div><div class="sub">99.97% SLA</div></div>
+          <div class="mock-metric"><div class="lbl">ML Models</div><div class="val">52</div><div class="sub">in production</div></div>
+        </div>
+        <div class="mock-code"><span class="cm">-- DATAFLOW pipeline definition</span>
+<span class="kw">CREATE PIPELINE</span> churn_prediction AS
+  <span class="kw">SOURCE</span> kafka.<span class="str">events</span>
+  <span class="kw">TRANSFORM</span> feature_store.<span class="str">enrich</span>
+  <span class="kw">SINK</span> ml.<span class="str">inference_v2</span>;
+<span class="cm">→ Status: RUNNING · lag: 0.3s · rows: 12.4M/hr</span></div>
+        <div class="mock-rows" style="margin-top:14px">
+          <div class="mock-row"><span class="tag">ETL</span> User events → Snowflake — healthy</div>
+          <div class="mock-row"><span class="tag">ML</span> Fraud scoring model — AUC 0.97</div>
+          <div class="mock-row"><span class="tag">DASH</span> Executive KPI board — live</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container trust-inner">
+    <span class="trust-label">Trusted by data-driven enterprises</span>
+    <div class="trust-logos">
+      <span>Coupang</span>
+      <span>Baemin</span>
+      <span>Toss</span>
+      <span>Naver</span>
+      <span>Kakao</span>
+      <span>Samsung</span>
+      <span>LG U+</span>
+      <span>Woowa Brothers</span>
+    </div>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Modern data stack의 모든 것</h2>
+      <p class="section-desc">From ingestion to ML inference — end-to-end data platform for analytics & engineering teams.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-item wide">
+        <div class="bento-icon">🔄</div>
+        <span class="bento-tag">Pipelines · Core</span>
+        <h3>Unified Data Pipelines</h3>
+        <p>Kafka, Spark, Flink, dbt — visual pipeline builder + SQL. Auto-scaling, schema evolution, dead letter queues.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">📊</div>
+        <span class="bento-tag">Dashboards</span>
+        <h3>Real-time Dashboards</h3>
+        <p>Sub-second query on billions of rows. Drag-and-drop charts, embedded analytics, scheduled reports.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🤖</div>
+        <span class="bento-tag">ML</span>
+        <h3>ML Model Serving</h3>
+        <p>Feature store, training pipelines, A/B testing, real-time inference. scikit-learn, XGBoost, PyTorch 지원.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🗄️</div>
+        <span class="bento-tag">Lakehouse</span>
+        <h3>Lakehouse Architecture</h3>
+        <p>S3/ADLS + Delta Lake/Iceberg. ACID transactions, time travel, schema enforcement on raw data.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🔍</div>
+        <span class="bento-tag">Observability</span>
+        <h3>Data Observability</h3>
+        <p>Pipeline health, data quality checks, anomaly detection, lineage tracking. Alert on schema drift.</p>
+      </div>
+      <div class="bento-item wide">
+        <div class="bento-icon">🔐</div>
+        <span class="bento-tag">Governance</span>
+        <h3>Data Governance</h3>
+        <p>Column-level access, PII masking, audit logs, data catalog. GDPR, 개인정보보호법 compliance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">4단계로 modern data stack 구축</h2>
+      <p class="section-desc">Connect, pipeline, visualize, predict — 평균 onboarding 1주, first dashboard 48시간.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step"><h4>Connect Sources</h4><p>Kafka, PostgreSQL, S3, APIs — 150+ connectors. CDC, batch, streaming ingest.</p></div>
+      <div class="process-step"><h4>Build Pipelines</h4><p>Visual builder 또는 SQL로 ETL/ELT. dbt integration, schema registry, data quality rules.</p></div>
+      <div class="process-step"><h4>Create Dashboards</h4><p>Real-time charts, KPI boards, embedded widgets. Slack/Email scheduled delivery.</p></div>
+      <div class="process-step"><h4>Deploy ML</h4><p>Feature engineering → training → inference. Model registry, A/B test, auto-retrain.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="데이터플로우 데이터 엔지니어링" loading="lazy">
+        <div class="about-float"><strong>8.2B</strong><span>events processed daily</span></div>
+      </div>
+      <div>
+        <div class="section-label">About DATAFLOW</div>
+        <h2 class="section-title">Data engineering을<br>10x 더 빠르게</h2>
+        <p class="section-desc">2019년 서울에서 시작한 DATAFLOW는 'data silos와 pipeline complexity'를 해결합니다. Lakehouse + real-time + ML — data team이 infra 대신 insight에 집중할 수 있는 platform.</p>
+        <div class="tech-chips">
+          <span class="tech-chip">Apache Kafka</span>
+          <span class="tech-chip">Apache Spark</span>
+          <span class="tech-chip">dbt</span>
+          <span class="tech-chip">Snowflake</span>
+          <span class="tech-chip">Delta Lake</span>
+          <span class="tech-chip">Airflow</span>
+          <span class="tech-chip">Feature Store</span>
+          <span class="tech-chip">SOC 2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="case-studies">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">고객들이 만든 data impact</h2>
+      <p class="section-desc">E-commerce, fintech, logistics — DATAFLOW로 data-driven decision을 내린 기업들.</p>
+    </div>
+    <div class="grid-3">
+      <article class="case-card">
+        <div class="case-logo">ShopStream</div>
+        <div class="case-industry">E-commerce · Enterprise</div>
+        <h3>Real-time inventory 99.9% accuracy</h3>
+        <p>8B events/day pipeline으로 재고·주문·배송 real-time sync. Stockout 73% 감소.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>99.9%</strong><span>Accuracy</span></div>
+          <div class="case-metric"><strong>73%</strong><span>Less stockout</span></div>
+          <div class="case-metric"><strong>8B</strong><span>Events/day</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">RiskGuard</div>
+        <div class="case-industry">Fintech · Series B</div>
+        <h3>Fraud detection AUC 0.97</h3>
+        <p>Real-time ML inference on transaction stream. False positive 60% 감소, detection 200ms.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>0.97</strong><span>AUC score</span></div>
+          <div class="case-metric"><strong>200ms</strong><span>Detection</span></div>
+          <div class="case-metric"><strong>60%</strong><span>Less FP</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">LogiPrime</div>
+        <div class="case-industry">Logistics · Growth</div>
+        <h3>Route optimization ₩4.2B saved</h3>
+        <p>GPS + weather + traffic ML pipeline. 배송 비용 18% 절감, ETA accuracy 94%.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>₩4.2B</strong><span>Annual savings</span></div>
+          <div class="case-metric"><strong>18%</strong><span>Cost down</span></div>
+          <div class="case-metric"><strong>94%</strong><span>ETA accuracy</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section tabs-section" id="product-tabs">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product Modules</div>
+      <h2 class="section-title">Data platform 모듈 deep dive</h2>
+      <p class="section-desc">Pipelines, Dashboards, ML, Governance — 각 모듈의 핵심 기능.</p>
+    </div>
+    <div class="tabs-wrap" style="max-width:920px;margin:0 auto">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="pipe">Pipelines</button>
+        <button class="tab-btn" data-tab="dash">Dashboards</button>
+        <button class="tab-btn" data-tab="ml">ML</button>
+        <button class="tab-btn" data-tab="gov">Governance</button>
+      </div>
+      <div class="tab-panel active" data-tab="pipe">
+        <h4>Data Pipeline Orchestration</h4>
+        <p>Visual and code-based pipeline builder with auto-scaling compute.</p>
+        <ul class="feature-list">
+          <li>150+ source connectors</li>
+          <li>Kafka/Spark/Flink native</li>
+          <li>dbt project integration</li>
+          <li>Schema registry & CDC</li>
+          <li>Dead letter queues</li>
+          <li>Auto-retry & alerting</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="dash">
+        <h4>Real-time Analytics</h4>
+        <p>Sub-second queries on petabyte-scale data with embedded analytics.</p>
+        <ul class="feature-list">
+          <li>Drag-and-drop builder</li>
+          <li>SQL editor + saved queries</li>
+          <li>Embedded iframe widgets</li>
+          <li>Scheduled Slack/Email</li>
+          <li>Row-level security</li>
+          <li>Mobile-responsive</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="ml">
+        <h4>ML Platform</h4>
+        <p>End-to-end ML lifecycle from feature engineering to production inference.</p>
+        <ul class="feature-list">
+          <li>Feature store</li>
+          <li>Training pipelines</li>
+          <li>Model registry</li>
+          <li>Real-time inference</li>
+          <li>A/B testing framework</li>
+          <li>Auto-retrain triggers</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="gov">
+        <h4>Data Governance</h4>
+        <p>Catalog, lineage, quality, and access control for enterprise compliance.</p>
+        <ul class="feature-list">
+          <li>Data catalog & lineage</li>
+          <li>PII auto-detection</li>
+          <li>Column-level ACL</li>
+          <li>Quality scorecards</li>
+          <li>Audit logs</li>
+          <li>GDPR/개인정보보호법</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="integrations">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Integrations</div>
+      <h2 class="section-title">Data stack과 바로 연결</h2>
+      <p class="section-desc">150+ connectors, dbt, Airflow, REST API — 기존 data infrastructure에 plug-in.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-chip"><span class="integ-icon">📨</span> Apache Kafka</div>
+      <div class="integ-chip"><span class="integ-icon">⚡</span> Apache Spark</div>
+      <div class="integ-chip"><span class="integ-icon">🔧</span> dbt</div>
+      <div class="integ-chip"><span class="integ-icon">❄️</span> Snowflake</div>
+      <div class="integ-chip"><span class="integ-icon">🐘</span> PostgreSQL</div>
+      <div class="integ-chip"><span class="integ-icon">☁️</span> AWS S3</div>
+      <div class="integ-chip"><span class="integ-icon">🔷</span> BigQuery</div>
+      <div class="integ-chip"><span class="integ-icon">🌊</span> Apache Flink</div>
+      <div class="integ-chip"><span class="integ-icon">💬</span> Slack</div>
+      <div class="integ-chip"><span class="integ-icon">🐙</span> GitHub</div>
+      <div class="integ-chip"><span class="integ-icon">📊</span> Tableau</div>
+      <div class="integ-chip"><span class="integ-icon">🔐</span> Okta SSO</div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section df-deep" id="platform">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product</div>
+      <h2 class="section-title">Lakehouse + real-time + ML</h2>
+      <p class="section-desc">Unified data platform — ingestion, transformation, analytics, ML inference in one stack.</p>
+    </div>
+    <div class="df-split">
+      <div class="df-hero-img"><img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=80" alt="Lakehouse + real-time + ML" loading="lazy"></div>
+      <div class="df-copy">
+        <ul class="df-list">
+          <li><strong>Stream Processing</strong>Kafka + Flink native. 8B+ events/day, sub-second latency.</li>
+          <li><strong>Lakehouse</strong>Delta Lake/Iceberg on S3. ACID, time travel, schema evolution.</li>
+          <li><strong>Feature Store</strong>Online + offline features. Training/inference consistency 보장.</li>
+          <li><strong>Cost Optimizer</strong>Auto-scaling compute, spot instances. Cloud bill 40% 절감.</li>
+        </ul>
+        <div class="df-metrics">
+          <div class="df-metric"><strong>Stream Processing</strong><span>Kafka + Flink native. 8B+ events/day, sub-second latency.</span></div>
+          <div class="df-metric"><strong>Lakehouse</strong><span>Delta Lake/Iceberg on S3. ACID, time travel, schema evolution.</span></div>
+          <div class="df-metric"><strong>Feature Store</strong><span>Online + offline features. Training/inference consistency 보장.</span></div>
+          <div class="df-metric"><strong>Cost Optimizer</strong><span>Auto-scaling compute, spot instances. Cloud bill 40% 절감.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Compute-based data pricing</h2>
+      <p class="section-desc">14-day free trial. Pay for compute + storage or committed enterprise.</p>
+    </div>
+    <div class="pricing-toggle-wrap">
+      <span class="active">Monthly</span><span>·</span><span>Annual</span>
+      <span class="pricing-badge-save">Save 20%</span>
+    </div>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p class="pricing-desc">Small data teams & PoC.</p>
+        <div class="price">₩0<span>/월</span></div>
+        <p class="pricing-billing">Free tier · 1M events/mo</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Get Started</a>
+        <ul class="pricing-features">
+          <li>3 pipelines</li>
+          <li>5 dashboards</li>
+          <li>1M events / month</li>
+          <li>7-day retention</li>
+          <li class="muted">ML inference</li>
+          <li class="muted">SSO</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Pro</h3>
+        <p class="pricing-desc">Growing data teams with ML needs.</p>
+        <div class="price">₩1,200,000<span>/월</span></div>
+        <p class="pricing-billing">includes 100M events · 10 seats</p>
+        <a href="#contact" class="btn btn-primary btn-sm">Start Free Trial</a>
+        <ul class="pricing-features">
+          <li>Unlimited pipelines</li>
+          <li>Unlimited dashboards</li>
+          <li>100M events / month</li>
+          <li>ML model serving</li>
+          <li>90-day retention</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p class="pricing-desc">Petabyte-scale with dedicated infra.</p>
+        <div class="price">Custom<span></span></div>
+        <p class="pricing-billing">committed compute · annual</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Contact Sales</a>
+        <ul class="pricing-features">
+          <li>Unlimited events</li>
+          <li>Dedicated cluster</li>
+          <li>Custom ML models</li>
+          <li>VPC / on-premise</li>
+          <li>99.97% SLA + CSM</li>
+          <li>SOC 2 reports</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">Data teams가 말하는 DATAFLOW</h2>
+      <p class="section-desc">Data engineers, analysts, ML engineers — 4.8/5 on G2 Data Tools.</p>
+    </div>
+    <div class="grid-4">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"8B events/day를 단일 platform에서. Kafka + Spark + dbt 통합이 game changer."</blockquote>
+        <div class="review-author"><div class="review-avatar">JK</div><div><strong>김지훈</strong><span>Head of Data · ShopStream</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Fraud ML inference 200ms. Feature store로 training/serving consistency 완벽."</blockquote>
+        <div class="review-author"><div class="review-avatar">SL</div><div><strong>Sarah Lee</strong><span>ML Lead · RiskGuard</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Pipeline builder가 직관적. data engineer onboarding 1주 → 2일로 단축."</blockquote>
+        <div class="review-author"><div class="review-avatar">PM</div><div><strong>박민수</strong><span>Data Eng · LogiPrime</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Cost optimizer로 cloud bill 40% 절감. FinOps team이 가장 좋아하는 feature."</blockquote>
+        <div class="review-author"><div class="review-avatar">EC</div><div><strong>Emily Chen</strong><span>VP Data · MegaMart</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section security-section" id="security">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Security & Governance</div>
+      <h2 class="section-title">데이터 거버넌스 & 보안</h2>
+      <p class="section-desc">엔터프라이즈 데이터 플랫폼에 필수적인 lineage, access control, compliance를 기본 제공합니다.</p>
+    </div>
+    <div class="security-grid">
+      <div class="security-badge">
+        <div class="ico">📊</div>
+        <strong>Data Lineage</strong>
+        <span>ETL→warehouse→dashboard 전 구간 추적</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">🔐</div>
+        <strong>RBAC + ABAC</strong>
+        <span>컬럼·행 단위 fine-grained access</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">🛡️</div>
+        <strong>SOC 2 Type II</strong>
+        <span>암호화 at rest/in transit · audit logs</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">📋</div>
+        <strong>GDPR / PIPA</strong>
+        <span>PII 마스킹 · retention policy 자동화</span>
+      </div>
+    </div>
+    <p class="security-note">Data catalog, quality scoring, anomaly alerts — 빅데이터 파이프라인의 신뢰성과 규제 준수를 하나의 governance layer로 관리합니다.</p>
+  </div>
+</section>
+
+<section class="surface-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">support@dataflow.io 또는 Slack community로 문의해 주세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" type="button">어떤 데이터 소스를 연결할 수 있나요?</button><div class="faq-a"><div class="faq-a-inner">Kafka, PostgreSQL, MySQL, MongoDB, S3, BigQuery, Snowflake, REST APIs 등 150+ connectors. CDC, batch, streaming 모두 지원.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Real-time processing 성능은?</button><div class="faq-a"><div class="faq-a-inner">Flink 기반 sub-second latency. 고객 사례 최대 8.2B events/day. Auto-scaling으로 traffic spike 대응.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">ML model serving은 어떻게 하나요?</button><div class="faq-a"><div class="faq-a-inner">Feature store → training pipeline → model registry → real-time inference endpoint. scikit-learn, XGBoost, PyTorch, ONNX 지원. A/B test 내장.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">기존 dbt/Airflow와 연동되나요?</button><div class="faq-a"><div class="faq-a-inner">dbt project import, Airflow DAG trigger, schema registry sync. 기존 workflow를 그대로 유지하면서 DATAFLOW orchestration layer 추가.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">데이터 보안과 governance는?</button><div class="faq-a"><div class="faq-a-inner">Column-level ACL, PII auto-masking, audit logs, data lineage. SOC 2 Type II, GDPR, 개인정보보호법 compliance.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">On-premise 배포가 가능한가요?</button><div class="faq-a"><div class="faq-a-inner">Enterprise 플랜에서 Kubernetes on-premise 또는 VPC dedicated cluster. Hybrid cloud (on-prem ingest + cloud analytics) 지원.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>지금 바로 modern data stack을 구축하세요</h2>
+    <p>14-day free trial · 1M events free · No credit card</p>
+    <a href="#contact" class="btn btn-primary">Start Free Trial →</a>
+  </div>
+</section>
+
+<section class="alt-section" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-label">Contact</div>
+        <h3>Data Platform 상담</h3>
+        <p>30분 미팅으로 DATAFLOW가 귀사 data infrastructure에 맞는지 확인해 보세요.</p>
+        <div class="contact-perks">
+          <div class="contact-perk"><span class="contact-perk-icon">🎯</span><div><strong>Architecture Review</strong><span>현재 data stack 분석 & migration plan</span></div></div>
+          <div class="contact-perk"><span class="contact-perk-icon">📅</span><div><strong>PoC Pipeline</strong><span>1주 PoC — 전담 data engineer 배정</span></div></div>
+          <div class="contact-perk"><span class="contact-perk-icon">🌏</span><div><strong>Global Regions</strong><span>Seoul · Tokyo · US-West data centers</span></div></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="상담 요청 접수! 24시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group"><label for="df-name">이름</label><input type="text" id="df-name" placeholder="홍길동" required></div>
+            <div class="form-group"><label for="df-email">Work Email</label><input type="email" id="df-email" placeholder="you@company.com" required></div>
+            <div class="form-group"><label for="df-co">회사명</label><input type="text" id="df-co" placeholder="DATAFLOW Inc."></div>
+            <div class="form-group"><label for="df-size">팀 규모</label><select id="df-size"><option>1–10명</option><option>11–50명</option><option>51–200명</option><option>200명+</option></select></div>
+            <div class="form-group full"><label for="df-msg">메시지</label><textarea id="df-msg" placeholder="데이터 규모, 현재 stack (Kafka/Spark/dbt 등), use case"></textarea></div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Request Demo →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">데이터플로우 DATAFLOW</a>
+      <p>Big data & ML platform. Pipelines, dashboards, ML — Seoul & Tokyo.</p>
+      <div class="footer-social" style="display:flex;gap:12px;margin-top:20px">
+        <a href="#" data-toast="Twitter — coming soon" style="color:#fff">X</a>
+        <a href="#" data-toast="LinkedIn — coming soon" style="color:#fff">in</a>
+        <a href="#" data-toast="GitHub — coming soon" style="color:#fff">GH</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="#" data-toast="About — demo">About</a><a href="#case-studies">Customers</a><a href="#" data-toast="Careers — hiring">Careers</a><a href="#contact">Contact</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="#" data-toast="Docs — demo">Documentation</a><a href="#" data-toast="API — demo">API</a><a href="#" data-toast="Status — operational">Status</a>
+      <form class="footer-newsletter demo-form" data-success="구독 감사합니다!" style="display:flex;gap:8px;margin-top:12px"><input type="email" placeholder="Email" required><button type="submit">→</button></form>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 DATAFLOW Inc.</span><span><a href="#" data-toast="Privacy — demo">Privacy</a> · <a href="#" data-toast="Terms — demo">Terms</a></span></div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

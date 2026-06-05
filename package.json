@@ -1,0 +1,10 @@
+{
+  "name": "oneulweb",
+  "version": "1.0.0",
+  "private": true,
+  "description": "오늘웹 — AI 홈페이지 제작 서비스 (oneulweb.com)",
+  "scripts": {
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel"
+  }
+}

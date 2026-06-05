@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쿠킹클래스 COOKING CLASS — 프리미엄 요리학원</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Noto Sans KR', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFF8F0;
+  --text: #2C2416;
+  --text-muted: #7A6B5A;
+  --accent: #C45C3E;
+  --accent-light: #E07A5F;
+  --accent-olive: #5C6B4A;
+  --accent-wood: #8B5A3C;
+  --accent-wood-dark: #5C3D28;
+  --accent-text: #fff;
+  --border: #E8DDD0;
+  --nav-bg: rgba(255,248,240,0.97);
+  --footer-bg: #3D2A1F;
+  --card-bg: #FFFFFF;
+  --btn-radius: 10px;
+  --card-radius: 16px;
+  --footer-text: rgba(255,255,255,0.6);
+}
+
+body { background: var(--bg); }
+
+.site-nav .logo {
+  color: var(--accent-wood-dark);
+  font-weight: 800;
+}
+
+.site-nav .logo span {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85em;
+  margin-left: 4px;
+}
+
+.nav-cta {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn-primary { background: var(--accent); color: var(--accent-text); }
+.section-label { color: var(--accent-olive); }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 88vh, 700px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg { position: absolute; inset: 0; }
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(44,36,22,0.88) 0%, rgba(92,61,40,0.72) 45%, rgba(196,92,62,0.45) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(48px, 8vw, 80px) clamp(20px, 4vw, 48px);
+  max-width: 700px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(196,92,62,0.25);
+  border: 1px solid rgba(224,122,95,0.4);
+  border-radius: 50px;
+  color: #F5C4B8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: #F0A88E;
+}
+
+.hero p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: #E8DDD0;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn-hero {
+  padding: 16px 32px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(196,92,62,0.35);
+}
+
+.btn-hero-outline {
+  padding: 16px 32px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.btn-hero-outline:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.55);
+}
+
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.hero-trust span {
+  font-size: 0.82rem;
+  color: #C4B5A5;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-trust strong { color: #FFF8F0; }
+
+/* Stats bar */
+.stats-bar {
+  background: var(--accent-wood-dark);
+  color: #fff;
+  padding: clamp(32px, 5vw, 48px) 0;
+  position: relative;
+}
+
+.stats-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(196,92,62,0.12), transparent);
+}
+
+.stats-bar .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 32px);
+  text-align: center;
+  position: relative;
+}
+
+.stat-item strong {
+  display: block;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: #F0A88E;
+}
+
+.stat-item span {
+  font-size: clamp(0.78rem, 1.5vw, 0.9rem);
+  font-weight: 500;
+  color: #D4C4B0;
+}
+
+/* Courses */
+.courses { background: var(--bg); }
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.course-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.course-card:hover {
+  border-color: var(--accent-light);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(196,92,62,0.12);
+}
+
+.course-card .course-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  position: relative;
+}
+
+.course-card .course-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.course-card:hover .course-img img { transform: scale(1.05); }
+
+.course-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+.course-tag.olive { background: var(--accent-olive); }
+
+.course-card .course-body { padding: clamp(20px, 3vw, 28px); }
+
+.course-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.course-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.course-meta span {
+  padding: 4px 10px;
+  background: #FFF0E8;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Chefs */
+.chefs { background: #fff; }
+
+.chef-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.chef-card {
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px) clamp(16px, 3vw, 24px);
+  transition: all 0.3s;
+}
+
+.chef-card:hover {
+  border-color: var(--accent-light);
+  box-shadow: 0 12px 32px rgba(196,92,62,0.08);
+}
+
+.chef-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  border: 3px solid #F5E6DC;
+}
+
+.chef-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chef-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.chef-card .role {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.chef-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.chef-creds {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.chef-creds span {
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  background: #F5F0EB;
+  color: var(--text-muted);
+  border-radius: 4px;
+}
+
+/* Process */
+.process-section { background: var(--bg); }
+
+.process-steps::before { display: none; }
+
+.process-step::before {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Gallery / Menu */
+.gallery-section { background: #fff; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.gallery-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(92,61,40,0.1);
+}
+
+.gallery-card .gal-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.gallery-card .gal-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.gallery-card:hover .gal-img img { transform: scale(1.06); }
+
+.gallery-card .gal-body {
+  padding: clamp(16px, 3vw, 24px);
+}
+
+.gallery-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.gallery-card .gal-cat {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-olive);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.gallery-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Facilities */
+.facilities-section { background: var(--bg); }
+
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.facility-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.facility-card:hover {
+  border-color: var(--accent-olive);
+  box-shadow: 0 12px 32px rgba(92,107,74,0.1);
+}
+
+.facility-card .fac-img {
+  aspect-ratio: 16/11;
+  overflow: hidden;
+}
+
+.facility-card .fac-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.facility-card .fac-body {
+  padding: clamp(18px, 3vw, 24px);
+}
+
+.facility-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.facility-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Schedule */
+.schedule-section { background: #fff; }
+
+.schedule-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.schedule-table thead {
+  background: var(--accent-wood-dark);
+  color: #fff;
+}
+
+.schedule-table th {
+  padding: 16px 12px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.82rem;
+}
+
+.schedule-table td {
+  padding: 14px 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.schedule-table tbody tr:hover { background: #FFF8F0; }
+
+.schedule-table td:first-child {
+  font-weight: 700;
+  color: var(--accent-wood-dark);
+  background: #F5F0EB;
+}
+
+.schedule-table .time {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.schedule-note {
+  padding: 16px 24px;
+  background: #FFF0E8;
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* Success / Student works */
+.success-section { background: var(--bg); }
+
+.success-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.success-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.success-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-olive));
+}
+
+.success-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(196,92,62,0.1);
+}
+
+.success-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #E8F0E0;
+  color: var(--accent-olive);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+
+.success-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.success-card .course-name {
+  font-size: 0.88rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.success-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.success-card .result {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.success-card .result strong { color: var(--accent-wood-dark); }
+
+/* Reviews */
+.reviews-section { background: #fff; }
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.review-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+}
+
+.review-card .subject-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: #FFF0E8;
+  padding: 3px 10px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* Consultation */
+.consult-section { background: #fff; }
+
+.consult-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: start;
+}
+
+.consult-info .section-desc { max-width: 100%; }
+
+.consult-features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.consult-feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.consult-feature .num {
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.consult-feature strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.consult-feature span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--btn-radius);
+  margin-top: 8px;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196,92,62,0.25);
+}
+
+/* Location */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(24px, 4vw, 40px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-wood-dark);
+  margin-bottom: 24px;
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.location-detail .ico {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: #FFF0E8;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-detail strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.location-detail span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Footer extras */
+.footer-brand .logo span { color: #F0A88E; }
+
+.footer-contact {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-contact span {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  transition: background 0.25s, color 0.25s;
+}
+
+.footer-social a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .course-grid { grid-template-columns: repeat(2, 1fr); }
+  .chef-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .facility-grid { grid-template-columns: repeat(2, 1fr); }
+  .success-grid { grid-template-columns: repeat(2, 1fr); }
+  .consult-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+  .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .course-grid,
+  .chef-grid,
+  .gallery-grid,
+  .facility-grid,
+  .success-grid,
+  .review-grid { grid-template-columns: 1fr; }
+
+  .schedule-table { font-size: 0.78rem; }
+  .schedule-table th,
+  .schedule-table td { padding: 10px 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav" id="top">
+  <a href="#top" class="logo">쿠킹클래스 <span>COOKING CLASS</span></a>
+  <button class="nav-toggle" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#courses">수업과정</a>
+    <a href="#chefs">셰프진</a>
+    <a href="#gallery">메뉴갤러리</a>
+    <a href="#reviews">수강후기</a>
+    <a href="#schedule">시간표</a>
+    <a href="#consult" class="nav-cta">체험신청</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1600&q=80" alt="따뜻한 주방에서 요리하는 모습">
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🍳 2012년 설립 · 프리미엄 요리학원</div>
+    <h1>주방에서 피어나는<br><em>나만의 요리 이야기</em></h1>
+    <p>한식·양식·베이킹부터 취업반까지, 현장 경력 10년+ 셰프진의 1:1 밀착 지도와 프로 주방 시설에서 진짜 요리를 배웁니다.</p>
+    <div class="hero-actions">
+      <a href="#consult" class="btn-hero">무료 체험 수업 신청</a>
+      <a href="#courses" class="btn-hero-outline">수업 과정 둘러보기</a>
+    </div>
+    <div class="hero-trust">
+      <span>✓ <strong>누적 수강생 8,500+</strong></span>
+      <span>✓ <strong>취업·창업 성공률 89%</strong></span>
+      <span>✓ <strong>전문 셰프 12명</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stat-item">
+      <strong>8,500+</strong>
+      <span>누적 수강생</span>
+    </div>
+    <div class="stat-item">
+      <strong>89%</strong>
+      <span>취업·창업 성공률</span>
+    </div>
+    <div class="stat-item">
+      <strong>12명</strong>
+      <span>전문 셰프진</span>
+    </div>
+    <div class="stat-item">
+      <strong>13년</strong>
+      <span>요리 교육 경력</span>
+    </div>
+  </div>
+</div>
+
+<!-- Courses -->
+<section class="courses" id="courses">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Courses</div>
+      <h2 class="section-title">쿠킹클래스 수업 과정</h2>
+      <p class="section-desc">취미부터 프로까지, 목적에 맞는 6가지 코스로 체계적인 요리 실력을 키워 드립니다.</p>
+    </div>
+    <div class="course-grid">
+      <article class="course-card">
+        <div class="course-img">
+          <img src="https://images.unsplash.com/photo-1498654077819-0c37b6a8c3f6?w=600&q=80" alt="한식 요리">
+          <span class="course-tag">인기</span>
+        </div>
+        <div class="course-body">
+          <h3>한식</h3>
+          <p>장·양념의 기본부터 반찬, 밥상차림, 한정식까지 정통 한식의 맛과 기술을 익힙니다.</p>
+          <div class="course-meta">
+            <span>기초</span><span>반찬</span><span>한정식</span>
+          </div>
+        </div>
+      </article>
+      <article class="course-card">
+        <div class="course-img">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="양식 요리">
+          <span class="course-tag">추천</span>
+        </div>
+        <div class="course-body">
+          <h3>양식</h3>
+          <p>파스타, 스테이크, 소스 마스터까지 이탈리안·프렌치 정통 양식 레시피를 배웁니다.</p>
+          <div class="course-meta">
+            <span>파스타</span><span>스테이크</span><span>소스</span>
+          </div>
+        </div>
+      </article>
+      <article class="course-card">
+        <div class="course-img">
+          <img src="https://images.unsplash.com/photo-1486427944299-d1955d23a34d?w=600&q=80" alt="베이킹">
+          <span class="course-tag">신규</span>
+        </div>
+        <div class="course-body">
+          <h3>베이킹</h3>
+          <p>빵·케이크·쿠키의 반죽 이론부터 오븐 타임까지, 홈베이킹에서 카페 운영까지 대비합니다.</p>
+          <div class="course-meta">
+            <span>빵</span><span>케이크</span><span>쿠키</span>
+          </div>
+        </div>
+      </article>
+      <article class="course-card">
+        <div class="course-img">
+          <img src="https://images.unsplash.com/photo-1563729784474-d77dc7f2a4e9?w=600&q=80" alt="디저트">
+        </div>
+        <div class="course-body">
+          <h3>디저트</h3>
+          <p>마카롱, 티라미수, 무스·타르트 등 감각적인 플레이팅 디저트를 단계별로 완성합니다.</p>
+          <div class="course-meta">
+            <span>마카롱</span><span>무스</span><span>플레이팅</span>
+          </div>
+        </div>
+      </article>
+      <article class="course-card">
+        <div class="course-img">
+          <img src="https://images.unsplash.com/photo-1606787366850-de633012ad01?w=600&q=80" alt="쿠킹데이트">
+          <span class="course-tag olive">커플</span>
+        </div>
+        <div class="course-body">
+          <h3>쿠킹데이트</h3>
+          <p>연인·친구와 함께하는 2인 1조 쿠킹 클래스. 와인 페어링과 함께 특별한 하루를 만듭니다.</p>
+          <div class="course-meta">
+            <span>2인</span><span>와인</span><span>선물</span>
+          </div>
+        </div>
+      </article>
+      <article class="course-card">
+        <div class="course-img">
+          <img src="https://images.unsplash.com/photo-1577219491135-25f06e1b0d3a?w=600&q=80" alt="취업반">
+          <span class="course-tag">프로</span>
+        </div>
+        <div class="course-body">
+          <h3>취업반</h3>
+          <p>호텔·레스토랑·케이터링 취업을 위한 집중 실습. 포트폴리오·면접 코칭까지 원스톱 지원합니다.</p>
+          <div class="course-meta">
+            <span>실습</span><span>자격증</span><span>취업연계</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Chefs -->
+<section class="chefs" id="chefs">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Chefs</div>
+      <h2 class="section-title">전문 셰프·강사진</h2>
+      <p class="section-desc">미슐랭·5성급 호텔 출신 셰프들이 실전 노하우를 직접 전수합니다.</p>
+    </div>
+    <div class="chef-grid">
+      <article class="chef-card">
+        <div class="chef-photo">
+          <img src="https://images.unsplash.com/photo-1577219491135-25f06e1b0d3a?w=300&q=80" alt="김태호 한식 셰프">
+        </div>
+        <h4>김태호</h4>
+        <div class="role">한식 총괄 셰프</div>
+        <p>前 조선호텔 한식당 수석, 現 한식진흥원 자문위원. 20년 경력, EBS &lt;한식의 힘&gt; 출연.</p>
+        <div class="chef-creds">
+          <span>조선호텔</span><span>20년</span><span>한식전문</span>
+        </div>
+      </article>
+      <article class="chef-card">
+        <div class="chef-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=80" alt="박소연 양식 셰프">
+        </div>
+        <h4>박소연</h4>
+        <div class="role">양식 수석 강사</div>
+        <p>Le Cordon Bleu Paris 수료, 前 파리 미슐랭 1스타 부주방장. 이탈리안·프렌치 정통 레시피 전문.</p>
+        <div class="chef-creds">
+          <span>코르동블루</span><span>미슐랭</span><span>양식</span>
+        </div>
+      </article>
+      <article class="chef-card">
+        <div class="chef-photo">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88baf54?w=300&q=80" alt="이하은 베이킹 강사">
+        </div>
+        <h4>이하은</h4>
+        <div class="role">베이킹·디저트 강사</div>
+        <p>前 파리바게뜨 R&amp;D, 제과기능사·제빵기능사 보유. 카페 창업·홈베이킹 지도 1,200명 이상.</p>
+        <div class="chef-creds">
+          <span>기능사</span><span>창업지도</span><span>베이킹</span>
+        </div>
+      </article>
+      <article class="chef-card">
+        <div class="chef-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=80" alt="최민재 취업반 셰프">
+        </div>
+        <h4>최민재</h4>
+        <div class="role">취업반·실습 총괄</div>
+        <p>前 신라호텔 연회부, 호텔·외식 취업 연계 500명 이상. HACCP·위생관리·면접 코칭 전문.</p>
+        <div class="chef-creds">
+          <span>신라호텔</span><span>취업연계</span><span>HACCP</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">수강 4단계 프로세스</h2>
+      <p class="section-desc">체험 상담부터 수료 후 취업·창업 지원까지, 체계적인 커리큘럼으로 요리 실력을 완성합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>무료 체험·상담</h4>
+        <p>1시간 체험 수업과 레벨 상담으로 목표와 적합한 코스를 안내해 드립니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>맞춤 커리큘럼</h4>
+        <p>취미·자격증·취업 목표에 맞는 수업 플랜과 반 편성을 설계합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>실습 중심 수업</h4>
+        <p>소수 정예 실습으로 레시피를 직접 만들며 기술과 감각을 키웁니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>수료·취업 지원</h4>
+        <p>포트폴리오 촬영, 자격증 대비, 취업·창업 멘토링까지 사후 관리합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu Gallery -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">수강생 메뉴 갤러리</h2>
+      <p class="section-desc">수업 중 완성한 대표 메뉴입니다. 매 시즌 새로운 레시피가 업데이트됩니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <article class="gallery-card">
+        <div class="gal-img">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="한우 불고기 정식">
+        </div>
+        <div class="gal-body">
+          <div class="gal-cat">한식</div>
+          <h4>한우 불고기 정식</h4>
+          <p>양념 비법과 반찬 5종 구성까지, 손님 접대용 한상차림을 완성합니다.</p>
+        </div>
+      </article>
+      <article class="gallery-card">
+        <div class="gal-img">
+          <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80" alt="트러플 크림 파스타">
+        </div>
+        <div class="gal-body">
+          <div class="gal-cat">양식</div>
+          <h4>트러플 크림 파스타</h4>
+          <p>생면 손질부터 소스 농도까지, 레스토랑급 파스타를 집에서도 재현합니다.</p>
+        </div>
+      </article>
+      <article class="gallery-card">
+        <div class="gal-img">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="수제 사워도우">
+        </div>
+        <div class="gal-body">
+          <div class="gal-cat">베이킹</div>
+          <h4>수제 사워도우</h4>
+          <p>스타터 키우기부터 오븐 스팀까지, 바삭한 껍질의 아티산 빵을 만듭니다.</p>
+        </div>
+      </article>
+      <article class="gallery-card">
+        <div class="gal-img">
+          <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80" alt="딸기 무스 케이크">
+        </div>
+        <div class="gal-body">
+          <div class="gal-cat">디저트</div>
+          <h4>딸기 무스 케이크</h4>
+          <p>젤라틴·무스 비율과 데코레이션으로 카페 메뉴급 케이크를 완성합니다.</p>
+        </div>
+      </article>
+      <article class="gallery-card">
+        <div class="gal-img">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="립아이 스테이크">
+        </div>
+        <div class="gal-body">
+          <div class="gal-cat">쿠킹데이트</div>
+          <h4>립아이 스테이크 디너</h4>
+          <p>커플이 함께 굽는 스테이크와 와인 페어링으로 로맨틱 디너를 연출합니다.</p>
+        </div>
+      </article>
+      <article class="gallery-card">
+        <div class="gal-img">
+          <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80" alt="브런치 플래터">
+        </div>
+        <div class="gal-body">
+          <div class="gal-cat">취업반</div>
+          <h4>브런치 플래터</h4>
+          <p>호텔 뷔페 스타일 브런치 플레이팅으로 취업 포트폴리오 메뉴를 구성합니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Facilities -->
+<section class="facilities-section" id="facilities">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Facilities</div>
+      <h2 class="section-title">프로 주방 시설</h2>
+      <p class="section-desc">실제 외식 현장과 동일한 장비와 위생 시스템으로 안전하고 전문적인 실습 환경을 제공합니다.</p>
+    </div>
+    <div class="facility-grid">
+      <article class="facility-card">
+        <div class="fac-img">
+          <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&q=80" alt="메인 실습 주방">
+        </div>
+        <div class="fac-body">
+          <h4>메인 실습 주방</h4>
+          <p>인덕션·가스 레인지 24구, 스테인리스 조리대로 1인 1조 실습이 가능합니다.</p>
+        </div>
+      </article>
+      <article class="facility-card">
+        <div class="fac-img">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&q=80" alt="베이킹 스튜디오">
+        </div>
+        <div class="fac-body">
+          <h4>베이킹 스튜디오</h4>
+          <p>컨벡션·데크 오븐 8대, 발효실·냉장 시설을 갖춘 전문 베이킹 공간입니다.</p>
+        </div>
+      </article>
+      <article class="facility-card">
+        <div class="fac-img">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&q=80" alt="시식·플레이팅 룸">
+        </div>
+        <div class="fac-body">
+          <h4>시식·플레이팅 룸</h4>
+          <p>완성 요리 시식과 사진 촬영이 가능한 갤러리형 다이닝 공간입니다.</p>
+        </div>
+      </article>
+      <article class="facility-card">
+        <div class="fac-img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80" alt="이론·데모 강의실">
+        </div>
+        <div class="fac-body">
+          <h4>이론·데모 강의실</h4>
+          <p>대형 모니터와 촬영 각도로 셰프 시연을 생생하게 관찰할 수 있습니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Schedule -->
+<section class="schedule-section" id="schedule">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Schedule</div>
+      <h2 class="section-title">주간 수업 시간표</h2>
+      <p class="section-desc">2025년 상반기 기준 정규 반 편성입니다. 주말 특강·1:1 레슨은 별도 안내합니다.</p>
+    </div>
+    <div class="schedule-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>시간</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>10:00<span class="time">오전반</span></td>
+            <td>한식 기초</td>
+            <td>베이킹 A</td>
+            <td>양식 기초</td>
+            <td>디저트</td>
+            <td>한식 심화</td>
+            <td>쿠킹데이트</td>
+          </tr>
+          <tr>
+            <td>14:00</td>
+            <td>양식 심화</td>
+            <td>한식 반찬</td>
+            <td>베이킹 B</td>
+            <td>쿠킹데이트</td>
+            <td>디저트 심화</td>
+            <td>주말 특강</td>
+          </tr>
+          <tr>
+            <td>18:00<span class="time">퇴근 후</span></td>
+            <td>취업반 실습</td>
+            <td>양식 저녁</td>
+            <td>취업반 면접</td>
+            <td>한식 저녁</td>
+            <td>베이킹 저녁</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>20:00</td>
+            <td>1:1 레슨</td>
+            <td>취업반 실습</td>
+            <td>1:1 레슨</td>
+            <td>취업반 포폴</td>
+            <td>쿠킹데이트</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="schedule-note">📌 반 편성은 체험 수업 후 레벨과 목표에 따라 조정됩니다. 정확한 시간표는 상담 시 안내해 드립니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Student Success -->
+<section class="success-section" id="success">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Success Stories</div>
+      <h2 class="section-title">수강생 성공 사례</h2>
+      <p class="section-desc">쿠킹클래스와 함께 요리사의 꿈을 이룬 수강생들의 이야기입니다.</p>
+    </div>
+    <div class="success-grid">
+      <article class="success-card">
+        <span class="success-badge">2025 취업</span>
+        <h4>신라호텔 연회부 주방보 조인</h4>
+        <div class="course-name">취업반 · 6개월 수료</div>
+        <p>요리 경험이 전혀 없었지만 취업반 실습과 면접 코칭으로 6개월 만에 5성급 호텔에 합격했습니다.</p>
+        <div class="result">수강 기간 <strong>6개월</strong> · 최민재 셰프 밀착 지도</div>
+      </article>
+      <article class="success-card">
+        <span class="success-badge">2024 창업</span>
+        <h4>성수동 홈베이커리 오픈</h4>
+        <div class="course-name">베이킹 · 디저트</div>
+        <p>이하은 강사님과 함께 사워도우·케이크 메뉴를 완성하고, 창업 멘토링으로 카페를 성공적으로 오픈했어요.</p>
+        <div class="result">월 매출 <strong>1,200만 원+</strong> · 인스타 팔로워 8천</div>
+      </article>
+      <article class="success-card">
+        <span class="success-badge">2024 자격증</span>
+        <h4>제과기능사·제빵기능사 동시 합격</h4>
+        <div class="course-name">베이킹 집중반</div>
+        <p>직장인이라 주말반만 들었는데도 체계적인 커리큘럼 덕분에 1년 만에 두 자격증을 모두 취득했습니다.</p>
+        <div class="result">수강 <strong>주 1회</strong> · 합격률 보장 프로그램</div>
+      </article>
+      <article class="success-card">
+        <span class="success-badge">2025 취미→프로</span>
+        <h4>파인다이닝 레스토랑 스테이지 합류</h4>
+        <div class="course-name">양식 · 취업반</div>
+        <p>박소연 셰프님의 양식 수업 후 스테이지로 전환, 강남 파인다이닝에서 소스 담당으로 일하고 있습니다.</p>
+        <div class="result">양식 수료 <strong>4개월</strong> · 포트폴리오 촬영 지원</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">수강 후기</h2>
+      <p class="section-desc">수강생과 졸업생이 직접 남긴 쿠킹클래스 수강 후기입니다.</p>
+    </div>
+    <div class="review-grid">
+      <article class="review-card">
+        <span class="subject-tag">한식</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>김태호 셰프님 수업이 정말 알차요. 장 담그기부터 한정식까지 단계별로 배워서 이제 명절 음식도 자신 있어요. 주방 분위기도 따뜻하고 좋습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div>
+            <strong>정수연</strong>
+            <span>한식 기초반 · 2025.04</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">양식</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>파스타 소스 비율 하나까지 꼼꼼히 가르쳐 주셔서 집에서도 레스토랑 맛이 나요. 박소연 선생님 덕분에 양식에 완전 빠졌습니다!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div>
+            <strong>김도현</strong>
+            <span>양식 심화반 · 2025.03</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">베이킹</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>사워도우가 이렇게 어려운 줄 몰랐는데 이하은 강사님이 스타터부터 차근차근 도와주셨어요. 이제 매주 빵을 굽고 있어요. 시설도 최고입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div>
+            <strong>박지은</strong>
+            <span>베이킹 A반 · 2025.02</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">디저트</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>마카롱이 항상 실패했는데 여기서는 성공률이 높아요. 플레이팅 감각도 키워서 인스타에 올리면 반응이 폭발합니다. 강추합니다!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div>
+            <strong>이채원</strong>
+            <span>디저트반 · 2025.01</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">쿠킹데이트</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>결혼 기념일에 신청했는데 남편이 요리에 푹 빠졌어요. 와인 페어링까지 해 주셔서 데이트 코스로 최고였습니다. 다음에 또 올 거예요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div>
+            <strong>한미래</strong>
+            <span>쿠킹데이트 · 2024.12</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">취업반</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>취업반 덕분에 호텔 주방에 들어갔습니다. 실습 시간이 길고 포트폴리오·면접 준비까지 챙겨 주셔서 혼자 준비할 때보다 훨씬 빨랐어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">오</div>
+          <div>
+            <strong>오준서</strong>
+            <span>취업반 · 2024.11</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">수강 전 많이 물어보시는 질문을 모았습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">요리를 전혀 못해도 수강할 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 가능합니다. 대부분의 수강생이 초보에서 시작하며, 기초반은 칼질·양념·화력 조절부터 차근차근 가르칩니다. 무료 체험 수업에서 현재 수준을 파악하고 적합한 반을 추천해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">체험 수업은 어떻게 신청하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">하단 상담 신청 양식 또는 전화(02-777-8899)로 예약하시면 됩니다. 체험 수업은 약 90분이며, 에이프런·재료·도구는 모두 학원에서 제공합니다. 체험비는 3만 원이며, 당일 등록 시 수강료에서 차감됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">수강료는 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">코스·횟수에 따라 다릅니다. 취미반 월 4회 기준 28만 원부터, 취업반·집중반은 별도 안내입니다. 2코스 이상 등록·3개월 선납 시 할인이 적용되며, 정확한 금액은 상담 시 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">준비물이 필요한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">실습용 에이프런·타올·도마·칼은 학원에서 대여·제공합니다. 개인용 에이프런 구매를 원하시면 데스크에서 안내해 드립니다. 수업 중 만든 요리는 포장 용기에 담아 가져가실 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">취업반은 어떤 지원을 받나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">HACCP·위생 교육, 포트폴리오 촬영, 이력서·면접 코칭, 제휴 호텔·레스토랑 채용 연계를 제공합니다. 졸업생 89%가 6개월 이내 관련 업종에 취업·창업에 성공했습니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">환불 규정은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">학원법 표준 환불 규정을 적용합니다. 개강 전 전액 환불, 수업 진행 후에는 잔여 회차에 비례하여 환불해 드립니다. 등록 시 환불 규정을 서면으로 안내하며, 자세한 사항은 데스크에 문의해 주세요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Consultation Form -->
+<section class="consult-section" id="consult">
+  <div class="container">
+    <div class="consult-grid">
+      <div class="consult-info">
+        <div class="section-label">Free Trial</div>
+        <h2 class="section-title">무료 체험·상담 신청</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 담당 매니저가 연락드립니다. 급한 문의는 전화(02-777-8899)로 연락해 주세요.</p>
+        <div class="consult-features">
+          <div class="consult-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>90분 체험 수업</strong>
+              <span>관심 코스 1회 체험과 레벨 상담을 함께 진행합니다.</span>
+            </div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>맞춤 코스 설계</strong>
+              <span>취미·자격증·취업 목표에 맞는 최적의 반을 추천합니다.</span>
+            </div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>재료·도구 제공</strong>
+              <span>체험·정규 수업 재료와 프로 주방 도구를 모두 제공합니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="체험·상담 신청이 접수되었습니다! 24시간 내 담당 매니저가 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="course">관심 과정</label>
+            <select id="course" name="course" required>
+              <option value="">과정을 선택해 주세요</option>
+              <option value="korean">한식</option>
+              <option value="western">양식</option>
+              <option value="baking">베이킹</option>
+              <option value="dessert">디저트</option>
+              <option value="date">쿠킹데이트</option>
+              <option value="career">취업반</option>
+              <option value="undecided">미정·상담 후 결정</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="experience">요리 경험</label>
+            <select id="experience" name="experience" required>
+              <option value="">선택해 주세요</option>
+              <option value="none">전혀 없음</option>
+              <option value="home">집에서 가끔</option>
+              <option value="hobby">취미로 1년+</option>
+              <option value="pro">관련 업종 경력</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="visit-date">희망 체험일</label>
+            <input type="date" id="visit-date" name="visit-date">
+          </div>
+          <div class="form-group full">
+            <label for="message">상담 요청 사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="목표(취미·자격증·취업), 가능한 요일·시간, 궁금한 점 등을 자유롭게 작성해 주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">체험·상담 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">홍대입구역 인근, 넓은 주차와 야간 수업 접근이 편리한 요리학원입니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>쿠킹클래스 COOKING CLASS</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 마포구 연남동 456, 쿠킹클래스빌딩 2~4층<br>(홍대입구역 2번 출구 도보 5분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>전화: 02-777-8899<br>카카오톡: @cookingclass<br>이메일: hello@cookingclass.kr</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>교통 안내</strong>
+            <span>지하철 2호선·경의중앙선 홍대입구역 2번 출구 도보 5분<br>버스: 연남동·홍대입구역 정류장 하차<br>주차: 건물 지하 1~2층 (3시간 무료)</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>10:00 – 22:00</td></tr>
+          <tr><td>토요일</td><td>09:00 – 20:00</td></tr>
+          <tr><td>일·공휴일</td><td>쿠킹데이트·특강만 운영</td></tr>
+          <tr><td>상담 시간</td><td>평일 10:00 – 19:00 (예약제)</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>쿠킹클래스 COOKING CLASS</strong>
+          <span>서울 마포구 연남동 456</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">쿠킹클래스 <span>COOKING CLASS</span></a>
+      <p>2012년 설립 이래 8,500명 이상의 수강생과 함께했습니다. 한식·양식·베이킹·디저트·취업반까지, 주방에서 피어나는 당신만의 요리 이야기를 시작하세요.</p>
+      <div class="footer-contact">
+        <span>📍 서울 마포구 연남동 456, 쿠킹클래스빌딩 2~4층</span>
+        <span>📞 02-777-8899</span>
+        <span>✉️ hello@cookingclass.kr</span>
+      </div>
+      <div class="footer-social">
+        <a href="#" data-toast="인스타그램 @cookingclass_kr 준비 중입니다." aria-label="인스타그램">IG</a>
+        <a href="#" data-toast="유튜브 쿠킹클래스 채널 준비 중입니다." aria-label="유튜브">YT</a>
+        <a href="#" data-toast="카카오톡 채널: @cookingclass" aria-label="카카오톡">KK</a>
+        <a href="#" data-toast="네이버 블로그 준비 중입니다." aria-label="블로그">BL</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>수업 과정</h4>
+      <a href="#courses">한식</a>
+      <a href="#courses">양식</a>
+      <a href="#courses">베이킹</a>
+      <a href="#courses">디저트</a>
+      <a href="#courses">쿠킹데이트</a>
+      <a href="#courses">취업반</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#chefs">셰프진 소개</a>
+      <a href="#gallery">메뉴 갤러리</a>
+      <a href="#facilities">시설 안내</a>
+      <a href="#success">성공 사례</a>
+      <a href="#reviews">수강 후기</a>
+      <a href="#process">수강 프로세스</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>상담 안내</h4>
+      <a href="#consult">체험·상담 신청</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 10:00 – 22:00</p>
+      <p>토요일 09:00 – 20:00</p>
+      <p>체험 예약: 02-777-8899</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 쿠킹클래스 COOKING CLASS. All rights reserved.</span>
+    <span>대표 김태호 · 사업자등록번호 234-56-78901 · 학원등록번호 제2025-서울마포-0456호</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

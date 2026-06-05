@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>앱크래프트 APPCRAFT — 모바일 앱 개발 & 디자인 에이전시</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #0F1117;
+  --text: #F8FAFC;
+  --text-muted: #94A3B8;
+  --accent: #FF6B6B;
+  --accent-2: #FF8E72;
+  --accent-text: #fff;
+  --border: rgba(255,107,107,0.12);
+  --nav-bg: rgba(15,17,23,0.94);
+  --footer-bg: #0A0C10;
+  --card-bg: #171B24;
+  --surface: #13161E;
+  --btn-radius: 12px;
+  --card-radius: 20px;
+  --logo-weight: 800;
+  --footer-text: rgba(255,255,255,0.5);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+.site-nav .nav-links a:hover { color: var(--text); }
+.nav-cta { background: linear-gradient(135deg, #FF6B6B, #FF8E72); }
+
+.hero {
+  position: relative;
+  padding: clamp(48px, 8vw, 80px) 0 clamp(40px, 6vw, 64px);
+  overflow: hidden;
+}
+
+.mesh-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 25% 15%, rgba(255,107,107,0.18), transparent),
+    radial-gradient(ellipse 55% 45% at 80% 75%, rgba(255,142,114,0.12), transparent);
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.28);
+  border-radius: 100px;
+  font-size: 0.76rem;
+  color: #FF8E72;
+  margin-bottom: 22px;
+  font-weight: 500;
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  background: #22C55E;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease infinite;
+}
+
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E72, #FFB347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-copy p {
+  font-size: clamp(0.92rem, 2vw, 1.06rem);
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  max-width: 480px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+
+.btn-primary {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E72);
+  box-shadow: 0 4px 24px rgba(255,107,107,0.4);
+  color: #fff;
+}
+
+.btn-outline { border-color: rgba(255,107,107,0.35); color: var(--text); }
+.btn-outline:hover { border-color: #FF6B6B; background: rgba(255,107,107,0.06); }
+
+.hero-stats {
+  display: flex;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #FF8E72;
+}
+
+.hero-stat span { font-size: 0.72rem; color: #64748B; }
+
+/* Phone mockup */
+.phone-wrap {
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.phone {
+  width: min(280px, 75vw);
+  background: #1A1F2B;
+  border: 2px solid rgba(255,107,107,0.25);
+  border-radius: 36px;
+  padding: 12px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 60px rgba(255,107,107,0.08);
+  transform: rotateY(-8deg) rotateX(4deg);
+}
+
+.phone-notch {
+  width: 80px; height: 24px;
+  background: #0F1117;
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto 8px;
+}
+
+.phone-screen {
+  background: linear-gradient(180deg, #1E2433 0%, #13161E 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.app-header {
+  padding: 20px 20px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-header h4 { font-size: 0.9rem; font-weight: 700; }
+.app-avatar {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #FF6B6B, #FF8E72);
+  border-radius: 50%;
+}
+
+.app-cards {
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.app-card {
+  background: rgba(255,107,107,0.08);
+  border: 1px solid rgba(255,107,107,0.2);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.app-card-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #FF6B6B, #FF8E72);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.app-card-text strong { display: block; font-size: 0.82rem; margin-bottom: 2px; }
+.app-card-text span { font-size: 0.7rem; color: #64748B; }
+
+.app-chart {
+  margin: 0 16px 16px;
+  background: #171B24;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+
+.app-chart-label { font-size: 0.68rem; color: #64748B; margin-bottom: 12px; }
+
+.mini-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 60px;
+}
+
+.mini-bar {
+  flex: 1;
+  background: linear-gradient(to top, #FF6B6B, #FF8E72);
+  border-radius: 4px 4px 0 0;
+  min-height: 8px;
+}
+
+.mini-bar:nth-child(1) { height: 45%; }
+.mini-bar:nth-child(2) { height: 72%; }
+.mini-bar:nth-child(3) { height: 58%; }
+.mini-bar:nth-child(4) { height: 90%; }
+.mini-bar:nth-child(5) { height: 65%; }
+
+.app-nav-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.3);
+}
+
+.app-nav-bar span { font-size: 1.1rem; opacity: 0.5; }
+.app-nav-bar span.active { opacity: 1; color: #FF6B6B; }
+
+.customers-strip {
+  padding: clamp(36px, 5vw, 56px) 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.customers-strip .strip-label {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #64748B;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+
+.logo-strip { gap: clamp(12px, 2vw, 20px); opacity: 1; }
+
+.logo-strip span {
+  padding: 12px 24px;
+  background: rgba(255,107,107,0.04);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748B;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.logo-strip span:hover { border-color: rgba(255,107,107,0.4); color: #94A3B8; }
+
+.section-label { color: #FF8E72; }
+.features { background: var(--surface); }
+.alt-section { background: var(--bg); }
+.surface-section { background: var(--surface); }
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.bento-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.bento-item:hover { border-color: rgba(255,107,107,0.4); transform: translateY(-2px); }
+.bento-item.wide { grid-column: span 2; }
+
+.bento-icon {
+  width: 44px; height: 44px;
+  background: rgba(255,107,107,0.12);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 16px;
+}
+
+.bento-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FF6B6B;
+  margin-bottom: 8px;
+}
+
+.bento-item h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.bento-item p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
+
+.apps-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.showcase-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.showcase-card:hover { border-color: #FF6B6B; transform: translateY(-4px); }
+
+.showcase-preview {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.showcase-preview.coral { background: linear-gradient(135deg, rgba(255,107,107,0.2), rgba(255,142,114,0.1)); }
+.showcase-preview.teal { background: linear-gradient(135deg, rgba(45,212,191,0.15), rgba(255,107,107,0.08)); }
+.showcase-preview.purple { background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(255,107,107,0.08)); }
+
+.showcase-body { padding: 24px; }
+.showcase-tag { font-size: 0.68rem; font-weight: 700; color: #FF6B6B; letter-spacing: 0.06em; margin-bottom: 8px; }
+.showcase-body h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.showcase-body p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
+.showcase-meta { font-size: 0.72rem; color: #64748B; }
+
+.how-section .process-step::before {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E72);
+  box-shadow: 0 8px 24px rgba(255,107,107,0.35);
+}
+
+.how-section .process-step h4 { font-weight: 700; color: var(--text); }
+.how-section .process-step p { color: var(--text-muted); }
+
+.case-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.case-card:hover { border-color: rgba(255,107,107,0.4); transform: translateY(-4px); }
+
+.case-industry { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8E72; margin-bottom: 12px; }
+.case-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; line-height: 1.35; }
+.case-card > p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.75; flex: 1; margin-bottom: 24px; }
+
+.case-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.case-metric strong { display: block; font-size: 1.35rem; font-weight: 800; color: #FF8E72; letter-spacing: -0.03em; }
+.case-metric span { font-size: 0.68rem; color: #64748B; }
+.case-logo { font-weight: 800; font-size: 0.9rem; color: #475569; margin-bottom: 16px; }
+
+.integ-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.integ-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.integ-chip:hover { border-color: rgba(255,107,107,0.4); background: rgba(255,107,107,0.06); color: var(--text); }
+
+.integ-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: #1E2433;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.pricing-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card.featured {
+  border-color: #FF6B6B;
+  box-shadow: 0 0 48px rgba(255,107,107,0.15);
+  position: relative;
+}
+
+.pricing-card.featured::before {
+  content: 'POPULAR';
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #FF6B6B, #FF8E72);
+  padding: 4px 16px;
+  border-radius: 100px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.pricing-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.pricing-desc { font-size: 0.8rem; color: #64748B; margin-bottom: 20px; line-height: 1.5; }
+.pricing-card .price { font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 6px; }
+.pricing-card .price span { font-size: 0.82rem; color: #64748B; font-weight: 500; }
+.pricing-billing { font-size: 0.75rem; color: #475569; margin-bottom: 24px; }
+.pricing-card .btn { width: 100%; margin-bottom: 24px; }
+
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.pricing-features li:last-child { border-bottom: none; }
+.pricing-features li::before { content: '✓'; color: #FF6B6B; font-weight: 700; flex-shrink: 0; }
+.pricing-features li.muted { color: #475569; }
+.pricing-features li.muted::before { content: '—'; color: #334155; }
+
+.review-card { background: var(--card-bg); border: 1px solid var(--border); height: 100%; }
+.review-card:hover { border-color: rgba(255,107,107,0.35); transform: translateY(-3px); }
+.review-card blockquote { color: #CBD5E1; }
+.review-stars { color: #FBBF24; }
+.review-avatar { background: linear-gradient(135deg, #FF6B6B, #FF8E72); }
+.review-author strong { color: var(--text); }
+.review-author span { color: #64748B; }
+
+.faq-item { background: var(--card-bg); border-color: var(--border); }
+.faq-q { color: var(--text); }
+.faq-q::after { color: #64748B; }
+.faq-a-inner { color: var(--text-muted); }
+
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.contact-info h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 16px; }
+.contact-info > p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 32px; }
+.contact-perks { display: flex; flex-direction: column; gap: 16px; }
+
+.contact-perk { display: flex; gap: 14px; align-items: flex-start; }
+
+.contact-perk-icon {
+  width: 40px; height: 40px;
+  background: rgba(255,107,107,0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-perk strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.contact-perk span { font-size: 0.82rem; color: #64748B; line-height: 1.5; }
+
+.form-card { background: var(--card-bg); border-color: var(--border); }
+.form-group label { color: #CBD5E1; }
+.form-group input, .form-group select, .form-group textarea {
+  background: #1E2433;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #FF6B6B; }
+
+.cta-band {
+  background: linear-gradient(135deg, rgba(255,107,107,0.12), rgba(255,142,114,0.08));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cta-band h2 { font-size: clamp(1.6rem, 4vw, 2.25rem); font-weight: 800; margin-bottom: 12px; }
+.cta-band p { color: var(--text-muted); margin-bottom: 28px; font-size: 1rem; }
+
+.site-footer { background: var(--footer-bg); border-top: 1px solid var(--border); }
+
+.footer-social { display: flex; gap: 12px; margin-top: 20px; }
+
+.footer-social a {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,107,107,0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.footer-social a:hover { border-color: #FF6B6B; color: #fff; }
+
+.footer-newsletter { display: flex; gap: 8px; margin-top: 12px; }
+
+.footer-newsletter input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255,107,107,0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.82rem;
+}
+
+.footer-newsletter button {
+  padding: 10px 16px;
+  background: #FF6B6B;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.footer-bottom a { color: rgba(255,255,255,0.45); }
+.footer-bottom a:hover { color: #fff; }
+
+@media (max-width: 1024px) {
+  .integ-grid { grid-template-columns: repeat(3, 1fr); }
+  .apps-showcase { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .phone { transform: none; }
+  .bento { grid-template-columns: 1fr; }
+  .bento-item.wide { grid-column: span 1; }
+  .contact-wrap { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr; }
+  .integ-grid { grid-template-columns: repeat(2, 1fr); }
+  .apps-showcase { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .integ-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">APPCRAFT</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#apps">Apps</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Start Project</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="mesh-bg"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-badge"><span class="dot"></span> React Native 0.76 · Flutter 3.24 지원</div>
+        <h1>모바일 앱,<br><span>완벽하게 만듭니다</span></h1>
+        <p>iOS·Android 네이티브 & 크로스플랫폼 개발. UI/UX 디자인부터 App Store 최적화까지 — 스타트업 MVP부터 Enterprise 앱까지.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">프로젝트 문의 →</a>
+          <a href="#apps" class="btn btn-outline">포트폴리오 보기</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>120+</strong><span>출시 앱</span></div>
+          <div class="hero-stat"><strong>4.7★</strong><span>평균 스토어 평점</span></div>
+          <div class="hero-stat"><strong>8주</strong><span>MVP 평균 기간</span></div>
+        </div>
+      </div>
+      <div class="phone-wrap" id="product">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="app-header">
+              <h4>FitTrack Pro</h4>
+              <div class="app-avatar"></div>
+            </div>
+            <div class="app-cards">
+              <div class="app-card">
+                <div class="app-card-icon">🏃</div>
+                <div class="app-card-text"><strong>오늘의 운동</strong><span>45분 · 칼로리 320kcal</span></div>
+              </div>
+              <div class="app-card">
+                <div class="app-card-icon">💧</div>
+                <div class="app-card-text"><strong>수분 섭취</strong><span>1.8L / 2.5L 목표</span></div>
+              </div>
+            </div>
+            <div class="app-chart">
+              <div class="app-chart-label">주간 활동량</div>
+              <div class="mini-bars">
+                <div class="mini-bar"></div><div class="mini-bar"></div><div class="mini-bar"></div>
+                <div class="mini-bar"></div><div class="mini-bar"></div>
+              </div>
+            </div>
+            <div class="app-nav-bar">
+              <span class="active">🏠</span><span>📊</span><span>➕</span><span>👤</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="customers-strip" id="clients">
+  <div class="container">
+    <p class="strip-label">Trusted by 80+ startups & enterprises</p>
+    <div class="logo-strip">
+      <span>Toss</span>
+      <span>Coupang</span>
+      <span>Yanolja</span>
+      <span>당근마켓</span>
+      <span>배달의민족</span>
+      <span>무신사</span>
+      <span>직방</span>
+      <span>뱅크샐러드</span>
+    </div>
+  </div>
+</section>
+
+<section class="features surface-section" id="apps">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">우리가 만든 앱들</h2>
+      <p class="section-desc">핀테크, 헬스케어, 커머스, SaaS — 다양한 도메인의 모바일 경험을 설계합니다.</p>
+    </div>
+    <div class="apps-showcase">
+      <article class="showcase-card">
+        <div class="showcase-preview coral">💳</div>
+        <div class="showcase-body">
+          <div class="showcase-tag">FINTECH · 2025</div>
+          <h3>PayMint</h3>
+          <p>P2P 송금 & 가계부 앱. MAU 850K, App Store 금융 카테고리 Top 10.</p>
+          <div class="showcase-meta">★ 4.8 · 1.2M 다운로드</div>
+        </div>
+      </article>
+      <article class="showcase-card">
+        <div class="showcase-preview teal">🏥</div>
+        <div class="showcase-body">
+          <div class="showcase-tag">HEALTH · 2024</div>
+          <h3>MediConnect</h3>
+          <p>비대면 진료 & 처방전 앱. 200+ 병원 연동, HIPAA 준수 아키텍처.</p>
+          <div class="showcase-meta">★ 4.7 · 500K 다운로드</div>
+        </div>
+      </article>
+      <article class="showcase-card">
+        <div class="showcase-preview purple">🛍️</div>
+        <div class="showcase-body">
+          <div class="showcase-tag">COMMERCE · 2024</div>
+          <h3>StyleBox</h3>
+          <p>퍼스널 스타일링 커머스. AR 피팅룸, 전환율 3.2배 향상.</p>
+          <div class="showcase-meta">★ 4.6 · 320K 다운로드</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">모바일 앱 풀스택 서비스</h2>
+      <p class="section-desc">디자인·개발·QA·출시·운영 — 원스톱 모바일 파트너.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-item wide">
+        <div class="bento-icon">📱</div>
+        <span class="bento-tag">Development</span>
+        <h3>iOS & Android 네이티브 / 크로스플랫폼</h3>
+        <p>Swift, Kotlin, React Native, Flutter — 프로젝트에 최적의 스택을 제안합니다. CI/CD, 자동화 테스트, OTA 업데이트 파이프라인을 기본 포함합니다.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🎨</div>
+        <span class="bento-tag">Design</span>
+        <h3>UI/UX 디자인</h3>
+        <p>Figma 프로토타입, 디자인 시스템, HIG/Material 가이드 준수.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🔍</div>
+        <span class="bento-tag">ASO</span>
+        <h3>App Store 최적화</h3>
+        <p>키워드, 스크린샷, A/B 테스트로 다운로드 전환율 극대화.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">☁️</div>
+        <span class="bento-tag">Backend</span>
+        <h3>백엔드 & API</h3>
+        <p>Node.js, Firebase, AWS — 확장 가능한 서버 아키텍처.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🧪</div>
+        <span class="bento-tag">QA</span>
+        <h3>QA & 테스트</h3>
+        <p>기기 50+ 대상 자동화 테스트. TestFlight·내부 배포.</p>
+      </div>
+      <div class="bento-item wide">
+        <div class="bento-icon">📈</div>
+        <span class="bento-tag">Growth</span>
+        <h3>출시 후 Growth & Analytics</h3>
+        <p>Firebase Analytics, Mixpanel, Amplitude 연동. 푸시 알림, A/B 테스트, 리텐션 캠페인 — 데이터 기반 성장을 함께합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section how-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">8주 MVP 개발 프로세스</h2>
+      <p class="section-desc">애자일 2주 스프린트. 매 스프린트마다 TestFlight 빌드를 공유합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>Discovery</h4>
+        <p>유저 리서치, 와이어프레임, 기술 스택 선정. 1주 내 PRD 완성.</p>
+      </div>
+      <div class="process-step">
+        <h4>Design</h4>
+        <p>Figma hi-fi 프로토타입, 디자인 시스템, 인터랙션 스펙.</p>
+      </div>
+      <div class="process-step">
+        <h4>Build</h4>
+        <p>2주 스프린트 개발. 주간 TestFlight 빌드 & 피드백 반영.</p>
+      </div>
+      <div class="process-step">
+        <h4>Launch</h4>
+        <p>스토어 심사, ASO, 소프트 런치 → 풀 런치. 30일 무료 버그픽스.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="case-studies">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">고객 성공 사례</h2>
+      <p class="section-desc">스타트업 MVP부터 대기업 앱 리뉴얼까지 — APPCRAFT와 함께한 결과.</p>
+    </div>
+    <div class="grid-3">
+      <article class="case-card">
+        <div class="case-logo">Toss Bank</div>
+        <div class="case-industry">FINTECH · Enterprise</div>
+        <h3>모바일 뱅킹 앱 UX 리뉴얼</h3>
+        <p>기존 앱 전면 리디자인 & React Native 마이그레이션. 전환율 28% 향상, 앱 크래시율 90% 감소.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>28%</strong><span>전환율 향상</span></div>
+          <div class="case-metric"><strong>90%</strong><span>크래시 감소</span></div>
+          <div class="case-metric"><strong>6mo</strong><span>개발 기간</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">FitLife</div>
+        <div class="case-industry">HEALTH · Series A</div>
+        <h3>8주 MVP로 시드 투자 유치</h3>
+        <p>아이디어만 있던 팀에 8주 MVP 제작. TestFlight 500명 베타 후 App Store 출시, 시드 ₩5억 유치.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>8wk</strong><span>MVP 기간</span></div>
+          <div class="case-metric"><strong>₩5억</strong><span>시드 유치</span></div>
+          <div class="case-metric"><strong>4.8★</strong><span>App Store</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">StyleBox</div>
+        <div class="case-industry">COMMERCE · Growth</div>
+        <h3>AR 피팅룸으로 전환율 3.2배</h3>
+        <p>ARKit/ARCore 기반 가상 피팅 기능 개발. 장바구니 전환율 3.2배, 반품률 22% 감소.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>3.2x</strong><span>전환율</span></div>
+          <div class="case-metric"><strong>22%</strong><span>반품 감소</span></div>
+          <div class="case-metric"><strong>AR</strong><span>Featured</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="tech">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Tech Stack</div>
+      <h2 class="section-title">검증된 모바일 기술 스택</h2>
+      <p class="section-desc">네이티브부터 크로스플랫폼까지 — 프로젝트에 맞는 최적 스택.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-chip"><span class="integ-icon">🍎</span> Swift / SwiftUI</div>
+      <div class="integ-chip"><span class="integ-icon">🤖</span> Kotlin</div>
+      <div class="integ-chip"><span class="integ-icon">⚛️</span> React Native</div>
+      <div class="integ-chip"><span class="integ-icon">🦋</span> Flutter</div>
+      <div class="integ-chip"><span class="integ-icon">🔥</span> Firebase</div>
+      <div class="integ-chip"><span class="integ-icon">☁️</span> AWS Amplify</div>
+      <div class="integ-chip"><span class="integ-icon">🎨</span> Figma</div>
+      <div class="integ-chip"><span class="integ-icon">📊</span> Mixpanel</div>
+      <div class="integ-chip"><span class="integ-icon">🔔</span> OneSignal</div>
+      <div class="integ-chip"><span class="integ-icon">🧪</span> Detox / Maestro</div>
+      <div class="integ-chip"><span class="integ-icon">🐙</span> Fastlane</div>
+      <div class="integ-chip"><span class="integ-icon">📦</span> CodePush</div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">프로젝트 규모별 패키지</h2>
+      <p class="section-desc">고정가 패키지. 초기 상담 & 견적 무료.</p>
+    </div>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <h3>MVP</h3>
+        <p class="pricing-desc">스타트업 아이디어 검증용 최소 기능 앱.</p>
+        <div class="price">₩12M<span>부터</span></div>
+        <p class="pricing-billing">6~8주 · iOS 또는 Android</p>
+        <a href="#contact" class="btn btn-outline btn-sm">견적 요청</a>
+        <ul class="pricing-features">
+          <li>UI/UX 디자인</li>
+          <li>핵심 기능 3~5개</li>
+          <li>단일 플랫폼</li>
+          <li>TestFlight/내부 배포</li>
+          <li>기본 Analytics</li>
+          <li class="muted">백엔드 개발</li>
+          <li class="muted">ASO & 마케팅</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Full App</h3>
+        <p class="pricing-desc">iOS + Android 동시 출시 풀 기능 앱.</p>
+        <div class="price">₩35M<span>부터</span></div>
+        <p class="pricing-billing">10~16주 · 크로스플랫폼</p>
+        <a href="#contact" class="btn btn-primary btn-sm">프로젝트 시작</a>
+        <ul class="pricing-features">
+          <li>풀 UI/UX & 디자인 시스템</li>
+          <li>iOS + Android 동시 개발</li>
+          <li>백엔드 & API</li>
+          <li>QA & 자동화 테스트</li>
+          <li>App Store 출시 & ASO</li>
+          <li>30일 버그픽스 보증</li>
+          <li>전담 PM & 주간 리포트</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Retainer</h3>
+        <p class="pricing-desc">출시 후 지속 개발 & 운영 파트너.</p>
+        <div class="price">₩5M<span>/월</span></div>
+        <p class="pricing-billing">최소 3개월 · 전담 개발자 1명</p>
+        <a href="#contact" class="btn btn-outline btn-sm">상담 신청</a>
+        <ul class="pricing-features">
+          <li>전담 개발자 1명 배정</li>
+          <li>월 80시간 개발</li>
+          <li>버그픽스 & 핫픽스</li>
+          <li>기능 추가 & A/B 테스트</li>
+          <li>Analytics 리포트</li>
+          <li>스토어 업데이트 관리</li>
+          <li>우선 기술 지원</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">고객들의 이야기</h2>
+      <p class="section-desc">스타트업 CEO, PM, CTO — APPCRAFT와 함께한 팀의 후기.</p>
+    </div>
+    <div class="grid-4">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"8주 만에 MVP가 나왔고, 그걸로 시드 투자를 받았어요. 디자인 퀄리티와 개발 속도 모두 최고입니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">KL</div>
+          <div><strong>김로운</strong><span>CEO · FitLife</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"React Native 마이그레이션을 6개월 만에 완료. 크래시율 90% 감소, 팀 모두 만족합니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">JH</div>
+          <div><strong>정현우</strong><span>CTO · Toss Bank</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"AR 피팅룸 아이디어를 3개월 만에 구현해 줬어요. 전환율 3배 — ROI가 명확합니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">SY</div>
+          <div><strong>신예진</strong><span>PM · StyleBox</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"매주 TestFlight 빌드를 받아서 피드백 반영이 빨랐어요. 커뮤니케이션이 정말 투명합니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">DM</div>
+          <div><strong>David Min</strong><span>Founder · PayMint</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">hello@appcraft.io 또는 카카오톡 채널로 문의해 주세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" type="button">네이티브 vs 크로스플랫폼, 어떤 걸 추천하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">MVP·스타트업은 React Native/Flutter로 비용·속도 최적화. 고성능 게임, AR/VR, OS 특화 기능이 필요하면 Swift/Kotlin 네이티브를 추천합니다. 상담 시 프로젝트에 맞는 스택을 제안해 드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">MVP 개발 기간은 얼마나 걸리나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">MVP 패키지는 평균 6~8주입니다. 기능 범위와 플랫폼 수에 따라 달라지며, Discovery 단계에서 상세 일정을 확정합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">앱 소스코드와 IP는 누구에게 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">프로젝트 완료 시 소스코드, 디자인 에셋, IP 모두 클라이언트에게 이전됩니다. GitHub repo 접근권한도 함께 제공합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">App Store 심사도 대응하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">iOS App Store, Google Play 심사 경험이 풍부합니다. 리젝 대응, 메타데이터 최적화, ASO까지 Full App 패키지에 포함됩니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">출시 후 유지보수는 어떻게 하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">Full App 패키지에 30일 버그픽스가 포함됩니다. 이후 Retainer(월 ₩5M~) 또는 건별 유지보수 계약이 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">이미 개발 중인 앱도 협업 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">네, mid-development 합류, 코드 리뷰, 특정 기능만 개발하는 partial engagement도 가능합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>다음 히트 앱, 함께 만들어요</h2>
+    <p>무료 초기 상담 · NDA 체결 가능 · 24시간 내 회신</p>
+    <a href="#contact" class="btn btn-primary">프로젝트 문의하기 →</a>
+  </div>
+</section>
+
+<section class="surface-section" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-label">Contact</div>
+        <h3>앱 프로젝트 상담</h3>
+        <p>아이디어 단계부터 출시 후 운영까지 — 30분 화상 미팅으로 APPCRAFT가 적합한 파트너인지 확인해 보세요.</p>
+        <div class="contact-perks">
+          <div class="contact-perk">
+            <span class="contact-perk-icon">🎯</span>
+            <div><strong>Free Discovery Call</strong><span>PRD 리뷰 & 기술 스택 제안</span></div>
+          </div>
+          <div class="contact-perk">
+            <span class="contact-perk-icon">📅</span>
+            <div><strong>1-Week Wireframe</strong><span>상담 후 1주 내 와이어프레임 제안</span></div>
+          </div>
+          <div class="contact-perk">
+            <span class="contact-perk-icon">🌏</span>
+            <div><strong>Seoul · Remote</strong><span>한·영 지원 · Slack 실시간 소통</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="프로젝트 문의가 접수되었습니다! 24시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="email">이메일</label>
+              <input type="email" id="email" name="email" placeholder="you@startup.com" required>
+            </div>
+            <div class="form-group">
+              <label for="company">회사명</label>
+              <input type="text" id="company" name="company" placeholder="FitLife Inc.">
+            </div>
+            <div class="form-group">
+              <label for="platform">플랫폼</label>
+              <select id="platform" name="platform">
+                <option value="">선택해 주세요</option>
+                <option>iOS + Android</option>
+                <option>iOS only</option>
+                <option>Android only</option>
+                <option>웹 + 모바일</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="package">관심 패키지</label>
+              <select id="package" name="package">
+                <option>MVP</option>
+                <option selected>Full App</option>
+                <option>Retainer</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">프로젝트 설명</label>
+              <textarea id="message" name="message" placeholder="앱 컨셉, 타깃 유저, 예산·일정 등을 알려주세요."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">문의 보내기 →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">APPCRAFT</a>
+      <p>모바일 앱 개발 & 디자인 에이전시. 아이디어를 App Store 히트작으로 — Seoul.</p>
+      <div class="footer-social">
+        <a href="#" data-toast="App Store — APPCRAFT apps">AS</a>
+        <a href="#" data-toast="LinkedIn — APPCRAFT">in</a>
+        <a href="#" data-toast="GitHub — appcraft-dev">GH</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Development</a>
+      <a href="#services">UI/UX Design</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" data-toast="Careers — We're hiring!">Careers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Work</h4>
+      <a href="#apps">Portfolio</a>
+      <a href="#case-studies">Case Studies</a>
+      <a href="#" data-toast="PayMint — App Store">PayMint</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#faq">FAQ</a>
+      <a href="#" data-toast="Blog — portfolio demo">Blog</a>
+      <a href="#" data-toast="Tech Stack Guide">Tech Guide</a>
+      <p style="margin-top:16px;font-size:0.78rem;color:rgba(255,255,255,0.4)">Newsletter</p>
+      <form class="footer-newsletter demo-form" data-success="구독해 주셔서 감사합니다!">
+        <input type="email" placeholder="Email" required aria-label="Newsletter email">
+        <button type="submit">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 APPCRAFT Inc. All rights reserved.</span>
+    <span>
+      <a href="#" data-toast="Privacy Policy — demo">Privacy</a> ·
+      <a href="#" data-toast="Terms — demo">Terms</a> ·
+      <a href="#" data-toast="Portfolio — appcraft.io">Portfolio</a>
+    </span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

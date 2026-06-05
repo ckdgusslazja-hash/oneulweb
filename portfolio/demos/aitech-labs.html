@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI테크랩스 AI TECH LABS — Enterprise Generative AI Platform</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+:root {
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --bg: #0F0A1A;
+  --text: #F5F3FF;
+  --text-muted: #A78BFA;
+  --accent: #8B5CF6;
+  --accent-2: #A855F7;
+  --accent-text: #fff;
+  --border: rgba(139,92,246,0.22);
+  --nav-bg: rgba(15,10,26,0.94);
+  --footer-bg: #07040F;
+  --card-bg: #1A1228;
+  --surface: #120C1E;
+  --alt-bg: #0F0A1A;
+  --btn-radius: 10px;
+  --card-radius: 16px;
+  --logo-weight: 700;
+  --footer-text: rgba(255,255,255,0.55);
+}
+body { background: var(--bg); color: var(--text); }
+.site-nav { border-bottom-color: var(--border); }
+.site-nav .logo { color: #C4B5FD; font-weight: 800; letter-spacing: -0.03em; }
+.site-nav .logo span { color: var(--text-muted); font-size: 0.72em; font-weight: 500; margin-left: 6px; }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { background: linear-gradient(135deg, #8B5CF6, #A855F7); color: var(--accent-text); }
+.nav-toggle { color: var(--text); }
+@media (max-width: 768px) { .nav-links { background: var(--nav-bg); border-color: var(--border); } }
+
+.hero { position: relative; padding: clamp(48px,8vw,88px) 0 clamp(40px,6vw,64px); overflow: hidden; }
+.hero-mesh { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 10% 0%, rgba(139,92,246,0.18), transparent), radial-gradient(ellipse 50% 40% at 90% 80%, rgba(168,85,247,0.1), transparent); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,64px); align-items: center; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.3); border-radius: 100px; font-size: 0.76rem; color: #C4B5FD; margin-bottom: 22px; font-weight: 600; }
+.hero-badge .dot { width: 6px; height: 6px; background: #22C55E; border-radius: 50%; animation: pulse-dot 2s ease infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.1rem,5vw,3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 20px; }
+.hero h1 em { font-style: normal; background: linear-gradient(135deg, #A78BFA, #C084FC); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-lead { font-size: clamp(0.92rem,2vw,1.08rem); color: var(--text-muted); line-height: 1.8; max-width: 520px; margin-bottom: 28px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.btn-primary { background: linear-gradient(135deg, #8B5CF6, #A855F7); color: var(--accent-text); box-shadow: 0 4px 24px rgba(139,92,246,0.35); }
+.btn-outline { border: 1.5px solid rgba(139,92,246,0.4); color: #C4B5FD; }
+.btn-outline:hover { background: rgba(139,92,246,0.08); }
+.hero-stats { display: flex; gap: clamp(20px,4vw,40px); flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
+.hero-stat strong { display: block; font-family: var(--font-display); font-size: clamp(1.2rem,2.5vw,1.55rem); font-weight: 800; color: #C4B5FD; }
+.hero-stat span { font-size: 0.72rem; color: var(--text-muted); }
+
+.product-mock { background: #1A1228; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 24px 64px rgba(139,92,246,0.2); }
+.mock-top { padding: 12px 16px; background: #1A1228; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid var(--border); }
+.mock-top span { width: 10px; height: 10px; border-radius: 50%; }
+.mock-top span:nth-child(1){background:#EF4444} .mock-top span:nth-child(2){background:#EAB308} .mock-top span:nth-child(3){background:#22C55E}
+.mock-url { margin-left: auto; font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono); }
+.mock-body { padding: clamp(16px,3vw,24px); }
+.mock-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+.mock-metric { background: #120C1E; border-radius: 12px; padding: 14px; border: 1px solid var(--border); }
+.mock-metric .lbl { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.mock-metric .val { font-size: 1.15rem; font-weight: 700; color: #C4B5FD; font-family: var(--font-display); }
+.mock-metric .sub { font-size: 0.66rem; color: #8B5CF6; margin-top: 4px; }
+.mock-code { background: #0A0612; border-radius: 12px; padding: 16px; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.7; color: #E9D5FF; overflow-x: auto; }
+.mock-code .kw { color: #C4B5FD; }
+.mock-code .str { color: #86EFAC; }
+.mock-code .cm { color: #6B7280; opacity: 0.7; }
+.mock-rows { display: flex; flex-direction: column; gap: 8px; }
+.mock-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #120C1E; border-radius: 8px; font-size: 0.8rem; border: 1px solid var(--border); }
+.mock-row .tag { font-size: 0.65rem; padding: 3px 8px; border-radius: 100px; font-weight: 700; background: rgba(139,92,246,0.15); color: #C4B5FD; }
+.mock-chart { background: #120C1E; border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin-top: 12px; }
+.chart-bars .bar { flex: 1; background: linear-gradient(180deg, #8B5CF6, #A855F7); border-radius: 4px 4px 0 0; min-height: 12px; opacity: 0.85; }
+.chart-bars .bar:nth-child(1){height:45%} .chart-bars .bar:nth-child(2){height:72%} .chart-bars .bar:nth-child(3){height:58%}
+.chart-bars .bar:nth-child(4){height:90%} .chart-bars .bar:nth-child(5){height:65%} .chart-bars .bar:nth-child(6){height:78%} .chart-bars .bar:nth-child(7){height:55%}
+
+.trust-strip { padding: 28px 0; background: #120C1E; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.trust-inner { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(16px,3vw,32px); justify-content: center; }
+.trust-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.trust-logos { display: flex; flex-wrap: wrap; gap: clamp(20px,4vw,40px); align-items: center; justify-content: center; }
+.trust-logos span { font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: #7C6A9E; }
+
+.section-label { color: #8B5CF6; }
+.alt-section { background: var(--alt-bg); }
+.surface-section { background: var(--surface); }
+
+.bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.bento-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,3vw,32px); transition: box-shadow 0.3s, transform 0.3s; }
+.bento-item:hover { box-shadow: 0 16px 40px rgba(139,92,246,0.15); transform: translateY(-3px); }
+.bento-item.wide { grid-column: span 2; }
+.bento-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.bento-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8B5CF6; background: rgba(139,92,246,0.15); padding: 4px 10px; border-radius: 100px; margin-bottom: 12px; }
+.bento-item h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.bento-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+.process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; counter-reset: step; }
+.process-step { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 28px 22px; position: relative; }
+.process-step::before { counter-increment: step; content: counter(step); position: absolute; top: -14px; left: 22px; width: 28px; height: 28px; background: linear-gradient(135deg, #8B5CF6, #A855F7); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.process-step h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; margin-top: 8px; }
+.process-step p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,5vw,56px); align-items: center; }
+.about-img { position: relative; border-radius: var(--card-radius); overflow: hidden; }
+.about-img img { width: 100%; height: 360px; object-fit: cover; }
+.about-float { position: absolute; bottom: 20px; left: 20px; background: var(--card-bg); padding: 16px 20px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+.about-float strong { display: block; font-size: 1.5rem; font-weight: 800; color: #C4B5FD; }
+.about-float span { font-size: 0.78rem; color: var(--text-muted); }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.tech-chip { padding: 8px 14px; background: rgba(139,92,246,0.15); border: 1px solid var(--border); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: #8B5CF6; }
+
+.case-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,3vw,32px); height: 100%; transition: box-shadow 0.3s; }
+.case-card:hover { box-shadow: 0 16px 40px rgba(139,92,246,0.15); }
+.case-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; color: #8B5CF6; margin-bottom: 6px; }
+.case-industry { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 14px; }
+.case-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; }
+.case-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+.case-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.case-metric { text-align: center; padding: 12px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); }
+.case-metric strong { display: block; font-size: 1.2rem; font-weight: 800; color: #C4B5FD; }
+.case-metric span { font-size: 0.66rem; color: var(--text-muted); }
+
+.integ-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.integ-chip { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); transition: all 0.25s; }
+.integ-chip:hover { border-color: #8B5CF6; background: rgba(139,92,246,0.15); color: var(--text); }
+.integ-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+.pricing-toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; font-size: 0.88rem; color: var(--text-muted); }
+.pricing-toggle-wrap .active { color: var(--text); font-weight: 600; }
+.pricing-badge-save { font-size: 0.68rem; padding: 3px 10px; background: rgba(34,197,94,0.15); color: #4ADE80; border-radius: 100px; font-weight: 700; }
+.pricing-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(28px,4vw,36px); display: flex; flex-direction: column; }
+.pricing-card.featured { border-color: #8B5CF6; box-shadow: 0 0 48px rgba(139,92,246,0.2); position: relative; }
+.pricing-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,#8B5CF6,#A855F7); padding: 4px 16px; border-radius: 100px; font-size: 0.64rem; font-weight: 700; color: #fff; }
+.pricing-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.pricing-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+.pricing-card .price { font-family: var(--font-display); font-size: clamp(2rem,4vw,2.5rem); font-weight: 800; margin-bottom: 6px; color: #C4B5FD; }
+.pricing-card .price span { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.pricing-billing { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 24px; }
+.pricing-card .btn { width: 100%; margin-bottom: 24px; }
+.pricing-features li { display: flex; gap: 10px; padding: 9px 0; font-size: 0.84rem; color: var(--text-muted); border-bottom: 1px solid var(--border); line-height: 1.5; }
+.pricing-features li::before { content: '✓'; color: #8B5CF6; font-weight: 700; }
+.pricing-features li.muted { opacity: 0.45; }
+.pricing-features li.muted::before { content: '—'; }
+
+.review-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 24px; height: 100%; transition: transform 0.3s, box-shadow 0.3s; }
+.review-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(139,92,246,0.15); }
+.review-stars { color: #FBBF24; margin-bottom: 12px; }
+.review-card blockquote { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+.review-author { display: flex; gap: 12px; align-items: center; }
+.review-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#8B5CF6,#A855F7); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.review-author strong { display: block; font-size: 0.88rem; }
+.review-author span { font-size: 0.75rem; color: var(--text-muted); }
+
+.faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+.faq-q { width: 100%; text-align: left; padding: 18px 22px; font-size: 0.92rem; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
+.faq-q::after { content: '+'; font-size: 1.2rem; color: #8B5CF6; }
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s; }
+.faq-item.open .faq-a { max-height: 320px; }
+.faq-a-inner { padding: 0 22px 18px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+
+.cta-band { background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(168,85,247,0.08)); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px,8vw,72px) 0; }
+.cta-band h2 { font-family: var(--font-display); font-size: clamp(1.6rem,4vw,2.2rem); font-weight: 800; margin-bottom: 12px; }
+.cta-band p { color: var(--text-muted); margin-bottom: 28px; }
+
+.contact-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,56px); }
+.contact-info h3 { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; margin-bottom: 16px; }
+.contact-info > p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 32px; }
+.contact-perks { display: flex; flex-direction: column; gap: 16px; }
+.contact-perk { display: flex; gap: 14px; }
+.contact-perk-icon { width: 40px; height: 40px; background: rgba(139,92,246,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.contact-perk strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.contact-perk span { font-size: 0.82rem; color: var(--text-muted); }
+.form-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,4vw,36px); }
+.form-group label { color: var(--text); font-size: 0.84rem; font-weight: 600; }
+.form-group input, .form-group select, .form-group textarea { background: #120C1E; border: 1px solid var(--border); color: var(--text); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #8B5CF6; }
+
+.tabs-wrap .tab-panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 28px; margin-top: 16px; }
+.tab-panel h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: #8B5CF6; }
+.tab-panel p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+.feature-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.feature-list li { padding: 12px 16px; background: var(--surface); border-radius: 10px; font-size: 0.84rem; font-weight: 600; border: 1px solid var(--border); }
+
+.at-deep { background: var(--surface); }
+.at-split { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px,5vw,48px); align-items: center; }
+.at-hero-img { border-radius: var(--card-radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(139,92,246,0.15); }
+.at-hero-img img { width: 100%; height: auto; display: block; aspect-ratio: 4/3; object-fit: cover; }
+.at-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.at-list li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+.at-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+.at-metrics { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.at-metric { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.at-metric strong { display: block; font-size: 0.92rem; color: #8B5CF6; margin-bottom: 6px; }
+.at-metric span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+.site-footer { background: var(--footer-bg); color: var(--footer-text); }
+.site-footer .logo { color: #fff; }
+.footer-col h4 { color: #fff; }
+.footer-col a:hover { color: #C4B5FD; }
+.footer-newsletter input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 8px; padding: 10px 14px; flex: 1; }
+.footer-newsletter button { background: #8B5CF6; color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; }
+
+@media (max-width: 1280px) {
+  .hero-grid { gap: clamp(24px,4vw,48px); }
+  .at-hero-img img { object-position: center 30%; }
+}
+@media (max-width: 1024px) {
+  .integ-grid { grid-template-columns: repeat(3,1fr); }
+  .bento { grid-template-columns: repeat(2,1fr); }
+  .bento-item.wide { grid-column: span 1; }
+  .mock-metrics { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .contact-wrap, .at-split { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: repeat(2,1fr); }
+  .product-mock { order: -1; }
+}
+@media (max-width: 768px) {
+  .hero h1 { font-size: clamp(1.9rem,8vw,2.6rem); }
+  .trust-logos { gap: 16px; }
+  .at-metrics { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .process-steps, .integ-grid, .bento, .feature-list, .mock-metrics { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; text-align: center; }
+}
+
+/* Extended component layer */
+.section-header { margin-bottom: clamp(32px, 5vw, 48px); }
+.section-header.center { text-align: center; }
+.section-header.center .section-desc { max-width: 640px; margin-left: auto; margin-right: auto; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3.5vw, 2.25rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.section-desc { font-size: clamp(0.88rem, 2vw, 1rem); color: var(--text-muted); line-height: 1.75; }
+
+.features, .how-section, .tabs-section, #integrations, #pricing, #testimonials, #faq, #contact, #case-studies, #about, #platform {
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 3vw, 24px); }
+@media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.tab-btn {
+  padding: 10px 20px; font-size: 0.84rem; font-weight: 600; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--text-muted); transition: all 0.25s;
+}
+.tab-btn:hover { border-color: #8B5CF6; color: var(--text); }
+.tab-btn.active { background: linear-gradient(135deg, #8B5CF6, #A855F7); color: var(--accent-text); border-color: transparent; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.pricing-features { list-style: none; flex: 1; }
+.pricing-card .btn-sm { padding: 12px 20px; font-size: 0.84rem; border-radius: var(--btn-radius); display: inline-block; text-align: center; }
+
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: clamp(24px, 4vw, 48px); padding: clamp(48px, 6vw, 72px) clamp(20px, 4vw, 48px); max-width: 1200px; margin: 0 auto; }
+.footer-brand p { font-size: 0.84rem; line-height: 1.7; margin-top: 12px; max-width: 280px; }
+.footer-col { display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 0.82rem; color: var(--footer-text); transition: color 0.25s; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 20px clamp(20px, 4vw, 48px); border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; max-width: 1200px; margin: 0 auto; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: span 2; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-brand { grid-column: span 1; } }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: span 2; }
+.form-group input, .form-group select, .form-group textarea { padding: 12px 14px; border-radius: 10px; font-size: 0.88rem; width: 100%; }
+.form-group textarea { min-height: 100px; resize: vertical; }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-group.full { grid-column: span 1; } }
+
+/* Brand accent animations */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.hero-badge .dot { animation: glow-pulse 2s ease infinite, pulse-dot 2s ease infinite; }
+.product-mock { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.product-mock:hover { transform: translateY(-4px); }
+
+/* Code syntax highlight refinements */
+.mock-code .num { color: #86EFAC; }
+.mock-code .fn { color: #8B5CF6; }
+
+/* Status indicators in mock rows */
+.mock-row .status-ok { color: #22C55E; margin-left: auto; font-size: 0.72rem; font-weight: 600; }
+.mock-row .status-run { color: #8B5CF6; margin-left: auto; font-size: 0.72rem; font-weight: 600; }
+
+/* Chart label styling */
+.mock-chart .chart-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Deep section copy refinements */
+.at-copy { display: flex; flex-direction: column; justify-content: center; }
+
+/* Review card quote styling */
+.review-card blockquote { font-style: normal; position: relative; padding-left: 0; }
+.review-card blockquote::before { content: '"'; font-size: 2rem; color: #8B5CF6; opacity: 0.3; line-height: 0; display: block; margin-bottom: 8px; }
+
+/* CTA band button spacing */
+.cta-band .btn { margin-top: 4px; }
+
+/* Nav scroll shadow enhancement */
+.site-nav { transition: box-shadow 0.3s; }
+
+/* Bento grid gap responsive */
+@media (max-width: 1280px) {
+  .bento { gap: 14px; }
+  .process-steps { gap: 16px; }
+}
+@media (max-width: 768px) {
+  .features, .how-section, .tabs-section, #integrations, #pricing, #testimonials, #faq, #contact, #case-studies, #about, #platform, #security {
+    padding: clamp(40px, 6vw, 64px) 0;
+  }
+}
+
+.security-section { background: var(--surface); }
+.security-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+.security-badge {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px 20px;
+  text-align: center;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.security-badge:hover {
+  border-color: rgba(139,92,246,0.5);
+  transform: translateY(-2px);
+}
+.security-badge .ico { font-size: 1.8rem; margin-bottom: 12px; }
+.security-badge strong { display: block; font-size: 0.9rem; margin-bottom: 6px; color: #C4B5FD; }
+.security-badge span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+.security-note {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: rgba(139,92,246,0.08);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  text-align: center;
+}
+@media (max-width: 900px) { .security-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .security-grid { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">AI테크랩스 <span>AI TECH LABS</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#product">Product</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-mesh"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge"><span class="dot"></span> v3.2 — Agent Orchestrator 출시</div>
+      <h1>생성형 AI를<br><em>production-ready로</em></h1>
+      <p class="hero-lead">LLM APIs, fine-tuning, RAG, agents — 하나의 AI platform에서 enterprise-grade generative AI를 배포하세요. OpenAI·Claude·Llama를 unified gateway로, 한국어 guardrails 내장.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Start Free Trial →</a>
+        <a href="#contact" class="btn btn-outline">View API Docs</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>2.4B+</strong><span>API calls / month</span></div>
+        <div class="hero-stat"><strong>99.99%</strong><span>Uptime SLA</span></div>
+        <div class="hero-stat"><strong>4.9/5</strong><span>Developer NPS</span></div>
+      </div>
+    </div>
+    <div class="product-mock" id="product">
+      <div class="mock-top"><span></span><span></span><span></span><span class="mock-url">console.aitech.io/models</span></div>
+      <div class="mock-body">
+        <div class="mock-metrics">
+          <div class="mock-metric"><div class="lbl">API Calls</div><div class="val">2.4M</div><div class="sub">↑ 18% today</div></div>
+          <div class="mock-metric"><div class="lbl">Latency P99</div><div class="val">142ms</div><div class="sub">↓ 12ms</div></div>
+          <div class="mock-metric"><div class="lbl">Active Models</div><div class="val">38</div><div class="sub">6 fine-tuned</div></div>
+        </div>
+        <div class="mock-code"><span class="cm"># RAG query via AI TECH LABS SDK</span>
+<span class="kw">response</span> = client.<span class="kw">chat</span>(model=<span class="str">"aitech-gpt-4o"</span>,
+  messages=[{{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: query}}],
+  rag=<span class="str">"internal-wiki"</span>, guardrails=<span class="kw">True</span>)
+<span class="cm">→ tokens: 847 · latency: 128ms · grounded: ✓</span></div>
+        <div class="mock-rows" style="margin-top:14px">
+          <div class="mock-row"><span class="tag">RAG</span> Legal contract Q&A — accuracy 94.2%</div>
+          <div class="mock-row"><span class="tag">FT</span> Customer support bot v3 — deployed</div>
+          <div class="mock-row"><span class="tag">AGENT</span> Data pipeline agent — running</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container trust-inner">
+    <span class="trust-label">Trusted by AI-first enterprises</span>
+    <div class="trust-logos">
+      <span>Samsung SDS</span>
+      <span>Naver Cloud</span>
+      <span>Kakao Enterprise</span>
+      <span>LG AI Research</span>
+      <span>SK Telecom</span>
+      <span>Hyundai AutoEver</span>
+      <span>Coupang</span>
+      <span>Toss</span>
+    </div>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Enterprise AI에 필요한 모든 것</h2>
+      <p class="section-desc">From model gateway to production agents — full-stack generative AI platform for engineering teams.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-item wide">
+        <div class="bento-icon">🧠</div>
+        <span class="bento-tag">LLM · Core</span>
+        <h3>Unified LLM Gateway</h3>
+        <p>OpenAI GPT-4o, Claude 3.5, Llama 3, Gemini — 단일 API endpoint로 라우팅. Automatic failover, cost optimization, latency-based routing.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">📚</div>
+        <span class="bento-tag">RAG</span>
+        <h3>RAG Studio</h3>
+        <p>PDF, wiki, Notion, Confluence를 vector DB에 ingest. Chunking, embedding, retrieval tuning을 no-code UI로.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">⚙️</div>
+        <span class="bento-tag">Fine-tune</span>
+        <h3>Fine-tuning Pipeline</h3>
+        <p>LoRA, QLoRA, full fine-tune 지원. GPU cluster 자동 프로비저닝, experiment tracking, A/B evaluation.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🤖</div>
+        <span class="bento-tag">Agents</span>
+        <h3>Agent Orchestrator</h3>
+        <p>Multi-step agents with tool calling, memory, human-in-the-loop. LangChain-compatible SDK.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🛡️</div>
+        <span class="bento-tag">Safety</span>
+        <h3>AI Guardrails</h3>
+        <p>PII 마스킹, prompt injection 방어, 한국어 toxicity filter, output validation.</p>
+      </div>
+      <div class="bento-item wide">
+        <div class="bento-icon">📊</div>
+        <span class="bento-tag">MLOps</span>
+        <h3>Observability & MLOps</h3>
+        <p>Token usage, latency, hallucination rate, cost per query — real-time dashboard. Prompt versioning, audit logs, SOC 2 compliance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">4단계로 production AI 배포</h2>
+      <p class="section-desc">Connect models, ingest data, deploy agents, monitor — 평균 PoC 2주, production 6주.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step"><h4>Connect Models</h4><p>API key 등록 또는 on-prem model endpoint 연결. Model Garden에서 20+ foundation models 선택.</p></div>
+      <div class="process-step"><h4>Build RAG / Fine-tune</h4><p>사내 문서 upload, chunking 설정, evaluation run. Fine-tune dataset 준비 및 training job 시작.</p></div>
+      <div class="process-step"><h4>Deploy Agents</h4><p>Agent workflow 설계, tool 연결, staging 테스트. One-click production deploy with canary rollout.</p></div>
+      <div class="process-step"><h4>Monitor & Scale</h4><p>Real-time metrics, cost alerts, guardrail violations. Auto-scaling GPU inference endpoints.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="AI테크랩스 AI 연구팀" loading="lazy">
+        <div class="about-float"><strong>240+</strong><span>enterprise deployments</span></div>
+      </div>
+      <div>
+        <div class="section-label">About AI TECH LABS</div>
+        <h2 class="section-title">Foundation models를<br>안전하게 production에</h2>
+        <p class="section-desc">2022년 판교에서 시작한 AI TECH LABS는 'PoC에서 멈추는 AI'를 해결합니다. MLOps, guardrails, 한국어 특화 모델까지 — engineering team이 직접 운영할 수 있는 enterprise AI platform.</p>
+        <div class="tech-chips">
+          <span class="tech-chip">OpenAI API</span>
+          <span class="tech-chip">Claude 3.5</span>
+          <span class="tech-chip">Llama 3</span>
+          <span class="tech-chip">RAG</span>
+          <span class="tech-chip">LoRA</span>
+          <span class="tech-chip">LangChain</span>
+          <span class="tech-chip">SOC 2</span>
+          <span class="tech-chip">On-prem VPC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="case-studies">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">고객들이 만든 AI impact</h2>
+      <p class="section-desc">금융, 제조, 유통, 공공 — AI TECH LABS로 generative AI를 production에 올린 기업들.</p>
+    </div>
+    <div class="grid-3">
+      <article class="case-card">
+        <div class="case-logo">FinCore Bank</div>
+        <div class="case-industry">금융 · Enterprise</div>
+        <h3>고객 상담 AI accuracy 91%</h3>
+        <p>RAG + fine-tuned Llama 3로 사내 규정 기반 답변. 상담원 업무 40% 자동화, compliance audit 통과.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>91%</strong><span>Accuracy</span></div>
+          <div class="case-metric"><strong>40%</strong><span>Auto-resolved</span></div>
+          <div class="case-metric"><strong>8wk</strong><span>To production</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">MediLink</div>
+        <div class="case-industry">헬스케어 · Series B</div>
+        <h3>의료 문서 요약 10x faster</h3>
+        <p>Agent pipeline으로 진료 기록·검사 결과 자동 요약. 의사 chart review 시간 65% 단축.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>10x</strong><span>Faster summary</span></div>
+          <div class="case-metric"><strong>65%</strong><span>Time saved</span></div>
+          <div class="case-metric"><strong>HIPAA</strong><span>Compliant</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">RetailMax</div>
+        <div class="case-industry">유통 · Growth</div>
+        <h3>상품 추천 agent ROI 320%</h3>
+        <p>Multi-agent system으로 개인화 추천, 재고 연동, 프로모션 생성. conversion 22% uplift.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>320%</strong><span>ROI</span></div>
+          <div class="case-metric"><strong>22%</strong><span>Conversion up</span></div>
+          <div class="case-metric"><strong>15M</strong><span>Daily queries</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section tabs-section" id="product-tabs">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product Modules</div>
+      <h2 class="section-title">플랫폼 모듈 deep dive</h2>
+      <p class="section-desc">LLM Gateway, RAG, Fine-tuning, Agents — 각 모듈의 핵심 기능.</p>
+    </div>
+    <div class="tabs-wrap" style="max-width:920px;margin:0 auto">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="llm">LLM API</button>
+        <button class="tab-btn" data-tab="rag">RAG</button>
+        <button class="tab-btn" data-tab="ft">Fine-tune</button>
+        <button class="tab-btn" data-tab="agent">Agents</button>
+      </div>
+      <div class="tab-panel active" data-tab="llm">
+        <h4>Unified LLM Gateway</h4>
+        <p>Multi-provider routing with automatic failover, cost caps, and latency optimization.</p>
+        <ul class="feature-list">
+          <li>20+ foundation models</li>
+          <li>OpenAI-compatible API</li>
+          <li>Streaming & function calling</li>
+          <li>Token usage metering</li>
+          <li>Rate limiting & quotas</li>
+          <li>Regional endpoints (KR/US/EU)</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="rag">
+        <h4>RAG Studio</h4>
+        <p>End-to-end retrieval pipeline from document ingest to grounded generation.</p>
+        <ul class="feature-list">
+          <li>PDF/Word/Notion ingest</li>
+          <li>Hybrid search (dense+sparse)</li>
+          <li>Chunking strategies</li>
+          <li>Hallucination scoring</li>
+          <li>Citation tracking</li>
+          <li>Korean tokenizer optimized</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="ft">
+        <h4>Fine-tuning Workbench</h4>
+        <p>From dataset prep to deployed custom model — managed GPU infrastructure.</p>
+        <ul class="feature-list">
+          <li>LoRA / QLoRA / full FT</li>
+          <li>Auto GPU provisioning</li>
+          <li>Experiment tracking</li>
+          <li>Eval harness (BLEU, ROUGE)</li>
+          <li>Model registry</li>
+          <li>One-click deploy</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="agent">
+        <h4>Agent Orchestrator</h4>
+        <p>Visual agent builder with tool calling, memory, and human approval flows.</p>
+        <ul class="feature-list">
+          <li>Multi-step workflows</li>
+          <li>Tool & API connectors</li>
+          <li>Conversation memory</li>
+          <li>Human-in-the-loop</li>
+          <li>LangChain SDK</li>
+          <li>Webhook triggers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="integrations">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Integrations</div>
+      <h2 class="section-title">개발 스택과 바로 연결</h2>
+      <p class="section-desc">Python/TypeScript SDK, REST API, LangChain, LlamaIndex — 기존 workflow에 plug-in.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-chip"><span class="integ-icon">🐍</span> Python SDK</div>
+      <div class="integ-chip"><span class="integ-icon">📘</span> TypeScript SDK</div>
+      <div class="integ-chip"><span class="integ-icon">🔗</span> LangChain</div>
+      <div class="integ-chip"><span class="integ-icon">📇</span> LlamaIndex</div>
+      <div class="integ-chip"><span class="integ-icon">☁️</span> AWS Bedrock</div>
+      <div class="integ-chip"><span class="integ-icon">🔷</span> Azure OpenAI</div>
+      <div class="integ-chip"><span class="integ-icon">🐙</span> GitHub</div>
+      <div class="integ-chip"><span class="integ-icon">📊</span> Snowflake</div>
+      <div class="integ-chip"><span class="integ-icon">🗄️</span> Pinecone</div>
+      <div class="integ-chip"><span class="integ-icon">⚡</span> Zapier</div>
+      <div class="integ-chip"><span class="integ-icon">💬</span> Slack Bot</div>
+      <div class="integ-chip"><span class="integ-icon">🔐</span> Okta SSO</div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section at-deep" id="platform">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product</div>
+      <h2 class="section-title">Production-grade AI infrastructure</h2>
+      <p class="section-desc">Model Garden, RAG Studio, Guardrails — MLOps가 내장된 enterprise AI platform.</p>
+    </div>
+    <div class="at-split">
+      <div class="at-hero-img"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80" alt="Production-grade AI infrastructure" loading="lazy"></div>
+      <div class="at-copy">
+        <ul class="at-list">
+          <li><strong>Model Garden</strong>OpenAI, Claude, Llama — 단일 API gateway로 라우팅. Cost & latency optimization.</li>
+          <li><strong>RAG Studio</strong>사내 wiki/PDF를 vector DB에 ingest. Hallucination rate real-time monitoring.</li>
+          <li><strong>Guardrails</strong>PII 마스킹, prompt injection 방어, 한국어 toxicity filter.</li>
+          <li><strong>On-prem VPC</strong>금융/공공 — isolated GPU cluster, air-gapped deployment 옵션.</li>
+        </ul>
+        <div class="at-metrics">
+          <div class="at-metric"><strong>Model Garden</strong><span>OpenAI, Claude, Llama — 단일 API gateway로 라우팅. Cost & latency optimization.</span></div>
+          <div class="at-metric"><strong>RAG Studio</strong><span>사내 wiki/PDF를 vector DB에 ingest. Hallucination rate real-time monitoring.</span></div>
+          <div class="at-metric"><strong>Guardrails</strong><span>PII 마스킹, prompt injection 방어, 한국어 toxicity filter.</span></div>
+          <div class="at-metric"><strong>On-prem VPC</strong><span>금융/공공 — isolated GPU cluster, air-gapped deployment 옵션.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Usage-based transparent pricing</h2>
+      <p class="section-desc">$50 free credits. Pay-as-you-go API or committed enterprise contracts.</p>
+    </div>
+    <div class="pricing-toggle-wrap">
+      <span class="active">Monthly</span><span>·</span><span>Annual</span>
+      <span class="pricing-badge-save">Save 20%</span>
+    </div>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <h3>Developer</h3>
+        <p class="pricing-desc">Individual developers & PoC projects.</p>
+        <div class="price">₩0<span>/월</span></div>
+        <p class="pricing-billing">Free tier · $50 credits</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Get API Key</a>
+        <ul class="pricing-features">
+          <li>LLM API access (rate limited)</li>
+          <li>RAG — 1 knowledge base</li>
+          <li>100K tokens / month</li>
+          <li>Community support</li>
+          <li class="muted">Basic guardrails</li>
+          <li class="muted">Fine-tuning</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Team</h3>
+        <p class="pricing-desc">Engineering teams shipping AI features.</p>
+        <div class="price">₩890,000<span>/월</span></div>
+        <p class="pricing-billing">includes 5M tokens · 3 seats</p>
+        <a href="#contact" class="btn btn-primary btn-sm">Start Free Trial</a>
+        <ul class="pricing-features">
+          <li>Unlimited LLM routing</li>
+          <li>RAG — 20 knowledge bases</li>
+          <li>Fine-tuning (2 jobs/mo)</li>
+          <li>Agent Orchestrator</li>
+          <li>SSO & audit logs</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p class="pricing-desc">Large orgs with compliance & dedicated infra.</p>
+        <div class="price">Custom<span></span></div>
+        <p class="pricing-billing">committed use · annual</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Contact Sales</a>
+        <ul class="pricing-features">
+          <li>Unlimited tokens & models</li>
+          <li>On-prem / VPC deployment</li>
+          <li>Dedicated GPU cluster</li>
+          <li>Custom fine-tuned models</li>
+          <li>99.99% SLA + CSM</li>
+          <li>SOC 2 & ISO 27001 reports</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">개발자들이 말하는 AI TECH LABS</h2>
+      <p class="section-desc">ML engineers, platform teams — 4.9/5 on G2 Developer Tools.</p>
+    </div>
+    <div class="grid-4">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"OpenAI + Claude + Llama를 하나의 SDK로 — routing failover가 정말 잘 됩니다. PoC 2주 만에 production."</blockquote>
+        <div class="review-author"><div class="review-avatar">JK</div><div><strong>김준혁</strong><span>ML Lead · FinCore Bank</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"RAG Studio의 hallucination scoring이 핵심이었어요. 의료 도메인에서 compliance 통과에 결정적."</blockquote>
+        <div class="review-author"><div class="review-avatar">PM</div><div><strong>박미영</strong><span>AI Engineer · MediLink</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Agent Orchestrator로 multi-step workflow를 visual하게 구성. LangChain migration 3일 만에 완료."</blockquote>
+        <div class="review-author"><div class="review-avatar">SL</div><div><strong>Sarah Lim</strong><span>Platform Eng · RetailMax</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"On-prem VPC 배포가 금융 규제를 충족. GPU cluster 관리를 완전히 offload했습니다."</blockquote>
+        <div class="review-author"><div class="review-avatar">EC</div><div><strong>Emily Cho</strong><span>VP Eng · InsureTech</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section security-section" id="security">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Security & Compliance</div>
+      <h2 class="section-title">Enterprise-grade AI 보안</h2>
+      <p class="section-desc">금융·의료·공공 프로젝트에서 요구하는 보안·컴플라이언스를 기본 제공합니다.</p>
+    </div>
+    <div class="security-grid">
+      <div class="security-badge">
+        <div class="ico">🔐</div>
+        <strong>SOC 2 Type II</strong>
+        <span>연간 외부 감사 · audit report Enterprise 제공</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">🛡️</div>
+        <strong>ISO 27001</strong>
+        <span>정보보호 관리체계 인증 · ISMS-P 대응</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">🔒</div>
+        <strong>Data Isolation</strong>
+        <span>VPC 격리 · 고객 데이터로 모델 학습 금지</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">📋</div>
+        <strong>Audit Logs</strong>
+        <span>프롬프트·응답·토큰 사용량 전수 기록</span>
+      </div>
+    </div>
+    <p class="security-note">PII auto-masking, content moderation, Korean guardrails — production AI 배포에 필요한 governance를 platform 레벨에서 제공합니다.</p>
+  </div>
+</section>
+
+<section class="surface-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">support@aitech.io 또는 Discord developer community로 문의해 주세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" type="button">어떤 LLM 모델을 지원하나요?</button><div class="faq-a"><div class="faq-a-inner">OpenAI GPT-4o/4o-mini, Anthropic Claude 3.5 Sonnet/Haiku, Meta Llama 3 70B/8B, Google Gemini Pro, Mistral — 20+ models. Custom on-prem endpoints도 연결 가능합니다.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">RAG pipeline은 어떻게 구축하나요?</button><div class="faq-a"><div class="faq-a-inner">RAG Studio에서 document upload → auto chunking → embedding → retrieval tuning → evaluation을 no-code로 진행. Hybrid search, re-ranking, citation tracking 내장.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Fine-tuning 비용은?</button><div class="faq-a"><div class="faq-a-inner">Team 플랜에 월 2 job 포함. LoRA 기준 A100 1장 × 4시간 ≈ ₩120,000. Enterprise는 dedicated GPU cluster와 volume discount.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">데이터 보안과 compliance는?</button><div class="faq-a"><div class="faq-a-inner">SOC 2 Type II, ISO 27001, GDPR. Enterprise: VPC isolation, no training on customer data, audit logs, PII auto-masking. 금융권 ISMS-P 대응 지원.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">On-premise 배포가 가능한가요?</button><div class="faq-a"><div class="faq-a-inner">Enterprise 플랜에서 air-gapped GPU cluster 배포. Kubernetes Helm chart 제공. Model weights, vector DB, inference 모두 고객 인프라 내 운영.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">OpenAI API와 호환되나요?</button><div class="faq-a"><div class="faq-a-inner">OpenAI-compatible `/v1/chat/completions` endpoint. 기존 SDK에서 base URL만 변경하면 migration 가능. Streaming, function calling, JSON mode 지원.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>지금 바로 production AI를 시작하세요</h2>
+    <p>$50 free credits · No credit card · OpenAI-compatible API</p>
+    <a href="#contact" class="btn btn-primary">Get API Key Free →</a>
+  </div>
+</section>
+
+<section class="alt-section" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-label">Contact</div>
+        <h3>Enterprise AI 상담</h3>
+        <p>30분 기술 미팅으로 AI TECH LABS가 귀사 AI roadmap에 맞는지 확인해 보세요.</p>
+        <div class="contact-perks">
+          <div class="contact-perk"><span class="contact-perk-icon">🎯</span><div><strong>Architecture Review</strong><span>귀사 use case에 맞춘 AI stack 설계</span></div></div>
+          <div class="contact-perk"><span class="contact-perk-icon">📅</span><div><strong>PoC Support</strong><span>2주 PoC — 전담 ML engineer 배정</span></div></div>
+          <div class="contact-perk"><span class="contact-perk-icon">🌏</span><div><strong>Global Infra</strong><span>Seoul · Singapore · US-West GPU regions</span></div></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="상담 요청 접수! 24시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group"><label for="at-name">이름</label><input type="text" id="at-name" placeholder="홍길동" required></div>
+            <div class="form-group"><label for="at-email">Work Email</label><input type="email" id="at-email" placeholder="you@company.com" required></div>
+            <div class="form-group"><label for="at-co">회사명</label><input type="text" id="at-co" placeholder="AI TECH LABS Inc."></div>
+            <div class="form-group"><label for="at-size">팀 규모</label><select id="at-size"><option>1–10명</option><option>11–50명</option><option>51–200명</option><option>200명+</option></select></div>
+            <div class="form-group full"><label for="at-msg">메시지</label><textarea id="at-msg" placeholder="관심 모듈 (LLM/RAG/Fine-tune/Agent), 현재 AI stack 등"></textarea></div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Request Demo →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">AI테크랩스 AI TECH LABS</a>
+      <p>Enterprise generative AI platform. LLM APIs, RAG, fine-tuning, agents — Seoul & San Francisco.</p>
+      <div class="footer-social" style="display:flex;gap:12px;margin-top:20px">
+        <a href="#" data-toast="Twitter — coming soon" style="color:#fff">X</a>
+        <a href="#" data-toast="LinkedIn — coming soon" style="color:#fff">in</a>
+        <a href="#" data-toast="GitHub — coming soon" style="color:#fff">GH</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="#" data-toast="About — demo">About</a><a href="#case-studies">Customers</a><a href="#" data-toast="Careers — hiring">Careers</a><a href="#contact">Contact</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="#" data-toast="Docs — demo">Documentation</a><a href="#" data-toast="API — demo">API</a><a href="#" data-toast="Status — operational">Status</a>
+      <form class="footer-newsletter demo-form" data-success="구독 감사합니다!" style="display:flex;gap:8px;margin-top:12px"><input type="email" placeholder="Email" required><button type="submit">→</button></form>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 AI TECH LABS Inc.</span><span><a href="#" data-toast="Privacy — demo">Privacy</a> · <a href="#" data-toast="Terms — demo">Terms</a></span></div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

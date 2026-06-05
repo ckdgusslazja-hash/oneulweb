@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>특허법인 아이피원 — 지식재산·특허 전문</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Noto Serif KR', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFFFF;
+  --text: #0F172A;
+  --text-muted: #64748B;
+  --accent: #0C2340;
+  --accent-silver: #94A3B8;
+  --accent-light: #1E4976;
+  --accent-text: #fff;
+  --border: #E2E8F0;
+  --nav-bg: rgba(255,255,255,0.97);
+  --footer-bg: #0C2340;
+  --card-bg: #F8FAFC;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --footer-text: rgba(255,255,255,0.6);
+}
+
+.site-nav .logo { color: var(--accent); }
+.nav-cta { background: var(--accent-light); color: #fff; }
+
+.hero {
+  background: linear-gradient(135deg, #0C2340 0%, #1E4976 50%, #0F172A 100%);
+  color: #fff;
+  padding: clamp(60px, 10vw, 100px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -20%;
+  width: 60%; height: 200%;
+  background: radial-gradient(ellipse, rgba(148,163,184,0.1), transparent 70%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid rgba(148,163,184,0.4);
+  color: var(--accent-silver);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.35;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.hero p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: #94A3B8;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-accent {
+  padding: 14px 28px;
+  background: var(--accent-light);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.btn-accent:hover { transform: translateY(-2px); opacity: 0.92; }
+
+.btn-ghost {
+  padding: 14px 28px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-ghost:hover { border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.06); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(148,163,184,0.25);
+  padding: clamp(20px, 3vw, 28px);
+  text-align: center;
+  border-radius: var(--card-radius);
+}
+
+.stat-card .num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--accent-silver);
+  font-weight: 700;
+}
+
+.stat-card .lbl { font-size: 0.78rem; color: #94A3B8; margin-top: 4px; }
+
+.areas-header { text-align: center; margin-bottom: 48px; }
+
+.area-card {
+  padding: clamp(28px, 4vw, 36px) clamp(20px, 3vw, 28px);
+  background: var(--card-bg);
+  border-top: 3px solid var(--accent-light);
+  text-align: center;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  border: 1px solid var(--border);
+  border-top-width: 3px;
+  transition: all 0.3s;
+  height: 100%;
+}
+
+.area-card:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.area-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+.area-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+.area-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; }
+.area-card:hover p { color: rgba(255,255,255,0.75); }
+
+.why-section { background: var(--card-bg); }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.why-box {
+  padding: 32px 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.why-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(12,35,64,0.08);
+}
+
+.why-box .icon {
+  width: 52px; height: 52px;
+  margin: 0 auto 16px;
+  background: rgba(12,35,64,0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.why-box h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.why-box p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+.expert-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.expert-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+.expert-photo { aspect-ratio: 4/3; overflow: hidden; }
+.expert-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.expert-info { padding: 24px; }
+.expert-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.expert-info .role { font-size: 0.8rem; color: var(--accent-light); margin-bottom: 12px; font-weight: 500; }
+.expert-info .creds { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
+.expert-info .spec { font-size: 0.75rem; color: var(--accent); font-weight: 500; }
+
+.cases-section { background: var(--card-bg); }
+
+.case-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-light);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 3vw, 28px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+}
+
+.case-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(12,35,64,0.08);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.case-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+.case-card .desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+
+.case-outcome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-light);
+}
+
+.case-outcome::before { content: '✓'; font-weight: 700; }
+
+.process-section .process-step::before {
+  background: var(--accent);
+  border: 2px solid var(--accent-silver);
+}
+
+.industry-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.industry-strip span {
+  padding: 10px 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-radius: var(--card-radius);
+  font-weight: 500;
+}
+
+.fee-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  height: 100%;
+}
+
+.fee-card h3 { font-family: var(--font-display); font-size: 1.1rem; color: var(--accent); margin-bottom: 12px; }
+.fee-card .fee-range { font-size: 1.4rem; font-weight: 700; color: var(--accent-light); margin-bottom: 16px; }
+.fee-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.fee-card ul { margin-top: 16px; }
+.fee-card li { font-size: 0.8rem; color: var(--text-muted); padding: 6px 0; border-bottom: 1px solid var(--border); }
+.fee-card li::before { content: '· '; color: var(--accent-silver); }
+
+.news-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+.news-thumb { aspect-ratio: 16/9; overflow: hidden; }
+.news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.news-body { padding: 24px; }
+.news-date { font-size: 0.72rem; color: var(--accent-light); font-weight: 600; margin-bottom: 8px; }
+.news-body h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+.news-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+.faq-section { background: var(--card-bg); }
+.faq-item.open .faq-q { color: var(--accent); }
+.faq-item .faq-q::after { color: var(--accent-light); }
+
+.consult-section { background: linear-gradient(180deg, #fff 0%, var(--card-bg) 100%); }
+
+.consult-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.consult-features { display: flex; flex-direction: column; gap: 16px; }
+
+.consult-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.consult-feature .num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  background: var(--accent);
+  color: var(--accent-silver);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.consult-feature strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.consult-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.form-card .btn-accent { width: 100%; border: none; cursor: pointer; margin-top: 8px; }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.location-detail .ico {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: rgba(12,35,64,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.location-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.site-footer .footer-brand .logo { color: #fff; }
+.footer-col a:hover { color: var(--accent-silver); }
+
+.global-section {
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+}
+
+.global-section .section-title { color: #fff; }
+.global-section .section-desc { color: rgba(255,255,255,0.7); margin: 0 auto; }
+
+.global-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.global-item {
+  padding: 24px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(148,163,184,0.2);
+  border-radius: var(--card-radius);
+}
+
+.global-item .flag { font-size: 2rem; margin-bottom: 12px; }
+.global-item h4 { font-size: 0.95rem; margin-bottom: 8px; }
+.global-item p { font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .consult-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+  .global-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .global-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">특허법인 아이피원</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#areas">업무분야</a>
+    <a href="#experts">전문가</a>
+    <a href="#cases">성공사례</a>
+    <a href="#process">진행절차</a>
+    <a href="#fees">비용안내</a>
+    <a href="#faq">FAQ</a>
+    <a href="#consult" class="nav-cta">상담신청</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">PATENT LAW · 특허청 인근 · 18년</div>
+        <h1>기술과 브랜드를 지키는<br>지식재산 파트너</h1>
+        <p>특허 · 상표 · 디자인 · 저작권 · 분쟁 대응까지 원스톱 IP 서비스를 제공합니다. 전기·기계·화학·바이오·IT·반도체 분야 변리사 14인이 국내외 출원부터 권리화·실시까지 전략적으로 지원합니다.</p>
+        <div class="hero-actions">
+          <a href="#consult" class="btn-accent">무료 IP 상담</a>
+          <a href="#cases" class="btn-ghost">성공사례 보기</a>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="num">8,500+</div><div class="lbl">누적 출원·등록</div></div>
+        <div class="stat-card"><div class="num">96%</div><div class="lbl">등록 성공률</div></div>
+        <div class="stat-card"><div class="num">14</div><div class="lbl">전문 변리사</div></div>
+        <div class="stat-card"><div class="num">35+</div><div class="lbl">해외 제휴 네트워크</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="areas">
+  <div class="container">
+    <div class="areas-header">
+      <div class="section-label">Practice Areas</div>
+      <h2 class="section-title">업무 분야</h2>
+      <p class="section-desc" style="margin:0 auto">기술 분야별 전담 변리사가 출원 전략부터 분쟁 대응까지 체계적으로 지원합니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="area-card">
+        <div class="icon">📜</div>
+        <h3>특허</h3>
+        <p>발명 특허·실용신안·디자인 출원, 심사 대응, 권리범위 확보, 무효·취소 심판, 침해 소송까지 담당합니다. 선행조사·FTO 분석으로 출원 전 리스크를 최소화합니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">™️</div>
+        <h3>상표 · 브랜드</h3>
+        <p>상표 출원·등록, 해외 마드리드·개별 출원, 상표권 침해·이미용 심판, 브랜드 포트폴리오 관리. 스타트업·프랜차이즈·뷰티·F&B 브랜드 보호에 특화되어 있습니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">🌐</div>
+        <h3>해외 IP</h3>
+        <p>PCT·Paris Convention·US·EU·CN·JP 출원, 현지 대리인 네트워크 35개국. 글로벌 기업·수출 기업의 해외 권리 확보와 현지 분쟁 대응을 지원합니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">⚔️</div>
+        <h3>분쟁 · 라이선싱</h3>
+        <p>특허·상표 침해 분석, 경고장·협상, 중재·소송, 라이선스·기술이전 계약. 표준특허·SEP·NPE 대응, IP Due Diligence for M&A도 제공합니다.</p>
+      </div>
+    </div>
+    <div class="industry-strip">
+      <span>반도체</span><span>바이오·제약</span><span>AI·소프트웨어</span><span>전기·전자</span><span>기계·자동차</span><span>화학·소재</span><span>의료기기</span><span>게임·콘텐츠</span>
+    </div>
+  </div>
+</section>
+
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Why IP One</div>
+      <h2 class="section-title">특허법인 아이피원을 선택하는 이유</h2>
+      <p class="section-desc">기술 이해와 법률 전문성을 겸비한 IP 파트너로 성장을 지원합니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-box">
+        <div class="icon">🔬</div>
+        <h4>기술 특화</h4>
+        <p>공학·자연과학 박사·석사 출신 변리사가 기술 내용을 정확히 이해하고, 심사관과의 기술 논쟁에서 설득력 있는 명세서를 작성합니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">📈</div>
+        <h4>96% 등록률</h4>
+        <p>출원 전 선행조사·청구항 설계로 거절이유통지를 최소화합니다. 1차 거절 후에도 보정·의견서 전략으로 높은 등록 성공률을 유지합니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">🌍</div>
+        <h4>글로벌 네트워크</h4>
+        <p>미국·유럽·중국·일본 등 35개국 제휴 대리인과 협력합니다. 해외 출원 일정·비용을 통합 관리해 드립니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">💼</div>
+        <h4>스타트업 패키지</h4>
+        <p>벤처·스타트업을 위한 할인 패키지, TIPS·R&D 과제 연계 IP 컨설팅, 투자 유치용 IP Due Diligence를 제공합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experts">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Patent Attorneys</div>
+      <h2 class="section-title">전문 변리사</h2>
+      <p class="section-desc">분야별 최고의 전문성을 갖춘 변리사가 프로젝트를 리드합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="expert-card">
+        <div class="expert-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="박지훈 대표">
+        </div>
+        <div class="expert-info">
+          <h3>박지훈 변리사</h3>
+          <div class="role">대표 · 전기·반도체</div>
+          <p class="creds">KAIST 전기박사 · 제52회 변리사<br>전 삼성전자 IP센터 · SEP 200건+</p>
+          <div class="spec">반도체·디스플레이 특허 1,200건</div>
+        </div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="최은영 변리사">
+        </div>
+        <div class="expert-info">
+          <h3>최은영 변리사</h3>
+          <div class="role">파트너 · 바이오·화학</div>
+          <p class="creds">서울대 약학박사 · 미국 USPTO 등록<br>제약·의료기기·화장품 IP 전문</p>
+          <div class="spec">바이오 특허 800건+</div>
+        </div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80" alt="김도현 변리사">
+        </div>
+        <div class="expert-info">
+          <h3>김도현 변리사</h3>
+          <div class="role">파트너 · IT·소프트웨어</div>
+          <p class="creds">연세대 컴공석사 · AI·빅데이터·SaaS<br>표준특허·오픈소스 IP 자문</p>
+          <div class="spec">SW·AI 특허 600건+</div>
+        </div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-photo">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" alt="이성민 변리사">
+        </div>
+        <div class="expert-info">
+          <h3>이성민 변리사</h3>
+          <div class="role">파트너 · 기계·자동차</div>
+          <p class="creds">한양대 기계공학 · 현대차 IP팀 출신<br>EV·배터리·부품 특허</p>
+          <div class="spec">기계 특허 900건+</div>
+        </div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="정하늘 변리사">
+        </div>
+        <div class="expert-info">
+          <h3>정하늘 변리사</h3>
+          <div class="role">선임 · 상표·디자인</div>
+          <p class="creds">이화여대 디자인학과<br>브랜드·프랜차이즈·뷰티 상표 500건+</p>
+          <div class="spec">상표 분쟁·이미용 심판 전문</div>
+        </div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="한재욱 변리사">
+        </div>
+        <div class="expert-info">
+          <h3>한재욱 변리사</h3>
+          <div class="role">선임 · 분쟁·소송</div>
+          <p class="creds">서울대 법학전문대학원 LL.M.<br>특허법원·대법원 소송 80건+</p>
+          <div class="spec">침해소송·무효심판 전문</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cases-section" id="cases">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Success Cases</div>
+      <h2 class="section-title">주요 성공 사례</h2>
+      <p class="section-desc">실제 의뢰 사건을 바탕으로 한 대표 사례입니다. 기업명 등은 익명 처리되었습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="case-card">
+        <span class="case-tag">특허 · 등록</span>
+        <h3>AI 반도체 아키텍처 핵심 특허 12건 등록</h3>
+        <p class="desc">국내 AI 칩 스타트업의 NPU·메모리 인터페이스 발명에 대해 출원 전 FTO와 청구항 설계를 진행했습니다. 거절이유 1차 후 보정으로 12건 모두 등록 완료, 시리즈 B 투자 DD에서 IP 평가 A등급을 받았습니다.</p>
+        <div class="case-outcome">12건 등록 · 투자 유치 성공</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">분쟁 · 승소</span>
+        <h3>대형 전자 기업 특허 침해 소송 원고 승소</h3>
+        <p class="desc">중소 부품사가 대기업에 제기당한 특허 침해 소송에서 무효 증거와 선행기술을 입증했습니다. 침해 성립 부정 판결로 50억 원 손해배상 청구를 기각시켰습니다.</p>
+        <div class="case-outcome">침해 부정 판결 확정</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">상표 · 해외</span>
+        <h3>K-뷰티 브랜드 글로벌 상표 28개국 등록</h3>
+        <p class="desc">마드리드·개별 출원 병행으로 미국·EU·동남아·중동 28개국 상표 등록을 완료했습니다. 중국 모조품 대응을 위한 세관 기록·온라인 모니터링 체계도 구축했습니다.</p>
+        <div class="case-outcome">28개국 등록 · 모니터링 운영</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">PCT · 해외</span>
+        <h3>바이오 신약 PCT 국내외 패밀리 15국</h3>
+        <p class="desc">항암제 화합물·조성물 발명에 대해 PCT 출원 후 미국·유럽·일본·중국 등 15국 국내단계 진입을 관리했습니다. USPTA 101 대응 의견서로 미국 등록을 확보했습니다.</p>
+        <div class="case-outcome">15국 패밀리 등록 진행</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">라이선스</span>
+        <h3>대학 기술이전 라이선스 80억 원 계약</h3>
+        <p class="desc">공대 TLO와 기업 간 배터리 소재 특허 패밀리 라이선스 협상을 지원했습니다. 독점·비독점, 로열티·마일스톤 조건을 조율하여 80억 원 규모 계약을 성사시켰습니다.</p>
+        <div class="case-outcome">80억 원 라이선스 계약 체결</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">스타트업</span>
+        <h3>로봇 스타트업 IP 포트폴리오 구축</h3>
+        <p class="desc">시드 단계부터 핵심 알고리즘·하드웨어·UI 특허 8건, 상표 3건 출원 전략을 수립했습니다. 시리즈 A 투자 전 IP DD에서 치명적 리스크 없음을 확인받았습니다.</p>
+        <div class="case-outcome">11건 출원 · 시리즈 A 유치</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">특허 출원 절차</h2>
+      <p class="section-desc">상담부터 등록·유지관리까지 5단계로 안내합니다.</p>
+    </div>
+    <div class="process-steps" style="grid-template-columns:repeat(5,1fr)">
+      <div class="process-step">
+        <h4>상담·선행조사</h4>
+        <p>발명 내용·시장·경쟁사 IP를 검토하고, 출원 가능성·FTO·전략 방향을 제안합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>명세서 작성</h4>
+        <p>청구항·발명의 설명·도면을 작성합니다. 분야 전담 변리사가 기술 회의에 참여합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>출원·심사</h4>
+        <p>국내·PCT·해외 출원을 진행하고, 거절이유통지 시 보정·의견서로 대응합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>등록·권리화</h4>
+        <p>등록 결정 후 등록료 납부, 권리범위 확보·분할·계속 출원 전략을 수립합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>유지·활용</h4>
+        <p>연차료 관리, 라이선스·이전, 침해 모니터링·분쟁 대응으로 IP 가치를 실현합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fees">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Fee Guide</div>
+      <h2 class="section-title">비용 안내</h2>
+      <p class="section-desc">사건 난이도·청구항 수·해외 출원 범위에 따라 달라집니다. 상담 후 견적서를 제공합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="fee-card">
+        <h3>국내 특허 출원</h3>
+        <div class="fee-range">150~350만 원</div>
+        <p>명세서 작성·출원 수수료·심사관납료(1년차) 포함 기준. 청구항·도면 수, 기술 분야에 따라 변동.</p>
+        <ul>
+          <li>선행조사(기본) 포함</li>
+          <li>거절이유 대응 별도</li>
+          <li>등록료·연차료 별도</li>
+        </ul>
+      </div>
+      <div class="fee-card">
+        <h3>상표 출원</h3>
+        <div class="fee-range">50~120만 원</div>
+        <p>류(類)당·지정상품 수에 따라 변동. 마드리드·해외 출원은 국가별 추가.</p>
+        <ul>
+          <li>유사상표 검색 포함</li>
+          <li>의견서·이미용 대응 별도</li>
+          <li>10년 갱신 안내</li>
+        </ul>
+      </div>
+      <div class="fee-card">
+        <h3>스타트업 패키지</h3>
+        <div class="fee-range">협의</div>
+        <p>벤처·TIPS·예비창업 기업 대상 할인. 핵심 특허 3건 + 상표 1건 번들.</p>
+        <ul>
+          <li>IP 전략 워크숍 1회</li>
+          <li>투자 DD 지원</li>
+          <li>분할 납부 가능</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="global-section" id="global">
+  <div class="container">
+    <div class="section-label" style="color:var(--accent-silver)">Global Network</div>
+    <h2 class="section-title">해외 IP 네트워크</h2>
+    <p class="section-desc">주요 시장 현지 대리인과 협력하여 글로벌 권리 확보를 지원합니다.</p>
+    <div class="global-grid">
+      <div class="global-item">
+        <div class="flag">🇺🇸</div>
+        <h4>미국 USPTO</h4>
+        <p>실무 대응·101·112 대응, ITC·연방지방법원 소송 제휴</p>
+      </div>
+      <div class="global-item">
+        <div class="flag">🇪🇺</div>
+        <h4>유럽 EPO</h4>
+        <p>유럽특허·Unified Patent Court 대응</p>
+      </div>
+      <div class="global-item">
+        <div class="flag">🇨🇳</div>
+        <h4>중국 CNIPA</h4>
+        <p>출원·실시·침해 대응, 세관 기록·행정 단속</p>
+      </div>
+      <div class="global-item">
+        <div class="flag">🇯🇵</div>
+        <h4>일본 JPO</h4>
+        <p>전자·기계·화학 분야 현지 대리</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">News & Insights</div>
+      <h2 class="section-title">IP 소식</h2>
+      <p class="section-desc">법령·판례 동향과 아이피원의 인사이트를 전합니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="AI 특허">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.25</div>
+          <h3>생성형 AI 발명의 특허 등록 가능성 — 2025 심사 동향</h3>
+          <p>특허청 AI 발명 심사 가이드라인 개정과 미국 USPTO 사례를 비교합니다. 김도현 파트너 변리사가 실무 체크리스트를 정리합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80" alt="상표법">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.10</div>
+          <h3>상표법 개정 — 악명상표·온라인 침해 대응 강화</h3>
+          <p>2025년 상표법 시행령 개정의 핵심과 e-commerce 플랫폼 삭제 요청 절차를 정하늘 변리사가 설명합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80" alt="스타트업 IP">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.04.18</div>
+          <h3>시리즈 A 전 IP Due Diligence — 투자자가 보는 5가지</h3>
+          <p>핵심 특허 존속, FTO, 공동출원·직무발명, 오픈소스 리스크 등 VC DD 관점을 박지훈 대표가 짚어 드립니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" alt="수상">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.03.28</div>
+          <h3>특허법인 아이피원, '2025 IP Firm of the Year' 선정</h3>
+          <p>대한변리사회 주관 평가에서 IT·반도체 분야 우수 법인으로 선정되었습니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">특허·상표 상담 전 많이 물어보시는 질문입니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">첫 상담은 무료인가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 30~60분 초기 상담은 무료입니다. 발명·브랜드 개요, 출원 가능성, 대략적 비용·일정을 안내해 드립니다. 상세 선행조사·명세서 작성은 유료로 진행됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">공개 전에 출원해야 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">논문·전시·키크스타터·SNS 공개 전 출원을 강력히 권합니다. 공개 후에는 신규성 상실로 국내 등록이 불가할 수 있으며, 미국은 1년 유예가 있으나 국가별로 다릅니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">특허 등록까지 얼마나 걸리나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">통상 심사 10~18개월, 우선심사 신청 시 3~6개월입니다. PCT 국내단계·해외는 국가별 1~3년 추가될 수 있습니다. 상표는 8~12개월이 일반적입니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">직원 발명은 누구 소유인가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">근로자 발명은 원칙적으로 사용자(회사)가 승계·취득할 수 있습니다. 근로계약·연구원 규정·보상 규정을 정비하고, 공동출원·이전 계약을 명확히 하는 것이 중요합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">해외 출원만 따로 의뢰할 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">가능합니다. 국내 출원 후 1년 이내 우선권 주장, PCT 30/31개월 국내단계 진입 등 기존 출원을 기반으로 해외만 진행할 수 있습니다. 기존 명세서 검토·보완도 지원합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">연차료를 놓치면 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">연차료 미납 시 권리가 소멸합니다. 회복 절차가 있으나 추가 비용·기한이 있으므로, 아이피원 연차료 관리 서비스로 일정·납부를 대행하는 것을 권합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="consult-section" id="consult">
+  <div class="container">
+    <div class="consult-grid">
+      <div class="consult-info">
+        <div class="section-label">Free Consultation</div>
+        <h2 class="section-title">무료 IP 상담 신청</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 분야별 변리사가 연락드립니다.</p>
+        <div class="consult-features">
+          <div class="consult-feature">
+            <div class="num">1</div>
+            <div><strong>기밀 보장</strong><span>상담 내용은 NDA 원칙에 따라 보호됩니다.</span></div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">2</div>
+            <div><strong>분야별 전문가</strong><span>기술 분야에 맞는 변리사가 1:1 상담합니다.</span></div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">3</div>
+            <div><strong>투명 견적</strong><span>수임 전 항목별 견적서를 서면으로 제공합니다.</span></div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="상담 신청이 접수되었습니다! 24시간 내 변리사가 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함 / 회사명</label>
+            <input type="text" id="name" name="name" placeholder="홍길동 / (주)OO" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="ip-type">문의 유형</label>
+            <select id="ip-type" name="ip-type" required>
+              <option value="">선택해 주세요</option>
+              <option value="patent">특허 출원·심사</option>
+              <option value="trademark">상표·디자인</option>
+              <option value="global">해외 IP</option>
+              <option value="dispute">분쟁·소송</option>
+              <option value="license">라이선스·이전</option>
+              <option value="startup">스타트업 패키지</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">문의 내용</label>
+            <textarea id="message" name="message" rows="5" placeholder="발명·브랜드 개요, 기술 분야, 출원·공개 일정 등을 적어 주세요." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-accent">상담 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Office Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">특허청·서울남부지방법원 인근에 위치해 있습니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>특허법인 아이피원</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div><strong>주소</strong><span>서울특별시 서초구 반포대로 456, IP원타워 12층<br>(양재역 3번 출구 도보 8분)</span></div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div><strong>연락처</strong><span>전화: 02-888-1234<br>이메일: contact@ipone.kr</span></div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div><strong>교통</strong><span>3호선·신분당선 양재역 3번 출구<br>특허청·서울남부지법 인근</span></div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>09:00 – 18:00</td></tr>
+          <tr><td>토요일</td><td>예약 상담 only</td></tr>
+          <tr><td>일·공휴일</td><td>휴무</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin"><strong>특허법인 아이피원</strong><span>서울 서초구 반포대로 456</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">특허법인 아이피원</a>
+      <p>PATENT LAW — 2007년 설립. 기술과 브랜드의 가치를 지식재산으로 보호합니다.</p>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:0.82rem;color:rgba(255,255,255,0.55)">📍 서울 서초구 반포대로 456</span>
+        <span style="font-size:0.82rem;color:rgba(255,255,255,0.55)">📞 02-888-1234</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>업무 분야</h4>
+      <a href="#areas">특허</a>
+      <a href="#areas">상표</a>
+      <a href="#areas">해외 IP</a>
+      <a href="#areas">분쟁</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#experts">변리사</a>
+      <a href="#cases">성공 사례</a>
+      <a href="#fees">비용 안내</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>상담</h4>
+      <a href="#consult">무료 상담</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 09:00 – 18:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 특허법인 아이피원. All rights reserved.</span>
+    <span>대표변리사 박지훈 · 사업자등록번호 234-56-78901</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

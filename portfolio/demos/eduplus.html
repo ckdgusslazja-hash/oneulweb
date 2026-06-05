@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>에듀플러스 EDUPLUS — 초중고 종합 학원</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Noto Sans KR', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #F8FAFC;
+  --text: #0F172A;
+  --text-muted: #64748B;
+  --accent: #1E40AF;
+  --accent-light: #3B82F6;
+  --accent-navy: #1E3A8A;
+  --accent-text: #fff;
+  --border: #E2E8F0;
+  --nav-bg: rgba(255,255,255,0.97);
+  --footer-bg: #0F172A;
+  --card-bg: #FFFFFF;
+  --btn-radius: 10px;
+  --card-radius: 16px;
+  --footer-text: rgba(255,255,255,0.6);
+}
+
+body { background: var(--bg); }
+
+.site-nav .logo {
+  color: var(--accent-navy);
+  font-weight: 800;
+}
+
+.site-nav .logo span {
+  color: var(--accent-light);
+  font-weight: 600;
+  font-size: 0.85em;
+  margin-left: 4px;
+}
+
+.nav-cta {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn-primary { background: var(--accent); color: var(--accent-text); }
+.section-label { color: var(--accent-light); }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 88vh, 700px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg { position: absolute; inset: 0; }
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(15,23,42,0.92) 0%, rgba(30,58,138,0.75) 55%, rgba(30,64,175,0.45) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(48px, 8vw, 80px) clamp(20px, 4vw, 48px);
+  max-width: 680px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(59,130,246,0.2);
+  border: 1px solid rgba(147,197,253,0.35);
+  border-radius: 50px;
+  color: #93C5FD;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: #60A5FA;
+}
+
+.hero p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: #CBD5E1;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn-hero {
+  padding: 16px 32px;
+  background: var(--accent-light);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(59,130,246,0.35);
+}
+
+.btn-hero-outline {
+  padding: 16px 32px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.btn-hero-outline:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.55);
+}
+
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.hero-trust span {
+  font-size: 0.82rem;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-trust strong { color: #E2E8F0; }
+
+/* Stats bar */
+.stats-bar {
+  background: var(--accent-navy);
+  color: #fff;
+  padding: clamp(32px, 5vw, 48px) 0;
+  position: relative;
+}
+
+.stats-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.15), transparent);
+}
+
+.stats-bar .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 32px);
+  text-align: center;
+  position: relative;
+}
+
+.stat-item strong {
+  display: block;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+  color: #60A5FA;
+}
+
+.stat-item span {
+  font-size: clamp(0.78rem, 1.5vw, 0.9rem);
+  font-weight: 500;
+  color: #BFDBFE;
+}
+
+/* Programs */
+.programs { background: var(--bg); }
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.program-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.program-card:hover {
+  border-color: var(--accent-light);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(30,64,175,0.1);
+}
+
+.program-card .prog-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  position: relative;
+}
+
+.program-card .prog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.program-card:hover .prog-img img { transform: scale(1.05); }
+
+.prog-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+.program-card .prog-body { padding: clamp(20px, 3vw, 28px); }
+
+.program-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.program-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.prog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.prog-meta span {
+  padding: 4px 10px;
+  background: #EFF6FF;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Teachers */
+.teachers { background: #fff; }
+
+.teacher-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.teacher-card {
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px) clamp(16px, 3vw, 24px);
+  transition: all 0.3s;
+}
+
+.teacher-card:hover {
+  border-color: var(--accent-light);
+  box-shadow: 0 12px 32px rgba(30,64,175,0.08);
+}
+
+.teacher-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  border: 3px solid #DBEAFE;
+}
+
+.teacher-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teacher-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.teacher-card .subject {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.teacher-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.teacher-creds {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.teacher-creds span {
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  background: #F1F5F9;
+  color: var(--text-muted);
+  border-radius: 4px;
+}
+
+/* Process */
+.process-section { background: var(--bg); }
+
+.process-steps::before { display: none; }
+
+.process-step::before {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Schedule */
+.schedule-section { background: #fff; }
+
+.schedule-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.schedule-table thead {
+  background: var(--accent-navy);
+  color: #fff;
+}
+
+.schedule-table th {
+  padding: 16px 12px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.82rem;
+}
+
+.schedule-table td {
+  padding: 14px 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.schedule-table tbody tr:hover { background: #F8FAFC; }
+
+.schedule-table td:first-child {
+  font-weight: 700;
+  color: var(--accent-navy);
+  background: #F1F5F9;
+}
+
+.schedule-table .time {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.schedule-note {
+  padding: 16px 24px;
+  background: #EFF6FF;
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* Success stories */
+.success-section { background: var(--bg); }
+
+.success-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.success-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.success-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+}
+
+.success-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(30,64,175,0.1);
+}
+
+.success-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #DBEAFE;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+
+.success-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.success-card .school {
+  font-size: 0.88rem;
+  color: var(--accent-light);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.success-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.success-card .result {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.success-card .result strong { color: var(--accent-navy); }
+
+/* Reviews */
+.reviews-section { background: #fff; }
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.review-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+}
+
+.review-card .subject-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: #EFF6FF;
+  padding: 3px 10px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* Consultation */
+.consult-section { background: #fff; }
+
+.consult-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: start;
+}
+
+.consult-info .section-desc { max-width: 100%; }
+
+.consult-features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.consult-feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.consult-feature .num {
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.consult-feature strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.consult-feature span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--btn-radius);
+  margin-top: 8px;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(30,64,175,0.25);
+}
+
+/* Location */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(24px, 4vw, 40px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-navy);
+  margin-bottom: 24px;
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.location-detail .ico {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: #EFF6FF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-detail strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.location-detail span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Footer extras */
+.footer-brand .logo span { color: #60A5FA; }
+
+.footer-contact {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-contact span {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  transition: background 0.25s, color 0.25s;
+}
+
+.footer-social a:hover {
+  background: var(--accent-light);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .program-grid { grid-template-columns: repeat(2, 1fr); }
+  .teacher-grid { grid-template-columns: repeat(2, 1fr); }
+  .success-grid { grid-template-columns: repeat(2, 1fr); }
+  .consult-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+  .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .program-grid,
+  .teacher-grid,
+  .success-grid,
+  .review-grid { grid-template-columns: 1fr; }
+
+  .schedule-table { font-size: 0.78rem; }
+  .schedule-table th,
+  .schedule-table td { padding: 10px 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav" id="top">
+  <a href="#top" class="logo">에듀플러스 <span>EDUPLUS</span></a>
+  <button class="nav-toggle" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#programs">프로그램</a>
+    <a href="#teachers">강사진</a>
+    <a href="#reviews">수강후기</a>
+    <a href="#schedule">시간표</a>
+    <a href="#faq">FAQ</a>
+    <a href="#consult" class="nav-cta">상담신청</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&q=80" alt="학생들이 함께 공부하는 모습">
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🏫 2010년 설립 · 초중고 종합 학원</div>
+    <h1>아이의 <em>가능성</em>을<br>함께 키워갑니다</h1>
+    <p>수학·영어·코딩부터 논술·입시컨설팅까지, 체계적인 커리큘럼과 1:1 맞춤 관리로 목표 대학 합격의 길을 열어 드립니다.</p>
+    <div class="hero-actions">
+      <a href="#consult" class="btn-hero">무료 학습 상담 신청</a>
+      <a href="#programs" class="btn-hero-outline">프로그램 둘러보기</a>
+    </div>
+    <div class="hero-trust">
+      <span>✓ <strong>누적 수강생 12,000+</strong></span>
+      <span>✓ <strong>명문대 합격률 94%</strong></span>
+      <span>✓ <strong>전문 강사 28명</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stat-item">
+      <strong>12,000+</strong>
+      <span>누적 수강생</span>
+    </div>
+    <div class="stat-item">
+      <strong>94%</strong>
+      <span>목표 대학 합격률</span>
+    </div>
+    <div class="stat-item">
+      <strong>28명</strong>
+      <span>전문 강사진</span>
+    </div>
+    <div class="stat-item">
+      <strong>15년</strong>
+      <span>교육 운영 경력</span>
+    </div>
+  </div>
+</div>
+
+<!-- Programs -->
+<section class="programs" id="programs">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Programs</div>
+      <h2 class="section-title">에듀플러스 교육 프로그램</h2>
+      <p class="section-desc">초등부터 고등까지, 학년별·수준별 맞춤 커리큘럼으로 체계적인 학습을 제공합니다.</p>
+    </div>
+    <div class="program-grid">
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80" alt="수학 수업">
+          <span class="prog-tag">인기</span>
+        </div>
+        <div class="prog-body">
+          <h3>수학</h3>
+          <p>개념 이해부터 심화·경시대회까지, 단계별 수학 역량을 키우는 체계적 프로그램입니다.</p>
+          <div class="prog-meta">
+            <span>초등</span><span>중등</span><span>고등</span><span>경시</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1546410531-bb4caa6e4247?w=600&q=80" alt="영어 수업">
+          <span class="prog-tag">추천</span>
+        </div>
+        <div class="prog-body">
+          <h3>영어</h3>
+          <p>원어민 회화, 독해·문법, TOEFL/TOEIC 준비까지 영어 실력을 종합적으로 향상시킵니다.</p>
+          <div class="prog-meta">
+            <span>회화</span><span>독해</span><span>내신</span><span>수능</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80" alt="코딩 수업">
+          <span class="prog-tag">신규</span>
+        </div>
+        <div class="prog-body">
+          <h3>코딩</h3>
+          <p>스크래치부터 Python, AI 기초까지 미래를 준비하는 프로그래밍 교육을 제공합니다.</p>
+          <div class="prog-meta">
+            <span>스크래치</span><span>Python</span><span>AI</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80" alt="논술 수업">
+        </div>
+        <div class="prog-body">
+          <h3>논술</h3>
+          <p>논리적 사고력과 글쓰기 역량을 키워 대입 논술·면접까지 완벽하게 준비합니다.</p>
+          <div class="prog-meta">
+            <span>중등</span><span>고등</span><span>대입논술</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1434030217611-bb0f93b5a601?w=600&q=80" alt="입시 컨설팅">
+        </div>
+        <div class="prog-body">
+          <h3>입시 컨설팅</h3>
+          <p>생기부 관리, 학종·수시 전략, 면접 코칭까지 1:1 맞춤 입시 로드맵을 설계합니다.</p>
+          <div class="prog-meta">
+            <span>학종</span><span>수시</span><span>면접</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="방학 특강">
+          <span class="prog-tag">한정</span>
+        </div>
+        <div class="prog-body">
+          <h3>방학 특강</h3>
+          <p>여름·겨울 방학 집중 특강으로 학기 중 부족한 부분을 빠르게 보완하고 실력을 끌어올립니다.</p>
+          <div class="prog-meta">
+            <span>집중반</span><span>선행</span><span>심화</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Teachers -->
+<section class="teachers" id="teachers">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Teachers</div>
+      <h2 class="section-title">전문 강사진</h2>
+      <p class="section-desc">SKY 출신·現 교사 출신 등 검증된 강사진이 학생 한 명 한 명을 책임지고 지도합니다.</p>
+    </div>
+    <div class="teacher-grid">
+      <article class="teacher-card">
+        <div class="teacher-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=80" alt="김민수 수학 강사">
+        </div>
+        <h4>김민수</h4>
+        <div class="subject">수학 총괄 원장</div>
+        <p>서울대 수학교육과 졸업, 現 교육청 수학 자문위원. 15년간 3,000명 이상 지도, 수능 만점자 다수 배출.</p>
+        <div class="teacher-creds">
+          <span>서울대</span><span>수능출제위원</span><span>15년 경력</span>
+        </div>
+      </article>
+      <article class="teacher-card">
+        <div class="teacher-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=80" alt="이서연 영어 강사">
+        </div>
+        <h4>이서연</h4>
+        <div class="subject">영어 수석 강사</div>
+        <p>연세대 영어영문학과, Columbia TESOL 수료. 원어민 수준 회화·독해 지도, TOEFL 110+ 배출 50명 이상.</p>
+        <div class="teacher-creds">
+          <span>연세대</span><span>TESOL</span><span>TOEFL 전문</span>
+        </div>
+      </article>
+      <article class="teacher-card">
+        <div class="teacher-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" alt="박준혁 코딩 강사">
+        </div>
+        <h4>박준혁</h4>
+        <div class="subject">코딩·AI 강사</div>
+        <p>KAIST 전산학과, 前 네이버 개발자. Python·AI 기초부터 정보올림피아드 대비까지 실전 중심 코딩 교육.</p>
+        <div class="teacher-creds">
+          <span>KAIST</span><span>정올 지도</span><span>現 개발자</span>
+        </div>
+      </article>
+      <article class="teacher-card">
+        <div class="teacher-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80" alt="최유진 논술 강사">
+        </div>
+        <h4>최유진</h4>
+        <div class="subject">논술·입시 컨설턴트</div>
+        <p>고려대 국어교육과, 前 대입 입학사정관. 논술·면접 전문, SKY 합격생 200명 이상 배출 실적.</p>
+        <div class="teacher-creds">
+          <span>고려대</span><span>입학사정관</span><span>SKY 전문</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Curriculum Process -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Curriculum</div>
+      <h2 class="section-title">학습 관리 4단계 프로세스</h2>
+      <p class="section-desc">입학 상담부터 성적 분석까지, 체계적인 4단계 관리로 학습 효과를 극대화합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>학습 진단</h4>
+        <p>레벨 테스트와 1:1 상담으로 현재 실력과 학습 성향을 정밀 분석합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>맞춤 커리큘럼</h4>
+        <p>학년·목표에 맞는 개인별 학습 계획과 반 편성을 설계합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>집중 수업</h4>
+        <p>소수 정예 수업과 주 1회 1:1 클리닉으로 개념을 완벽히 다집니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>성적 관리</h4>
+        <p>주간 테스트·월간 리포트로 학부모에게 학습 현황을 투명하게 공유합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Schedule -->
+<section class="schedule-section" id="schedule">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Schedule</div>
+      <h2 class="section-title">평일 수업 시간표</h2>
+      <p class="section-desc">2025년 2학기 기준 평일 반 편성입니다. 토·일 특강 및 1:1 클리닉은 별도 안내합니다.</p>
+    </div>
+    <div class="schedule-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>시간</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>15:00<span class="time">방과 후</span></td>
+            <td>초등 수학 A</td>
+            <td>초등 영어 A</td>
+            <td>초등 코딩</td>
+            <td>초등 수학 B</td>
+            <td>초등 영어 B</td>
+          </tr>
+          <tr>
+            <td>16:30</td>
+            <td>중1 수학</td>
+            <td>중1 영어</td>
+            <td>중2 수학</td>
+            <td>중2 영어</td>
+            <td>중3 통합</td>
+          </tr>
+          <tr>
+            <td>18:00</td>
+            <td>중3 수학</td>
+            <td>중3 영어</td>
+            <td>고1 수학</td>
+            <td>고1 영어</td>
+            <td>논술 기초</td>
+          </tr>
+          <tr>
+            <td>19:30</td>
+            <td>고2 수학</td>
+            <td>고2 영어</td>
+            <td>고3 수학</td>
+            <td>고3 영어</td>
+            <td>입시 면접</td>
+          </tr>
+          <tr>
+            <td>21:00<span class="time">심화반</span></td>
+            <td>수능 수학</td>
+            <td>수능 영어</td>
+            <td>논술 심화</td>
+            <td>입시 컨설팅</td>
+            <td>자율 학습</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="schedule-note">📌 반 편성은 레벨 테스트 결과에 따라 조정될 수 있습니다. 정확한 시간표는 상담 시 안내해 드립니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Success Stories -->
+<section class="success-section" id="success">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Success Stories</div>
+      <h2 class="section-title">합격 사례</h2>
+      <p class="section-desc">에듀플러스와 함께 꿈의 대학에 합격한 학생들의 생생한 이야기입니다.</p>
+    </div>
+    <div class="success-grid">
+      <article class="success-card">
+        <span class="success-badge">2025 수시 합격</span>
+        <h4>수학 만점에서 서울대 자연계 합격</h4>
+        <div class="school">서울대학교 공과대학</div>
+        <p>중3 때부터 에듀플러스 수학 심화반을 수강했습니다. 김민수 원장님의 1:1 클리닉과 주간 테스트가 큰 도움이 됐어요.</p>
+        <div class="result">수강 기간 <strong>3년</strong> · 수능 수학 <strong>표준점수 100%</strong></div>
+      </article>
+      <article class="success-card">
+        <span class="success-badge">2025 수시 합격</span>
+        <h4>영어 내신 1등급, 연세대 인문계 합격</h4>
+        <div class="school">연세대학교 인문대학</div>
+        <p>이서연 선생님의 독해·문법 수업으로 영어 자신감이 생겼습니다. 학종 서류 준비도 최유진 선생님이 꼼꼼히 도와주셨어요.</p>
+        <div class="result">수강 기간 <strong>2년</strong> · 영어 내신 <strong>1등급</strong></div>
+      </article>
+      <article class="success-card">
+        <span class="success-badge">2024 정시 합격</span>
+        <h4>코딩 특기자 전형, KAIST 합격</h4>
+        <div class="school">KAIST 전산학부</div>
+        <p>박준혁 선생님과 함께 Python·알고리즘을 배우며 정보올림피아드 동상을 수상했습니다. 코딩이 입시의 강력한 무기가 됐어요.</p>
+        <div class="result">수강 기간 <strong>1.5년</strong> · 정보올림피아드 <strong>동상</strong></div>
+      </article>
+      <article class="success-card">
+        <span class="success-badge">2024 수시 합격</span>
+        <h4>논술 전형으로 고려대 의예과 합격</h4>
+        <div class="school">고려대학교 의과대학</div>
+        <p>논술 기초반부터 심화반까지 체계적으로 준비했습니다. 면접 코칭까지 받아 자신 있게 논술고사와 면접에 임할 수 있었습니다.</p>
+        <div class="result">수강 기간 <strong>2년</strong> · 논술고사 <strong>상위 5%</strong></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">수강 후기</h2>
+      <p class="section-desc">학부모와 학생들이 직접 남긴 에듀플러스 수강 후기입니다.</p>
+    </div>
+    <div class="review-grid">
+      <article class="review-card">
+        <span class="subject-tag">수학</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>아이가 수학을 싫어했는데, 에듀플러스에 다니면서 점수가 30점에서 90점으로 올랐어요. 소수 정예 수업이라 선생님이 꼼꼼히 챙겨주시는 게 가장 큰 장점입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div>
+            <strong>김영희 학부모</strong>
+            <span>중2 수학반 · 2025.03</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">영어</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>이서연 선생님 수업이 정말 좋아요. 원어민 선생님과 함께하는 회화 시간이 특히 도움이 됐고, 내신도 1등급을 받았습니다. 학원 분위기도 밝고 즐거워요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div>
+            <strong>박지현 학생</strong>
+            <span>고1 영어반 · 2025.02</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">코딩</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>초등 5학년 아들이 코딩을 너무 재미있어해요. 스크래치부터 시작해서 지금은 Python도 할 수 있게 됐습니다. 미래를 준비하는 교육이라 믿고 맡기고 있어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div>
+            <strong>이정민 학부모</strong>
+            <span>초5 코딩반 · 2025.01</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">논술</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>논술이 막막했는데 최유진 선생님이 글쓰기 구조부터 차근차근 가르쳐 주셨어요. 대입 논술에서 좋은 결과를 얻을 수 있었습니다. 감사합니다!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div>
+            <strong>한소율 학생</strong>
+            <span>고3 논술반 · 2024.12</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">입시</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>입시 컨설팅이 정말 체계적이에요. 생기부 관리부터 면접 준비까지 원스톱으로 해결할 수 있어서 부담이 많이 줄었습니다. 아이가 서울대에 합격했어요!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div>
+            <strong>정미경 학부모</strong>
+            <span>입시 컨설팅 · 2024.11</span>
+          </div>
+        </div>
+      </article>
+      <article class="review-card">
+        <span class="subject-tag">방학특강</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>여름 방학 특강으로 수학 선행을 완벽히 마쳤어요. 2주 집중반인데도 커리큘럼이 탄탄하고, 매일 테스트로 실력을 확인할 수 있어서 만족스러웠습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">오</div>
+          <div>
+            <strong>오태양 학생</strong>
+            <span>중1 방학특강 · 2024.08</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">학원 등록 전 많이 물어보시는 질문들을 모았습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">레벨 테스트는 어떻게 진행되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">상담 예약 후 방문하시면 약 40분간 해당 과목 레벨 테스트를 진행합니다. 테스트 결과와 학습 성향 분석을 바탕으로 적합한 반과 커리큘럼을 추천해 드립니다. 레벨 테스트는 무료이며, 결과 상담도 함께 제공됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">수업료는 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">과목·학년·반 유형에 따라 수업료가 다릅니다. 기본 월 4회 수업 기준 초등 18만 원, 중등 22만 원, 고등 28만 원부터이며, 2과목 이상 등록 시 할인이 적용됩니다. 정확한 수업료는 상담 시 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">반 편성은 몇 명 규모인가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">에듀플러스는 소수 정예 수업을 원칙으로 합니다. 초등반 최대 8명, 중·고등반 최대 10명으로 운영하며, 1:1 클리닉은 주 1회 모든 학생에게 제공됩니다. 개인별 학습 관리가 가능한 규모를 유지하고 있습니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">학부모에게 학습 현황을 알려주시나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">매주 학습 리포트를 카카오톡으로 발송하며, 매월 정기 상담을 통해 성적 변화와 학습 태도를 상세히 공유합니다. 에듀플러스 전용 학부모 앱에서 출결·과제·성적을 실시간으로 확인하실 수도 있습니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">중간에 반을 변경할 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 가능합니다. 주간 테스트 결과나 학습 진도에 따라 반 조정이 필요한 경우 담임 선생님과 상담 후 적합한 반으로 이동합니다. 상위반·하위반 이동은 월 1회 정기적으로 검토하며, 추가 비용 없이 진행됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">환불 규정은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">학원법에 따른 표준 환불 규정을 적용합니다. 수업 시작 전 전액 환불, 수업 진행 후에는 잔여 수업 횟수에 비례하여 환불해 드립니다. 등록 시 환불 규정을 서면으로 안내해 드리며, 자세한 사항은 데스크에 문의해 주세요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Consultation Form -->
+<section class="consult-section" id="consult">
+  <div class="container">
+    <div class="consult-grid">
+      <div class="consult-info">
+        <div class="section-label">Free Consultation</div>
+        <h2 class="section-title">무료 학습 상담 신청</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 담당 선생님이 연락드립니다. 급한 문의는 전화(02-555-1234)로 연락해 주세요.</p>
+        <div class="consult-features">
+          <div class="consult-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>무료 레벨 테스트</strong>
+              <span>상담과 함께 과목별 레벨 테스트를 무료로 진행합니다.</span>
+            </div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>맞춤 학습 설계</strong>
+              <span>학년·목표에 맞는 최적의 반과 커리큘럼을 추천해 드립니다.</span>
+            </div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>학부모 리포트</strong>
+              <span>등록 후 매주 학습 현황을 투명하게 공유합니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="상담 신청이 접수되었습니다! 24시간 내 담당 선생님이 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="student-name">학생 이름</label>
+            <input type="text" id="student-name" name="student-name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="grade">학년</label>
+            <select id="grade" name="grade" required>
+              <option value="">학년을 선택해 주세요</option>
+              <option value="elem3">초등 3학년</option>
+              <option value="elem4">초등 4학년</option>
+              <option value="elem5">초등 5학년</option>
+              <option value="elem6">초등 6학년</option>
+              <option value="mid1">중학교 1학년</option>
+              <option value="mid2">중학교 2학년</option>
+              <option value="mid3">중학교 3학년</option>
+              <option value="high1">고등학교 1학년</option>
+              <option value="high2">고등학교 2학년</option>
+              <option value="high3">고등학교 3학년</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="subject">관심 과목</label>
+            <select id="subject" name="subject" required>
+              <option value="">과목을 선택해 주세요</option>
+              <option value="math">수학</option>
+              <option value="english">영어</option>
+              <option value="coding">코딩</option>
+              <option value="essay">논술</option>
+              <option value="admission">입시 컨설팅</option>
+              <option value="vacation">방학 특강</option>
+              <option value="multi">복수 과목</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="parent-name">학부모 성함</label>
+            <input type="text" id="parent-name" name="parent-name" placeholder="홍부모" required>
+          </div>
+          <div class="form-group">
+            <label for="parent-phone">학부모 연락처</label>
+            <input type="tel" id="parent-phone" name="parent-phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="message">상담 요청 사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="현재 성적, 목표 대학, 궁금한 점 등을 자유롭게 작성해 주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">상담 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">강남역 인근, 대치동 학원가 중심에 위치해 있어 접근성이 뛰어납니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>에듀플러스 EDUPLUS</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 강남구 대치동 123, 에듀플러스빌딩 3~5층<br>(강남역 3번 출구 도보 7분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>전화: 02-555-1234<br>카카오톡: @eduplus<br>이메일: info@eduplus.kr</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>교통 안내</strong>
+            <span>지하철 2호선 강남역 3번 출구 도보 7분<br>버스: 대치동·강남역 정류장 하차<br>주차: 건물 지하 1~2층 (2시간 무료)</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>14:00 – 22:00</td></tr>
+          <tr><td>토요일</td><td>09:00 – 18:00</td></tr>
+          <tr><td>일·공휴일</td><td>휴무 (방학 특강 별도 운영)</td></tr>
+          <tr><td>상담 시간</td><td>평일 10:00 – 20:00 (예약제)</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>에듀플러스 EDUPLUS</strong>
+          <span>서울 강남구 대치동 123</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">에듀플러스 <span>EDUPLUS</span></a>
+      <p>2010년 설립 이래 초중고 종합 학원으로 12,000명 이상의 학생을 지도해 왔습니다. 수학·영어·코딩·논술·입시까지, 아이의 꿈을 함께 키워가겠습니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 강남구 대치동 123, 에듀플러스빌딩 3~5층</span>
+        <span>📞 02-555-1234</span>
+        <span>✉️ info@eduplus.kr</span>
+      </div>
+      <div class="footer-social">
+        <a href="#" data-toast="인스타그램 페이지 준비 중입니다." aria-label="인스타그램">IG</a>
+        <a href="#" data-toast="유튜브 채널 준비 중입니다." aria-label="유튜브">YT</a>
+        <a href="#" data-toast="카카오톡 채널: @eduplus" aria-label="카카오톡">KK</a>
+        <a href="#" data-toast="블로그 준비 중입니다." aria-label="블로그">BL</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>교육 프로그램</h4>
+      <a href="#programs">수학</a>
+      <a href="#programs">영어</a>
+      <a href="#programs">코딩</a>
+      <a href="#programs">논술</a>
+      <a href="#programs">입시 컨설팅</a>
+      <a href="#programs">방학 특강</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#teachers">강사진 소개</a>
+      <a href="#success">합격 사례</a>
+      <a href="#reviews">수강 후기</a>
+      <a href="#schedule">수업 시간표</a>
+      <a href="#process">학습 프로세스</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>상담 안내</h4>
+      <a href="#consult">무료 상담 신청</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 14:00 – 22:00</p>
+      <p>토요일 09:00 – 18:00</p>
+      <p>상담 예약: 02-555-1234</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 에듀플러스 EDUPLUS. All rights reserved.</span>
+    <span>대표 김민수 · 사업자등록번호 123-45-67890 · 학원등록번호 제2025-서울강남-0123호</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오븐피자 OVEN PIZZA — 나폴리 피자</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FDF8F5;
+  --text: #1A1410;
+  --text-muted: #7A6B5D;
+  --accent: #C41E24;
+  --accent-text: #fff;
+  --accent-green: #2D6A4F;
+  --border: #E8DFD4;
+  --nav-bg: rgba(253,248,245,0.97);
+  --footer-bg: #1A1410;
+  --card-bg: #fff;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --title-weight: 400;
+  --logo-weight: 600;
+  --logo-spacing: 0.15em;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(26,20,16,0.5) 0%, rgba(26,20,16,0.75) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: #FDF8F5;
+  padding: 0 24px;
+  max-width: 760px;
+}
+
+.hero-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6.5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  opacity: 0.92;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: rgba(253,248,245,0.5);
+  z-index: 1;
+}
+
+.btn-reserve {
+  display: inline-block;
+  padding: 16px 44px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  transition: all 0.3s;
+}
+
+.btn-reserve:hover { background: var(--accent); color: #fff; }
+
+/* Marquee */
+.marquee {
+  padding: 14px 0;
+  background: var(--accent);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-inner {
+  display: inline-flex;
+  gap: 44px;
+  animation: marquee 26s linear infinite;
+  font-size: 0.76rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* About */
+.about { background: #fff; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--accent);
+}
+
+.stat span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* Philosophy */
+.philosophy-section { background: var(--bg); }
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.phil-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.phil-card .icon { font-size: 2rem; margin-bottom: 16px; }
+
+.phil-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.phil-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Menu */
+.menu-section {
+  background: var(--text);
+  color: #FDF8F5;
+}
+
+.menu-section .section-label { color: var(--accent); }
+.menu-section .section-title { color: #FDF8F5; }
+.menu-section .section-desc { color: rgba(253,248,245,0.65); margin: 0 auto; }
+
+.menu-section .tab-btn {
+  border-color: rgba(196,30,36,0.35);
+  color: rgba(253,248,245,0.7);
+}
+
+.menu-section .tab-btn.active,
+.menu-section .tab-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.menu-section .menu-row { border-bottom-color: rgba(196,30,36,0.2); }
+.menu-section .menu-row-info p { color: rgba(253,248,245,0.55); }
+.menu-section .price { color: var(--accent); }
+
+.menu-tabs-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid rgba(196,30,36,0.25);
+  border-radius: var(--card-radius);
+}
+
+/* Oven */
+.oven-section { background: #fff; }
+
+.oven-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 64px);
+  align-items: center;
+}
+
+.oven-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.oven-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.oven-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.oven-specs div {
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--card-radius);
+  border-left: 3px solid var(--accent);
+}
+
+.oven-specs strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.oven-specs span { font-size: 0.88rem; color: var(--text-muted); }
+
+/* Wine */
+.wine-section { background: var(--bg); }
+
+.wine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.wine-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.wine-card .wine-img { aspect-ratio: 3/4; overflow: hidden; }
+.wine-card .wine-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.wine-card .wine-body { padding: 24px; }
+
+.wine-card .region {
+  font-size: 0.72rem;
+  color: var(--accent-green);
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+
+.wine-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.wine-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Team */
+.team-section { background: #fff; }
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.gallery-grid img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 4px;
+  transition: transform 0.3s;
+}
+
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* Reviews */
+.reviews-section { background: var(--bg); }
+
+/* FAQ */
+.faq-section { background: #fff; }
+
+/* Location */
+.location-section { background: var(--bg); }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.location-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.location-detail-grid h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.location-detail-grid p,
+.location-detail-grid ul {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.location-detail-grid ul li {
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.location-detail-grid ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* Reserve */
+.reserve-section { background: #fff; }
+
+.reserve-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.reserve-intro .section-desc { margin-bottom: 24px; }
+
+.reserve-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 16px 20px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+}
+
+@media (max-width: 900px) {
+  .about-grid, .oven-grid, .location-grid, .reserve-wrap { grid-template-columns: 1fr; }
+  .philosophy-grid { grid-template-columns: 1fr; }
+  .wine-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .location-detail-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stats, .oven-specs { grid-template-columns: 1fr; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">OVEN PIZZA</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">스토리</a>
+    <a href="#menu">메뉴</a>
+    <a href="#oven">오븐</a>
+    <a href="#wine">와인</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">위치</a>
+    <a href="#reserve" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=80" alt="오븐피자 나폴리 피자">
+  </div>
+  <div class="hero-content">
+    <div class="hero-sub">AUTHENTIC NAPOLI · 이태원</div>
+    <h1>나폴리의 불맛,<br>서울에서</h1>
+    <p>이탈리아 수입 화덕에서 90초에 구워지는 정통 나폴리 피자. San Marzano 토마토, 모짜렐라 di bufala, 48시간 숙성 도우. OVEN PIZZA가 이태원에 나폴리를 옮겼습니다.</p>
+    <a href="#reserve" class="btn-reserve">테이블 예약</a>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- Trust Strip -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Wood-Fired Oven</span><span>·</span><span>AVPN Certified</span><span>·</span><span>San Marzano</span><span>·</span><span>48H Dough</span><span>·</span><span>이태원 피자</span><span>·</span>
+    <span>Wood-Fired Oven</span><span>·</span><span>AVPN Certified</span><span>·</span><span>San Marzano</span><span>·</span><span>48H Dough</span><span>·</span><span>이태원 피자</span><span>·</span>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&q=80" alt="오븐피자 셰프가 피자를 굽는 모습">
+      </div>
+      <div class="about-content">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">나폴리에서 배운<br>피자의 정석</h2>
+        <p class="section-desc">2017년 나폴리 현지 피체리아에서 2년간 수습한 셰프 김태오가 2021년 이태원에 OVEN PIZZA를 열었습니다. AVPN(정통 나폴리 피자 협회) 가이드라인을 준수하며, 도우·토핑·오븐 온도까지 나폴리 그대로 재현합니다.</p>
+        <p class="section-desc">이탈리아 직수입 가스 화덕(400°C)에서 60~90초에 구워지는 피자는 가장자리가 부풀어 오르고(Cornicione), 속은 촉촉합니다. San Marzano DOP 토마토, 모짜렐라 di bufala, 엑스트라 버진 올리브오일만 사용합니다.</p>
+        <div class="stats">
+          <div class="stat"><strong>400°C</strong><span>화덕 온도</span></div>
+          <div class="stat"><strong>48H</strong><span>도우 숙성</span></div>
+          <div class="stat"><strong>4.8</strong><span>네이버 평점</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Philosophy -->
+<section class="philosophy-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Philosophy</div>
+      <h2 class="section-title">나폴리 피자 3원칙</h2>
+      <p class="section-desc">좋은 피자는 좋은 재료, 오래 숙성된 도우, 뜨거운 화덕에서 나옵니다.</p>
+    </div>
+    <div class="philosophy-grid">
+      <div class="phil-card">
+        <div class="icon">🍅</div>
+        <h4>San Marzano</h4>
+        <p>이탈리아 산지 San Marzano DOP 토마토만 사용. 통조림이 아닌 생토마토 소스로 산미와 단맛의 균형.</p>
+      </div>
+      <div class="phil-card">
+        <div class="icon">🧀</div>
+        <h4>Bufala & Fior di Latte</h4>
+        <p>모짜렐라 di bufala(수타 버팔로)와 fior di latte(우유 모짜렐라)를 메뉴별로 구분 사용. 신선 유통 3일 이내.</p>
+      </div>
+      <div class="phil-card">
+        <div class="icon">🔥</div>
+        <h4>90초 화덕</h4>
+        <p>이탈리아 수입 가스 화덕 400°C. 피자마다 60~90초 굽기. 바닥은 바삭, 가장자리는 에어 포켓이 살아있게.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Menu</div>
+      <h2 class="section-title">OVEN PIZZA 메뉴</h2>
+      <p class="section-desc">정통 나폴리 스타일 피자. 모든 피자 30cm, 1~2인 분량. 런치 세트(피자+샐러드+음료) ₩18,000.</p>
+    </div>
+    <div class="menu-tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="classic">클래식</button>
+        <button class="tab-btn" data-tab="special">시그니처</button>
+        <button class="tab-btn" data-tab="side">사이드·음료</button>
+      </div>
+      <div class="tab-panel active" data-tab="classic">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>마르게리타</h4>
+              <p>San Marzano · fior di latte · 바질 · 올리브오일. 나폴리의 기본</p>
+            </div>
+            <span class="price">₩18,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>마리나라</h4>
+              <p>토마토 · 마늘 · 오레가노 · 올리브오일. 모짜렐라 없는 클래식</p>
+            </div>
+            <span class="price">₩15,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>콰트로 포르마지</h4>
+              <p>fior di latte · 고르곤졸라 · 파르미지아노 · 스모크 모짜렐라</p>
+            </div>
+            <span class="price">₩22,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>디아볼라</h4>
+              <p>토마토 · 모짜렐라 · 스파이시 살라미 · 페퍼론치노</p>
+            </div>
+            <span class="price">₩21,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>프로슈토 에 팡고</h4>
+              <p>토마토 · 모짜렐라 · 프로슈토 · 버섯 · 아티초크</p>
+            </div>
+            <span class="price">₩24,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="special">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>OVEN 시그니처</h4>
+              <p>bufala · 트러플 오일 · 루꼴라 · 파르미지아노. 셰프 추천</p>
+            </div>
+            <span class="price">₩26,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>부라타 & 프로슈토</h4>
+              <p>통구이 후 부라타 · 24개월 프로슈토 · 아루굴라</p>
+            </div>
+            <span class="price">₩28,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>트러플 포르치니</h4>
+              <p>포르치니 · 트러플 크림 · 모짜렐라 · 타임</p>
+            </div>
+            <span class="price">₩27,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>해산물 마리나라</h4>
+              <p>토마토 · 뉴질랜드 홍합 · 새우 · 바지루스</p>
+            </div>
+            <span class="price">₩25,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="side">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>카프레제 샐러드</h4>
+              <p>bufala · 토마토 · 바질 · 발사믹 글레이즈</p>
+            </div>
+            <span class="price">₩14,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>갈릭 브레드</h4>
+              <p>수제 포카치아 · 마늘 버터 · 파슬리</p>
+            </div>
+            <span class="price">₩8,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>티라미수</h4>
+              <p>수제 마스카포네 · 에스프레소 · 코코아</p>
+            </div>
+            <span class="price">₩9,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>하우스 와인 (글래스)</h4>
+              <p>이탈리아 레드·화이트. 피자 페어링 추천</p>
+            </div>
+            <span class="price">₩9,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>이탈리안 에스프레소</h4>
+              <p>식후 에스프레소. 디카페인 가능</p>
+            </div>
+            <span class="price">₩4,500</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Oven -->
+<section class="oven-section" id="oven">
+  <div class="container">
+    <div class="oven-grid">
+      <div class="oven-img">
+        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80" alt="오븐피자 화덕 오븐">
+      </div>
+      <div class="oven-details">
+        <div class="section-label">Wood-Fired Oven</div>
+        <h2 class="section-title">400°C 화덕 오븐</h2>
+        <p class="section-desc">이탈리아 Napoli Oven社에서 직수입한 가스 화덕. 도어를 열면 400°C의 열기가 피자 도우를 90초 만에 완성합니다. 바닥 돌판은 5분마다 회전하며 균일한 화력을 유지합니다.</p>
+        <p class="section-desc">도우는 tipo 00 밀가루·이탈리아산 이스트·바다 소금·물만으로 48시간 저온 숙성. 발효가 끝난 도우는 손으로 늘려(Cornsicione을 남기며) 토핑 후 즉시 오븐에 넣습니다.</p>
+        <div class="oven-specs">
+          <div><strong>오븐 온도</strong><span>400°C (752°F)</span></div>
+          <div><strong>굽기 시간</strong><span>60~90초</span></div>
+          <div><strong>도우 숙성</strong><span>48시간 저온</span></div>
+          <div><strong>피자 크기</strong><span>30cm (1~2인)</span></div>
+        </div>
+        <a href="#menu" class="btn btn-primary">메뉴 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wine -->
+<section class="wine-section" id="wine">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Wine Pairing</div>
+      <h2 class="section-title">피자와 어울리는 와인</h2>
+      <p class="section-desc">이탈리아 산지 와인 20여 종. 셰프 추천 페어링으로 피자의 풍미를 더합니다.</p>
+    </div>
+    <div class="wine-grid">
+      <div class="wine-card">
+        <div class="wine-img">
+          <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=80" alt="피노 누아">
+        </div>
+        <div class="wine-body">
+          <div class="region">PIEDMONT · ITALY</div>
+          <h4>바르베라 다스티</h4>
+          <p>마르게리타·마리나라와 페어링. 산미와 탄닌이 토마토 산미와 조화.</p>
+        </div>
+      </div>
+      <div class="wine-card">
+        <div class="wine-img">
+          <img src="https://images.unsplash.com/photo-1506377247377-2ccd5cedb242?w=400&q=80" alt="키안티">
+        </div>
+        <div class="wine-body">
+          <div class="region">TUSCANY · ITALY</div>
+          <h4>키안티 클라시코</h4>
+          <p>디아볼라·프로슈토 피자에 추천. 체리·허브 노트, 미디엄 바디.</p>
+        </div>
+      </div>
+      <div class="wine-card">
+        <div class="wine-img">
+          <img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=400&q=80" alt="프로세코">
+        </div>
+        <div class="wine-body">
+          <div class="region">VENETO · ITALY</div>
+          <h4>프로세코 DOC</h4>
+          <p>해산물·버팔라 피자와 페어링. 상큼한 기포, 가벼운 마무리.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">피자를 만드는 사람들</h2>
+      <p class="section-desc">나폴리 현지 경험과 이탈리아 정통 제법으로 매일 피자를 굽습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="김태오 헤드 셰프">
+        </div>
+        <div class="card-body">
+          <h4>김태오</h4>
+          <div class="role">Head Pizzaiolo · AVPN</div>
+          <p>나폴리 피체리아 2년 수습. OVEN PIZZA 창업. 도우·오븐 총괄.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="마르코 피자이올로">
+        </div>
+        <div class="card-body">
+          <h4>Marco Rossi</h4>
+          <div class="role">Pizzaiolo · 나폴리 출신</div>
+          <p>나폴리 현지 15년 경력. 화덕 운영·신메뉴 R&D.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" alt="이소영 소믈리에">
+        </div>
+        <div class="card-body">
+          <h4>이소영</h4>
+          <div class="role">Sommelier · 와인</div>
+          <p>이탈리아 와인 전문. 피자 페어링 추천, 와인 리스트 큐레이션.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">오븐의 열기</h2>
+      <p class="section-desc">화덕에서 갓 나온 피자, 이태원의 밤, 와인 한 잔까지.</p>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80" alt="마르게리타 피자">
+      <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80" alt="화덕 오븐">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" alt="피자 제작">
+      <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400&q=80" alt="콰트로 포르마지">
+      <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&q=80" alt="피자 클로즈업">
+      <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=80" alt="와인">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80" alt="레스토랑 인테리어">
+      <img src="https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&q=80" alt="피자와 샐러드">
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">손님들의 이야기</h2>
+      <p class="section-desc">네이버·인스타그램에서 받은 진솔한 후기를 모았습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>마르게리타가 진짜 나폴리 맛이에요. 가장자리가 부풀어 오르고 속은 촉촉. 이태원에서 이런 피자를 먹을 수 있다니 감동입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김민수</strong><span>네이버 리뷰 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>OVEN 시그니처에 트러플 오일이 환상적. bufala 모짜렐라가 신선하고, 와인 페어링 추천도 완벽했어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이하늘</strong><span>인스타 DM · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>화덕에서 갓 나온 피자라 뜨거운데 그게 매력. 90초에 구워진다니 신기하고, 도우가 48시간 숙성이라 소화도 편해요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박준혁</strong><span>네이버 리뷰 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <blockquote>런치 세트 가성비 좋아요. 피자+샐러드+와인까지 18,000원. 주말엔 예약 필수, 웨이팅 있을 수 있어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최유나</strong><span>카카오맵 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>부라타 & 프로슈토 피자가 예술. 통구이 후 부라타가 녹아내리는 순간 최고. 기념일 데이트로 강추합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정서연</strong><span>네이버 리뷰 · 2024.12</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>이탈리아 여행 때 먹었던 피자 맛이 나요. 셰프가 나폴리에서 수습했다고 하니 믿음이 갑니다. 재방문 각!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한동훈</strong><span>인스타 리뷰 · 2024.11</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">방문 전 궁금한 점을 확인해 보세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">예약은 필수인가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">주말·저녁 시간대는 예약을 권장합니다. 평일 런치는 워크인 가능하나, 6인 이상 단체는 사전 예약 필수. 홈페이지 예약 폼 또는 전화(02-4567-8901)로 문의해 주세요.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">피자 1판 분량은?</button>
+        <div class="faq-a"><div class="faq-a-inner">모든 피자 30cm, 1~2인 분량입니다. 나폴리 스타일은 가운데가 얇고 가장자리(Cornicione)가 두꺼운 형태. 2인이서 1판+사이드 1~2개 주문을 권장합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">테이크아웃·배달이 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">테이크아웃 가능(피자 전용 박스 제공). 배달은 배민·쿠팡이츠 제휴. 다만 화덕 피자는 갓 구운 상태가 최고이므로 매장 식사를 권장합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차는 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">건물 지하 주차장(2시간 무료, 영수증 지참) 이용 가능. 만차 시 이태원 공영주차장(도보 5분) 안내. 이태원 골목이라 대중교통 이용을 권장합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">와인 BYOB가 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">BYOB(콜키지)는 1병당 ₩20,000입니다. 매장 와인 리스트도 20여 종 준비되어 있으며, 셰프·소믈리에 페어링 추천을 받으실 수 있습니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="location-section" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">이태원역 3번 출구에서 도보 4분. 골목 안쪽 빨간 간판을 찾아주세요.</p>
+    </div>
+    <div class="location-grid">
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>OVEN PIZZA</strong>
+          <span>서울 용산구 이태원로 45길 18</span>
+        </div>
+      </div>
+      <div class="location-info">
+        <h3>매장 정보</h3>
+        <table class="hours-table">
+          <tr><td>월 – 목</td><td>11:30 – 22:00</td></tr>
+          <tr><td>금 – 토</td><td>11:30 – 23:00</td></tr>
+          <tr><td>일</td><td>11:30 – 21:00</td></tr>
+          <tr><td>런치</td><td>11:30 – 15:00</td></tr>
+          <tr><td>라스트오더</td><td>마감 30분 전</td></tr>
+        </table>
+        <div class="location-detail-grid">
+          <div>
+            <h4>주차</h4>
+            <p>건물 지하 주차장 2시간 무료(영수증 제시). 승용차 10대. 만차 시 이태원 공영주차장(도보 5분).</p>
+          </div>
+          <div>
+            <h4>대중교통</h4>
+            <ul>
+              <li>지하철 6호선 이태원역 3번 출구 도보 4분</li>
+              <li>버스 401, 7212 이태원입구 정류장 하차</li>
+              <li>이태원 골목 도보 접근 권장</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:20px;font-size:0.9rem;color:var(--text-muted)">문의 · 02-4567-8901 · hello@ovenpizza.kr</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reserve -->
+<section class="reserve-section" id="reserve">
+  <div class="container">
+    <div class="reserve-wrap">
+      <div class="reserve-intro">
+        <div class="section-label">Reservation</div>
+        <h2 class="section-title">테이블 예약</h2>
+        <p class="section-desc">주말·저녁, 6인 이상 단체 예약을 남겨 주시면 1영업일 내 확인 연락드립니다. 급한 문의는 02-4567-8901로 전화해 주세요.</p>
+        <p class="reserve-note">※ 주말 저녁은 예약 필수. 당일 예약은 전화로만 가능합니다. 6인 이상은 최소 2일 전 예약을 권장합니다.</p>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="예약 요청이 접수되었습니다! 곧 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="date">희망 일시</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="guests">인원</label>
+              <select id="guests" name="guests" required>
+                <option value="">선택</option>
+                <option value="1-2">1–2명</option>
+                <option value="3-4">3–4명</option>
+                <option value="5-6">5–6명</option>
+                <option value="7+">7명 이상</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">요청 사항</label>
+              <textarea id="message" name="message" placeholder="희망 시간, 창가석·단체석, 기념일·알레르기 등을 적어 주세요." rows="4"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">예약 요청 보내기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">OVEN PIZZA</span>
+      <p>이태원에서 만나는 정통 나폴리 피자. 400°C 화덕, 48시간 도우, San Marzano. 나폴리의 불맛을 서울에.</p>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#about">스토리</a>
+      <a href="#menu">메뉴</a>
+      <a href="#oven">화덕</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#reserve">예약</a>
+    </div>
+    <div class="footer-col">
+      <h4>영업 안내</h4>
+      <p>월–목 11:30–22:00</p>
+      <p>금–토 11:30–23:00</p>
+      <p>일 11:30–21:00</p>
+      <p>런치 11:30–15:00</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>서울 용산구 이태원로 45길 18</p>
+      <p>02-4567-8901</p>
+      <p>hello@ovenpizza.kr</p>
+      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 OVEN PIZZA. All rights reserved.</span>
+    <span>사업자등록번호 456-78-90123</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

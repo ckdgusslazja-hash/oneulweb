@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스튜디오 우드 — 인테리어 디자인 & 리모델링</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FAF7F2;
+  --text: #3D3429;
+  --text-muted: #8A7E6F;
+  --accent: #8B6914;
+  --accent-wood: #6B4F2A;
+  --accent-light: #C4A574;
+  --accent-text: #fff;
+  --border: #E8DFD0;
+  --nav-bg: rgba(250,247,242,0.97);
+  --footer-bg: #3D3429;
+  --card-bg: #FFFFFF;
+  --btn-radius: 2px;
+  --card-radius: 4px;
+  --footer-text: rgba(255,255,255,0.6);
+  --title-weight: 500;
+  --logo-spacing: 0.06em;
+}
+
+.site-nav .logo { color: var(--accent-wood); }
+.nav-cta { background: var(--accent-wood); color: #fff; }
+
+.hero {
+  background: linear-gradient(135deg, #3D3429 0%, #6B4F2A 55%, #8B6914 100%);
+  color: #fff;
+  padding: clamp(60px, 10vw, 100px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -15%;
+  width: 55%; height: 180%;
+  background: radial-gradient(ellipse, rgba(196,165,116,0.12), transparent 70%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid rgba(196,165,116,0.45);
+  color: var(--accent-light);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.8vw, 3.4rem);
+  line-height: 1.25;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.hero p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: rgba(255,255,255,0.75);
+  line-height: 1.85;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-primary-custom {
+  padding: 14px 28px;
+  background: var(--accent-light);
+  color: var(--accent-wood);
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.btn-primary-custom:hover { transform: translateY(-2px); opacity: 0.92; }
+
+.btn-ghost {
+  padding: 14px 28px;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(196,165,116,0.25);
+  padding: clamp(20px, 3vw, 28px);
+  text-align: center;
+  border-radius: var(--card-radius);
+}
+
+.stat-card .num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--accent-light);
+  font-weight: 700;
+}
+
+.stat-card .lbl { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+.areas-header { text-align: center; margin-bottom: 48px; }
+
+.area-card {
+  padding: clamp(28px, 4vw, 36px) clamp(20px, 3vw, 28px);
+  background: var(--card-bg);
+  border-top: 3px solid var(--accent-light);
+  text-align: center;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  border: 1px solid var(--border);
+  border-top-width: 3px;
+  transition: all 0.3s;
+  height: 100%;
+}
+
+.area-card:hover {
+  background: var(--accent-wood);
+  color: #fff;
+  transform: translateY(-4px);
+  border-color: var(--accent-wood);
+}
+
+.area-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+.area-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; }
+.area-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; }
+.area-card:hover p { color: rgba(255,255,255,0.8); }
+
+.why-section { background: #F0EBE3; }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.why-box {
+  padding: 32px 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.why-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(107,79,42,0.1);
+}
+
+.why-box .icon {
+  width: 52px; height: 52px;
+  margin: 0 auto 16px;
+  background: rgba(107,79,42,0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.why-box h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--accent-wood);
+}
+
+.why-box p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+.team-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+.team-photo { aspect-ratio: 4/3; overflow: hidden; }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.team-info { padding: 24px; }
+.team-info h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+.team-info .role { font-size: 0.8rem; color: var(--accent); margin-bottom: 12px; font-weight: 500; }
+.team-info .creds { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+
+.portfolio-section { background: #F0EBE3; }
+
+.project-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+
+.project-thumb { aspect-ratio: 4/3; overflow: hidden; }
+.project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.project-card:hover .project-thumb img { transform: scale(1.05); }
+
+.project-body { padding: 24px; }
+.project-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(107,79,42,0.08);
+  color: var(--accent-wood);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.project-body h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+.project-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+.project-meta { font-size: 0.75rem; color: var(--accent); margin-top: 12px; font-weight: 500; }
+
+.process-section .process-step::before {
+  background: var(--accent-wood);
+  border: 2px solid var(--accent-light);
+}
+
+.pricing-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.pricing-card.featured {
+  border-color: var(--accent-wood);
+  border-width: 2px;
+  position: relative;
+}
+
+.pricing-card.featured::before {
+  content: '인기';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-wood);
+  color: #fff;
+  font-size: 0.72rem;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.pricing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+
+.pricing-card h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 8px; color: var(--accent-wood); }
+.pricing-card .price { font-size: 1.8rem; font-weight: 700; color: var(--accent-wood); margin: 16px 0; }
+.pricing-card .price span { font-size: 0.85rem; font-weight: 400; color: var(--text-muted); }
+.pricing-card ul { text-align: left; margin: 20px 0; }
+.pricing-card li {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.pricing-card li::before { content: '✓ '; color: var(--accent-light); font-weight: 700; }
+
+.news-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+.news-thumb { aspect-ratio: 16/9; overflow: hidden; }
+.news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.news-body { padding: 24px; }
+.news-date { font-size: 0.72rem; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+.news-body h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+.news-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+.reviews-section { background: #F0EBE3; }
+
+.faq-section { background: var(--bg); }
+.faq-item.open .faq-q { color: var(--accent-wood); }
+.faq-item .faq-q::after { color: var(--accent-light); }
+
+.consult-section { background: linear-gradient(180deg, #fff 0%, #F0EBE3 100%); }
+
+.consult-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.consult-features { display: flex; flex-direction: column; gap: 16px; }
+
+.consult-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.consult-feature .num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  background: var(--accent-wood);
+  color: var(--accent-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.consult-feature strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.consult-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.form-card .btn-primary-custom {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin-bottom: 20px;
+  color: var(--accent-wood);
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.location-detail .ico {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: rgba(107,79,42,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.location-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.site-footer .footer-brand .logo { color: #fff; }
+.footer-col a:hover { color: var(--accent-light); }
+
+.material-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.material-strip span {
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-radius: var(--card-radius);
+}
+
+.cta-band {
+  background: var(--accent-wood);
+  color: #fff;
+}
+
+.cta-band .section-title { color: #fff; }
+.cta-band .section-desc { color: rgba(255,255,255,0.75); margin: 0 auto 28px; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .consult-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">스튜디오 우드</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#services">서비스</a>
+    <a href="#portfolio">포트폴리오</a>
+    <a href="#team">디자이너</a>
+    <a href="#process">진행절차</a>
+    <a href="#pricing">견적안내</a>
+    <a href="#faq">FAQ</a>
+    <a href="#consult" class="nav-cta">상담신청</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">INTERIOR DESIGN · 서울 강남 · 15년</div>
+        <h1>공간에 숨을 불어넣는<br>인테리어 스튜디오</h1>
+        <p>주거 · 상업 · 오피스 전 분야 맞춤 디자인과 시공을 원스톱으로 제공합니다. 자연 소재와 따뜻한 톤으로 일상의 질을 높이는 공간을 설계합니다. 3D 시안부터 마감재 선정, 시공 감리까지 책임집니다.</p>
+        <div class="hero-actions">
+          <a href="#consult" class="btn-primary-custom">무료 실측 상담</a>
+          <a href="#portfolio" class="btn-ghost">시공 사례 보기</a>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="num">1,200+</div><div class="lbl">누적 시공 프로젝트</div></div>
+        <div class="stat-card"><div class="num">97%</div><div class="lbl">고객 만족도</div></div>
+        <div class="stat-card"><div class="num">8</div><div class="lbl">전문 디자이너</div></div>
+        <div class="stat-card"><div class="num">15년</div><div class="lbl">업력</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="areas-header">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">인테리어 서비스</h2>
+      <p class="section-desc" style="margin:0 auto">공간의 목적과 라이프스타일에 맞춘 맞춤형 디자인·시공 서비스를 제공합니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="area-card">
+        <div class="icon">🏠</div>
+        <h3>주거 인테리어</h3>
+        <p>아파트·빌라·단독주택 전체 리모델링과 부분 시공을 담당합니다. 가족 구성과 생활 패턴을 반영한 동선 설계, 수납·조명·마감재까지 통합 제안합니다. 33㎡ 원룸부터 200㎡ 이상 대형 평형까지 경험이 풍부합니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">☕</div>
+        <h3>상업 공간</h3>
+        <p>카페, 레스토랑, 소매점, 뷰티샵 등 브랜드 아이덴티티를 공간에 담습니다. 유동·조리·쇼핑 동선을 최적화하고, 인허가·소방·위생 기준을 충족하는 실용 설계를 병행합니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">💼</div>
+        <h3>오피스 · 스튜디오</h3>
+        <p>스타트업 오피스, 공유오피스, 촬영 스튜디오 등 업무 효율을 높이는 공간을 설계합니다. 집중·협업·휴식 존의 균형, 가변 파티션, 친환경 마감재 적용이 강점입니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">🛋️</div>
+        <h3>스타일링 · 컨설팅</h3>
+        <p>기존 공간의 가구·조명·소품 스타일링, 컬러 컨설팅, 3D 렌더링 단독 서비스도 가능합니다. 이사 전 공간 진단, 분양 아파트 옵션 선택 자문까지 지원합니다.</p>
+      </div>
+    </div>
+    <div class="material-strip">
+      <span>오크 원목</span><span>월넛</span><span>린넨 패브릭</span><span>대리석</span><span>테라조</span><span>친환경 도장</span><span>LED 간접조명</span>
+    </div>
+  </div>
+</section>
+
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Why Studio Wood</div>
+      <h2 class="section-title">스튜디오 우드를 선택하는 이유</h2>
+      <p class="section-desc">디자인부터 시공·A/S까지 한 팀이 책임지는 원스톱 인테리어 경험을 약속합니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-box">
+        <div class="icon">✏️</div>
+        <h4>맞춤 3D 설계</h4>
+        <p>실측 후 2주 이내 3D 시안과 VR 투어를 제공합니다. 마감재·가구 배치를 사전에 확인하고 수정할 수 있어 시공 후 불만을 최소화합니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">🔨</div>
+        <h4>직영 시공팀</h4>
+        <p>외주 없이 15년 경력의 직영 시공팀이 시공합니다. 일정·품질·안전을 스튜디오가 직접 관리하며, 하자 발생 시 신속 A/S를 보장합니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">📋</div>
+        <h4>투명 견적</h4>
+        <p>항목별 상세 견적서를 제공하고, 계약 후 추가 비용은 사전 동의 없이 청구하지 않습니다. 자재 등급별 옵션 비교표로 합리적 선택을 돕습니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">🌿</div>
+        <h4>친환경 소재</h4>
+        <p>E0·E1 등급 합판, 저VOC 도장, FSC 인증 원목을 기본 적용합니다. 아이·반려동물 가정을 위한 안전 마감재 큐레이션도 제공합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Design Team</div>
+      <h2 class="section-title">전문 디자이너</h2>
+      <p class="section-desc">국내외 수상 경력과 풍부한 현장 경험을 갖춘 디자이너가 프로젝트를 리드합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="김서연 대표">
+        </div>
+        <div class="team-info">
+          <h3>김서연</h3>
+          <div class="role">대표 디자이너 · 주거 전문</div>
+          <p class="creds">홍익대 실내디자인 석사<br>대한실내건축학회 우수상 2회 · 주거 프로젝트 400건+</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="박민호 실장">
+        </div>
+        <div class="team-info">
+          <h3>박민호</h3>
+          <div class="role">시공 총괄 · 목공 전문</div>
+          <p class="creds">경기대 목공학과<br>직영 시공 12년 · 맞춤 가구·붙박이장 전문</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="이하은 디자이너">
+        </div>
+        <div class="team-info">
+          <h3>이하은</h3>
+          <div class="role">시니어 디자이너 · 상업 공간</div>
+          <p class="creds">이화여대 공간디자인학과<br>카페·F&B 브랜딩 150건 · Red Dot 수상</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80" alt="최준영 디자이너">
+        </div>
+        <div class="team-info">
+          <h3>최준영</h3>
+          <div class="role">디자이너 · 오피스·스튜디오</div>
+          <p class="creds">서울대 건축학과<br>스타트업·IT 오피스 특화 · LEED GA</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80" alt="정유진 디자이너">
+        </div>
+        <div class="team-info">
+          <h3>정유진</h3>
+          <div class="role">디자이너 · 컬러·스타일링</div>
+          <p class="creds">국민대 시각디자인학과<br>Residential Styling Award · 소품·조명 큐레이션</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" alt="한도윤 PM">
+        </div>
+        <div class="team-info">
+          <h3>한도윤</h3>
+          <div class="role">프로젝트 매니저</div>
+          <p class="creds">건축기사 · 현장 감리 10년<br>일정·품질·고객 커뮤니케이션 총괄</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio-section" id="portfolio">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">시공 사례</h2>
+      <p class="section-desc">최근 완공 프로젝트입니다. 스타일·평형·예산대별 다양한 레퍼런스를 확인해 보세요.</p>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="residential">주거</button>
+      <button class="tab-btn" data-tab="commercial">상업</button>
+      <button class="tab-btn" data-tab="office">오피스</button>
+    </div>
+    <div class="tab-panels">
+      <div class="tab-panel active" data-tab="residential">
+        <div class="grid-3">
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1618221195710-e06d1f2e0a3a?w=600&q=80" alt="한남동 펜트하우스">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">주거 · 84㎡</span>
+              <h3>한남동 모던 우드 펜트하우스</h3>
+              <p>오크 바닥과 베이지 톤 벽면으로 따뜻한 분위기를 연출했습니다. 오픈형 주방·거실 일체형과 맞춤 수납장으로 공간 효율을 극대화했습니다.</p>
+              <div class="project-meta">시공 기간 6주 · 예산 4,200만 원</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80" alt="판교 아파트">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">주거 · 59㎡</span>
+              <h3>판교 신혼부부 아파트</h3>
+              <p>좁은 평수에 맞춘 미니멀 인테리어. 접이식 가구와 벽면 수납으로 체감 면적을 확장했으며, 간접 조명으로 아늑한 분위기를 연출했습니다.</p>
+              <div class="project-meta">시공 기간 4주 · 예산 2,800만 원</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="성수 빌라">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">주거 · 리모델링</span>
+              <h3>성수 빌라 전체 리모델링</h3>
+              <p>노후 배관·전기 교체와 함께 인테리어를 진행했습니다. 노출 콘크리트와 철제 선반으로 인더스트리얼 무드를 완성했습니다.</p>
+              <div class="project-meta">시공 기간 8주 · 예산 5,600만 원</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="commercial">
+        <div class="grid-3">
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" alt="연남 카페">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">카페 · 45㎡</span>
+              <h3>연남동 스페셜티 카페</h3>
+              <p>테라코타 타일과 원목 바테이블로 유럽 감성을 담았습니다. 바리스타 동선과 고객 좌석 배치를 분리해 운영 효율을 높였습니다.</p>
+              <div class="project-meta">시공 기간 5주 · 예산 3,500만 원</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80" alt="성수 편집샵">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">리테일 · 120㎡</span>
+              <h3>성수 편집샵 인테리어</h3>
+              <p>이동식 행거와 모듈형 진열장으로 시즌별 레이아웃 변경이 용이합니다. 무채색 벽면에 포인트 조명으로 상품을 돋보이게 했습니다.</p>
+              <div class="project-meta">시공 기간 7주 · 예산 6,800만 원</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1560066984-138d983ef1f0?w=600&q=80" alt="청담 뷰티">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">뷰티 · 80㎡</span>
+              <h3>청담 프리미엄 뷰티살롱</h3>
+              <p>대리석 리셉션과 골드 포인트로 고급스러움을 강조했습니다. 시술실별 프라이버시 파티션과 소음 차단 마감을 적용했습니다.</p>
+              <div class="project-meta">시공 기간 6주 · 예산 5,200만 원</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="office">
+        <div class="grid-3">
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="강남 스타트업">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">오피스 · 200㎡</span>
+              <h3>강남 IT 스타트업 오피스</h3>
+              <p>오픈 데스크·미팅룸·라운지 3존 구성. 가변 파티션으로 팀 확장에 대응하고, 식물과 우드 톤으로 피로도를 낮췄습니다.</p>
+              <div class="project-meta">시공 기간 5주 · 예산 4,500만 원</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=80" alt="판교 공유오피스">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">공유오피스</span>
+              <h3>판교 공유오피스 2호점</h3>
+              <p>포커스룸·콜부스·이벤트 홀을 포함한 350㎡ 규모. 음향 흡수 패널과 층간 소음 방지 설계로 업무 집중도를 높였습니다.</p>
+              <div class="project-meta">시공 기간 10주 · 예산 1.2억 원</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ceea?w=600&q=80" alt="홍대 스튜디오">
+            </div>
+            <div class="project-body">
+              <span class="project-tag">스튜디오</span>
+              <h3>홍대 촬영 스튜디오</h3>
+              <p>자연광 스튜디오와 cyclorama wall, 조명 레일 시스템을 구축했습니다. 대기실·메이크업룸·편집실을 원스톱으로 배치했습니다.</p>
+              <div class="project-meta">시공 기간 6주 · 예산 3,900만 원</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">인테리어 진행 절차</h2>
+      <p class="section-desc">상담부터 A/S까지 6단계로 체계적으로 진행합니다.</p>
+    </div>
+    <div class="process-steps" style="grid-template-columns:repeat(6,1fr)">
+      <div class="process-step">
+        <h4>상담·실측</h4>
+        <p>현장 방문 실측과 라이프스타일·예산 상담을 진행합니다. 레퍼런스와 희망 스타일을 공유해 주시면 방향을 잡습니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>기획·3D</h4>
+        <p>평면도·입면도·3D 시안을 제작합니다. VR 투어로 공간감을 확인하고 2회까지 무료 수정합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>견적·계약</h4>
+        <p>항목별 상세 견적서를 제공하고, 자재 등급·브랜드를 확정한 뒤 계약합니다. 공정별 일정표도 함께 안내합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>시공</h4>
+        <p>철거·목공·타일·도장·전기 순으로 직영팀이 시공합니다. 주 2회 현장 사진·진행률을 공유합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>완공·점검</h4>
+        <p>고객과 함께 최종 점검 후 하자 리스트를 정리·보수합니다. 사용 설명서와 유지보수 가이드를 전달합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>A/S</h4>
+        <p>완공 후 1년 무상 A/S, 이후 유상 유지보수를 제공합니다. 긴급 하자는 48시간 내 방문합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Pricing Guide</div>
+      <h2 class="section-title">견적 안내</h2>
+      <p class="section-desc">평형·범위·자재 등급에 따라 달라지며, 상담 후 맞춤 견적을 제공합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <h3>라이트</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">부분 시공 · 원룸·소형</p>
+        <div class="price">150<span>만 원~ / ㎡</span></div>
+        <ul>
+          <li>도배·장판·조명 교체</li>
+          <li>기본 수납·커튼박스</li>
+          <li>3D 시안 1회</li>
+          <li>시공 2~3주</li>
+          <li>6개월 A/S</li>
+        </ul>
+        <a href="#consult" class="btn btn-outline btn-sm" data-toast="라이트 패키지 상담 신청이 접수되었습니다.">상담 신청</a>
+      </div>
+      <div class="pricing-card featured">
+        <h3>스탠다드</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">전체 리모델링 · 아파트</p>
+        <div class="price">220<span>만 원~ / ㎡</span></div>
+        <ul>
+          <li>철거·배관·전기 포함</li>
+          <li>맞춤 붙박이·주방</li>
+          <li>3D 시안·VR 2회 수정</li>
+          <li>시공 4~6주</li>
+          <li>1년 무상 A/S</li>
+        </ul>
+        <a href="#consult" class="btn btn-primary btn-sm" style="background:var(--accent-wood)" data-toast="스탠다드 패키지 상담 신청이 접수되었습니다.">상담 신청</a>
+      </div>
+      <div class="pricing-card">
+        <h3>프리미엄</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">고급 자재 · 대형·상업</p>
+        <div class="price">350<span>만 원~ / ㎡</span></div>
+        <ul>
+          <li>수입 타일·원목·대리석</li>
+          <li>맞춤 가구·스마트홈</li>
+          <li>전담 PM·주간 리포트</li>
+          <li>시공 6~12주</li>
+          <li>2년 무상 A/S</li>
+        </ul>
+        <a href="#consult" class="btn btn-outline btn-sm" data-toast="프리미엄 패키지 상담 신청이 접수되었습니다.">상담 신청</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">News & Tips</div>
+      <h2 class="section-title">인테리어 소식</h2>
+      <p class="section-desc">트렌드, 시공 팁, 스튜디오 소식을 전해 드립니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80" alt="2025 인테리어 트렌드">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.20</div>
+          <h3>2025 주거 인테리어 트렌드 — 웜 미니멀 & 내추럴 우드</h3>
+          <p>차가운 화이트 미니멀에서 따뜻한 베이지·우드 톤으로 이동하는 흐름을 정리했습니다. 김서연 대표가 추천하는 컬러 팔레트 5가지를 소개합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=600&q=80" alt="리모델링 체크리스트">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.08</div>
+          <h3>아파트 리모델링 전 반드시 확인할 7가지</h3>
+          <p>관리규약·하자보증·층간소음·엘리베이터 사용 시간 등 계약 전 체크리스트를 한도윤 PM이 설명합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1618221195710-e06d1f2e0a3a?w=600&q=80" alt="수납 팁">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.04.22</div>
+          <h3>좁은 집도 넓어 보이게 — 수납·동선 설계 팁</h3>
+          <p>59㎡ 이하 소형 평형에서 체감 면적을 키우는 붙박이·다용도 가구·거울 활용법을 공유합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="스튜디오 수상">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.04.01</div>
+          <h3>스튜디오 우드, '2025 서울 인테리어 어워드' 수상</h3>
+          <p>한남동 펜트하우스 프로젝트가 주거 부문 대상을 수령했습니다. 고객 여러분의 신뢰에 감사드립니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">고객 후기</h2>
+      <p class="section-desc">실제 의뢰 고객의 생생한 후기입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>3D 시안이 실제와 거의 같아서 놀랐어요. 시공 중에도 카톡으로 매일 사진 보내주셔서 안심하고 맡길 수 있었습니다. 붙박이장 수납력이 정말 좋아요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김○○ 님</strong><span>판교 59㎡ · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>카페 오픈 일정이 촉박했는데 약속한 날짜에 맞춰 완공해 주셨습니다. 동선 설계 덕분에 바리스타 업무가 훨씬 편해졌어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박○○ 님</strong><span>연남 카페 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>견적이 투명해서 다른 업체와 비교해도 합리적이었습니다. A/S도 빠르게 와서 문짝 조정까지 해 주셨어요. 추천합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이○○ 님</strong><span>성수 빌라 · 2024.11</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">인테리어 상담 전 많이 물어보시는 질문입니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">실측·상담은 무료인가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 서울·경기 지역 실측과 1차 상담은 무료입니다. 3D 시안 제작은 계약 후 진행되며, 상담 단계에서는 레퍼런스와 대략적 견적 범위를 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">시공 기간은 보통 얼마나 걸리나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">59㎡ 전체 리모델링 기준 4~6주, 부분 시공은 2~3주입니다. 철거·배관 공사 포함 여부, 맞춤 가구 제작 기간에 따라 달라지며, 계약 시 일정표를 제공합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">거주 중에도 시공이 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">부분 시공은 가능하나, 전체 리모델링은 철거·먼지·소음 때문에 이사 후 공사를 권장합니다. 불가피한 경우 방 dust 차단과 단계별 공사로 대응합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">자재를 직접 구매해도 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">일부 소품·가구는 고객 직구 가능합니다. 바닥·벽·주방 등 시공 품질과 연동되는 자재는 스튜디오 추천 제품을 사용하는 것이 하자·A/S 측면에서 유리합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">하자 발생 시 어떻게 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">완공 후 1년 무상 A/S를 제공합니다. 문·서랍 조정, 도장·타일 미세 하자 등은 48시간 내 방문하며, 계약서에 A/S 범위를 명시합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">지방 시공도 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">수도권이 주력이나, 100㎡ 이상 프로젝트는 전국 시공 가능합니다. 지방의 경우 출장비·숙박비가 별도이며, 상담 시 안내해 드립니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="consult-section" id="consult">
+  <div class="container">
+    <div class="consult-grid">
+      <div class="consult-info">
+        <div class="section-label">Free Consultation</div>
+        <h2 class="section-title">무료 실측·상담 신청</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 48시간 이내 전담 디자이너가 연락드립니다.</p>
+        <div class="consult-features">
+          <div class="consult-feature">
+            <div class="num">1</div>
+            <div><strong>현장 실측</strong><span>서울·경기 무료 방문 실측 및 라이프스타일 상담</span></div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">2</div>
+            <div><strong>맞춤 제안</strong><span>평형·예산에 맞는 스타일·견적 범위 안내</span></div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">3</div>
+            <div><strong>투명 견적</strong><span>항목별 상세 견적, 추가 비용 사전 동의 원칙</span></div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="상담 신청이 접수되었습니다! 48시간 내 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="space-type">공간 유형</label>
+            <select id="space-type" name="space-type" required>
+              <option value="">선택해 주세요</option>
+              <option value="apt">아파트·빌라</option>
+              <option value="house">단독주택</option>
+              <option value="commercial">상업 공간</option>
+              <option value="office">오피스</option>
+              <option value="styling">스타일링만</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">상담 내용</label>
+            <textarea id="message" name="message" rows="5" placeholder="평형, 희망 스타일, 예산, 입주 예정일 등을 적어 주세요." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary-custom">상담 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="cta">
+  <div class="container">
+    <div class="section-label" style="color:var(--accent-light)">Showroom</div>
+    <h2 class="section-title">쇼룸 방문 예약</h2>
+    <p class="section-desc">강남 쇼룸에서 마감재·가구 샘플을 직접 보실 수 있습니다. 평일·토요일 예약제 운영.</p>
+    <a href="#consult" class="btn-primary-custom" data-toast="쇼룸 방문 예약이 접수되었습니다.">방문 예약하기</a>
+  </div>
+</section>
+
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">강남역 인근 쇼룸·사무실입니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>스튜디오 우드</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div><strong>주소</strong><span>서울특별시 강남구 논현로 123, 우드빌딩 3층<br>(강남역 11번 출구 도보 7분)</span></div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div><strong>연락처</strong><span>전화: 02-555-1234<br>이메일: hello@studiowood.kr</span></div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div><strong>교통</strong><span>2호선·신분당선 강남역 11번 출구<br>주차: 건물 지하 1층 (2시간 무료)</span></div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>10:00 – 19:00</td></tr>
+          <tr><td>토요일</td><td>10:00 – 17:00 (예약제)</td></tr>
+          <tr><td>일·공휴일</td><td>휴무</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin"><strong>스튜디오 우드 쇼룸</strong><span>서울 강남구 논현로 123</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">스튜디오 우드</a>
+      <p>2010년 설립. 자연 소재와 정직한 시공으로 공간의 가치를 높입니다. INTERIOR DESIGN — 인테리어 스튜디오.</p>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:0.82rem;color:rgba(255,255,255,0.55)">📍 서울 강남구 논현로 123</span>
+        <span style="font-size:0.82rem;color:rgba(255,255,255,0.55)">📞 02-555-1234</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>서비스</h4>
+      <a href="#services">주거 인테리어</a>
+      <a href="#services">상업 공간</a>
+      <a href="#services">오피스</a>
+      <a href="#services">스타일링</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#portfolio">포트폴리오</a>
+      <a href="#team">디자이너</a>
+      <a href="#pricing">견적 안내</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>상담</h4>
+      <a href="#consult">무료 상담</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 10:00 – 19:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 스튜디오 우드. All rights reserved.</span>
+    <span>대표 김서연 · 사업자등록번호 123-45-67890</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

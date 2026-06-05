@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>웨딩플래너 — 두 사람의 가장 아름다운 순간을 함께합니다</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Noto Serif KR', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFCFC;
+  --text: #3D2C2C;
+  --text-muted: #8B7373;
+  --accent: #8B5E5E;
+  --accent-blush: #F8E8E8;
+  --accent-blush-deep: #E8C4C4;
+  --accent-gold: #C9A227;
+  --accent-gold-deep: #B8953F;
+  --accent-text: #fff;
+  --border: #E8C4C4;
+  --nav-bg: rgba(255,252,252,0.97);
+  --footer-bg: #3D2C2C;
+  --card-bg: #F8E8E8;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --footer-text: rgba(255,255,255,0.6);
+  --title-weight: 500;
+}
+
+.site-nav .logo { color: var(--accent); letter-spacing: 0.04em; }
+.nav-cta { background: var(--accent-gold); color: #fff; }
+.nav-links a:hover { color: var(--accent-gold-deep); }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 85vh, 780px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(61,44,44,0.72) 0%, rgba(139,94,94,0.55) 50%, rgba(201,162,39,0.25) 100%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid rgba(201,162,39,0.5);
+  color: var(--accent-gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 24px;
+  background: rgba(255,255,255,0.08);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.4;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.hero p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: rgba(255,255,255,0.88);
+  line-height: 1.85;
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-gold {
+  padding: 14px 28px;
+  background: var(--accent-gold);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.btn-gold:hover { transform: translateY(-2px); opacity: 0.92; }
+
+.btn-ghost {
+  padding: 14px 28px;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.08); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(201,162,39,0.3);
+  padding: clamp(20px, 3vw, 28px);
+  text-align: center;
+  border-radius: var(--card-radius);
+  backdrop-filter: blur(8px);
+}
+
+.stat-card .num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.stat-card .lbl { font-size: 0.78rem; color: rgba(255,255,255,0.75); margin-top: 4px; }
+
+.packages-section { background: var(--bg); }
+
+/* Cards shared hover */
+.package-card, .planner-card, .venue-card, .news-card, .testimonial-card {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--card-radius);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.package-card:hover, .planner-card:hover, .venue-card:hover, .news-card:hover, .testimonial-card:hover {
+  transform: translateY(-4px); box-shadow: 0 16px 40px rgba(139,94,94,0.1);
+}
+.package-card { overflow: hidden; height: 100%; display: flex; flex-direction: column; }
+.package-card.featured { border-color: var(--accent-gold); box-shadow: 0 8px 32px rgba(201,162,39,0.15); }
+.package-header { padding: clamp(24px,3vw,32px); background: var(--accent-blush); text-align: center; border-bottom: 1px solid var(--border); }
+.package-card.featured .package-header { background: linear-gradient(135deg, var(--accent-blush), rgba(201,162,39,0.15)); }
+.package-tag { display: inline-block; padding: 4px 12px; background: var(--accent-gold); color: #fff; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; border-radius: 4px; margin-bottom: 12px; }
+.package-header h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 8px; color: var(--accent); }
+.package-price { font-family: var(--font-display); font-size: 1.6rem; color: var(--accent-gold-deep); font-weight: 600; }
+.package-price span { font-size: 0.82rem; color: var(--text-muted); font-weight: 400; }
+.package-body { padding: clamp(24px,3vw,28px); flex: 1; display: flex; flex-direction: column; }
+.package-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+.package-list { flex: 1; margin-bottom: 24px; }
+.package-list li { font-size: 0.82rem; padding: 8px 0; border-bottom: 1px solid var(--accent-blush); display: flex; gap: 8px; line-height: 1.6; }
+.package-list li::before { content: '✦'; color: var(--accent-gold); font-size: 0.7rem; margin-top: 3px; flex-shrink: 0; }
+.package-body .btn-gold { display: block; text-align: center; width: 100%; }
+
+.gallery-section { background: var(--card-bg); }
+.gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-auto-rows: 200px; gap: 12px; }
+.gallery-item { position: relative; overflow: hidden; border-radius: var(--card-radius); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.gallery-item:hover img { transform: scale(1.08); }
+.gallery-item.wide { grid-column: span 2; }
+.gallery-item.tall { grid-row: span 2; }
+.gallery-caption { position: absolute; bottom: 16px; left: 16px; color: #fff; font-size: 0.82rem; font-weight: 500; z-index: 1; opacity: 0; transition: opacity 0.3s; }
+.gallery-item:hover .gallery-caption { opacity: 1; }
+
+.process-section { background: #fff; }
+.process-section .process-step::before { background: var(--accent-blush-deep); color: var(--accent-gold-deep); border: 2px solid var(--accent-gold); }
+
+.team-section { background: var(--bg); }
+.planner-card { overflow: hidden; }
+.planner-photo { aspect-ratio: 3/4; overflow: hidden; }
+.planner-photo img { width: 100%; height: 100%; object-fit: cover; }
+.planner-info { padding: 24px; text-align: center; }
+.planner-info h3 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 4px; }
+.planner-info .role { font-size: 0.8rem; color: var(--accent-gold-deep); margin-bottom: 12px; font-weight: 500; }
+.planner-info .bio { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; }
+
+.testimonials-section { background: var(--card-bg); }
+.testimonial-card { padding: clamp(28px,4vw,36px); position: relative; }
+.testimonial-stars { color: var(--accent-gold); letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 16px; }
+.testimonial-card blockquote { font-family: var(--font-display); font-size: 0.95rem; line-height: 1.85; margin-bottom: 20px; }
+.testimonial-meta { display: flex; align-items: center; gap: 14px; padding-top: 16px; border-top: 1px solid var(--accent-blush); }
+.testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--accent-blush-deep); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 600; flex-shrink: 0; }
+.testimonial-meta strong { display: block; font-size: 0.88rem; }
+.testimonial-meta span { font-size: 0.78rem; color: var(--text-muted); }
+
+.venues-section { background: #fff; }
+.venue-card { overflow: hidden; }
+.venue-img { aspect-ratio: 16/10; overflow: hidden; }
+.venue-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.venue-card:hover .venue-img img { transform: scale(1.05); }
+.venue-body { padding: 24px; }
+.venue-tag { display: inline-block; padding: 4px 10px; background: var(--accent-blush); color: var(--accent); font-size: 0.72rem; font-weight: 600; border-radius: 4px; margin-bottom: 10px; }
+.venue-body h3 { font-family: var(--font-display); font-size: 1rem; margin-bottom: 8px; }
+.venue-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.venue-spec { font-size: 0.78rem; color: var(--accent-gold-deep); font-weight: 500; }
+
+.styling-section { background: var(--card-bg); }
+.styling-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,5vw,48px); align-items: center; }
+.styling-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.styling-visual img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: var(--card-radius); }
+.styling-visual img:first-child { grid-row: span 2; aspect-ratio: auto; height: 100%; }
+.styling-content .section-desc { margin-bottom: 28px; }
+.styling-list { display: flex; flex-direction: column; gap: 16px; }
+.styling-item { display: flex; gap: 16px; padding: 20px; background: #fff; border: 1px solid var(--border); border-radius: var(--card-radius); }
+.styling-item .icon { flex-shrink: 0; width: 48px; height: 48px; background: var(--accent-blush); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.styling-item h4 { font-family: var(--font-display); font-size: 0.95rem; margin-bottom: 6px; color: var(--accent); }
+.styling-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+.news-card { overflow: hidden; }
+.news-thumb { aspect-ratio: 16/9; overflow: hidden; }
+.news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.news-body { padding: 24px; }
+.news-date { font-size: 0.72rem; color: var(--accent-gold-deep); font-weight: 600; margin-bottom: 8px; }
+.news-body h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; margin-bottom: 10px; line-height: 1.5; }
+.news-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+.faq-section { background: var(--bg); }
+.faq-item.open .faq-q { color: var(--accent); }
+.faq-item .faq-q::after { color: var(--accent-gold); }
+
+.consult-section { background: linear-gradient(180deg, #fff, var(--accent-blush)); }
+.consult-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,56px); align-items: start; }
+.consult-info .section-desc { margin-bottom: 28px; }
+.consult-features { display: flex; flex-direction: column; gap: 16px; }
+.consult-feature { display: flex; gap: 14px; align-items: flex-start; }
+.consult-feature .num { flex-shrink: 0; width: 32px; height: 32px; background: var(--accent-gold); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.consult-feature strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.consult-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+.form-card .btn-gold { width: 100%; border: none; cursor: pointer; margin-top: 8px; }
+
+.location-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(28px,4vw,48px); align-items: start; }
+.location-info h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 20px; color: var(--accent); }
+.location-detail { display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start; }
+.location-detail .ico { flex-shrink: 0; width: 40px; height: 40px; background: var(--accent-blush); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.location-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+.map-box { border: 1px solid var(--border); }
+
+.site-footer .footer-brand .logo { color: #fff; }
+.footer-col a:hover { color: var(--accent-gold); }
+.footer-contact { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+@media (max-width: 900px) {
+  .hero-grid, .styling-grid, .consult-grid, .location-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 160px; }
+  .gallery-item.wide, .gallery-item.tall { grid-column: span 1; grid-row: span 1; }
+}
+@media (max-width: 480px) {
+  .stats-grid, .gallery-grid, .styling-visual { grid-template-columns: 1fr; }
+  .styling-visual img:first-child { grid-row: span 1; aspect-ratio: 4/3; height: auto; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">웨딩플래너</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#packages">패키지</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#process">진행과정</a>
+    <a href="#team">플래너</a>
+    <a href="#venues">웨딩홀</a>
+    <a href="#faq">FAQ</a>
+    <a href="#consult" class="nav-cta">상담신청</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80" alt="로맨틱한 웨딩 커플">
+  </div>
+  <div class="hero-inner">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">WEDDING PLANNER · 웨딩플래닝</div>
+          <h1>두 사람의 가장<br>아름다운 순간을<br>함께 만듭니다</h1>
+          <p>처음 만난 그 설렘부터 평생을 약속하는 그날까지, 웨딩플래너가 당신만의 이야기를 담은 완벽한 결혼식을 디자인합니다. 800쌍 이상의 행복한 순간을 함께하며 쌓아온 경험으로, 꿈꾸던 웨딩을 현실로 만들어 드립니다.</p>
+          <div class="hero-actions">
+            <a href="#consult" class="btn-gold">무료 웨딩 상담</a>
+            <a href="#gallery" class="btn-ghost">포트폴리오 보기</a>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="num">800+</div><div class="lbl">성공적인 웨딩</div></div>
+          <div class="stat-card"><div class="num">98%</div><div class="lbl">예비부부 만족도</div></div>
+          <div class="stat-card"><div class="num">12년</div><div class="lbl">웨딩플래닝 경력</div></div>
+          <div class="stat-card"><div class="num">50+</div><div class="lbl">제휴 웨딩홀</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packages -->
+<section class="packages-section" id="packages">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Wedding Packages</div>
+      <h2 class="section-title">웨딩 패키지</h2>
+      <p class="section-desc">예산과 스타일에 맞는 세 가지 패키지로, 두 분만의 특별한 결혼식을 준비해 드립니다. 모든 패키지에 전담 플래너 1:1 배정이 포함됩니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="package-card">
+        <div class="package-header">
+          <h3>Essential</h3>
+          <div class="package-price">280<span>만원~</span></div>
+        </div>
+        <div class="package-body">
+          <p class="package-desc">소규모 웨딩이나 스몰 웨딩을 원하시는 예비부부를 위한 실속 있는 패키지입니다. 핵심 준비 과정을 체계적으로 지원합니다.</p>
+          <ul class="package-list">
+            <li>전담 웨딩플래너 1:1 배정</li>
+            <li>웨딩홀 투어 및 예약 대행 (3곳)</li>
+            <li>스드메(스튜디오·드레스·메이크업) 업체 추천</li>
+            <li>예식 순서 및 타임라인 기획</li>
+            <li>당일 진행 코디네이션 (4시간)</li>
+          </ul>
+          <a href="#consult" class="btn-gold">상담 신청</a>
+        </div>
+      </div>
+      <div class="package-card featured">
+        <div class="package-header">
+          <span class="package-tag">MOST POPULAR</span>
+          <h3>Premium</h3>
+          <div class="package-price">480<span>만원~</span></div>
+        </div>
+        <div class="package-body">
+          <p class="package-desc">가장 많은 예비부부가 선택하는 프리미엄 패키지. 웨딩홀부터 플라워, 촬영, 당일 진행까지 원스톱으로 완성합니다.</p>
+          <ul class="package-list">
+            <li>시니어 웨딩플래너 전담 배정</li>
+            <li>웨딩홀 투어 및 예약 대행 (5곳)</li>
+            <li>스드메 업체 협상 및 예약 관리</li>
+            <li>플라워 &amp; 데코레이션 디자인</li>
+            <li>청첩장·답례품·사회자 섭외 지원</li>
+            <li>리허설 및 당일 풀 코디네이션</li>
+          </ul>
+          <a href="#consult" class="btn-gold">상담 신청</a>
+        </div>
+      </div>
+      <div class="package-card">
+        <div class="package-header">
+          <h3>Luxury</h3>
+          <div class="package-price">780<span>만원~</span></div>
+        </div>
+        <div class="package-body">
+          <p class="package-desc">완벽한 맞춤형 웨딩을 원하시는 분을 위한 럭셔리 패키지. 모든 디테일을 두 분의 이야기에 맞춰 처음부터 끝까지 설계합니다.</p>
+          <ul class="package-list">
+            <li>수석 플래너 + 어시스턴트 2인 배정</li>
+            <li>프리미엄 웨딩홀 VIP 투어 (무제한)</li>
+            <li>맞춤형 웨딩 콘셉트 기획 및 연출</li>
+            <li>프리미엄 플라워 &amp; 라이팅 디자인</li>
+            <li>웨딩 영상·스냅 촬영 디렉팅</li>
+            <li>리허설 2회 + 당일 풀 코디네이션</li>
+          </ul>
+          <a href="#consult" class="btn-gold">상담 신청</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Portfolio Gallery</div>
+      <h2 class="section-title">웨딩 갤러리</h2>
+      <p class="section-desc">웨딩플래너와 함께한 예비부부들의 아름다운 순간들입니다. 클래식부터 모던, 가든, 호텔 웨딩까지 다양한 스타일을 만나보세요.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <img src="https://images.unsplash.com/photo-1465495976277-4387d110b28f?w=600&q=80" alt="클래식 웨딩">
+        <div class="gallery-caption">클래식 채플 웨딩 · 서울</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&q=80" alt="웨딩 부케">
+        <div class="gallery-caption">로맨틱 부케 · 프리미엄</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500&q=80" alt="웨딩 테이블">
+        <div class="gallery-caption">테이블 데코 · 골드&amp;블러쉬</div>
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80" alt="가든 웨딩">
+        <div class="gallery-caption">가든 웨딩 · 제주</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=80" alt="웨딩 드레스">
+        <div class="gallery-caption">드레스 피팅 · A라인</div>
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80" alt="호텔 웨딩">
+        <div class="gallery-caption">호텔 뷔페 웨딩 · 강남</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Planning Process</div>
+      <h2 class="section-title">웨딩 준비 과정</h2>
+      <p class="section-desc">복잡한 웨딩 준비, 5단계로 차분하고 체계적으로 진행합니다. 첫 상담부터 예식 당일까지 전담 플래너가 함께합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>무료 상담</h4>
+        <p>예식 일정, 예산, 원하는 웨딩 스타일을 나누는 첫 만남입니다. 60분 무료 상담으로 맞춤 플랜의 방향을 함께 정합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>콘셉트 기획</h4>
+        <p>두 분의 이야기를 바탕으로 웨딩 콘셉트, 컬러 팔레트, 무드보드를 제작합니다. 웨딩홀 투어 일정도 함께 잡아 드립니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>업체 섭외</h4>
+        <p>웨딩홀, 스드메, 플라워, 촬영, 사회자 등 모든 업체를 비교·협상·예약합니다. 예산 내 최적의 선택을 도와드립니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>디테일 준비</h4>
+        <p>청첩장, 하객 명단, 좌석 배치, 예식 순서, 식순표까지 세심하게 준비합니다. D-30부터는 주 1회 진행 미팅을 진행합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>리허설 &amp; 웨딩데이</h4>
+        <p>예식 1~2주 전 리허설로 입장 동선과 식순을 점검합니다. 당일 전담 플래너가 현장을 총괄하여 두 분은 행복에만 집중하시면 됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Planners</div>
+      <h2 class="section-title">웨딩 플래너</h2>
+      <p class="section-desc">각자의 전문 분야를 갖춘 플래너들이 두 분의 웨딩을 책임집니다. 1:1 전담 배정으로 끝까지 함께합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="planner-card">
+        <div class="planner-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="김서윤 수석 플래너">
+        </div>
+        <div class="planner-info">
+          <h3>김서윤</h3>
+          <div class="role">수석 웨딩플래너 · 대표</div>
+          <p class="bio">12년 경력, 350쌍 이상의 웨딩 기획. 클래식·호텔 웨딩 전문. 두 분의 이야기를 가장 아름답게 담아내는 것이 저의 사명입니다.</p>
+        </div>
+      </div>
+      <div class="planner-card">
+        <div class="planner-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="이하은 플래너">
+        </div>
+        <div class="planner-info">
+          <h3>이하은</h3>
+          <div class="role">시니어 웨딩플래너</div>
+          <p class="bio">가든·야외 웨딩 전문. 자연 속 로맨틱한 무드를 연출하는 데 특화되어 있습니다. 200쌍 이상의 가든 웨딩 경험을 보유하고 있습니다.</p>
+        </div>
+      </div>
+      <div class="planner-card">
+        <div class="planner-photo">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80" alt="박지민 플래너">
+        </div>
+        <div class="planner-info">
+          <h3>박지민</h3>
+          <div class="role">웨딩플래너 · 스타일리스트</div>
+          <p class="bio">플라워·데코레이션·드레스 코디네이션 전문. 섬세한 감각으로 공간을 두 분만의 아틀리에처럼 변화시킵니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Happy Couples</div>
+      <h2 class="section-title">예비부부 후기</h2>
+      <p class="section-desc">웨딩플래너와 함께한 예비부부들의 진솔한 이야기입니다. 여러분의 행복한 순간도 함께 만들어 가겠습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>처음엔 웨딩 준비가 너무 막막했는데, 서윤 플래너님 덕분에 모든 과정이 즐거웠어요. 저희가 원하던 클래식 호텔 웨딩을 예산 안에서 완벽하게 만들어 주셨고, 당일엔 정말 아무 걱정 없이 행복만 느꼈습니다.</blockquote>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">김</div>
+          <div>
+            <strong>김민준 · 이수진</strong>
+            <span>2025.04 · 그랜드 인터컨티넨탈 서울</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>가든 웨딩을 꿈꿨는데 하은 플래너님이 제주의 숨은 보석 같은 장소를 찾아주셨어요. 플라워 데코도 너무 아름다웠고, 하객들이 "인생 웨딩"이라고 할 정도였습니다. 평생 잊지 못할 하루를 선물해 주셔서 감사합니다.</blockquote>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">박</div>
+          <div>
+            <strong>박준영 · 최유나</strong>
+            <span>2025.03 · 제주 가든 웨딩</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>직장 때문에 시간이 없었는데, 플래너님이 모든 업체 협상과 일정 관리를 대신해 주셔서 정말 편했어요. 30인 스몰 웨딩이었지만 가족들만 모인 따뜻한 자리가 되었습니다. 세심한 배려에 감동받았습니다.</blockquote>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar">정</div>
+          <div>
+            <strong>정태현 · 한소희</strong>
+            <span>2025.02 · 성수 스몰 웨딩</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Venues -->
+<section class="venues-section" id="venues">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Partner Venues</div>
+      <h2 class="section-title">제휴 웨딩홀</h2>
+      <p class="section-desc">웨딩플래너와 제휴한 50여 곳의 프리미엄 웨딩홀입니다. VIP 투어 예약 및 특별 할인 혜택을 제공합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="venue-card">
+        <div class="venue-img">
+          <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&q=80" alt="그랜드 호텔 웨딩홀">
+        </div>
+        <div class="venue-body">
+          <span class="venue-tag">호텔 웨딩</span>
+          <h3>그랜드 인터컨티넨탈 서울 파르나스</h3>
+          <p>강남 중심에 위치한 프리미엄 호텔 웨딩홀. 200~400명 규모, 높은 층고와 샹들리에가 돋보이는 Grand Ballroom.</p>
+          <div class="venue-spec">수용 200~400명 · 강남구 · VIP 할인 10%</div>
+        </div>
+      </div>
+      <div class="venue-card">
+        <div class="venue-img">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b8?w=600&q=80" alt="채플 웨딩">
+        </div>
+        <div class="venue-body">
+          <span class="venue-tag">채플 웨딩</span>
+          <h3>더 채플 at 청담</h3>
+          <p>유리 천장과 자연광이 아름다운 모던 채플. 100~200명 규모의 클래식하고 우아한 예식에 적합합니다.</p>
+          <div class="venue-spec">수용 100~200명 · 강남구 · VIP 할인 8%</div>
+        </div>
+      </div>
+      <div class="venue-card">
+        <div class="venue-img">
+          <img src="https://images.unsplash.com/photo-1478146896984-b79ab25c974f?w=600&q=80" alt="가든 웨딩">
+        </div>
+        <div class="venue-body">
+          <span class="venue-tag">가든 웨딩</span>
+          <h3>가든포레스트 양평</h3>
+          <p>수목원 속 야외 가든과 실내 연회장을 갖춘 복합 웨딩 공간. 자연 속 로맨틱 웨딩을 꿈꾸는 분께 추천합니다.</p>
+          <div class="venue-spec">수용 80~250명 · 경기 양평 · VIP 할인 12%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Styling -->
+<section class="styling-section" id="styling">
+  <div class="container">
+    <div class="styling-grid">
+      <div class="styling-visual">
+        <img src="https://images.unsplash.com/photo-1529636798458-92179e477544?w=600&q=80" alt="웨딩 스타일링">
+        <img src="https://images.unsplash.com/photo-1528892954731-bf46c1f56a55?w=400&q=80" alt="웨딩 플라워">
+        <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=400&q=80" alt="웨딩 데코">
+      </div>
+      <div class="styling-content">
+        <div class="section-label">Wedding Styling</div>
+        <h2 class="section-title">웨딩 스타일링</h2>
+        <p class="section-desc">플라워, 데코, 드레스, 테이블 세팅까지. 두 분의 취향과 웨딩 콘셉트에 맞춘 토탈 스타일링을 제공합니다.</p>
+        <div class="styling-list">
+          <div class="styling-item">
+            <div class="icon">💐</div>
+            <div>
+              <h4>플라워 &amp; 부케</h4>
+              <p>신부 부케, 부토니에, 아치·테이블 플라워까지 시즌 플라워로 맞춤 제작. 블러쉬·화이트·골드 톤의 로맨틱 스타일이 인기입니다.</p>
+            </div>
+          </div>
+          <div class="styling-item">
+            <div class="icon">✨</div>
+            <div>
+              <h4>데코레이션 &amp; 라이팅</h4>
+              <p>웨딩홀 공간을 두 분만의 갤러리로 변화시킵니다. 캔들, 거울, 드레이프, 조명 연출로 분위기 있는 공간을 완성합니다.</p>
+            </div>
+          </div>
+          <div class="styling-item">
+            <div class="icon">👗</div>
+            <div>
+              <h4>드레스 &amp; 테이블 세팅</h4>
+              <p>체형과 콘셉트에 맞는 드레스·턱시도 코디부터 테이블 린넨, 네임카드, 웨딩 케이크까지 세심한 스타일링을 제공합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Wedding News</div>
+      <h2 class="section-title">웨딩 소식</h2>
+      <p class="section-desc">2025년 웨딩 트렌드, 준비 팁, 웨딩플래너의 소식을 전해 드립니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="2025 웨딩 트렌드">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.20</div>
+          <h3>2025 웨딩 트렌드 — 블러쉬 &amp; 골드, 마이크로 웨딩의 부상</h3>
+          <p>올해 주목받는 웨딩 컬러 팔레트와 50인 이하 마이크로 웨딩 트렌드를 정리했습니다. 김서윤 대표 플래너가 직접 설명합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&q=80" alt="웨딩 준비 체크리스트">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.08</div>
+          <h3>예식 6개월 전, 반드시 해야 할 10가지</h3>
+          <p>웨딩홀 예약부터 스드메, 청첩장까지. D-180부터 D-day까지 타임라인별 체크리스트를 공유합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1529635209928-891a9f9d2f2b?w=600&q=80" alt="웨딩플래너 수상">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.04.01</div>
+          <h3>웨딩플래너, '2025 대한민국 베스트 웨딩플래너' 선정</h3>
+          <p>웨딩21 주관 2025 베스트 웨딩플래너 어wards에서 종합 대상을 수상했습니다. 예비부부 여러분의 사랑에 감사드립니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">웨딩 준비 전 많이 물어보시는 질문들을 모았습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">웨딩플래너는 언제부터 섭외하는 것이 좋나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">예식 6~12개월 전 섭외를 권장합니다. 인기 웨딩홀과 플래너 일정은 빠르게 차오르기 때문입니다. 다만 3개월 전 급한 준비도 가능하니, 일정에 맞춰 상담해 주세요. 첫 상담은 언제든 무료입니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">패키지 비용 외에 추가 비용이 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">패키지 비용은 플래닝·코디네이션 서비스 비용입니다. 웨딩홀, 스드메, 플라워, 촬영 등 실비는 별도이며, 상담 시 예산 범위를 투명하게 안내해 드립니다. 숨겨진 비용 없이 처음부터 끝까지 명확하게 진행합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">스몰 웨딩도 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 20~50인 규모의 스몰·마이크로 웨딩을 전문으로 합니다. Essential 패키지(280만 원~)로도 충분히 아름다운 스몰 웨딩이 가능합니다. 정수아 플래너가 스몰 웨딩 전담으로 배정됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">지방 웨딩·destination wedding도 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">제주, 부산, 경주 등 국내 지방 웨딩과 발리, 하와이, 유럽 등 해외 destination wedding 모두 기획 가능합니다. 한예린 플래너가 허니문·리조트 웨딩 전담으로 함께합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">이미 웨딩홀을 예약했는데 플래너만 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">가능합니다. 웨딩홀 예약 후 스드메, 플라워, 당일 진행 등 부분 플래닝도 제공합니다. 상담 시 현재 진행 상황을 알려주시면 맞춤 플랜을 제안해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">상담은 어떻게 진행되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">방문 상담(강남 스튜디오), 화상 상담(Zoom), 전화 상담 모두 가능합니다. 60분 무료 상담 후 패키지 선택은 부담 없이 결정하시면 됩니다. 상담 예약은 아래 양식 또는 02-555-0123으로 연락해 주세요.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">계약 후 플래너 변경이 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">초기 상담 후 배정된 플래너와의 케미가 맞지 않을 경우, 1회에 한해 다른 플래너로 변경 가능합니다. 두 분과의 신뢰 관계가 가장 중요하기에, 편하게 말씀해 주시면 최선을 다해 조율해 드립니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Consult -->
+<section class="consult-section" id="consult">
+  <div class="container">
+    <div class="consult-grid">
+      <div class="consult-info">
+        <div class="section-label">Free Consultation</div>
+        <h2 class="section-title">무료 웨딩 상담 신청</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 전담 플래너가 연락드립니다. 급한 문의는 전화(02-555-0123)로 연락해 주세요.</p>
+        <div class="consult-features">
+          <div class="consult-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>60분 무료 상담</strong>
+              <span>예식 일정, 예산, 스타일을 나누는 첫 만남은 무료입니다.</span>
+            </div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>맞춤 플랜 제안</strong>
+              <span>두 분의 이야기를 바탕으로 최적의 패키지와 일정을 제안합니다.</span>
+            </div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>부담 없는 결정</strong>
+              <span>상담 후 패키지 선택은 충분히 고민하신 후 결정하시면 됩니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="웨딩 상담 신청이 접수되었습니다! 24시간 내 전담 플래너가 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="wedding-date">예식 희망일</label>
+            <input type="text" id="wedding-date" name="wedding-date" placeholder="2025년 10월 (미정 가능)">
+          </div>
+          <div class="form-group full">
+            <label for="package-type">관심 패키지</label>
+            <select id="package-type" name="package-type" required>
+              <option value="">패키지를 선택해 주세요</option>
+              <option value="essential">Essential (280만원~)</option>
+              <option value="premium">Premium (480만원~)</option>
+              <option value="luxury">Luxury (780만원~)</option>
+              <option value="undecided">아직 미정 / 상담 후 결정</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">상담 내용</label>
+            <textarea id="message" name="message" rows="5" placeholder="예식 희망 규모, 선호 스타일(클래식/가든/스몰 등), 예산 범위 등을 간략히 작성해 주세요." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-gold">웨딩 상담 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Studio Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">강남역 인근 웨딩플래너 스튜디오에서 편안한 상담을 받으실 수 있습니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>웨딩플래너 스튜디오</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 강남구 테헤란로 152, 웨딩플래너 빌딩 5층<br>(강남역 2번 출구 도보 3분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>전화: 02-555-0123<br>카카오톡: @weddingplanner<br>이메일: hello@weddingplanner.kr</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>교통 안내</strong>
+            <span>지하철 2호선·신분당선 강남역 2번 출구 도보 3분<br>주차: 건물 지하 1~3층 (2시간 무료)</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>10:00 – 19:00</td></tr>
+          <tr><td>토요일</td><td>10:00 – 17:00 (예약제)</td></tr>
+          <tr><td>일·공휴일</td><td>휴무</td></tr>
+          <tr><td>야간 상담</td><td>평일 19:00 – 21:00 (사전 예약)</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>웨딩플래너</strong>
+          <span>서울 강남구 테헤란로 152</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">웨딩플래너</a>
+      <p>2013년부터 800쌍 이상의 예비부부와 함께하며, 두 사람만의 특별한 결혼식을 만들어 왔습니다. 꿈꾸던 웨딩, 이제 현실로 — 웨딩플래너가 함께합니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 강남구 테헤란로 152, 5층</span>
+        <span>📞 02-555-0123</span>
+        <span>✉️ hello@weddingplanner.kr</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>패키지</h4>
+      <a href="#packages">Essential</a>
+      <a href="#packages">Premium</a>
+      <a href="#packages">Luxury</a>
+      <a href="#consult">무료 상담</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#gallery">웨딩 갤러리</a>
+      <a href="#team">플래너 소개</a>
+      <a href="#venues">제휴 웨딩홀</a>
+      <a href="#styling">웨딩 스타일링</a>
+      <a href="#news">웨딩 소식</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>상담 안내</h4>
+      <a href="#consult">상담 신청</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 10:00 – 19:00</p>
+      <p>토요일 10:00 – 17:00</p>
+      <p>60분 무료 상담</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 웨딩플래너 WEDDING PLANNER. All rights reserved.</span>
+    <span>대표 김서윤 · 사업자등록번호 456-78-90123</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

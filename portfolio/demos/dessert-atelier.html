@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>디저트아뜰리에 DESSERT ATELIER — 성수 디저트 카페</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Italiana', serif;
+  --font-body: 'Quicksand', 'Pretendard', sans-serif;
+  --bg: #FFFBF7;
+  --text: #3D2C32;
+  --text-muted: #9A7B85;
+  --accent: #E8A0B8;
+  --accent-dark: #D4789A;
+  --accent-text: #fff;
+  --cream: #FFF5EB;
+  --border: #F5E0E8;
+  --nav-bg: rgba(255,251,247,0.96);
+  --footer-bg: #3D2C32;
+  --card-bg: #fff;
+  --btn-radius: 50px;
+  --card-radius: 20px;
+  --title-weight: 400;
+  --logo-weight: 400;
+}
+
+body { background: var(--bg); }
+
+.site-nav .logo { font-family: var(--font-display); letter-spacing: 0.08em; }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(560px, 90vh, 800px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,251,247,0.3) 0%, rgba(255,251,247,0.85) 55%, var(--bg) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px;
+  max-width: 640px;
+}
+
+.hero-ribbon {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-dark);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 4.5rem);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.hero p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 40px;
+}
+
+.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+.btn-primary { background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+.btn-outline { border-color: var(--accent); color: var(--accent-dark); }
+.btn-outline:hover { background: var(--cream); }
+
+/* Marquee */
+.marquee {
+  padding: 12px 0;
+  background: var(--cream);
+  color: var(--accent-dark);
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.marquee-inner {
+  display: inline-flex;
+  gap: 40px;
+  animation: marquee 26s linear infinite;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* About */
+.about-section { background: var(--card-bg); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(36px, 6vw, 72px);
+  align-items: center;
+}
+
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: 3px solid var(--border);
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--accent-dark);
+}
+
+.stat span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* Showcase */
+.showcase-section { background: var(--cream); }
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.showcase-item {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+
+.showcase-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.showcase-item:hover img { transform: scale(1.06); }
+
+.showcase-item .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(61,44,50,0.7) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  color: #fff;
+}
+
+.showcase-item h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.showcase-item span { font-size: 0.82rem; opacity: 0.9; }
+
+/* Why */
+.why-section { background: var(--bg); }
+
+.why-grid .info-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  padding: 36px 24px;
+}
+
+.why-grid .info-box h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+/* Menu */
+.menu-section { background: #fff; }
+
+.menu-header { text-align: center; margin-bottom: 56px; }
+.menu-header .section-desc { margin: 0 auto; }
+
+.menu-tabs-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 40px);
+}
+
+.menu-section .tab-btn { border-radius: 50px; }
+.menu-section .tab-btn.active,
+.menu-section .tab-btn:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: #fff;
+}
+
+.menu-section .price { color: var(--accent-dark); font-weight: 600; }
+
+/* Workshop */
+.workshop-section { background: var(--bg); }
+
+.workshop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.workshop-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  border: 3px solid var(--border);
+}
+
+.workshop-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.workshop-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.workshop-slot {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+
+.workshop-slot .day {
+  font-weight: 600;
+  color: var(--accent-dark);
+  font-size: 0.88rem;
+}
+
+.workshop-slot h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.workshop-slot p { font-size: 0.82rem; color: var(--text-muted); }
+
+.workshop-slot .fee {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* Patissier */
+.team-section { background: var(--cream); }
+
+.team-card { border-radius: var(--card-radius); overflow: hidden; border: 1px solid var(--border); }
+.team-card .role { color: var(--accent-dark); }
+
+/* Gallery */
+.gallery-mosaic {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 180px);
+  gap: 10px;
+}
+
+.gallery-mosaic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.gallery-mosaic img:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-mosaic img:nth-child(2) { grid-column: span 2; }
+.gallery-mosaic img:nth-child(3) { grid-column: span 2; }
+.gallery-mosaic img:nth-child(4) { grid-column: span 2; }
+.gallery-mosaic img:nth-child(5) { grid-column: span 2; }
+.gallery-mosaic img:nth-child(6) { grid-column: span 2; }
+
+/* Gift */
+.gift-section { background: #fff; }
+
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.gift-card {
+  text-align: center;
+  padding: 40px 28px;
+  background: var(--cream);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border);
+}
+
+.gift-card .icon { font-size: 2.5rem; margin-bottom: 16px; }
+
+.gift-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.gift-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.reserve-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.reserve-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 16px 20px;
+  background: var(--cream);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+  margin-top: 20px;
+  line-height: 1.7;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .about-grid,
+  .workshop-grid,
+  .location-grid,
+  .reserve-wrap { grid-template-columns: 1fr; }
+  .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+  .gift-grid { grid-template-columns: 1fr; }
+  .gallery-mosaic {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  .gallery-mosaic img { grid-column: span 1 !important; grid-row: span 1 !important; aspect-ratio: 1; }
+  .workshop-slot { grid-template-columns: 1fr; text-align: left; }
+}
+
+@media (max-width: 480px) {
+  .stats { grid-template-columns: 1fr; text-align: center; }
+  .showcase-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">DESSERT ATELIER</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">스토리</a>
+    <a href="#showcase">쇼케이스</a>
+    <a href="#menu">메뉴</a>
+    <a href="#workshop">클래스</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">위치</a>
+    <a href="#reserve" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=1400&q=80" alt="디저트 쇼케이스">
+  </div>
+  <div class="hero-content">
+    <div class="hero-ribbon">Pâtisserie · 성수동</div>
+    <h1>달콤한 순간을<br>예술로 만듭니다</h1>
+    <p>프랑스 파티스리 기법과 제철 과일이 만나는 디저트 아뜰리에. 매일 오전 완성되는 케이크·타르트·마카롱, 그리고 주말 원데이 클래스까지 — DESSERT ATELIER에서 당신만의 스위트 모먼트를 만나보세요.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">오늘의 메뉴</a>
+      <a href="#workshop" class="btn btn-outline">클래스 신청</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Macaron</span><span>·</span><span>Entremet</span><span>·</span><span>Fruit Tart</span><span>·</span><span>Choux</span><span>·</span><span>성수 디저트</span><span>·</span><span>Daily Fresh</span><span>·</span><span>Gift Box</span><span>·</span>
+    <span>Macaron</span><span>·</span><span>Entremet</span><span>·</span><span>Fruit Tart</span><span>·</span><span>Choux</span><span>·</span><span>성수 디저트</span><span>·</span><span>Daily Fresh</span><span>·</span><span>Gift Box</span><span>·</span>
+  </div>
+</div>
+
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700&q=80" alt="파티시에가 케이크를 장식">
+      </div>
+      <div class="about-content">
+        <div class="section-label">Our Atelier</div>
+        <h2 class="section-title">디저트 한 조각에<br>담긴 정성</h2>
+        <p class="section-desc">2018년 성수동, 작은 오븐 하나로 시작한 DESSERT ATELIER는 '먹는 예술'을 표방합니다. 르몽드·파리 현장 경험을 가진 파티시에 팀이 매일 아침 쇼케이스를 채우고, 계절마다 바뀌는 과일 타르트와 엔트레멍이 손님을 맞이합니다.</p>
+        <p class="section-desc">핑크와 크림 톤의 공간, 대리석 쇼케이스, 그리고 창가의 티 테이블. 혼자 조용히, 연인과, 기념일 케이크 예약까지 — 모든 순간이 아뜰리에의 작품이 됩니다.</p>
+        <div class="stats">
+          <div class="stat"><strong>24+</strong><span>데일리 메뉴</span></div>
+          <div class="stat"><strong>6</strong><span>시그니처 케이크</span></div>
+          <div class="stat"><strong>4.9</strong><span>네이버 평점</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="showcase-section" id="showcase">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Showcase</div>
+      <h2 class="section-title">오늘의 쇼케이스</h2>
+      <p class="section-desc">매일 오전 10시 완성. 당일 소진 시 조기 마감됩니다.</p>
+    </div>
+    <div class="showcase-grid">
+      <div class="showcase-item">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80" alt="딸기 쇼트케이크">
+        <div class="overlay"><h4>딸기 쇼트케이크</h4><span>시즌 베스트</span></div>
+      </div>
+      <div class="showcase-item">
+        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80" alt="마카롱">
+        <div class="overlay"><h4>마카롱 6종</h4><span>매일 12pcs 한정</span></div>
+      </div>
+      <div class="showcase-item">
+        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=80" alt="과일 타르트">
+        <div class="overlay"><h4>과일 타르트</h4><span>제철 과일</span></div>
+      </div>
+      <div class="showcase-item">
+        <img src="https://images.unsplash.com/photo-1624353365286-3f8c62daad51?w=400&q=80" alt="엔트레멍">
+        <div class="overlay"><h4>로즈 엔트레멍</h4><span>시그니처</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Why Atelier</div>
+      <h2 class="section-title">아뜰리에를 선택하는 이유</h2>
+    </div>
+    <div class="why-grid info-grid">
+      <div class="info-box">
+        <div class="icon">🎂</div>
+        <h4>매일 신선 제조</h4>
+        <p>전 메뉴 당일 제조·당일 판매. 남은 재고는 마감 후 기부 또는 폐기.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🍓</div>
+        <h4>제철 과일</h4>
+        <p>국내산 딸기·복숭아·무화과 등 계절 로테이션. 타르트·케이크에 반영.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🎁</div>
+        <h4>기프트 박스</h4>
+        <p>마카롱·쿠키·미니 케이크 세트. 리본·카드 무료 포장.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">✨</div>
+        <h4>원데이 클래스</h4>
+        <p>마카롱·슈·타르트 클래스. 최대 8명, 사전 예약 필수.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <div class="section-label">Menu</div>
+      <h2 class="section-title">디저트 메뉴</h2>
+      <p class="section-desc">조각 케이크·타르트·음료. 기념일 홀케이크는 3일 전 예약.</p>
+    </div>
+    <div class="menu-tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="cake">케이크</button>
+        <button class="tab-btn" data-tab="pastry">페이스트리</button>
+        <button class="tab-btn" data-tab="drink">음료</button>
+      </div>
+      <div class="tab-panel active" data-tab="cake">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>딸기 쇼트케이크</h4>
+              <p>생크림·국내산 딸기. 시즌 한정</p>
+            </div>
+            <span class="price">₩8,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>로즈 엔트레멍</h4>
+              <p>라즈베리·로즈워터·화이트 초콜릿</p>
+            </div>
+            <span class="price">₩9,200</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>티라미수</h4>
+              <p>마스카포네·에스프레소 시럽</p>
+            </div>
+            <span class="price">₩7,800</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>당근 케이크</h4>
+              <p>크림치즈 프로스팅·호두</p>
+            </div>
+            <span class="price">₩7,200</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>초코 가나슈</h4>
+              <p>벨기에 72%·겹겹이 텍스처</p>
+            </div>
+            <span class="price">₩8,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="pastry">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>과일 타르트</h4>
+              <p>당일 제조 커스터드·제철 과일</p>
+            </div>
+            <span class="price">₩7,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>마카롱 (1pc)</h4>
+              <p>라즈베리·피스타치오·솔티드캐러멜 등</p>
+            </div>
+            <span class="price">₩3,200</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>크렘 브륄레 슈</h4>
+              <p>바삭한 슈·카라멜 크림</p>
+            </div>
+            <span class="price">₩5,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>에클레르 2종</h4>
+              <p>바닐라·초콜릿</p>
+            </div>
+            <span class="price">₩6,800</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="drink">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>로열 밀크티</h4>
+              <p>실론티·베르가못</p>
+            </div>
+            <span class="price">₩6,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>딸기 라떼</h4>
+              <p>딸기 퓨레·우유</p>
+            </div>
+            <span class="price">₩6,800</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>에스프레소</h4>
+              <p>디저트 페어링 추천</p>
+            </div>
+            <span class="price">₩4,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="workshop-section" id="workshop">
+  <div class="container">
+    <div class="workshop-grid">
+      <div class="workshop-img">
+        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=700&q=80" alt="디저트 클래스">
+      </div>
+      <div class="workshop-content">
+        <div class="section-label">Atelier Class</div>
+        <h2 class="section-title">원데이 파티스리 클래스</h2>
+        <p class="section-desc">최대 8명 소규모. 재료·도구·포장까지 포함. 완성품은 집으로 가져가세요.</p>
+        <div class="workshop-schedule">
+          <div class="workshop-slot">
+            <span class="day">토 14:00</span>
+            <div><h4>마카롱 클래스</h4><p>2색 6개 완성 · 2.5시간</p></div>
+            <span class="fee">₩68,000</span>
+          </div>
+          <div class="workshop-slot">
+            <span class="day">일 11:00</span>
+            <div><h4>과일 타르트</h4><p>6인치 1개 · 3시간</p></div>
+            <span class="fee">₩85,000</span>
+          </div>
+          <div class="workshop-slot">
+            <span class="day">토 10:00</span>
+            <div><h4>크렘 슈 기초</h4><p>슈 4개 · 2시간</p></div>
+            <span class="fee">₩55,000</span>
+          </div>
+        </div>
+        <a href="#reserve" class="btn btn-primary" style="margin-top:24px">클래스 예약</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gift-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gift</div>
+      <h2 class="section-title">기프트 & 오더 케이크</h2>
+    </div>
+    <div class="gift-grid">
+      <div class="gift-card">
+        <div class="icon">🎀</div>
+        <h4>마카롱 박스</h4>
+        <p>6·12·18개 세트. 리본·카드 무료. 당일 픽업 또는 택배(제주 제외).</p>
+      </div>
+      <div class="gift-card">
+        <div class="icon">🎂</div>
+        <h4>오더 케이크</h4>
+        <p>15·18cm 홀케이크. 3일 전 예약. 글씨·캔들 옵션.</p>
+      </div>
+      <div class="gift-card">
+        <div class="icon">💝</div>
+        <h4>기념일 세트</h4>
+        <p>미니 케이크+마카롱+꽃. 프로포즈·생일 패키지 ₩89,000~</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Patissier</div>
+      <h2 class="section-title">파티시에 팀</h2>
+    </div>
+    <div class="grid-3">
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1595278069441-2cf29f8005ec?w=400&q=80" alt="최유진 셰프">
+        </div>
+        <div class="card-body">
+          <h4>최유진</h4>
+          <div class="role">Executive Pastry Chef</div>
+          <p>파리 르몽드 수료. 시그니처 엔트레멍·오더 케이크 총괄.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1583394294546-4e6cbe9f2f5c?w=400&q=80" alt="정민서 파티시에">
+        </div>
+        <div class="card-body">
+          <h4>정민서</h4>
+          <div class="role">Pastry Chef · 타르트</div>
+          <p>제철 과일 타르트·쇼케이스 데일리 메뉴.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e38c847?w=400&q=80" alt="한소영 클래스">
+        </div>
+        <div class="card-body">
+          <h4>한소영</h4>
+          <div class="role">Class Instructor</div>
+          <p>마카롱·슈 클래스 진행. 초보자 환영.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">아뜰리에의 하루</h2>
+    </div>
+    <div class="gallery-mosaic">
+      <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80" alt="쇼케이스">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80" alt="케이크">
+      <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80" alt="마카롱">
+      <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=80" alt="타르트">
+      <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&q=80" alt="인테리어">
+      <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f6?w=400&q=80" alt="디저트 플레이트">
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">손님들의 이야기</h2>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>딸기 쇼트케이크 크림이 가볍고 딸기가 신선해요. 인테리어도 너무 예뻐서 사진 찍기 좋습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김서현</strong><span>네이버 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>마카롱 클래스 재밌고 선생님이 친절해요. 만든 거 포장해서 가족한테 선물했어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이지민</strong><span>인스타 · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>생일 오더 케이크 글씨까지 예쁘게 해주셨어요. 로즈 엔트레멍 맛도 최고.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박준혁</strong><span>카카오 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <blockquote>주말 오후엔 웨이팅 있어요. 오전 10시쯤 가면 쇼케이스 풀입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최은지</strong><span>네이버 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>기프트 박스 포장이 고급스러워서 선물용으로 자주 이용해요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정유나</strong><span>인스타 · 2024.12</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>로열 밀크티랑 티라미수 조합 추천. 성수 산책 후 들르기 딱.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한도윤</strong><span>네이버 · 2024.11</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq" style="background:var(--cream)">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">오더 케이크는 언제 예약하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">최소 3일 전(주말·공휴일 5일 전) 예약. 디자인·맛·사이즈는 전화·폼으로 상담.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">클래스 취소·환불 규정은?</button>
+        <div class="faq-a"><div class="faq-a-inner">3일 전 100%, 1일 전 50% 환불. 당일 취소 불가. 재료 준비 관계상 양해 부탁드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">테이크아웃만 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">홀 16석 운영. 테이크아웃·기프트 박스 모두 가능. 마카롱 박스는 재고 확인 후 방문 권장.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">알레르기 정보는?</button>
+        <div class="faq-a"><div class="faq-a-inner">우유·계란·밀·견과류 사용. 상세 성분표는 카운터·메뉴판에 비치. 문의 시 안내해 드립니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="location-section" id="contact" style="background:#fff">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">성수역 3번 출구 도보 6분.</p>
+    </div>
+    <div class="location-grid">
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>DESSERT ATELIER</strong>
+          <span>서울 성동구 연무장길 45</span>
+        </div>
+      </div>
+      <div class="location-info">
+        <h3 style="font-family:var(--font-display);font-size:1.4rem;margin-bottom:20px">매장 정보</h3>
+        <table class="hours-table">
+          <tr><td>화 – 일</td><td>10:00 – 20:00</td></tr>
+          <tr><td>월요일</td><td>휴무</td></tr>
+          <tr><td>쇼케이스</td><td>10:30 완성</td></tr>
+          <tr><td>라스트오더</td><td>19:30</td></tr>
+        </table>
+        <p style="margin-top:20px;font-size:0.9rem;color:var(--text-muted)">02-444-7788 · order@dessertatelier.kr</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reserve-section" id="reserve" style="background:var(--cream)">
+  <div class="container">
+    <div class="reserve-wrap">
+      <div class="reserve-intro">
+        <div class="section-label">Reservation</div>
+        <h2 class="section-title">예약 · 문의</h2>
+        <p class="section-desc">클래스·오더 케이크·단체 예약.</p>
+        <p class="reserve-note">※ 클래스는 선착순 마감. 오더 케이크는 3일 전까지.</p>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="접수되었습니다! 곧 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" required placeholder="홍길동">
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" name="phone" required placeholder="010-0000-0000">
+            </div>
+            <div class="form-group">
+              <label for="type">문의 유형</label>
+              <select id="type" name="type" required>
+                <option value="">선택</option>
+                <option value="class">원데이 클래스</option>
+                <option value="cake">오더 케이크</option>
+                <option value="gift">기프트 박스</option>
+                <option value="visit">홀 예약</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">희망 일시</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group full">
+              <label for="message">내용</label>
+              <textarea id="message" name="message" rows="4" placeholder="클래스명 / 케이크 사이즈·맛 / 인원 등"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">보내기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">DESSERT ATELIER</span>
+      <p>성수에서 만나는 스위트 아뜰리에. 달콤한 순간을 예술로.</p>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#menu">메뉴</a>
+      <a href="#workshop">클래스</a>
+      <a href="#reserve">예약</a>
+    </div>
+    <div class="footer-col">
+      <h4>영업</h4>
+      <p>화–일 10:00–20:00</p>
+      <p>월 휴무</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>성동구 연무장길 45</p>
+      <p>02-444-7788</p>
+      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DESSERT ATELIER.</span>
+    <span>사업자 456-78-90123</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

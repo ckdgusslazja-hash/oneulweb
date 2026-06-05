@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>브루랩 BREW LAB — 스페셜티 로스터리 카페</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Libre Baskerville', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #F5F0E8;
+  --text: #2A1F18;
+  --text-muted: #7A6B5E;
+  --accent: #6B4423;
+  --accent-text: #fff;
+  --border: #DDD4C8;
+  --nav-bg: rgba(245,240,232,0.96);
+  --footer-bg: #2A1F18;
+  --card-bg: #fff;
+  --btn-radius: 6px;
+  --card-radius: 10px;
+  --title-weight: 400;
+  --logo-weight: 700;
+}
+
+/* Hero */
+.hero {
+  min-height: clamp(500px, 88vh, 760px);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: stretch;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 8vw, 80px);
+  padding-left: clamp(24px, 5vw, 60px);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text .label {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.18;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.hero-text p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 36px;
+  max-width: 440px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, transparent 28%);
+}
+
+.hero-badge {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  z-index: 2;
+  background: rgba(42,31,24,0.85);
+  color: #F5F0E8;
+  padding: 14px 20px;
+  border-radius: var(--card-radius);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(8px);
+}
+
+/* Marquee */
+.marquee {
+  padding: 14px 0;
+  background: var(--accent);
+  color: #F5F0E8;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-inner {
+  display: inline-flex;
+  gap: 40px;
+  animation: marquee 28s linear infinite;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* About */
+.about { background: #fff; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--accent);
+}
+
+.stat span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* Roasting */
+.roasting-section { background: var(--bg); }
+
+.roast-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.roast-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 28px 24px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.roast-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(107,68,35,0.1);
+}
+
+.roast-card .step {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.roast-card h4 {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.roast-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Menu */
+.menu { background: #fff; }
+
+.menu-header { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
+.menu-header .section-desc { margin: 0 auto; }
+
+.menu-tabs-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 40px);
+}
+
+/* Beans */
+.beans-section { background: var(--bg); }
+
+.beans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.bean-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.bean-card .bean-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.bean-card .bean-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.bean-card .bean-body { padding: 24px; }
+
+.bean-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.bean-card .origin {
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.bean-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.bean-card .notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bean-card .notes span {
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  background: var(--bg);
+  border-radius: 20px;
+  color: var(--text-muted);
+}
+
+/* Lab */
+.lab-section { background: #fff; }
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 64px);
+  align-items: center;
+}
+
+.lab-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.lab-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.lab-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.lab-features li {
+  font-size: 0.9rem;
+  padding-left: 20px;
+  position: relative;
+}
+
+.lab-features li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.55rem;
+  top: 4px;
+}
+
+/* Team */
+.team-section { background: var(--bg); }
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.gallery-grid img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 4px;
+  transition: transform 0.3s;
+}
+
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* Reviews */
+.reviews-section { background: #fff; }
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* Location */
+.location-section { background: #fff; }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.location-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.location-detail-grid h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.location-detail-grid p,
+.location-detail-grid ul {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.location-detail-grid ul li {
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.location-detail-grid ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* Reserve */
+.reserve-section { background: var(--bg); }
+
+.reserve-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.reserve-intro .section-desc { margin-bottom: 24px; }
+
+.reserve-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 16px 20px;
+  background: var(--card-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-visual { height: 50vh; min-height: 320px; order: -1; }
+  .hero-visual::after { background: linear-gradient(180deg, transparent 50%, var(--bg) 100%); }
+  .hero-text { padding: 40px 24px; }
+  .hero-badge { left: 16px; bottom: 16px; }
+  .about-grid, .lab-grid, .location-grid, .reserve-wrap { grid-template-columns: 1fr; }
+  .roast-grid { grid-template-columns: repeat(2, 1fr); }
+  .beans-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .location-detail-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stats, .roast-grid { grid-template-columns: 1fr; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">BREW LAB</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">스토리</a>
+    <a href="#roasting">로스팅</a>
+    <a href="#menu">메뉴</a>
+    <a href="#beans">원두</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">위치</a>
+    <a href="#reserve" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-text">
+    <div class="label">SPECIALTY ROASTERY · 연남동</div>
+    <h1>커피의 과학,<br>브루랩에서 증명하다</h1>
+    <p>생두 선별부터 로스팅 프로파일, 추출 실험까지. 매일 기록하고 매일 개선하는 스페셜티 로스터리. 한 잔의 커피 뒤에 숨은 데이터와 열정을 경험해 보세요.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">메뉴 보기</a>
+      <a href="#beans" class="btn btn-outline">원두 구매</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1447933601403-0c6688de01e5?w=900&q=80" alt="브루랩 로스팅 머신과 원두">
+    <div class="hero-badge">SCA 인증 로스터 · 일 3배치 소량 로스팅</div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Single Origin</span><span>·</span><span>Profile Roasting</span><span>·</span><span>Cupping Lab</span><span>·</span><span>연남동 로스터리</span><span>·</span><span>Fresh Roast Daily</span><span>·</span>
+    <span>Single Origin</span><span>·</span><span>Profile Roasting</span><span>·</span><span>Cupping Lab</span><span>·</span><span>연남동 로스터리</span><span>·</span><span>Fresh Roast Daily</span><span>·</span>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=700&q=80" alt="브루랩 커핑 랩에서 원두를 시음하는 모습">
+      </div>
+      <div class="about-content">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">로스팅은 과학,<br>한 잔은 예술</h2>
+        <p class="section-desc">2020년 연남동 골목에서 시작한 브루랩은 '좋은 커피는 측정 가능하다'는 믿음 위에 세워졌습니다. SCA 인증 로스터가 운영하는 12kg 프로배트 로스터에서 매일 3배치 이하의 소량 로스팅만 진행하며, 배치마다 온도·시간·RoR(로스팅 속도)을 기록합니다.</p>
+        <p class="section-desc">1층은 오픈 카페, 2층은 커핑 랩과 원두 패키징 공간. 방문객은 로스팅 과정을 유리창 너머로 직접 볼 수 있고, 매주 토요일 오전 커핑 세션에 참여할 수 있습니다. 우리는 커피를 팔기보다, 커피에 대한 이해를 나누는 공간을 지향합니다.</p>
+        <div class="stats">
+          <div class="stat"><strong>8+</strong><span>싱글 오리진</span></div>
+          <div class="stat"><strong>365</strong><span>일 로스팅 기록</span></div>
+          <div class="stat"><strong>4.8</strong><span>네이버 평점</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Roasting Process -->
+<section class="roasting-section" id="roasting">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Roasting Process</div>
+      <h2 class="section-title">브루랩 4단계 로스팅</h2>
+      <p class="section-desc">생두 입고부터 포장까지, 모든 과정이 투명하게 기록됩니다. 같은 원두라도 로트마다 미세하게 다른 프로파일을 적용합니다.</p>
+    </div>
+    <div class="roast-grid">
+      <div class="roast-card">
+        <div class="step">01</div>
+        <h4>생두 선별</h4>
+        <p>스페셜티 그레이드 84점 이상 생두만 입고. 수분함량·밀도·결점두 비율을 측정하고 로트별로 분류합니다.</p>
+      </div>
+      <div class="roast-card">
+        <div class="step">02</div>
+        <h4>프로파일 설계</h4>
+        <p>산지·가공방식·목표 추출 방식에 따라 초기 온도, 화력 곡선, 1차·2차 크랙 타이밍을 사전 설계합니다.</p>
+      </div>
+      <div class="roast-card">
+        <div class="step">03</div>
+        <h4>소량 배치 로스팅</h4>
+        <p>12kg 프로배트 로스터로 배치당 5~8kg만 로스팅. RoR 그래프를 실시간 모니터링하며 일관성을 유지합니다.</p>
+      </div>
+      <div class="roast-card">
+        <div class="step">04</div>
+        <h4>커핑 & 포장</h4>
+        <p>24시간 디가싱 후 커핑 평가. 합격 배치만 밸브 포장하여 로스팅 후 48시간 이내 매장·온라인에 출고합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <div class="section-label">Menu</div>
+      <h2 class="section-title">브루랩 메뉴</h2>
+      <p class="section-desc">당일 로스팅 원두로 추출하는 시그니처 메뉴. 테이크아웃 300원 할인, 매장 원두 구매 시 음료 10% 할인.</p>
+    </div>
+    <div class="menu-tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="espresso">에스프레소</button>
+        <button class="tab-btn" data-tab="brew">브루잉</button>
+        <button class="tab-btn" data-tab="lab">랩 시그니처</button>
+      </div>
+      <div class="tab-panel active" data-tab="espresso">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>랩 에스프레소</h4>
+              <p>시즌 블렌드 더블 샷. 캐러멜·다크 초콜릿, 균형 잡힌 산미</p>
+            </div>
+            <span class="price">₩4,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>플랫 화이트</h4>
+              <p>리스트레토 베이스. 실크 같은 밀크 텍스처에 집중한 시그니처</p>
+            </div>
+            <span class="price">₩5,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>코르타도</h4>
+              <p>에스프레소 1:1 우유. 진한 커피 향을 짧게 즐기기 좋은 메뉴</p>
+            </div>
+            <span class="price">₩5,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>바닐라 빈 라떼</h4>
+              <p>마다가스카르 바닐라 빈 시럽. 에스프레소와 부드러운 조화</p>
+            </div>
+            <span class="price">₩5,800</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>아포가토</h4>
+              <p>에스프레소 샷 + 수제 바닐라 젤라토. 디저트 겸용 메뉴</p>
+            </div>
+            <span class="price">₩7,500</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="brew">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>브루랩 핸드드립</h4>
+              <p>바리스타 추천 싱글 오리진. V60, 15g 기준 250ml 추출</p>
+            </div>
+            <span class="price">₩6,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>에티오피아 예가체프</h4>
+              <p>워시드 G1. 재스민·베리·복숭아 노트, 라이트 바디</p>
+            </div>
+            <span class="price">₩7,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>콜드브루</h4>
+              <p>18시간 저온 추출. 초콜릿·너트 undertone, 깔끔한 피니시</p>
+            </div>
+            <span class="price">₩6,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>케멕스</h4>
+              <p>2~3인용. 중배전 블렌드, 5분 내 추출 완료</p>
+            </div>
+            <span class="price">₩12,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>프렌치프레스</h4>
+              <p>풀 바디 싱글 오리진. 4분 침출, 묵직한 질감</p>
+            </div>
+            <span class="price">₩6,500</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="lab">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>프로파일 토닉</h4>
+              <p>에스프레소 + 시트러스 토닉. 로스팅 노트 카드 동봉</p>
+            </div>
+            <span class="price">₩6,800</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>랩 콜드브루 플로트</h4>
+              <p>콜드브루 + 바닐라 젤라토. 여름 시즌 한정</p>
+            </div>
+            <span class="price">₩7,200</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>버터스카치 라떼</h4>
+              <p>직화 버터스카치 시럽 + 에스프레소. 고소하고 달콤한 시그니처</p>
+            </div>
+            <span class="price">₩6,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>랩 브런치 세트</h4>
+              <p>핸드드립 + 크루아상 + 시즌 과일. 주말 10:00–14:00</p>
+            </div>
+            <span class="price">₩14,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Beans -->
+<section class="beans-section" id="beans">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Single Origin</div>
+      <h2 class="section-title">이번 달 싱글 오리진</h2>
+      <p class="section-desc">매월 2~3종의 싱글 오리진을 로테이션합니다. 200g·500g 밸브 포장, 로스팅 일자·프로파일 카드 동봉.</p>
+    </div>
+    <div class="beans-grid">
+      <div class="bean-card">
+        <div class="bean-img">
+          <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55c?w=500&q=80" alt="에티오피아 예가체프 원두">
+        </div>
+        <div class="bean-body">
+          <div class="origin">ETHIOPIA · YIRGACHEFFE</div>
+          <h4>예가체프 코체레 G1</h4>
+          <p>워시드 프로세스. 재스민과 베리의 화사한 산미, 깨끗한 피니시. 핸드드립·에어로프레스 추천.</p>
+          <div class="notes"><span>플로럴</span><span>베리</span><span>라이트</span></div>
+        </div>
+      </div>
+      <div class="bean-card">
+        <div class="bean-img">
+          <img src="https://images.unsplash.com/photo-1610888861242-fd692eb38fdc?w=500&q=80" alt="과테말라 안티구아 원두">
+        </div>
+        <div class="bean-body">
+          <div class="origin">GUATEMALA · ANTIGUA</div>
+          <h4>안티구아 라 에르모사</h4>
+          <p>화산토 기반 재배. 다크 초콜릿·견과류·카라멜의 묵직한 바디. 에스프레소·라떼 베이스 최적.</p>
+          <div class="notes"><span>초콜릿</span><span>너트</span><span>미디엄</span></div>
+        </div>
+      </div>
+      <div class="bean-card">
+        <div class="bean-img">
+          <img src="https://images.unsplash.com/photo-1447933601403-0c6688de01e5?w=500&q=80" alt="콜롬비아 후일라 원두">
+        </div>
+        <div class="bean-body">
+          <div class="origin">COLOMBIA · HUILA</div>
+          <h4>후일라 라스 플로레스</h4>
+          <p>내추럴 프로세스. 붉은 과일·와인·다크 체리 노트. 콜드브루·프렌치프레스에 어울립니다.</p>
+          <div class="notes"><span>과일</span><span>와인</span><span>풀바디</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cupping Lab -->
+<section class="lab-section" id="lab">
+  <div class="container">
+    <div class="lab-grid">
+      <div class="lab-img">
+        <img src="https://images.unsplash.com/photo-1511924848333-c31ccb5d2c5f?w=800&q=80" alt="브루랩 2층 커핑 랩">
+      </div>
+      <div class="lab-details">
+        <div class="section-label">Cupping Lab</div>
+        <h2 class="section-title">커핑 세션 & 워크숍</h2>
+        <p class="section-desc">2층 커핑 랩에서 매주 토요일 오전 11시, 무료 오픈 커핑을 진행합니다. 로스팅 프로파일 설명과 함께 3~4종의 싱글 오리진을 시음하며, 커피 향미 표현법을 배울 수 있습니다.</p>
+        <p class="section-desc">월 1회 '홈 브루잉 클래스'(유료 ₩45,000)에서는 핸드드립·에어로프레스 실습과 원두 200g 증정이 포함됩니다. 6인 소규모로 진행되며 사전 예약 필수입니다.</p>
+        <ul class="lab-features">
+          <li>매주 토요일 오픈 커핑 — 무료, 선착순 12명</li>
+          <li>홈 브루잉 클래스 — 월 1회, 6인 소규모</li>
+          <li>기업·단체 커핑 — 맞춤 원두 4종, 2시간 프로그램</li>
+          <li>로스팅 체험 — 분기 1회, 로스터 견학 포함</li>
+        </ul>
+        <a href="#reserve" class="btn btn-primary">커핑 예약하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">랩을 이끄는 사람들</h2>
+      <p class="section-desc">SCA 자격과 로스팅 현장 경험으로, 매 배치에 진심을 담습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="강민수 헤드 로스터">
+        </div>
+        <div class="card-body">
+          <h4>강민수</h4>
+          <div class="role">Head Roaster · SCA 인증</div>
+          <p>10년차 로스터. 브루랩 시그니처 블렌드 레시피 총괄. 커핑 세션 진행.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" alt="윤서아 시니어 바리스타">
+        </div>
+        <div class="card-body">
+          <h4>윤서아</h4>
+          <div class="role">Senior Barista · 브루잉</div>
+          <p>핸드드립·케멕스 전문. WBrC 국내 예선 출전. 추출 가이드 매일 업데이트.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="조현우 바리스타">
+        </div>
+        <div class="card-body">
+          <h4>조현우</h4>
+          <div class="role">Barista · 에스프레소</div>
+          <p>에스프레소 바 운영. 홈 브루잉 클래스 보조. 신메뉴 R&D 참여.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">랩의 일상</h2>
+      <p class="section-desc">로스팅 현장, 커핑 테이블, 한 잔의 완성까지. 브루랩의 하루를 담았습니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1447933601403-0c6688de01e5?w=400&q=80" alt="로스팅 머신">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80" alt="핸드드립">
+      <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&q=80" alt="원두와 드립">
+      <img src="https://images.unsplash.com/photo-1511924848333-c31ccb5d2c5f?w=400&q=80" alt="라떼아트">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80" alt="카페 인테리어">
+      <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55c?w=400&q=80" alt="원두 패키지">
+      <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&q=80" alt="커핑 세션">
+      <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80" alt="시그니처 라떼">
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">방문객의 이야기</h2>
+      <p class="section-desc">네이버·인스타그램에서 받은 진솔한 후기를 모았습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>로스팅 과정을 유리창으로 볼 수 있어서 신뢰가 갑니다. 예가체프 핸드드립 산미가 정말 깔끔하고, 바리스타가 추출 노트도 설명해 줘서 좋았어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김태현</strong><span>네이버 리뷰 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>토요일 커핑 세션 참여했는데 3종 시음 + 프로파일 설명까지 무료라니 감동. 원두 200g 포장에 로스팅 일자 카드가 들어 있어 센스 최고.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이하은</strong><span>인스타 DM · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>플랫 화이트가 제가 마셔본 것 중 최고 수준. 밀크 텍스처가 실크 같아요. 연남동 산책 후 들르기 딱 좋은 분위기입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박준영</strong><span>네이버 리뷰 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <blockquote>홈 브루잉 클래스 들었는데 핸드드립 각도·물 온도까지 꼼꼼히 알려줘서 집에서도 맛있게 내렸어요. 6인 소규모라 질문하기 편했습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최수빈</strong><span>카카오맵 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>안티구아 원두로 라떼 마셨는데 초콜릿·너트 향이 확실합니다. 매장에서 원두 사면 음료 할인도 되고, 직원분들이 친절해요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정민호</strong><span>네이버 리뷰 · 2024.12</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>프로파일 토닉이 신선하고 맛있어요. 로스팅 노트 카드까지 주니 커피에 대한 애정이 느껴집니다. 재방문 각!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한소희</strong><span>인스타 리뷰 · 2024.11</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">방문 전 궁금한 점을 확인해 보세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">원두는 어디서 구매할 수 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">매장 1층 카운터와 온라인 스토어(brewlab.kr)에서 200g·500g 밸브 포장 원두를 구매할 수 있습니다. 로스팅 일자·프로파일 카드가 동봉되며, 매장 구매 시 당일 음료 10% 할인이 적용됩니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">커핑 세션 참여 방법은?</button>
+        <div class="faq-a"><div class="faq-a-inner">매주 토요일 오전 11시, 2층 커핑 랩에서 무료 오픈 커핑을 진행합니다. 선착순 12명이며, 당일 10:30부터 현장 접수합니다. 홈 브루잉 클래스는 홈페이지 예약 폼으로 사전 신청해 주세요.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차는 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">건물 지하 주차장(1시간 무료, 영수증 지참)을 이용하실 수 있습니다. 만차 시 인근 연남동 공영주차장(도보 5분)을 안내해 드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">테이크아웃·배달이 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">테이크아웃은 전 메뉴 가능하며 300원 할인됩니다. 배달은 배민·쿠팡이츠 제휴(브루잉 메뉴 일부 제외)로 운영 중입니다. 원두는 택배 배송 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">로스팅 견학이 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">1층 카페에서 유리창 너머로 로스팅 과정을 관람하실 수 있습니다. 분기 1회 진행되는 '로스팅 체험' 프로그램(유료, 사전 예약)에서는 로스터리 내부 견학이 포함됩니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="location-section" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">연남역 3번 출구에서 도보 6분. 골목 안쪽, BREW LAB 간판을 찾아주세요.</p>
+    </div>
+    <div class="location-grid">
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>BREW LAB</strong>
+          <span>서울 마포구 연남로 45길 12</span>
+        </div>
+      </div>
+      <div class="location-info">
+        <h3>매장 정보</h3>
+        <table class="hours-table">
+          <tr><td>월 – 금</td><td>08:30 – 21:30</td></tr>
+          <tr><td>토 – 일</td><td>09:00 – 20:00</td></tr>
+          <tr><td>공휴일</td><td>09:00 – 19:00</td></tr>
+          <tr><td>커핑 세션</td><td>토 11:00 (선착순 12명)</td></tr>
+          <tr><td>라스트오더</td><td>마감 30분 전</td></tr>
+        </table>
+        <div class="location-detail-grid">
+          <div>
+            <h4>주차</h4>
+            <p>건물 지하 주차장 1시간 무료(영수증 제시). 승용차 기준 8대. 만차 시 연남동 공영주차장(도보 5분) 이용.</p>
+          </div>
+          <div>
+            <h4>대중교통</h4>
+            <ul>
+              <li>지하철 2호선·경의중앙선 홍대입구역 3번 출구 도보 8분</li>
+              <li>버스 271, 7737 연남동 정류장 하차</li>
+              <li>자전거 거치대 매장 앞 3대</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:20px;font-size:0.9rem;color:var(--text-muted)">문의 · 02-2345-6789 · hello@brewlab.kr</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reserve -->
+<section class="reserve-section" id="reserve">
+  <div class="container">
+    <div class="reserve-wrap">
+      <div class="reserve-intro">
+        <div class="section-label">Reservation</div>
+        <h2 class="section-title">예약 · 문의</h2>
+        <p class="section-desc">커핑 세션, 홈 브루잉 클래스, 기업 단체 커핑 문의를 남겨 주시면 1영업일 내 연락드립니다. 급한 문의는 02-2345-6789로 전화해 주세요.</p>
+        <p class="reserve-note">※ 홈 브루잉 클래스는 월 1회, 6인 소규모로 진행됩니다. 오픈 커핑은 당일 현장 접수이며 예약이 필요 없습니다.</p>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="예약 요청이 접수되었습니다! 곧 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="date">희망 일시</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="type">예약 유형</label>
+              <select id="type" name="type" required>
+                <option value="">선택</option>
+                <option value="cupping">커핑 세션</option>
+                <option value="class">홈 브루잉 클래스</option>
+                <option value="corporate">기업·단체 커핑</option>
+                <option value="roasting">로스팅 체험</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">문의 내용</label>
+              <textarea id="message" name="message" placeholder="참여 인원, 희망 프로그램, 기타 문의 사항을 적어 주세요." rows="4"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">예약 요청 보내기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">BREW LAB</span>
+      <p>연남동에서 매일 로스팅하는 스페셜티 로스터리. 커피의 과학과 한 잔의 예술, 브루랩에서 만나보세요.</p>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#about">스토리</a>
+      <a href="#menu">메뉴</a>
+      <a href="#beans">원두</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#reserve">예약</a>
+    </div>
+    <div class="footer-col">
+      <h4>영업 안내</h4>
+      <p>월–금 08:30–21:30</p>
+      <p>토–일 09:00–20:00</p>
+      <p>공휴일 09:00–19:00</p>
+      <p>커핑 세션 토 11:00</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>서울 마포구 연남로 45길 12</p>
+      <p>02-2345-6789</p>
+      <p>hello@brewlab.kr</p>
+      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 BREW LAB. All rights reserved.</span>
+    <span>사업자등록번호 234-56-78901</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

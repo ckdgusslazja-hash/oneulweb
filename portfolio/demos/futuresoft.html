@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>퓨처소프트 FUTURESOFT — IT솔루션·SI·클라우드</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #0B0A14;
+  --bg-elevated: #12101F;
+  --surface: #1A1730;
+  --text: #F4F2FF;
+  --text-muted: #9B94B8;
+  --accent: #8B5CF6;
+  --accent-dark: #7C3AED;
+  --accent-cyan: #22D3EE;
+  --accent-light: #A78BFA;
+  --accent-text: #fff;
+  --border: rgba(139,92,246,0.2);
+  --border-subtle: rgba(255,255,255,0.08);
+  --nav-bg: rgba(11,10,20,0.94);
+  --footer-bg: #06050C;
+  --card-bg: #14122A;
+  --btn-radius: 8px;
+  --card-radius: 12px;
+  --footer-text: rgba(255,255,255,0.55);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+.site-nav { border-bottom-color: var(--border-subtle); }
+.site-nav .logo {
+  font-family: var(--font-display);
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  letter-spacing: -0.02em;
+}
+.site-nav .logo span {
+  font-size: 0.7em;
+  font-weight: 500;
+  background: linear-gradient(135deg, var(--accent), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nav-links a { color: var(--text-muted); }
+.nav-links a:hover { color: var(--accent-cyan); }
+.nav-cta {
+  background: linear-gradient(135deg, var(--accent), #6366F1);
+  color: #fff;
+  font-weight: 700;
+}
+.nav-toggle { color: var(--text); }
+@media (max-width: 768px) {
+  .nav-links { background: var(--nav-bg); border-color: var(--border-subtle); }
+}
+
+.hero {
+  position: relative;
+  min-height: clamp(520px, 90vh, 760px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(11,10,20,0.94) 0%, rgba(26,23,48,0.85) 50%, rgba(11,10,20,0.7) 100%),
+    radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.15), transparent 50%);
+}
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(139,92,246,0.15);
+  border: 1px solid rgba(34,211,238,0.3);
+  border-radius: 100px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  margin-bottom: 24px;
+}
+.hero-badge .dot {
+  width: 7px; height: 7px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.9); }
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-lead {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: rgba(244,242,255,0.78);
+  line-height: 1.85;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+.btn-primary-gradient {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, var(--accent), #6366F1);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-primary-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(139,92,246,0.4);
+}
+.btn-outline-cyan {
+  padding: 15px 30px;
+  border: 1.5px solid rgba(34,211,238,0.4);
+  color: var(--accent-cyan);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s, border-color 0.25s;
+}
+.btn-outline-cyan:hover {
+  background: rgba(34,211,238,0.08);
+  border-color: var(--accent-cyan);
+}
+.hero-metrics {
+  display: flex;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+}
+.hero-metric strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+.hero-metric span { font-size: 0.75rem; color: var(--text-muted); }
+
+.hero-code {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+}
+.hero-code-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.hero-code-header span {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.hero-code-header span:nth-child(1) { background: #EF4444; }
+.hero-code-header span:nth-child(2) { background: #FBBF24; }
+.hero-code-header span:nth-child(3) { background: #22C55E; }
+.hero-code pre {
+  padding: 20px;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--accent-cyan);
+  font-family: 'Consolas', monospace;
+  overflow-x: auto;
+}
+.hero-code .comment { color: var(--text-muted); }
+.hero-code .key { color: var(--accent-light); }
+.hero-code .str { color: #86EFAC; }
+
+.trust-strip {
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 20px 0;
+}
+.trust-strip .container {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.trust-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+.trust-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 32px);
+}
+.trust-logos span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.about-section { background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(40px, 6vw, 64px);
+  align-items: center;
+}
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.about-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.about-float {
+  position: absolute;
+  bottom: 20px; right: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  border-radius: var(--card-radius);
+}
+.about-float strong {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--accent-cyan);
+}
+.about-float span { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+.tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+.tech-chip {
+  padding: 8px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  transition: border-color 0.25s, color 0.25s;
+}
+.tech-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+.solutions-section { background: var(--bg-elevated); }
+.sol-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  height: 100%;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.sol-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-cyan));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.sol-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border);
+  box-shadow: 0 20px 40px rgba(139,92,246,0.12);
+}
+.sol-card:hover::before { opacity: 1; }
+.sol-icon {
+  width: 52px; height: 52px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+.sol-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+.sol-card p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+.sol-card ul { font-size: 0.8rem; color: var(--text-muted); }
+.sol-card li {
+  padding: 4px 0 4px 14px;
+  position: relative;
+  line-height: 1.6;
+}
+.sol-card li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.clients-section { background: var(--bg); }
+.client-marquee {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+.client-tile {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: 22px 12px;
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.25s;
+}
+.client-tile:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(139,92,246,0.08);
+}
+
+.projects-section { background: var(--bg-elevated); }
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+.project-thumb { aspect-ratio: 16/10; overflow: hidden; position: relative; }
+.project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.project-card:hover .project-thumb img { transform: scale(1.05); }
+.project-tag {
+  position: absolute;
+  top: 12px; left: 12px;
+  padding: 6px 12px;
+  background: rgba(11,10,20,0.85);
+  border: 1px solid var(--border);
+  color: var(--accent-cyan);
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 4px;
+}
+.project-body { padding: 22px; }
+.project-body h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; line-height: 1.45; }
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.project-body p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+.project-result {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.78rem;
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.partners-section { background: var(--bg); }
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.partner-box {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: 28px 20px;
+  text-align: center;
+  transition: border-color 0.25s;
+}
+.partner-box:hover { border-color: var(--border); }
+.partner-box .logo-text {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.partner-box span { font-size: 0.72rem; color: var(--text-muted); }
+
+.tabs-section { background: var(--bg-elevated); }
+.stack-tab-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 40px);
+}
+.stack-tab-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: var(--accent-cyan);
+}
+.stack-tab-card > p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.stack-item {
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  text-align: center;
+}
+.stack-item strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.stack-item span { font-size: 0.75rem; color: var(--text-muted); }
+
+.careers-section { background: var(--bg); }
+.careers-banner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(32px, 5vw, 48px);
+}
+.career-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.career-tags span {
+  padding: 6px 12px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--accent-light);
+  border-radius: 100px;
+}
+.open-positions { margin-top: 32px; }
+.pos-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+.pos-row h4 { font-size: 0.92rem; }
+.pos-row .meta { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+.pos-apply {
+  padding: 8px 18px;
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  transition: all 0.25s;
+}
+.pos-apply:hover {
+  background: var(--accent-cyan);
+  color: var(--bg);
+}
+
+.faq-section { background: var(--bg-elevated); }
+.faq-item {
+  border-color: var(--border-subtle);
+  background: var(--card-bg);
+}
+.faq-q { color: var(--text); }
+.faq-item.open .faq-q { color: var(--accent-cyan); }
+
+.contact-section { background: var(--bg); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+.contact-points { display: flex; flex-direction: column; gap: 18px; margin-top: 24px; }
+.contact-point {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.contact-point .ico {
+  width: 44px; height: 44px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.contact-point strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.contact-point span { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+.form-card { background: var(--card-bg); border-color: var(--border-subtle); }
+.form-group label { color: var(--text); }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--surface);
+  border-color: var(--border-subtle);
+  color: var(--text);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--accent); }
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--accent), #6366F1);
+  color: #fff;
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  margin-top: 8px;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139,92,246,0.35);
+}
+
+.cta-band {
+  background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(34,211,238,0.1));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: clamp(48px, 8vw, 72px) 0;
+}
+.cta-band h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  margin-bottom: 12px;
+}
+.cta-band p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+
+.site-footer .footer-brand .logo { color: #fff; font-family: var(--font-display); }
+.site-footer .footer-brand .logo span {
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-col a:hover { color: var(--accent-cyan); }
+.section-label { color: var(--accent-cyan); }
+
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .contact-grid, .careers-banner { grid-template-columns: 1fr; }
+  .hero-code { display: none; }
+  .client-marquee { grid-template-columns: repeat(3, 1fr); }
+  .partner-grid { grid-template-columns: repeat(2, 1fr); }
+  .stack-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .client-marquee, .partner-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">퓨처소프트 <span>FUTURESOFT</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#solutions">솔루션</a>
+    <a href="#projects">프로젝트</a>
+    <a href="#partners">파트너</a>
+    <a href="#careers">채용</a>
+    <a href="#contact" class="nav-cta">문의</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80" alt="클라우드·데이터센터">
+  </div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge"><span class="dot"></span> SI · Cloud · AI · Security</div>
+      <h1>비즈니스를 가속하는<br><em>디지털 코어</em></h1>
+      <p class="hero-lead">퓨처소프트는 ERP·클라우드·AI·보안을 통합한 IT 솔루션/SI 기업입니다. 2005년 설립 이래 1,200건 이상의 프로젝트를 수행하며, 금융·제조·유통·공공 분야의 디지털 전환을 선도합니다.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary-gradient">프로젝트 문의</a>
+        <a href="#solutions" class="btn-outline-cyan">솔루션 보기</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="hero-metric"><strong>1,200+</strong><span>누적 프로젝트</span></div>
+        <div class="hero-metric"><strong>420+</strong><span>엔지니어</span></div>
+        <div class="hero-metric"><strong>CMMI5</strong><span>품질 인증</span></div>
+      </div>
+    </div>
+    <div class="hero-code">
+      <div class="hero-code-header"><span></span><span></span><span></span></div>
+      <pre><span class="comment">// FutureCloud Deploy Pipeline</span>
+<span class="key">deploy</span>({
+  <span class="key">stack</span>: <span class="str">"k8s-hybrid"</span>,
+  <span class="key">region</span>: [<span class="str">"ap-northeast-2"</span>],
+  <span class="key">ai</span>: { <span class="key">inference</span>: <span class="str">"gpu-a10"</span> },
+  <span class="key">security</span>: <span class="str">"zero-trust"</span>
+});
+<span class="comment">→ Status: ✓ Production Ready</span></pre>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container">
+    <span class="trust-label">Technology Partners</span>
+    <div class="trust-logos">
+      <span>AWS Advanced</span>
+      <span>Microsoft Azure</span>
+      <span>Google Cloud</span>
+      <span>SAP Gold</span>
+      <span>Oracle Partner</span>
+      <span>Kubernetes CKA</span>
+    </div>
+  </div>
+</div>
+
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="퓨처소프트 개발팀">
+        <div class="about-float">
+          <strong>420+</strong>
+          <span>인증 엔지니어 · 24개 기술 스택</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">About FUTURESOFT</div>
+        <h2 class="section-title">기술로 연결하고,<br>데이터로 증명합니다</h2>
+        <p class="section-desc">퓨처소프트는 컨설팅·구축·운영·MSP를 아우르는 End-to-End IT 파트너입니다. 레거시 현대화부터 클라우드 네이티브·생성형 AI 도입까지, 기업의 디지털 로드맵을 함께 설계하고 실행합니다.</p>
+        <div class="tech-chips">
+          <span class="tech-chip">Kubernetes</span>
+          <span class="tech-chip">Terraform</span>
+          <span class="tech-chip">SAP S/4HANA</span>
+          <span class="tech-chip">LLM/RAG</span>
+          <span class="tech-chip">Zero Trust</span>
+          <span class="tech-chip">MLOps</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solutions-section" id="solutions">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Solutions</div>
+      <h2 class="section-title">솔루션</h2>
+      <p class="section-desc">ERP·클라우드·AI·보안 4대 솔루션으로 디지털 전환의 전 과정을 지원합니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="sol-card">
+        <div class="sol-icon">📊</div>
+        <h3>ERP</h3>
+        <p>SAP·Oracle·더존 등 ERP 구축·마이그레이션·운영. S/4HANA 전환, 모듈 통합, BI 연계를 수행합니다.</p>
+        <ul>
+          <li>S/4HANA 컨버전</li>
+          <li>재무·생산·SCM 모듈</li>
+          <li>그룹웨어·MES 연동</li>
+        </ul>
+      </div>
+      <div class="sol-card">
+        <div class="sol-icon">☁️</div>
+        <h3>클라우드</h3>
+        <p>AWS·Azure·GCP 멀티클라우드 설계, 마이그레이션, FinOps, 24×7 MSP. 하이브리드·온프레미 연동을 지원합니다.</p>
+        <ul>
+          <li>Lift & Shift / Re-architect</li>
+          <li>Kubernetes·서버리스</li>
+          <li>클라우드 비용 최적화</li>
+        </ul>
+      </div>
+      <div class="sol-card">
+        <div class="sol-icon">🤖</div>
+        <h3>AI</h3>
+        <p>생성형 AI·RAG·MLOps·비전 AI. 사내 LLM, 챗봇, 문서 자동화, 예측 분석 프로젝트를 수행합니다.</p>
+        <ul>
+          <li>Enterprise GPT / RAG</li>
+          <li>데이터 레이크·파이프라인</li>
+          <li>GPU 인프라·추론 최적화</li>
+        </ul>
+      </div>
+      <div class="sol-card">
+        <div class="sol-icon">🔐</div>
+        <h3>보안</h3>
+        <p>Zero Trust, SIEM/SOAR, 취약점 진단, ISMS-P·CSAP 인증 컨설팅. 클라우드·온프레미 통합 보안을 구축합니다.</p>
+        <ul>
+          <li>침해사고 대응</li>
+          <li>DevSecOps 파이프라인</li>
+          <li>개인정보·컴플라이언스</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="clients-section" id="clients">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Clients</div>
+      <h2 class="section-title">고객사</h2>
+      <p class="section-desc">금융·제조·유통·공공·헬스케어 등 다양한 산업의 leading 기업이 퓨처소프트와 함께합니다.</p>
+    </div>
+    <div class="client-marquee">
+      <div class="client-tile">KB금융</div>
+      <div class="client-tile">삼성전자</div>
+      <div class="client-tile">LG CNS</div>
+      <div class="client-tile">현대자동차</div>
+      <div class="client-tile">CJ올리브영</div>
+      <div class="client-tile">네이버</div>
+      <div class="client-tile">카카오</div>
+      <div class="client-tile">한국전력</div>
+      <div class="client-tile">서울시청</div>
+      <div class="client-tile">삼성바이오</div>
+      <div class="client-tile">SK텔레콤</div>
+      <div class="client-tile">롯데면세점</div>
+    </div>
+  </div>
+</section>
+
+<section class="projects-section" id="projects">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Project Portfolio</div>
+      <h2 class="section-title">프로젝트 실적</h2>
+      <p class="section-desc">대표 구축·전환 프로젝트와 달성한 비즈니스 성과입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="금융 클라우드">
+          <span class="project-tag">Cloud</span>
+        </div>
+        <div class="project-body">
+          <h3>KB금융그룹 하이브리드 클라우드 플랫폼</h3>
+          <div class="project-meta"><span>금융</span><span>36개월</span><span>120명</span></div>
+          <p>온프레미 DC와 AWS 하이브리드 아키텍처, 400+ 마이크로서비스 전환, FinOps로 연간 클라우드 비용 28% 절감.</p>
+          <div class="project-result">→ 가용성 99.99% · 배포 주기 2주→1일</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80" alt="AI 챗봇">
+          <span class="project-tag">AI</span>
+        </div>
+        <div class="project-body">
+          <h3>제조 대기업 생성형 AI 업무 포털</h3>
+          <div class="project-meta"><span>제조</span><span>12개월</span><span>45명</span></div>
+          <p>사내 문서 RAG·다국어 번역·설계 도면 검색 LLM. GPU 클러스터 및 MLOps 파이프라인 구축.</p>
+          <div class="project-result">→ 업무 시간 35% 단축 · CSAT 4.6/5</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" alt="ERP">
+          <span class="project-tag">ERP</span>
+        </div>
+        <div class="project-body">
+          <h3>글로벌 유통 S/4HANA 롤아웃</h3>
+          <div class="project-meta"><span>유통</span><span>24개월</span><span>80명</span></div>
+          <p>아시아 5개국 ERP 통합, 재무·구매·물류 모듈 표준화, 실시간 그룹 재무 대시보드.</p>
+          <div class="project-result">→ 결산 기간 12일→5일</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80" alt="보안">
+          <span class="project-tag">Security</span>
+        </div>
+        <div class="project-body">
+          <h3>공공기관 Zero Trust 보안 체계</h3>
+          <div class="project-meta"><span>공공</span><span>18개월</span><span>35명</span></div>
+          <p>ISMS-P·CSAP 인증, SIEM/SOAR, IDaaS, 망분리 환경 클라우드 연동 보안 설계.</p>
+          <div class="project-result">→ 인증 획득 · 침해사고 0건 2년</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80" alt="데이터">
+          <span class="project-tag">Data</span>
+        </div>
+        <div class="project-body">
+          <h3>통신사 빅데이터 플랫폼 현대화</h3>
+          <div class="project-meta"><span>통신</span><span>20개월</span><span>55명</span></div>
+          <p>Hadoop→Snowflake·Databricks 전환, 실시간 이벤트 스트리밍, ML 추천 엔진.</p>
+          <div class="project-result">→ 쿼리 성능 8배 · 인프라비 40%↓</div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80" alt="헬스케어">
+          <span class="project-tag">Cloud</span>
+        </div>
+        <div class="project-body">
+          <h3>바이오 헬스케어 클라우드 MSP</h3>
+          <div class="project-meta"><span>헬스케어</span><span>상시</span><span>25명</span></div>
+          <p>GxP 준수 AWS 환경, LIMS·임상 데이터 백업, 24×7 모니터링·장애 대응.</p>
+          <div class="project-result">→ SLA 99.95% · 감사 대응 100%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partners-section" id="partners">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Technology Partners</div>
+      <h2 class="section-title">기술 파트너</h2>
+      <p class="section-desc">글로벌 빅테크·솔루션 벤더와 공동 혁신 센터를 운영합니다.</p>
+    </div>
+    <div class="partner-grid">
+      <div class="partner-box"><div class="logo-text">AWS</div><span>Advanced Consulting</span></div>
+      <div class="partner-box"><div class="logo-text">Microsoft</div><span>Azure Expert MSP</span></div>
+      <div class="partner-box"><div class="logo-text">Google Cloud</div><span>Partner · AI</span></div>
+      <div class="partner-box"><div class="logo-text">SAP</div><span>Gold Partner</span></div>
+      <div class="partner-box"><div class="logo-text">Oracle</div><span>OCP · Cloud</span></div>
+      <div class="partner-box"><div class="logo-text">Red Hat</div><span>OpenShift</span></div>
+      <div class="partner-box"><div class="logo-text">NVIDIA</div><span>Inception · GPU</span></div>
+      <div class="partner-box"><div class="logo-text">Palo Alto</div><span>Security Elite</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="tabs-section" id="stack">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Tech Stack</div>
+      <h2 class="section-title">기술 스택 &amp; 역량</h2>
+      <p class="section-desc">솔루션별 핵심 기술 스택과 인증 보유 현황입니다.</p>
+    </div>
+    <div class="tabs-wrap" style="max-width:920px;margin:0 auto">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="cloud">클라우드</button>
+        <button class="tab-btn" data-tab="data">데이터·AI</button>
+        <button class="tab-btn" data-tab="app">앱·DevOps</button>
+      </div>
+      <div class="stack-tab-card tab-panel active" data-tab="cloud">
+        <h4>클라우드 &amp; 인프라</h4>
+        <p>멀티클라우드·하이브리드 설계, IaC, 컨테이너 오케스트레이션 전문 팀이 상주합니다.</p>
+        <div class="stack-grid">
+          <div class="stack-item"><strong>AWS</strong><span>20+ Solutions Architect</span></div>
+          <div class="stack-item"><strong>Azure</strong><span>Expert MSP</span></div>
+          <div class="stack-item"><strong>GCP</strong><span>Cloud Architect</span></div>
+          <div class="stack-item"><strong>Kubernetes</strong><span>CKA 45명</span></div>
+          <div class="stack-item"><strong>Terraform</strong><span>IaC 표준</span></div>
+          <div class="stack-item"><strong>FinOps</strong><span>비용 최적화</span></div>
+        </div>
+      </div>
+      <div class="stack-tab-card tab-panel" data-tab="data">
+        <h4>데이터 &amp; AI</h4>
+        <p>데이터 엔지니어링부터 LLM 파인튜닝·RAG·MLOps까지 End-to-End 역량을 보유합니다.</p>
+        <div class="stack-grid">
+          <div class="stack-item"><strong>Databricks</strong><span>Lakehouse</span></div>
+          <div class="stack-item"><strong>Snowflake</strong><span>DW</span></div>
+          <div class="stack-item"><strong>LangChain</strong><span>RAG/Agent</span></div>
+          <div class="stack-item"><strong>PyTorch</strong><span>ML/DL</span></div>
+          <div class="stack-item"><strong>Kafka</strong><span>Streaming</span></div>
+          <div class="stack-item"><strong>dbt</strong><span>Analytics</span></div>
+        </div>
+      </div>
+      <div class="stack-tab-card tab-panel" data-tab="app">
+        <h4>애플리케이션 &amp; DevOps</h4>
+        <p>MSA·API·프론트엔드·DevSecOps 파이프라인 구축 및 레거시 현대화.</p>
+        <div class="stack-grid">
+          <div class="stack-item"><strong>Java/Spring</strong><span>Enterprise</span></div>
+          <div class="stack-item"><strong>React/Next</strong><span>Frontend</span></div>
+          <div class="stack-item"><strong>GitLab CI</strong><span>DevOps</span></div>
+          <div class="stack-item"><strong>ArgoCD</strong><span>GitOps</span></div>
+          <div class="stack-item"><strong>Elastic</strong><span>Observability</span></div>
+          <div class="stack-item"><strong>CMMI5</strong><span>품질 프로세스</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">프로젝트 문의·견적·기술 상담에 대한 안내입니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">프로젝트 문의 후 절차는 어떻게 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">접수 후 2영업일 내 PM이 연락드리며, 요구사항 워크숍 → 범위·일정·견적 제안 → 계약 → 킥오프 순으로 진행됩니다. PoC(파일럿)부터 시작하는 것도 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">클라우드 마이그레이션 기간은 얼마나 걸리나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">애플리케이션 규모에 따라 3~24개월입니다. Assessment(4~8주) 후 단계별 로드맵을 제시하며, Lift & Shift는 단기, Re-architect는 중장기 프로젝트로 설계합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">생성형 AI 도입 시 보안은 어떻게 하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">사내 Private LLM, VPC 격리, PII 마스킹, 프롬프트 감사 로그를 기본 적용합니다. 금융·공공 프로젝트는 망분리·온프레미 GPU 옵션을 제공합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">운영(MSP) 서비스도 제공하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">24×7 모니터링, 장애 대응, 패치·백업, SLA 기반 운영 계약을 제공합니다. 구축과 운영을 단일 파트너로 진행하면 인수인계 리스크를 줄일 수 있습니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">해외 법인·글로벌 롤아웃도 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">싱가포르·베트남·인도 네트워크와 글로벌 SI 파트너를 통해 아시아·북미 프로젝트를 수행합니다. 다국어·다통화 ERP/클라우드 경험이 풍부합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="careers-section" id="careers">
+  <div class="container">
+    <div class="careers-banner">
+      <div>
+        <div class="section-label">Careers</div>
+        <h2 class="section-title">퓨처소프트와 함께할 동료</h2>
+        <p class="section-desc">최신 기술 스택, 대형 프로젝트, 자유로운 R&D 시간. 성장하는 IT 전문가를 기다립니다.</p>
+        <div class="career-tags">
+          <span>재택·하이브리드</span>
+          <span>자격증·교육 지원</span>
+          <span>스톡옵션</span>
+          <span>사내 AI Lab</span>
+        </div>
+      </div>
+      <div>
+        <div class="open-positions">
+          <div class="pos-row">
+            <div><h4>클라우드 아키텍트</h4><p class="meta">판교 · 정규직 · 경력 7년+</p></div>
+            <a href="#" class="pos-apply" data-toast="채용 담당자가 연락드리겠습니다.">지원</a>
+          </div>
+          <div class="pos-row">
+            <div><h4>AI/ML 엔지니어</h4><p class="meta">판교 · 정규직 · 경력 3년+</p></div>
+            <a href="#" class="pos-apply" data-toast="채용 담당자가 연락드리겠습니다.">지원</a>
+          </div>
+          <div class="pos-row">
+            <div><h4>SAP 컨설턴트</h4><p class="meta">서울 · 정규직 · 경력 5년+</p></div>
+            <a href="#" class="pos-apply" data-toast="채용 담당자가 연락드리겠습니다.">지원</a>
+          </div>
+          <div class="pos-row">
+            <div><h4>보안 컨설턴트</h4><p class="meta">판교 · 정규직 · 경력 4년+</p></div>
+            <a href="#" class="pos-apply" data-toast="채용 담당자가 연락드리겠습니다.">지원</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="container">
+    <h2>디지털 전환, 지금 시작하세요</h2>
+    <p>무료 기술 워크숍으로 현황 진단과 로드맵 초안을 제공합니다.</p>
+    <a href="#contact" class="btn-primary-gradient">프로젝트 문의</a>
+  </div>
+</div>
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">문의</h2>
+        <p class="section-desc">SI·클라우드·AI·보안 프로젝트 및 제휴 문의를 남겨 주세요. 영업일 기준 2일 내 회신드립니다.</p>
+        <div class="contact-points">
+          <div class="contact-point">
+            <div class="ico">📍</div>
+            <div><strong>본사 · R&D</strong><span>경기 성남시 분당구 판교역로 235 퓨처소프트타워</span></div>
+          </div>
+          <div class="contact-point">
+            <div class="ico">📞</div>
+            <div><strong>대표전화</strong><span>02-3456-7800</span></div>
+          </div>
+          <div class="contact-point">
+            <div class="ico">✉️</div>
+            <div><strong>이메일</strong><span>biz@futuresoft.co.kr</span></div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="문의가 접수되었습니다. 영업일 2일 내 담당 PM이 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="co">회사명</label>
+            <input type="text" id="co" placeholder="㈜퓨처파트너" required>
+          </div>
+          <div class="form-group">
+            <label for="nm">담당자명</label>
+            <input type="text" id="nm" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="em">이메일</label>
+            <input type="email" id="em" placeholder="name@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="ph">연락처</label>
+            <input type="tel" id="ph" placeholder="010-0000-0000">
+          </div>
+          <div class="form-group full">
+            <label for="sol">관심 솔루션</label>
+            <select id="sol" required>
+              <option value="">선택해 주세요</option>
+              <option>ERP</option>
+              <option>클라우드</option>
+              <option>AI</option>
+              <option>보안</option>
+              <option>복합 / 컨설팅</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="msg">프로젝트 개요</label>
+            <textarea id="msg" rows="4" placeholder="현재 시스템, 목표, 예상 일정·예산 등을 간략히 적어주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">문의 접수하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">퓨처소프트 <span>FUTURESOFT</span></span>
+      <p>IT 솔루션·SI·클라우드·AI·보안. 기업의 디지털 전환을 설계하고 실행하는 기술 파트너.</p>
+    </div>
+    <div class="footer-col">
+      <h4>솔루션</h4>
+      <a href="#solutions">ERP</a>
+      <a href="#solutions">클라우드</a>
+      <a href="#solutions">AI</a>
+      <a href="#solutions">보안</a>
+    </div>
+    <div class="footer-col">
+      <h4>회사</h4>
+      <a href="#about">회사소개</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#partners">파트너</a>
+      <a href="#careers">채용</a>
+    </div>
+    <div class="footer-col">
+      <h4>문의</h4>
+      <a href="#contact">프로젝트 문의</a>
+      <p>02-3456-7800</p>
+      <p>biz@futuresoft.co.kr</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 퓨처소프트 FUTURESOFT. All rights reserved.</span>
+    <span>사업자등록번호 220-88-56789</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

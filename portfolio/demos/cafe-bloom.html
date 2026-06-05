@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafe Bloom — 성수동 스페셜티 커피</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FAF8F5;
+  --text: #2C2420;
+  --text-muted: #7A6E66;
+  --accent: #8B5E3C;
+  --accent-text: #fff;
+  --border: #E8E0D8;
+  --nav-bg: rgba(250,248,245,0.95);
+  --footer-bg: #2C2420;
+  --card-bg: #fff;
+  --btn-radius: 4px;
+  --card-radius: 12px;
+  --title-weight: 400;
+  --logo-weight: 600;
+}
+
+/* Hero */
+.hero {
+  min-height: clamp(480px, 85vh, 720px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, transparent 30%);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 8vw, 80px);
+  padding-left: clamp(24px, 5vw, 60px);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text .label {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.hero-text p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 36px;
+  max-width: 420px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Marquee */
+.marquee {
+  padding: 16px 0;
+  background: var(--text);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-inner {
+  display: inline-flex;
+  gap: 48px;
+  animation: marquee 25s linear infinite;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* About */
+.about { background: #fff; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+}
+
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.about-content .section-desc { margin-bottom: 20px; }
+.about-content .section-desc:last-of-type { margin-bottom: 32px; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--accent);
+}
+
+.stat span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* Why Bloom */
+.why-bloom { background: var(--bg); }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.why-grid .info-box {
+  text-align: left;
+  padding: 32px 28px;
+}
+
+.why-grid .info-box h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/* Menu */
+.menu { background: var(--bg); }
+
+.menu-header { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
+.menu-header .section-desc { margin: 0 auto; }
+
+.menu-tabs-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 40px);
+}
+
+/* Space */
+.space-section { background: #fff; }
+
+.space-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 64px);
+  align-items: center;
+}
+
+.space-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.space-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.space-details h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.space-details p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.space-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.space-features li {
+  font-size: 0.9rem;
+  padding-left: 20px;
+  position: relative;
+}
+
+.space-features li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.7rem;
+}
+
+.space-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.space-meta div {
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--card-radius);
+}
+
+.space-meta strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.space-meta span { font-size: 0.88rem; color: var(--text-muted); }
+
+/* Team */
+.team-section { background: var(--bg); }
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.gallery-grid img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 4px;
+  transition: transform 0.3s;
+}
+
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* Reviews */
+.reviews-section { background: #fff; }
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* Location */
+.location-section { background: #fff; }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.location-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.location-detail-grid h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.location-detail-grid p,
+.location-detail-grid ul {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.location-detail-grid ul li {
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.location-detail-grid ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* Reserve */
+.reserve-section { background: var(--bg); }
+
+.reserve-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.reserve-intro .section-desc { margin-bottom: 24px; }
+
+.reserve-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 16px 20px;
+  background: var(--card-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+}
+
+/* Footer accent */
+.site-footer .footer-brand .logo { font-weight: 600; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-visual { height: 50vh; min-height: 320px; order: -1; }
+  .hero-visual::after { background: linear-gradient(180deg, transparent 50%, var(--bg) 100%); }
+  .hero-text { padding: 40px 24px; }
+  .about-grid,
+  .space-grid,
+  .location-grid,
+  .reserve-wrap { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .location-detail-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-links a { font-size: 0.82rem; }
+}
+
+@media (max-width: 480px) {
+  .stats,
+  .space-meta { grid-template-columns: 1fr; text-align: center; }
+  .why-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">Cafe Bloom</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">스토리</a>
+    <a href="#menu">메뉴</a>
+    <a href="#space">공간</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">위치</a>
+    <a href="#reserve" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-text">
+    <div class="label">SPECIALTY COFFEE · 성수동</div>
+    <h1>향기로운 하루의<br>시작을 함께</h1>
+    <p>직접 로스팅한 스페셜티 원두와 매일 구워내는 수제 디저트. 도심 속 작은 휴식, Cafe Bloom에서 당신만의 리듬을 찾아보세요.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">메뉴 보기</a>
+      <a href="#space" class="btn btn-outline">공간 대여</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80" alt="Cafe Bloom 인테리어와 라떼아트">
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Single Origin</span><span>·</span><span>Hand Roasted</span><span>·</span><span>Homemade Dessert</span><span>·</span><span>성수동 카페</span><span>·</span><span>Private Event Space</span><span>·</span>
+    <span>Single Origin</span><span>·</span><span>Hand Roasted</span><span>·</span><span>Homemade Dessert</span><span>·</span><span>성수동 카페</span><span>·</span><span>Private Event Space</span><span>·</span>
+  </div>
+</div>
+
+<!-- About / Story -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=700&q=80" alt="바리스타가 핸드드립 커피를 내리는 모습">
+      </div>
+      <div class="about-content">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">한 잔의 커피에<br>진심을 담다</h2>
+        <p class="section-desc">2019년 성수동 골목에서 문을 연 Cafe Bloom은 '좋은 원두를 더 많은 사람에게'라는 작은 다짐에서 시작했습니다. 매일 아침 5kg 단위로 직접 로스팅하며, 산지·로트·추출 방식까지 투명하게 기록합니다. 우리는 커피를 단순한 음료가 아니라, 하루를 여는 의식이라고 믿습니다.</p>
+        <p class="section-desc">2층 프라이빗 룸과 넓은 테이블 존은 혼자 책을 읽기에도, 팀 미팅·브랜드 런칭·소규모 웨딩 촬영에도 어울립니다. 지역 로스터리와 협업한 시즌 한정 블렌드, 파티시에가 매일 구운 디저트, 그리고 늘 따뜻한 미소로 맞이하는 바리스타들이 Bloom만의 풍경을 완성합니다.</p>
+        <div class="stats">
+          <div class="stat"><strong>6+</strong><span>싱글 오리진</span></div>
+          <div class="stat"><strong>12</strong><span>수제 디저트</span></div>
+          <div class="stat"><strong>4.9</strong><span>네이버 평점</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Bloom -->
+<section class="why-bloom">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Why Bloom</div>
+      <h2 class="section-title">Bloom을 선택하는 이유</h2>
+      <p class="section-desc">커피 한 잔에 담긴 정성과 공간이 주는 경험, 네 가지 약속으로 이어집니다.</p>
+    </div>
+    <div class="why-grid info-grid">
+      <div class="info-box">
+        <div class="icon">☕</div>
+        <h4>직접 로스팅</h4>
+        <p>에티오피아·과테말라·콜롬비아 등 6종 이상의 싱글 오리진을 매장 로스터리에서 소량 배치로 굽습니다. 추출 가이드가 매일 맞춤 조정합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🍰</div>
+        <h4>수제 디저트</h4>
+        <p>마스카포네 티라미수, 시즌 과일 타르트, 브라운치 스콘 등 12종 이상의 디저트를 매일 오전에 굽습니다. 당일 소진 시 조기 마감될 수 있습니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🪴</div>
+        <h4>프라이빗 공간</h4>
+        <p>2층 단독 룸(최대 20인), 1층 창가석, 야외 테라스까지 목적에 맞게 예약 가능합니다. 프로젝터·음향 기본 제공.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">✨</div>
+        <h4>성수동 감성</h4>
+        <p>빈티지 우드와 식물, 자연광이 어우러진 인테리어. 골목 산책 후 들르기 좋은 위치, 주말 브런치와 야간 무드 모두 사랑받습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <div class="section-label">Menu</div>
+      <h2 class="section-title">Bloom 메뉴</h2>
+      <p class="section-desc">엄선된 원두와 정성으로 만든 시그니처 메뉴. 테이크아웃 300원 할인, 리유저블 컵 추가 500원 할인.</p>
+    </div>
+    <div class="menu-tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="coffee">커피</button>
+        <button class="tab-btn" data-tab="noncoffee">논커피</button>
+        <button class="tab-btn" data-tab="dessert">디저트</button>
+      </div>
+      <div class="tab-panel active" data-tab="coffee">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>블룸 라떼</h4>
+              <p>바닐라 빈 & 시나몬 시럽 시그니처. 부드러운 우유 거품과 에스프레소의 조화</p>
+            </div>
+            <span class="price">₩5,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>에티오피아 핸드드립</h4>
+              <p>예가체프 G1. 플로럴 & 베리 노트, 라이트~미디엄 바디</p>
+            </div>
+            <span class="price">₩6,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>콜드브루 블랙</h4>
+              <p>12시간 저온 추출. 초콜릿·너트 undertone, 깔끔한 피니시</p>
+            </div>
+            <span class="price">₩5,800</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>플랫 화이트</h4>
+              <p>더블 리스트레토 기반. 밀크와 커피의 밸런스에 집중한 시그니처</p>
+            </div>
+            <span class="price">₩5,200</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>시즌 블렌드 에스프레소</h4>
+              <p>과테말라·브라질 블렌드. 캐러멜·헤이즐넛, 라떼·아메리카노 베이스</p>
+            </div>
+            <span class="price">₩4,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>바닐라 아포가토</h4>
+              <p>에스프레소 샷 + 수제 바닐라 젤라토. 디저트와 커피를 한 번에</p>
+            </div>
+            <span class="price">₩7,200</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="noncoffee">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>말차 라떼</h4>
+              <p>우지 말차 + 오트밀크 옵션. 진한 말차 향과 고소한 마무리</p>
+            </div>
+            <span class="price">₩6,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>히비스커스 에이드</h4>
+              <p>무카페인. 상큼한 베리향, 여름 시즌 베스트</p>
+            </div>
+            <span class="price">₩5,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>골든 밀크 라떼</h4>
+              <p>커큐민 & 시나몬. 따뜻하게 또는 아이스 선택</p>
+            </div>
+            <span class="price">₩5,800</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>유기농 페퍼민트 티</h4>
+              <p>프리미엄 잎차 티백. 디카페인, 리필 1회 무료</p>
+            </div>
+            <span class="price">₩4,800</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="dessert">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>수제 티라미수</h4>
+              <p>마스카포네 & 에스프레소 시그니처. 48시간 숙성</p>
+            </div>
+            <span class="price">₩7,000</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>시즌 과일 타르트</h4>
+              <p>당일 제조 크림 & 제철 과일. 딸기·복숭아·무화과 로테이션</p>
+            </div>
+            <span class="price">₩7,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>크루아상 푸딩</h4>
+              <p>버터 크루아상 + 바닐라 커스터드. 브런치 인기 메뉴</p>
+            </div>
+            <span class="price">₩6,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>브라운치 스콘 세트</h4>
+              <p>플레인·치즈 2종 + 클러터드 크림 & 잼</p>
+            </div>
+            <span class="price">₩8,500</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>다크 초콜릿 브라우니</h4>
+              <p>벨기에 커버춰 72%. 견과류 토핑, 따뜻하게 제공 가능</p>
+            </div>
+            <span class="price">₩5,500</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Space -->
+<section class="space-section" id="space">
+  <div class="container">
+    <div class="space-grid">
+      <div class="space-img">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80" alt="Cafe Bloom 2층 프라이빗 공간">
+      </div>
+      <div class="space-details">
+        <div class="section-label">Private Space</div>
+        <h3>단체예약 · 이벤트 공간</h3>
+        <p>회의, 워크숍, 브랜드 런칭, 독서 모임, 소규모 촬영까지 — Bloom의 2층 프라이빗 룸과 1층 단체석을 목적에 맞게 대여해 드립니다. 음향·프로젝터·화이트보드 기본 제공, 케이터링(커피·디저트 플래터) 옵션 선택 가능합니다.</p>
+        <p>평일 10:00–18:00 타임 슬롯(3시간 / 4시간 / 종일), 주말은 사전 협의제입니다. 최소 8인 이상 단체 예약 시 공간 대여료 20% 할인이 적용됩니다.</p>
+        <ul class="space-features">
+          <li>2층 단독 룸 — 최대 20인, 방음 처리, 독립 에어컨</li>
+          <li>1층 단체석 — 8~12인, 창가 자연광</li>
+          <li>야외 테라스 — 4~8인, 날씨에 따라 이용</li>
+          <li>촬영·이벤트 — 상업 촬영 시 별도 문의 (플래시 제한 구역 안내)</li>
+        </ul>
+        <div class="space-meta">
+          <div><strong>대여 요금</strong><span>3시간 ₩150,000~</span></div>
+          <div><strong>예약 문의</strong><span>02-1234-5678 · DM</span></div>
+        </div>
+        <a href="#reserve" class="btn btn-primary" style="margin-top:24px">공간 예약 문의</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">바리스타를 소개합니다</h2>
+      <p class="section-desc">SCA 자격과 수년간의 현장 경험으로, 한 잔 한 잔에 최선을 다합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="김서연 헤드 바리스타">
+        </div>
+        <div class="card-body">
+          <h4>김서연</h4>
+          <div class="role">Head Barista · 로스터</div>
+          <p>8년차 바리스타. SCA 로스팅 인터미디엇. Bloom 시그니처 블렌드 레시피 총괄.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" alt="박지민 시니어 바리스타">
+        </div>
+        <div class="card-body">
+          <h4>박지민</h4>
+          <div class="role">Senior Barista · 브루잉</div>
+          <p>핸드드립·콜드브루 전문. WBrC 국내 예선 출전. 산미·바디 밸런스에 집착합니다.</p>
+        </div>
+      </div>
+      <div class="team-card card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="이준호 바리스타">
+        </div>
+        <div class="card-body">
+          <h4>이준호</h4>
+          <div class="role">Barista · 라떼아트</div>
+          <p>에스프레소 바 & 고객 응대. 라떼아트 워크숍 진행. 신메뉴 R&D에도 참여합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">공간 & 메뉴</h2>
+      <p class="section-desc">Bloom의 일상 — 아침 빛, 오후의 라떼, 저녁의 무드까지 담았습니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&q=80" alt="카페 인테리어">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80" alt="핸드드립 커피">
+      <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&q=80" alt="창가 좌석">
+      <img src="https://images.unsplash.com/photo-1511924848333-c31ccb5d2c5f?w=400&q=80" alt="라떼아트">
+      <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80" alt="시그니처 라떼">
+      <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&q=80" alt="수제 디저트">
+      <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&q=80" alt="원두와 드립">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80" alt="바 테이블">
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">손님들의 이야기</h2>
+      <p class="section-desc">네이버·인스타그램에서 받은 따뜻한 후기를 모았습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>블룸 라떼는 정말 시그니처답게 부드럽고 향이 오래갑니다. 2층 룸에서 팀 미팅했는데 조용하고 콘센트·와이파이 모두 만족스러웠어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김현우</strong><span>네이버 리뷰 · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>에티오피아 핸드드립 산미가 깔끔해서 원두 산지 설명도 자세히 들을 수 있었습니다. 티라미수는 당일에 구운 느낌이 확실해요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이수진</strong><span>인스타 DM · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>성수동 산책 후 들르기 딱 좋은 분위기. 창가 자리에서 책 읽기 좋고, 직원분들이 항상 친절합니다. 재방문 각!</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박민재</strong><span>네이버 리뷰 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <blockquote>브라운치 스콘 세트 양이 넉넉하고 커피랑 조합이 좋아요. 주말엔 웨이팅이 있을 수 있으니 평일 오전 추천합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최예린</strong><span>카카오맵 · 2024.12</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>브랜드 런칭 소모임으로 2층 대여했는데 음향·프로젝터 세팅이 빠르고 케이터링 플래터도 예쁘게 나왔습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정다은</strong><span>이메일 후기 · 2024.11</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>콜드브루 블랙이 진하면서도 떫지 않아서 여름에 자주 옵니다. 리유저블 컵 할인도 환경적으로 마음에 들어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한지훈</strong><span>네이버 리뷰 · 2024.10</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">방문 전 궁금한 점을 확인해 보세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">주차는 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">건물 지하 1~2층 유료 주차장(2시간 무료, 영수증 지참)을 이용하실 수 있습니다. 만차 시 인근 성수 공영주차장을 안내해 드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">단체 예약·공간 대여는 어떻게 하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">홈페이지 하단 예약 폼 또는 전화(02-1234-5678)로 문의해 주세요. 인원·일시·목적을 알려주시면 1영업일 내 견적과 가능 시간을 안내드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">테이크아웃·배달이 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">테이크아웃은 전 메뉴 가능하며, 리유저블 컵 지참 시 500원 추가 할인됩니다. 배달은 배민·쿠팡이츠 제휴(디저트 일부 제외)로 운영 중입니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">반려동물 동반 입장이 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">1층 창가·야외 테라스 구역만 소형견 동반 가능합니다(리드줄 필수). 2층 프라이빗 룸은 동반 불가입니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">원두·굿즈를 구매할 수 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">매장 로스팅 원두 200g·500g, 드립백·텀블러·머그 등 굿즈를 판매합니다. 멤버십 가입 시 원두 10% 할인 혜택이 있습니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="location-section" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">성수역 2번 출구에서 도보 7분. 골목 안쪽, 우드 간판을 찾아주세요.</p>
+    </div>
+    <div class="location-grid">
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>Cafe Bloom</strong>
+          <span>서울 성동구 성수이로 12길 34</span>
+        </div>
+      </div>
+      <div class="location-info">
+        <h3>매장 정보</h3>
+        <table class="hours-table">
+          <tr><td>월 – 금</td><td>08:00 – 22:00</td></tr>
+          <tr><td>토 – 일</td><td>09:00 – 21:00</td></tr>
+          <tr><td>공휴일</td><td>09:00 – 20:00</td></tr>
+          <tr><td>브런치 (주말)</td><td>09:00 – 14:00</td></tr>
+          <tr><td>라스트오더</td><td>마감 30분 전</td></tr>
+        </table>
+        <div class="location-detail-grid">
+          <div>
+            <h4>주차</h4>
+            <p>건물 지하 주차장 2시간 무료(영수증 제시). 승용차 기준 12대. 만차 시 성수동 공영주차장(도보 3분) 이용.</p>
+          </div>
+          <div>
+            <h4>대중교통</h4>
+            <ul>
+              <li>지하철 2호선 성수역 2번 출구 도보 7분</li>
+              <li>버스 271, 2014 성수역 정류장 하차</li>
+              <li>자전거 거치대 매장 앞 4대</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:20px;font-size:0.9rem;color:var(--text-muted)">문의 · 02-1234-5678 · hello@cafebloom.kr</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reserve -->
+<section class="reserve-section" id="reserve">
+  <div class="container">
+    <div class="reserve-wrap">
+      <div class="reserve-intro">
+        <div class="section-label">Reservation</div>
+        <h2 class="section-title">예약 · 문의</h2>
+        <p class="section-desc">단체 방문, 공간 대여, 케이터링 문의를 남겨 주시면 담당자가 1영업일 내 연락드립니다. 급한 문의는 02-1234-5678로 전화해 주세요.</p>
+        <p class="reserve-note">※ 당일 예약은 전화로만 가능합니다. 8인 이상 단체는 최소 3일 전 예약을 권장합니다.</p>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="예약 요청이 접수되었습니다! 곧 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="date">희망 일시</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="guests">인원</label>
+              <select id="guests" name="guests" required>
+                <option value="">선택</option>
+                <option value="1-2">1–2명</option>
+                <option value="3-5">3–5명</option>
+                <option value="6-10">6–10명</option>
+                <option value="11-20">11–20명</option>
+                <option value="20+">20명 이상 (공간 대여)</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">문의 내용</label>
+              <textarea id="message" name="message" placeholder="단체 예약 / 2층 룸 대여 / 케이터링 문의 등 자유롭게 적어 주세요." rows="4"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">예약 요청 보내기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Cafe Bloom</span>
+      <p>성수동에서 매일 아침 로스팅하는 스페셜티 커피와 수제 디저트. 한 잔의 여유, 한 공간의 Bloom.</p>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#about">스토리</a>
+      <a href="#menu">메뉴</a>
+      <a href="#space">공간 대여</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#reserve">예약</a>
+    </div>
+    <div class="footer-col">
+      <h4>영업 안내</h4>
+      <p>월–금 08:00–22:00</p>
+      <p>토–일 09:00–21:00</p>
+      <p>공휴일 09:00–20:00</p>
+      <p>라스트오더 마감 30분 전</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>서울 성동구 성수이로 12길 34</p>
+      <p>02-1234-5678</p>
+      <p>hello@cafebloom.kr</p>
+      <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Cafe Bloom. All rights reserved.</span>
+    <span>사업자등록번호 123-45-67890</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

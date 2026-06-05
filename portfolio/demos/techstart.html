@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechStart — Data Analytics Platform for Modern Teams</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #09090B;
+  --text: #FAFAFA;
+  --text-muted: #A1A1AA;
+  --accent: #6366F1;
+  --accent-2: #8B5CF6;
+  --accent-text: #fff;
+  --border: rgba(255,255,255,0.08);
+  --nav-bg: rgba(9,9,11,0.92);
+  --footer-bg: #050506;
+  --card-bg: #18181B;
+  --surface: #0F0F12;
+  --btn-radius: 10px;
+  --card-radius: 16px;
+  --logo-weight: 800;
+  --footer-text: rgba(255,255,255,0.55);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+/* ── Nav ── */
+.site-nav .nav-links a:hover { color: var(--text); }
+.nav-cta { background: linear-gradient(135deg, #6366F1, #8B5CF6); }
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  padding: clamp(48px, 8vw, 80px) 0 clamp(40px, 6vw, 64px);
+  overflow: hidden;
+}
+
+.mesh-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(99,102,241,0.2), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(168,85,247,0.14), transparent),
+    radial-gradient(ellipse 40% 30% at 50% 100%, rgba(34,197,94,0.06), transparent);
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.12fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.28);
+  border-radius: 100px;
+  font-size: 0.76rem;
+  color: #A5B4FC;
+  margin-bottom: 22px;
+  font-weight: 500;
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  background: #22C55E;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5.2vw, 3.65rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, #818CF8 0%, #C084FC 50%, #F472B6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-copy p {
+  font-size: clamp(0.92rem, 2vw, 1.08rem);
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  max-width: 500px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  box-shadow: 0 4px 24px rgba(99,102,241,0.4);
+  color: #fff;
+}
+
+.btn-outline { border-color: rgba(255,255,255,0.18); color: var(--text); }
+.btn-outline:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); }
+
+.hero-stats {
+  display: flex;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.hero-stat span { font-size: 0.72rem; color: #71717A; }
+
+/* Dashboard mockup */
+.dashboard {
+  background: #18181B;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(99,102,241,0.08);
+}
+
+.dash-top {
+  padding: 12px 16px;
+  background: #27272A;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.dash-top span { width: 10px; height: 10px; border-radius: 50%; }
+.dash-top span:nth-child(1) { background: #EF4444; }
+.dash-top span:nth-child(2) { background: #EAB308; }
+.dash-top span:nth-child(3) { background: #22C55E; }
+
+.dash-url {
+  margin-left: auto;
+  font-size: 0.68rem;
+  color: #52525B;
+  font-family: var(--font-display);
+}
+
+.dash-content { padding: clamp(16px, 3vw, 24px); }
+
+.dash-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.metric {
+  background: #27272A;
+  border-radius: 12px;
+  padding: clamp(12px, 2vw, 18px);
+  border: 1px solid var(--border);
+}
+
+.metric .lbl { font-size: 0.66rem; color: #71717A; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+.metric .val { font-size: clamp(1.05rem, 2.5vw, 1.45rem); font-weight: 700; font-family: var(--font-display); }
+.metric .chg { font-size: 0.66rem; color: #22C55E; margin-top: 4px; }
+.metric .chg.down { color: #F87171; }
+
+.dash-chart {
+  background: #27272A;
+  border-radius: 12px;
+  padding: clamp(14px, 2vw, 20px);
+  border: 1px solid var(--border);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.chart-label { font-size: 0.72rem; color: #71717A; }
+
+.chart-pill {
+  font-size: 0.62rem;
+  padding: 3px 10px;
+  background: rgba(99,102,241,0.15);
+  color: #A5B4FC;
+  border-radius: 100px;
+  font-weight: 600;
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(4px, 1vw, 8px);
+  height: clamp(60px, 12vw, 100px);
+}
+
+.bar {
+  flex: 1;
+  background: linear-gradient(to top, #6366F1, #818CF8);
+  border-radius: 4px 4px 0 0;
+  min-height: 8px;
+}
+
+.bar:nth-child(1) { height: 42%; }
+.bar:nth-child(2) { height: 68%; }
+.bar:nth-child(3) { height: 55%; }
+.bar:nth-child(4) { height: 88%; }
+.bar:nth-child(5) { height: 62%; }
+.bar:nth-child(6) { height: 95%; }
+.bar:nth-child(7) { height: 74%; }
+
+/* ── Customers logo strip ── */
+.customers-strip {
+  padding: clamp(36px, 5vw, 56px) 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.customers-strip .strip-label {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #52525B;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+
+.logo-strip { gap: clamp(12px, 2vw, 20px); opacity: 1; }
+
+.logo-strip span {
+  padding: 12px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: #71717A;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.logo-strip span:hover {
+  border-color: rgba(99,102,241,0.35);
+  color: #A1A1AA;
+}
+
+/* ── Section accents ── */
+.section-label { color: #818CF8; }
+
+.features { background: var(--surface); }
+
+.alt-section { background: var(--bg); }
+
+.surface-section { background: var(--surface); }
+
+/* Bento grid */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+
+.bento-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.bento-item:hover {
+  border-color: rgba(99,102,241,0.45);
+  transform: translateY(-2px);
+}
+
+.bento-item.wide { grid-column: span 2; }
+
+.bento-icon {
+  width: 44px; height: 44px;
+  background: rgba(99,102,241,0.14);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 16px;
+}
+
+.bento-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #818CF8;
+  margin-bottom: 8px;
+}
+
+.bento-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.bento-item p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
+
+/* How it works */
+.how-section .process-step::before {
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+}
+
+.how-section .process-step h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.how-section .process-step p { color: var(--text-muted); }
+
+/* Case studies */
+.case-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.case-card:hover {
+  border-color: rgba(99,102,241,0.4);
+  transform: translateY(-4px);
+}
+
+.case-industry {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #818CF8;
+  margin-bottom: 12px;
+}
+
+.case-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.case-card > p {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 24px;
+}
+
+.case-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.case-metric strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #A5B4FC;
+  letter-spacing: -0.03em;
+}
+
+.case-metric span { font-size: 0.68rem; color: #71717A; }
+
+.case-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #52525B;
+  margin-bottom: 16px;
+}
+
+/* Integrations */
+.integ-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.integ-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.integ-chip:hover {
+  border-color: rgba(99,102,241,0.4);
+  background: rgba(99,102,241,0.06);
+  color: var(--text);
+}
+
+.integ-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: #27272A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Pricing */
+.pricing-toggle-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.pricing-toggle-wrap .active { color: var(--text); font-weight: 600; }
+
+.pricing-badge-save {
+  font-size: 0.68rem;
+  padding: 3px 10px;
+  background: rgba(34,197,94,0.15);
+  color: #4ADE80;
+  border-radius: 100px;
+  font-weight: 700;
+}
+
+.pricing-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card.featured {
+  border-color: #6366F1;
+  box-shadow: 0 0 48px rgba(99,102,241,0.18);
+  position: relative;
+}
+
+.pricing-card.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  padding: 4px 16px;
+  border-radius: 100px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+
+.pricing-card h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.pricing-desc {
+  font-size: 0.8rem;
+  color: #71717A;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.pricing-card .price {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.03em;
+}
+
+.pricing-card .price span { font-size: 0.82rem; color: #71717A; font-weight: 500; }
+
+.pricing-billing {
+  font-size: 0.75rem;
+  color: #52525B;
+  margin-bottom: 24px;
+}
+
+.pricing-card .btn { width: 100%; margin-bottom: 24px; }
+
+.pricing-features {
+  flex: 1;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.pricing-features li:last-child { border-bottom: none; }
+
+.pricing-features li::before {
+  content: '✓';
+  color: #818CF8;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pricing-features li.muted { color: #52525B; }
+.pricing-features li.muted::before { content: '—'; color: #3F3F46; }
+
+/* Testimonials */
+.review-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  height: 100%;
+}
+
+.review-card:hover {
+  border-color: rgba(99,102,241,0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+
+.review-card blockquote { color: #D4D4D8; }
+
+.review-stars { color: #FBBF24; }
+
+.review-avatar { background: linear-gradient(135deg, #6366F1, #8B5CF6); }
+
+.review-author strong { color: var(--text); }
+.review-author span { color: #71717A; }
+
+/* FAQ dark */
+.faq-item {
+  background: var(--card-bg);
+  border-color: var(--border);
+}
+
+.faq-q { color: var(--text); }
+.faq-q::after { color: #71717A; }
+.faq-a-inner { color: var(--text-muted); }
+
+/* Contact */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.contact-info h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.contact-info > p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.contact-perks { display: flex; flex-direction: column; gap: 16px; }
+
+.contact-perk {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.contact-perk-icon {
+  width: 40px; height: 40px;
+  background: rgba(99,102,241,0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-perk strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.contact-perk span { font-size: 0.82rem; color: #71717A; line-height: 1.5; }
+
+.form-card {
+  background: var(--card-bg);
+  border-color: var(--border);
+}
+
+.form-group label { color: #D4D4D8; }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: #27272A;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #6366F1;
+}
+
+/* CTA band */
+.cta-band {
+  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cta-band h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+
+.cta-band p {
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  font-size: 1rem;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border);
+}
+
+.footer-brand .logo { font-weight: 800; letter-spacing: -0.03em; }
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.footer-social a:hover {
+  border-color: rgba(99,102,241,0.5);
+  color: #fff;
+}
+
+.footer-newsletter {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.footer-newsletter input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.82rem;
+}
+
+.footer-newsletter button {
+  padding: 10px 16px;
+  background: #6366F1;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.footer-bottom a { color: rgba(255,255,255,0.45); }
+.footer-bottom a:hover { color: #fff; }
+
+/* Card hover override dark */
+.card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+
+@media (max-width: 1024px) {
+  .integ-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .dash-metrics { grid-template-columns: 1fr; }
+  .bento { grid-template-columns: 1fr; }
+  .bento-item.wide { grid-column: span 1; }
+  .contact-wrap { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr; }
+  .integ-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .integ-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">TechStart</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#product">Product</a>
+    <a href="#features">Features</a>
+    <a href="#customers">Customers</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- 2. Hero -->
+<section class="hero" id="top">
+  <div class="mesh-bg"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-badge"><span class="dot"></span> v3.2 — AI Copilot for Analytics 출시</div>
+        <h1>데이터로 비즈니스를<br><span>가속하세요</span></h1>
+        <p>Real-time analytics, automated reporting, 200+ integrations. 스타트업부터 Enterprise까지 — 하나의 unified data platform.</p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-primary">Start Free Trial →</a>
+          <a href="#contact" class="btn btn-outline">Book a Demo</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>2,400+</strong><span>Active teams</span></div>
+          <div class="hero-stat"><strong>99.9%</strong><span>Uptime SLA</span></div>
+          <div class="hero-stat"><strong>4.9/5</strong><span>G2 Rating</span></div>
+        </div>
+      </div>
+      <div class="dashboard" id="product">
+        <div class="dash-top">
+          <span></span><span></span><span></span>
+          <span class="dash-url">app.techstart.io/dashboard</span>
+        </div>
+        <div class="dash-content">
+          <div class="dash-metrics">
+            <div class="metric"><div class="lbl">Revenue</div><div class="val">₩48.2M</div><div class="chg">↑ 12.5%</div></div>
+            <div class="metric"><div class="lbl">Active Users</div><div class="val">12,847</div><div class="chg">↑ 8.3%</div></div>
+            <div class="metric"><div class="lbl">Conversion</div><div class="val">4.8%</div><div class="chg">↑ 2.1%</div></div>
+          </div>
+          <div class="dash-chart">
+            <div class="chart-header">
+              <div class="chart-label">Weekly Performance</div>
+              <span class="chart-pill">Live</span>
+            </div>
+            <div class="bars">
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Logo strip -->
+<section class="customers-strip" id="customers">
+  <div class="container">
+    <p class="strip-label">Trusted by 2,400+ teams worldwide</p>
+    <div class="logo-strip">
+      <span>Samsung</span>
+      <span>Naver</span>
+      <span>Kakao</span>
+      <span>Coupang</span>
+      <span>Toss</span>
+      <span>Line</span>
+      <span>Hyundai</span>
+      <span>SK Telecom</span>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Features bento -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">성장에 필요한 모든 도구</h2>
+      <p class="section-desc">From raw data to actionable insights — AI-powered analytics stack built for modern product teams.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-item wide">
+        <div class="bento-icon">🤖</div>
+        <span class="bento-tag">AI · New</span>
+        <h3>AI Analytics Copilot</h3>
+        <p>머신러닝 기반 anomaly detection과 natural language queries. "지난달 churn이 왜 올랐지?"라고 물으면 즉시 actionable insight를 생성합니다.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">📊</div>
+        <span class="bento-tag">Dashboard</span>
+        <h3>Custom Dashboards</h3>
+        <p>Drag-and-drop 빌더로 팀별 맞춤 대시보드를 5분 안에 구성.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🔗</div>
+        <span class="bento-tag">Connect</span>
+        <h3>200+ Integrations</h3>
+        <p>Slack, Notion, Stripe, HubSpot — 원클릭 OAuth 연동.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🔒</div>
+        <span class="bento-tag">Security</span>
+        <h3>Enterprise Security</h3>
+        <p>SOC 2 Type II, E2E encryption, SSO/SAML, role-based access control.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">📈</div>
+        <span class="bento-tag">Reports</span>
+        <h3>Auto Reports</h3>
+        <p>주간·월간 리포트를 Slack/Email로 자동 배포. PDF export 지원.</p>
+      </div>
+      <div class="bento-item wide">
+        <div class="bento-icon">⚡</div>
+        <span class="bento-tag">Real-time</span>
+        <h3>Real-time Sync</h3>
+        <p>100ms 이내 데이터 동기화. WebSocket 기반 live alerts, collaborative annotations, team comments — 모두 하나의 workspace에서.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. How it works -->
+<section class="alt-section how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">4단계로 시작하는 data stack</h2>
+      <p class="section-desc">복잡한 설정 없이 — Connect, Analyze, Share, Scale. 평균 onboarding 48시간.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>Connect Sources</h4>
+        <p>데이터베이스, CRM, 결제 시스템을 OAuth로 연결. 200+ pre-built connectors.</p>
+      </div>
+      <div class="process-step">
+        <h4>Build Dashboards</h4>
+        <p>AI가 추천하는 템플릿으로 시작하거나 drag-and-drop으로 커스터마이즈.</p>
+      </div>
+      <div class="process-step">
+        <h4>Share Insights</h4>
+        <p>팀에 real-time 공유. Slack 알림, scheduled reports, embed widgets.</p>
+      </div>
+      <div class="process-step">
+        <h4>Scale with AI</h4>
+        <p>Copilot이 trends를 예측하고 anomalies를 탐지. growth를 자동 가속.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Case studies -->
+<section class="surface-section" id="case-studies">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">고객들이 만든 real results</h2>
+      <p class="section-desc">Fintech, E-commerce, SaaS — 다양한 산업의 팀이 TechStart로 data-driven decision을 내립니다.</p>
+    </div>
+    <div class="grid-3">
+      <article class="case-card">
+        <div class="case-logo">PayFlow</div>
+        <div class="case-industry">Fintech · Series B</div>
+        <h3>결제 데이터 분석 시간 80% 단축</h3>
+        <p>수백만 건의 transaction을 real-time으로 모니터링. fraud detection accuracy 34% 향상, ops 팀 3명 절감.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>80%</strong><span>Time saved</span></div>
+          <div class="case-metric"><strong>34%</strong><span>Fraud accuracy</span></div>
+          <div class="case-metric"><strong>3x</strong><span>ROI in 6mo</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">ShopWave</div>
+        <div class="case-industry">E-commerce · Enterprise</div>
+        <h3>Conversion funnel 가시성 확보</h3>
+        <p>200+ SKU, 12개 마켓플레이스 데이터를 unified dashboard로 통합. cart abandonment 18% 감소.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>18%</strong><span>Less abandonment</span></div>
+          <div class="case-metric"><strong>₩2.1B</strong><span>Revenue uplift</span></div>
+          <div class="case-metric"><strong>12</strong><span>Channels unified</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">CloudOps</div>
+        <div class="case-industry">B2B SaaS · Growth</div>
+        <h3>Product-led growth metrics 자동화</h3>
+        <p>Activation, retention, NPS를 한 화면에서. weekly all-hands prep 6시간 → 30분으로 단축.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>92%</strong><span>Less prep time</span></div>
+          <div class="case-metric"><strong>2.4x</strong><span>Activation rate</span></div>
+          <div class="case-metric"><strong>48h</strong><span>Onboarding</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Integrations -->
+<section class="alt-section" id="integrations">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Integrations</div>
+      <h2 class="section-title">이미 쓰는 도구와 바로 연결</h2>
+      <p class="section-desc">200+ native integrations. API & webhooks for custom stacks.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-chip"><span class="integ-icon">💬</span> Slack</div>
+      <div class="integ-chip"><span class="integ-icon">📝</span> Notion</div>
+      <div class="integ-chip"><span class="integ-icon">💳</span> Stripe</div>
+      <div class="integ-chip"><span class="integ-icon">📧</span> HubSpot</div>
+      <div class="integ-chip"><span class="integ-icon">🐙</span> GitHub</div>
+      <div class="integ-chip"><span class="integ-icon">📊</span> Google Analytics</div>
+      <div class="integ-chip"><span class="integ-icon">🛒</span> Shopify</div>
+      <div class="integ-chip"><span class="integ-icon">☁️</span> AWS S3</div>
+      <div class="integ-chip"><span class="integ-icon">🔷</span> Salesforce</div>
+      <div class="integ-chip"><span class="integ-icon">📋</span> Jira</div>
+      <div class="integ-chip"><span class="integ-icon">🎫</span> Zendesk</div>
+      <div class="integ-chip"><span class="integ-icon">⚡</span> Zapier</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Pricing -->
+<section class="surface-section" id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">팀 규모에 맞는 transparent pricing</h2>
+      <p class="section-desc">14-day free trial on all plans. No credit card required. 연간 결제 시 20% 할인.</p>
+    </div>
+    <div class="pricing-toggle-wrap">
+      <span class="active">Monthly</span>
+      <span>·</span>
+      <span>Annual</span>
+      <span class="pricing-badge-save">Save 20%</span>
+    </div>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p class="pricing-desc">Solo founders & small teams getting started with analytics.</p>
+        <div class="price">₩29,000<span>/월</span></div>
+        <p class="pricing-billing">per workspace · billed monthly</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Get Started</a>
+        <ul class="pricing-features">
+          <li>대시보드 최대 5개</li>
+          <li>월 50K events tracked</li>
+          <li>기본 리포트 & email export</li>
+          <li>10 integrations</li>
+          <li>7-day data retention</li>
+          <li>Community support</li>
+          <li>1 workspace member</li>
+          <li class="muted">AI Analytics Copilot</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Pro</h3>
+        <p class="pricing-desc">Growing teams that need AI insights and unlimited scale.</p>
+        <div class="price">₩79,000<span>/월</span></div>
+        <p class="pricing-billing">per workspace · billed monthly</p>
+        <a href="#contact" class="btn btn-primary btn-sm">Start Free Trial</a>
+        <ul class="pricing-features">
+          <li>무제한 dashboards</li>
+          <li>월 500K events tracked</li>
+          <li>AI Analytics Copilot</li>
+          <li>200+ integrations</li>
+          <li>90-day data retention</li>
+          <li>Slack & scheduled reports</li>
+          <li>Priority email & chat support</li>
+          <li>Up to 15 team members</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p class="pricing-desc">Large orgs with compliance, SSO, and dedicated success.</p>
+        <div class="price">Custom</div>
+        <p class="pricing-billing">volume pricing · annual contracts</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Contact Sales</a>
+        <ul class="pricing-features">
+          <li>무제한 everything</li>
+          <li>Unlimited events & retention</li>
+          <li>Custom AI models & training</li>
+          <li>SSO/SAML & SCIM provisioning</li>
+          <li>SOC 2 reports & audit logs</li>
+          <li>On-premise & VPC deployment</li>
+          <li>99.9% SLA + dedicated CSM</li>
+          <li>24/7 phone support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Testimonials -->
+<section class="alt-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">고객들이 말하는 TechStart</h2>
+      <p class="section-desc">Product, growth, and data teams — 4.9/5 average on G2 & Capterra.</p>
+    </div>
+    <div class="grid-4">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Onboarding이 정말 빨라요. 첫 주에 이미 executive dashboard를 Slack에 공유했습니다. Best analytics tool we've used."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">JK</div>
+          <div><strong>김지훈</strong><span>Head of Product · PayFlow</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"AI Copilot이 churn 원인을 찾아줬어요. data team 2명이 6개월치 분석을 20분 만에 끝냈습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">SL</div>
+          <div><strong>Sarah Lee</strong><span>VP Growth · CloudOps</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"200개 마켓 데이터를 한 곳에서 — 이전엔 불가능했던 일이에요. ROI는 3개월 만에 회수했습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">PM</div>
+          <div><strong>박민수</strong><span>Data Lead · ShopWave</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Enterprise security 요구사항을 모두 충족. SOC 2 audit도 seamless하게 통과했습니다. Highly recommend."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">EC</div>
+          <div><strong>Emily Chen</strong><span>CTO · FinStack</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FAQ -->
+<section class="surface-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">궁금한 점이 있으시면 support@techstart.io 또는 live chat으로 문의해 주세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" type="button">Free trial은 어떻게 시작하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">Pro 플랜 기준 14일 무료 trial입니다. 신용카드 없이 가입 가능하며, trial 종료 후 자동 결제되지 않습니다. Starter는 영구 free tier로 월 50K events까지 사용할 수 있습니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">어떤 데이터 소스를 연결할 수 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">PostgreSQL, MySQL, BigQuery, Snowflake, Stripe, Shopify, HubSpot, Salesforce 등 200+ native connector를 지원합니다. REST API와 webhooks로 custom source도 연결 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">데이터 보안과 compliance는?</button>
+        <div class="faq-a"><div class="faq-a-inner">SOC 2 Type II 인증, GDPR 준수, E2E encryption at rest and in transit. Enterprise 플랜은 SSO/SAML, audit logs, VPC/on-premise deployment, custom DPA를 제공합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">기존 BI 도구에서 migration이 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">Tableau, Looker, Metabase에서 dashboard export & import wizard를 제공합니다. Pro 이상 플랜은 dedicated migration specialist가 48시간 내 onboarding을 지원합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">팀 인원을 나중에 추가할 수 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">네, 언제든 workspace settings에서 invite 가능합니다. Pro는 최대 15명, Enterprise는 unlimited seats입니다. 추가 seat 비용은 플랜별 pricing page를 참고해 주세요.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">환불 정책은 어떻게 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">월간 구독은 언제든 cancel 가능하며, 다음 billing cycle부터 과금이 중단됩니다. 연간 구독은 첫 30일 이내 full refund를 제공합니다. Enterprise는 계약 조건에 따릅니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA band -->
+<section class="cta-band">
+  <div class="container">
+    <h2>지금 바로 data-driven team이 되세요</h2>
+    <p>14-day free trial · No credit card · Cancel anytime</p>
+    <a href="#contact" class="btn btn-primary">Get Started Free →</a>
+  </div>
+</section>
+
+<!-- 11. Contact -->
+<section class="alt-section" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-label">Contact</div>
+        <h3>데모 & 상담 예약</h3>
+        <p>Product tour, custom pricing, Enterprise deployment — 30분 화상 미팅으로 TechStart가 팀에 맞는지 확인해 보세요.</p>
+        <div class="contact-perks">
+          <div class="contact-perk">
+            <span class="contact-perk-icon">🎯</span>
+            <div><strong>Personalized Demo</strong><span>귀사 data stack에 맞춘 live walkthrough</span></div>
+          </div>
+          <div class="contact-perk">
+            <span class="contact-perk-icon">📅</span>
+            <div><strong>48h Onboarding</strong><span>전담 CSM이 첫 dashboard까지 함께 구축</span></div>
+          </div>
+          <div class="contact-perk">
+            <span class="contact-perk-icon">🌏</span>
+            <div><strong>Global Support</strong><span>Seoul · San Francisco · Singapore — KST/PST 지원</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="데모 요청이 접수되었습니다! 24시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Work Email</label>
+              <input type="email" id="email" name="email" placeholder="you@company.com" required>
+            </div>
+            <div class="form-group">
+              <label for="company">회사명</label>
+              <input type="text" id="company" name="company" placeholder="TechStart Inc.">
+            </div>
+            <div class="form-group">
+              <label for="size">팀 규모</label>
+              <select id="size" name="size">
+                <option value="">선택해 주세요</option>
+                <option>1–10명</option>
+                <option>11–50명</option>
+                <option>51–200명</option>
+                <option>200명 이상</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="interest">관심 플랜</label>
+              <select id="interest" name="interest">
+                <option>Starter (Free trial)</option>
+                <option selected>Pro</option>
+                <option>Enterprise</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">메시지 (선택)</label>
+              <textarea id="message" name="message" placeholder="현재 사용 중인 analytics 도구, 주요 use case 등을 알려주세요."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Request Demo →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">TechStart</a>
+      <p>The unified analytics platform for modern teams. Real-time data, AI insights, enterprise-grade security — San Francisco & Seoul.</p>
+      <div class="footer-social">
+        <a href="#" data-toast="Twitter — coming soon">X</a>
+        <a href="#" data-toast="LinkedIn — coming soon">in</a>
+        <a href="#" data-toast="GitHub — coming soon">GH</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="#features">Features</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#" data-toast="Changelog — v3.2 released">Changelog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#" data-toast="About page — portfolio demo">About</a>
+      <a href="#customers">Customers</a>
+      <a href="#case-studies">Case Studies</a>
+      <a href="#" data-toast="Careers — We're hiring!">Careers</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#" data-toast="Documentation — demo">Documentation</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" data-toast="API Reference — demo">API Reference</a>
+      <a href="#" data-toast="Status — All systems operational">Status</a>
+      <p style="margin-top:16px;font-size:0.78rem;color:rgba(255,255,255,0.4)">Newsletter</p>
+      <form class="footer-newsletter demo-form" data-success="구독해 주셔서 감사합니다!">
+        <input type="email" placeholder="Email" required aria-label="Newsletter email">
+        <button type="submit">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 TechStart Inc. All rights reserved.</span>
+    <span>
+      <a href="#" data-toast="Privacy Policy — demo">Privacy</a> ·
+      <a href="#" data-toast="Terms of Service — demo">Terms</a> ·
+      <a href="#" data-toast="Security — SOC 2 Type II">Security</a>
+    </span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

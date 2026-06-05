@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>브릿지컨설팅 BRIDGE CONSULTING — 전략과 실행을 잇는 경영 컨설팅</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Noto Serif KR', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #0A1628;
+  --bg-elevated: #0F1D32;
+  --surface: #132238;
+  --text: #F1F5F9;
+  --text-muted: #94A3B8;
+  --accent: #C9A227;
+  --accent-light: #E8C547;
+  --accent-text: #0A1628;
+  --navy: #1A3050;
+  --border: rgba(201,162,39,0.15);
+  --border-subtle: rgba(255,255,255,0.08);
+  --nav-bg: rgba(10,22,40,0.94);
+  --footer-bg: #060E1A;
+  --card-bg: #0F1D32;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --footer-text: rgba(255,255,255,0.55);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+/* Nav */
+.site-nav { border-bottom-color: var(--border-subtle); }
+.site-nav .logo {
+  font-family: var(--font-display);
+  color: var(--text);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  letter-spacing: 0.02em;
+}
+.site-nav .logo span { color: var(--accent); font-weight: 600; }
+.nav-links a { color: var(--text-muted); }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { background: var(--accent); color: var(--accent-text); font-weight: 700; }
+
+/* Hero */
+.hero {
+  position: relative;
+  padding: clamp(72px, 12vw, 120px) 0 clamp(64px, 10vw, 100px);
+  overflow: hidden;
+  background: linear-gradient(160deg, #060E1A 0%, #0A1628 40%, #132238 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -15%;
+  width: 55%; height: 160%;
+  background: radial-gradient(ellipse, rgba(201,162,39,0.1), transparent 65%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.4;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(40px, 6vw, 72px);
+  align-items: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  border: 1px solid rgba(201,162,39,0.35);
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.28;
+  font-weight: 600;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero-lead {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+
+.btn-gold {
+  padding: 15px 30px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(201,162,39,0.3);
+}
+
+.btn-ghost {
+  padding: 15px 30px;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--text);
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  background: rgba(201,162,39,0.06);
+}
+
+.hero-trust {
+  display: flex;
+  gap: clamp(24px, 4vw, 48px);
+  flex-wrap: wrap;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.hero-trust-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.hero-trust-item span { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Hero visual */
+.hero-visual {
+  position: relative;
+}
+
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  position: relative;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+}
+
+.hero-card-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.metric-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  padding: 20px;
+  border-radius: var(--card-radius);
+  text-align: center;
+}
+
+.metric-box .val {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.metric-box .lbl {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.hero-quote {
+  margin-top: 20px;
+  padding: 18px 20px;
+  background: rgba(201,162,39,0.06);
+  border-left: 3px solid var(--accent);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* Client strip */
+.client-strip {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+}
+
+.client-strip .container {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+}
+
+.client-strip-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.client-logos {
+  display: flex;
+  gap: clamp(12px, 2vw, 24px);
+  flex-wrap: wrap;
+  opacity: 0.65;
+}
+
+.client-logos span {
+  padding: 8px 18px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Services */
+.services-section { background: var(--bg); }
+
+.service-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  height: 100%;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.25);
+}
+
+.service-icon {
+  width: 52px; height: 52px;
+  background: rgba(201,162,39,0.1);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.service-card p {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.service-tags span {
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.68rem;
+  color: var(--accent);
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+/* Industries */
+.industries-section {
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.industry-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.industry-chip {
+  padding: 16px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.industry-chip:hover {
+  border-color: var(--accent);
+  background: rgba(201,162,39,0.08);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.industry-chip .ico { font-size: 1.1rem; }
+
+.industry-desc {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+
+/* Cases */
+.cases-section { background: var(--bg); }
+
+.case-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 3vw, 32px);
+  height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+
+.case-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.case-tag {
+  padding: 4px 10px;
+  background: rgba(201,162,39,0.12);
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 3px;
+}
+
+.case-industry { font-size: 0.72rem; color: var(--text-muted); }
+
+.case-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.case-card .desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.case-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.case-metric {
+  text-align: center;
+}
+
+.case-metric strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.case-metric span {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+  display: block;
+  margin-top: 2px;
+}
+
+/* Approach */
+.approach-section {
+  background: linear-gradient(180deg, var(--bg-elevated), var(--bg));
+}
+
+.approach-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  counter-reset: approach;
+}
+
+.approach-step {
+  text-align: center;
+  padding: 32px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  position: relative;
+}
+
+.approach-step::before {
+  counter-increment: approach;
+  content: counter(approach, decimal-leading-zero);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  margin: 0 auto 16px;
+  background: var(--accent);
+  color: var(--accent-text);
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.approach-step h4 { font-size: 0.92rem; margin-bottom: 8px; }
+.approach-step p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.65; }
+
+/* Team */
+.team-section { background: var(--bg-elevated); }
+
+.partner-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.partner-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+
+.partner-photo { aspect-ratio: 4/5; overflow: hidden; position: relative; }
+
+.partner-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.3s;
+}
+
+.partner-card:hover .partner-photo img { filter: grayscale(0%); }
+
+.partner-photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(transparent, rgba(10,22,40,0.85));
+}
+
+.partner-info { padding: 24px; }
+.partner-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.partner-info .role { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+.partner-info .bio { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
+.partner-info .cred { font-size: 0.72rem; color: var(--text-muted); opacity: 0.8; }
+
+/* Why us */
+.why-section { background: var(--bg); }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.why-box {
+  padding: 32px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.why-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--border);
+}
+
+.why-box .icon {
+  width: 56px; height: 56px;
+  margin: 0 auto 16px;
+  background: rgba(201,162,39,0.1);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.why-box h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+.why-box p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+/* Insights */
+.insights-section { background: var(--bg-elevated); }
+
+.insight-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.insight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+
+.insight-thumb { aspect-ratio: 16/9; overflow: hidden; }
+.insight-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.insight-card:hover .insight-thumb img { transform: scale(1.04); }
+
+.insight-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.insight-cat {
+  font-size: 0.68rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.insight-body h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; line-height: 1.5; flex: 1; }
+.insight-body p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+.insight-date { font-size: 0.72rem; color: var(--text-muted); opacity: 0.7; }
+
+/* Careers */
+.careers-section { background: var(--bg); }
+
+.careers-banner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(32px, 5vw, 48px);
+}
+
+.careers-banner h2 { margin-bottom: 16px; }
+.careers-banner .section-desc { margin-bottom: 24px; }
+
+.career-perks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.career-perk {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--card-radius);
+}
+
+.career-perk .ico { color: var(--accent); font-size: 1rem; flex-shrink: 0; }
+.career-perk strong { display: block; font-size: 0.82rem; margin-bottom: 2px; }
+.career-perk span { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+
+.open-roles { margin-top: 32px; }
+
+.role-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+
+.role-row:last-child { border-bottom: none; }
+.role-row h4 { font-size: 0.92rem; margin-bottom: 4px; }
+.role-row .meta { font-size: 0.78rem; color: var(--text-muted); }
+
+.role-apply {
+  padding: 8px 18px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+
+.role-apply:hover { background: var(--accent); color: var(--accent-text); }
+
+/* Consult */
+.consult-section {
+  background: linear-gradient(180deg, var(--bg-elevated), var(--bg));
+}
+
+.consult-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.consult-info .section-desc { margin-bottom: 28px; }
+
+.consult-features { display: flex; flex-direction: column; gap: 18px; }
+
+.consult-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.consult-feature .num {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  background: var(--accent);
+  color: var(--accent-text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.consult-feature strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.consult-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.form-card {
+  background: var(--surface);
+  border-color: var(--border-subtle);
+}
+
+.form-group label { color: var(--text); }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--card-bg);
+  border-color: var(--border-subtle);
+  color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--accent); }
+
+.form-card .btn-gold {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* Locations */
+.locations-section { background: var(--bg-elevated); }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.office-list { display: flex; flex-direction: column; gap: 20px; }
+
+.office-card {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  transition: border-color 0.25s;
+}
+
+.office-card:hover { border-color: var(--border); }
+
+.office-card .city {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.office-card .type { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 12px; }
+.office-card .addr { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
+.office-card .tel { font-size: 0.82rem; color: var(--text); font-weight: 600; }
+
+.map-box {
+  background: linear-gradient(135deg, #132238, #1A3050);
+  border: 1px solid var(--border-subtle);
+  aspect-ratio: 4/3;
+}
+
+.map-box::before {
+  background:
+    linear-gradient(rgba(201,162,39,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,162,39,0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+.map-pin {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.map-pin strong { color: var(--text); }
+.map-pin span { color: var(--text-muted); }
+
+/* CTA band */
+.cta-band {
+  background: linear-gradient(135deg, #132238, #1A3050);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cta-band h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  margin-bottom: 12px;
+}
+
+.cta-band p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+
+/* Footer */
+.site-footer .footer-brand .logo { color: #fff; }
+.site-footer .footer-brand .logo span { color: var(--accent); }
+.footer-col a:hover { color: var(--accent); }
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+.section-label { color: var(--accent); }
+.btn-primary { background: var(--accent); color: var(--accent-text); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .approach-steps { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .consult-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+  .careers-banner { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr; gap: 14px; }
+}
+
+@media (max-width: 480px) {
+  .metrics-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .approach-steps { grid-template-columns: 1fr; }
+  .career-perks { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">브릿지컨설팅 <span>BRIDGE</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#services">서비스</a>
+    <a href="#industries">산업전문성</a>
+    <a href="#team">팀</a>
+    <a href="#insights">인사이트</a>
+    <a href="#careers">채용</a>
+    <a href="#consult" class="nav-cta">문의</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Management & Strategy Consulting</div>
+        <h1>전략과 실행을 잇는<br><em>브릿지</em>가 되겠습니다</h1>
+        <p class="hero-lead">브릿지컨설팅은 글로벌 탑티어 출신 파트너들이 기업의 성장 전략 수립부터 M&A, 디지털 전환, 조직 혁신까지 End-to-End 컨설팅을 제공합니다. 데이터 기반 인사이트와 현장 실행력으로 측정 가능한 성과를 만듭니다.</p>
+        <div class="hero-actions">
+          <a href="#consult" class="btn-gold">무료 컨설팅 상담</a>
+          <a href="#cases" class="btn-ghost">성과 사례 보기</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item"><strong>18년</strong><span>컨설팅 경력</span></div>
+          <div class="hero-trust-item"><strong>320+</strong><span>누적 프로젝트</span></div>
+          <div class="hero-trust-item"><strong>94%</strong><span>고객 재의뢰율</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-label">Bridge Impact Index 2025</div>
+          <div class="metrics-grid">
+            <div class="metric-box"><div class="val">+38%</div><div class="lbl">평균 매출 성장률</div></div>
+            <div class="metric-box"><div class="val">-27%</div><div class="lbl">운영비용 절감</div></div>
+            <div class="metric-box"><div class="val">4.2x</div><div class="lbl">ROI 달성 배수</div></div>
+            <div class="metric-box"><div class="val">6개월</div><div class="lbl">평균 성과 가시화</div></div>
+          </div>
+          <p class="hero-quote">"브릿지컨설팅은 분석에서 멈추지 않고, 현장과 함께 실행하며 실질적 성과를 만들어냅니다."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Client Strip -->
+<div class="client-strip">
+  <div class="container">
+    <span class="client-strip-label">Trusted by</span>
+    <div class="client-logos">
+      <span>Samsung C&T</span>
+      <span>LG Energy</span>
+      <span>SK Hynix</span>
+      <span>Hyundai Motor</span>
+      <span>Naver Cloud</span>
+      <span>Kakao Enterprise</span>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Services</div>
+      <h2 class="section-title">핵심 컨설팅 서비스</h2>
+      <p class="section-desc">기업의 성장 단계와 산업 특성에 맞춘 4대 핵심 서비스로 전략적 의사결정부터 실행까지 지원합니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <h3>전략 컨설팅</h3>
+        <p>시장 분석, 경쟁 포지셔닝, 사업 포트폴리오 재편, 신사업 진출 전략을 수립합니다. 3C·SWOT·시나리오 플래닝 등 검증된 프레임워크와 독자 데이터 분석을 결합해 실행 가능한 전략 로드맵을 제시합니다.</p>
+        <div class="service-tags">
+          <span>성장전략</span><span>사업재편</span><span>시장진입</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🤝</div>
+        <h3>M&A 자문</h3>
+        <p>인수·매각 전략 수립, 타깃 스크리닝, 실사(DD), 밸류에이션, PMI(인수 후 통합)까지 M&A 전 과정을 지원합니다. Cross-border 딜 경험과 금융·법률 네트워크를 활용해 리스크를 최소화하고 시너지를 극대화합니다.</p>
+        <div class="service-tags">
+          <span>인수자문</span><span>매각자문</span><span>PMI</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💡</div>
+        <h3>DX 전환</h3>
+        <p>디지털 전략 수립, IT 아키텍처 설계, AI·데이터 플랫폼 구축, 프로세스 자동화를 통해 기업의 디지털 역량을 강화합니다. 레거시 시스템 현대화부터 조직의 디지털 문화 정착까지 End-to-End로 지원합니다.</p>
+        <div class="service-tags">
+          <span>데이터전략</span><span>AI도입</span><span>프로세스혁신</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👥</div>
+        <h3>조직·인사</h3>
+        <p>조직 구조 재설계, 핵심인재 확보 전략, 성과관리 체계, 리더십 개발 프로그램을 제공합니다. 변화관리(Change Management) 전문성으로 조직 문화와 역량을 전략 목표에 정렬시킵니다.</p>
+        <div class="service-tags">
+          <span>조직설계</span><span>인재전략</span><span>변화관리</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Industries -->
+<section class="industries-section" id="industries">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Industry Expertise</div>
+      <h2 class="section-title">산업 전문성</h2>
+      <p class="section-desc">산업별 딥다이브 경험을 보유한 파트너들이 각 섹터의 고유한 과제와 규제 환경을 이해하고 맞춤 솔루션을 제공합니다.</p>
+    </div>
+    <div class="industry-chips">
+      <div class="industry-chip"><span class="ico">🏭</span> 제조·중공업</div>
+      <div class="industry-chip"><span class="ico">💊</span> 헬스케어·바이오</div>
+      <div class="industry-chip"><span class="ico">🏦</span> 금융·핀테크</div>
+      <div class="industry-chip"><span class="ico">🛒</span> 유통·커머스</div>
+      <div class="industry-chip"><span class="ico">⚡</span> 에너지·인프라</div>
+      <div class="industry-chip"><span class="ico">🚀</span> IT·테크</div>
+    </div>
+    <p class="industry-desc">각 산업별 전담 파트너와 애널리스트 팀이 시장 트렌드, 규제 변화, 경쟁 동향을 실시간 모니터링하며 프로젝트에 최신 인사이트를 반영합니다.</p>
+  </div>
+</section>
+
+<!-- Case Studies -->
+<section class="cases-section" id="cases">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">성과 사례</h2>
+      <p class="section-desc">브릿지컨설팅과 함께한 기업들이 달성한 측정 가능한 성과를 소개합니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="case-card">
+        <div class="case-meta">
+          <span class="case-tag">전략</span>
+          <span class="case-industry">글로벌 제조기업</span>
+        </div>
+        <h3>아시아 사업 포트폴리오 재편 및 신흥시장 진출 전략</h3>
+        <p class="desc">매출 정체기에 진입한 글로벌 제조기업의 아시아 사업 구조를 분석하고, 3개 신흥시장 진출 로드맵과 기존 사업부 통·폐합 전략을 수립·실행했습니다.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>+42%</strong><span>아시아 매출 성장</span></div>
+          <div class="case-metric"><strong>18개월</strong><span>전략 실행 기간</span></div>
+          <div class="case-metric"><strong>₩320억</strong><span>비용 구조 개선</span></div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-meta">
+          <span class="case-tag">M&A</span>
+          <span class="case-industry">국내 헬스케어 그룹</span>
+        </div>
+        <h3>바이오 스타트업 인수 및 PMI 통합 컨설팅</h3>
+        <p class="desc">헬스케어 그룹의 바이오 신사업 확보를 위한 타깃 12개사 스크리닝, 인수 협상 지원, 인수 후 6개월간 R&D·영업·조직 통합 프로그램을 운영했습니다.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>3.8x</strong><span>시너지 ROI</span></div>
+          <div class="case-metric"><strong>6개월</strong><span>PMI 완료</span></div>
+          <div class="case-metric"><strong>+65%</strong><span>통합 매출 증가</span></div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-meta">
+          <span class="case-tag">DX</span>
+          <span class="case-industry">대형 유통 그룹</span>
+        </div>
+        <h3>옴니채널 데이터 플랫폼 구축 및 AI 수요예측</h3>
+        <p class="desc">오프라인·온라인 통합 데이터 아키텍처 설계, AI 기반 수요예측 모델 도입, 재고 최적화 시스템 구축을 9개월간 수행하여 운영 효율을 혁신했습니다.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>-31%</strong><span>재고 비용 절감</span></div>
+          <div class="case-metric"><strong>92%</strong><span>예측 정확도</span></div>
+          <div class="case-metric"><strong>+24%</strong><span>온라인 전환율</span></div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-meta">
+          <span class="case-tag">조직</span>
+          <span class="case-industry">핀테크 스케일업</span>
+        </div>
+        <h3>글로벌 확장을 위한 조직 구조 재설계 및 리더십 육성</h3>
+        <p class="desc">직원 200명→800명 급성장기 핀테크 기업의 매트릭스 조직 전환, C-Level 리더십 프로그램, 핵심인재 리텐션 체계를 설계·실행했습니다.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>89%</strong><span>핵심인재 유지</span></div>
+          <div class="case-metric"><strong>4개국</strong><span>글로벌 거점 확장</span></div>
+          <div class="case-metric"><strong>-40%</strong><span>이직률 감소</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Approach -->
+<section class="approach-section" id="approach">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Approach</div>
+      <h2 class="section-title">브릿지 컨설팅 방법론</h2>
+      <p class="section-desc">분석에서 실행까지, 4단계 체계적 프로세스로 지속 가능한 성과를 창출합니다.</p>
+    </div>
+    <div class="approach-steps">
+      <div class="approach-step">
+        <h4>진단 & 분석</h4>
+        <p>현황 진단, 데이터 분석, 이해관계자 인터뷰를 통해 핵심 과제와 기회를 도출합니다.</p>
+      </div>
+      <div class="approach-step">
+        <h4>전략 설계</h4>
+        <p>검증된 프레임워크와 벤치마킹을 기반으로 실행 가능한 전략과 로드맵을 수립합니다.</p>
+      </div>
+      <div class="approach-step">
+        <h4>실행 지원</h4>
+        <p>현장 밀착 PMO 운영, 워크숍, 변화관리로 전략이 실제 업무에 정착되도록 지원합니다.</p>
+      </div>
+      <div class="approach-step">
+        <h4>성과 측정</h4>
+        <p>KPI 모니터링, 성과 리뷰, 지속 개선 체계를 구축하여 장기적 가치를 확보합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">파트너 팀</h2>
+      <p class="section-desc">McKinsey, BCG, Bain 출신 파트너 4인이 프로젝트를 직접 리드하며 최고 수준의 컨설팅을 제공합니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="partner-card">
+        <div class="partner-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="김도현 파트너">
+        </div>
+        <div class="partner-info">
+          <h3>김도현 파트너</h3>
+          <div class="role">대표 파트너 · 전략</div>
+          <p class="bio">McKinsey 12년, 삼성·현대차 그룹 전략 프로젝트 40건+ 리드. 서울대 경영학 박사.</p>
+          <p class="cred">전 McKinsey & Company 시니어 파트너</p>
+        </div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="이서연 파트너">
+        </div>
+        <div class="partner-info">
+          <h3>이서연 파트너</h3>
+          <div class="role">파트너 · M&A</div>
+          <p class="bio">BCG 10년, Cross-border M&A 딜 $2B+ 자문. 연세대 MBA, CFA Charterholder.</p>
+          <p class="cred">전 BCG 플래티넘 컨설턴트</p>
+        </div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80" alt="박준혁 파트너">
+        </div>
+        <div class="partner-info">
+          <h3>박준혁 파트너</h3>
+          <div class="role">파트너 · DX</div>
+          <p class="bio">Bain 9년, 포털·핀테크 DX 프로젝트 전문. KAIST 전산학 석사, 전 네이버 AI Lab.</p>
+          <p class="cred">전 Bain & Company 매니저</p>
+        </div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="최유진 파트너">
+        </div>
+        <div class="partner-info">
+          <h3>최유진 파트너</h3>
+          <div class="role">파트너 · 조직</div>
+          <p class="bio">Deloitte 11년, 대기업 조직개편·인재전략 50건+ 수행. 고려대 조직심리학 박사.</p>
+          <p class="cred">전 Deloitte Human Capital 디렉터</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Us -->
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Why Bridge</div>
+      <h2 class="section-title">브릿지컨설팅을 선택하는 이유</h2>
+      <p class="section-desc">글로벌 수준의 분석력과 한국 기업에 특화된 실행력, 두 가지를 동시에 갖춘 컨설팅 파트너입니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-box">
+        <div class="icon">🏆</div>
+        <h4>탑티어 출신 파트너</h4>
+        <p>McKinsey, BCG, Bain 출신 파트너가 프로젝트를 직접 리드합니다. 시니어 컨설턴트의 깊이 있는 인사이트와 네트워크를 프로젝트에 투입합니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">📊</div>
+        <h4>데이터 기반 의사결정</h4>
+        <p>독자 데이터 플랫폼과 AI 분석 역량으로 감이 아닌 근거 있는 전략을 수립합니다. 모든 권고안에 정량적 근거와 시나리오 분석을 포함합니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">⚡</div>
+        <h4>현장 실행 중심</h4>
+        <p>보고서에서 끝나지 않습니다. PMO 운영, 워크숍, 코칭을 통해 전략이 현장에 정착될 때까지 파트너가 함께합니다. 평균 6개월 내 성과 가시화.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">🔒</div>
+        <h4>철저한 기밀 유지</h4>
+        <p>NDA 체계, 정보 보안 프로토콜, 프로젝트 격리 운영으로 고객사 기밀을 최우선으로 보호합니다. 금융·헬스케어 등 민감 산업 경험 다수.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Insights -->
+<section class="insights-section" id="insights">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Insights</div>
+      <h2 class="section-title">인사이트 & 리포트</h2>
+      <p class="section-desc">브릿지컨설팅의 전문가들이 발행하는 산업 분석, 전략 인사이트, 시장 전망을 만나보세요.</p>
+    </div>
+    <div class="grid-4">
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="2026 한국 제조업 전략">
+        </div>
+        <div class="insight-body">
+          <div class="insight-cat">전략 리포트</div>
+          <h3>2026 한국 제조업, 글로벌 공급망 재편 대응 전략</h3>
+          <p>미·중 갈등 심화와 ESG 규제 강화 속에서 한국 제조기업이 선택해야 할 3가지 전략 경로를 분석합니다.</p>
+          <time class="insight-date">2026.05.28</time>
+        </div>
+      </article>
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="AI 도입 ROI">
+        </div>
+        <div class="insight-body">
+          <div class="insight-cat">DX 인사이트</div>
+          <h3>기업 AI 도입, ROI를 극대화하는 5가지 원칙</h3>
+          <p>120개 AI 도입 사례 분석을 바탕으로, 성공 기업과 실패 기업의 결정적 차이점을 데이터로 검증합니다.</p>
+          <time class="insight-date">2026.05.15</time>
+        </div>
+      </article>
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80" alt="M&A 트렌드">
+        </div>
+        <div class="insight-body">
+          <div class="insight-cat">M&A 동향</div>
+          <h3>2026 상반기 국내 M&A 시장 트렌드 & 전망</h3>
+          <p>헬스케어·에너지·테크 섹터 중심의 M&A 활성화 전망과 PMI 성공 요인을 심층 분석합니다.</p>
+          <time class="insight-date">2026.04.30</time>
+        </div>
+      </article>
+      <article class="insight-card">
+        <div class="insight-thumb">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80" alt="조직 문화">
+        </div>
+        <div class="insight-body">
+          <div class="insight-cat">조직 혁신</div>
+          <h3>하이브리드 시대, 성과를 만드는 조직 문화 설계</h3>
+          <p>원격·오피스 혼합 근무 환경에서 협업과 성과를 동시에 끌어올리는 조직 설계 프레임워크를 제안합니다.</p>
+          <time class="insight-date">2026.04.12</time>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Careers -->
+<section class="careers-section" id="careers">
+  <div class="container">
+    <div class="careers-banner">
+      <div>
+        <div class="section-label">Careers</div>
+        <h2 class="section-title">브릿지와 함께 성장하세요</h2>
+        <p class="section-desc">최고의 프로젝트, 최고의 동료, 최고의 성장 환경. 브릿지컨설팅에서 커리어의 다음 챕터를 열어보세요.</p>
+        <a href="#consult" class="btn-gold btn-sm" data-toast="채용 문의가 접수되었습니다. HR팀에서 연락드리겠습니다.">채용 문의하기</a>
+      </div>
+      <div class="career-perks">
+        <div class="career-perk">
+          <span class="ico">✦</span>
+          <div><strong>글로벌 프로젝트</strong><span>Fortune 500 및 국내 대기업 프로젝트 참여</span></div>
+        </div>
+        <div class="career-perk">
+          <span class="ico">✦</span>
+          <div><strong>멘토링 프로그램</strong><span>파트너 1:1 멘토링 및 MBA 지원</span></div>
+        </div>
+        <div class="career-perk">
+          <span class="ico">✦</span>
+          <div><strong>유연 근무</strong><span>하이브리드 근무 및 프로젝트 기반 스케줄</span></div>
+        </div>
+        <div class="career-perk">
+          <span class="ico">✦</span>
+          <div><strong>성과 보상</strong><span>업계 최상위 수준의 성과 인센티브</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="open-roles">
+      <div class="role-row">
+        <div>
+          <h4>시니어 컨설턴트 — 전략</h4>
+          <p class="meta">서울 · 정규직 · 경력 5년+</p>
+        </div>
+        <a href="#" class="role-apply" data-toast="지원서 접수 안내 메일을 발송했습니다.">지원하기</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <h4>컨설턴트 — DX/데이터</h4>
+          <p class="meta">서울 · 정규직 · 경력 3년+</p>
+        </div>
+        <a href="#" class="role-apply" data-toast="지원서 접수 안내 메일을 발송했습니다.">지원하기</a>
+      </div>
+      <div class="role-row">
+        <div>
+          <h4>비즈니스 애널리스트</h4>
+          <p class="meta">서울 · 정규직 · 경력 1~3년</p>
+        </div>
+        <a href="#" class="role-apply" data-toast="지원서 접수 안내 메일을 발송했습니다.">지원하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Band -->
+<div class="cta-band" id="cta">
+  <div class="container">
+    <h2>성장의 브릿지, 지금 시작하세요</h2>
+    <p>30분 무료 컨설팅으로 귀사의 핵심 과제를 진단하고, 브릿지컨설팅이 어떻게 도울 수 있는지 확인해 보세요.</p>
+    <a href="#consult" class="btn-gold">무료 상담 예약</a>
+  </div>
+</div>
+
+<!-- Consultation Form -->
+<section class="consult-section" id="consult">
+  <div class="container">
+    <div class="consult-grid">
+      <div class="consult-info">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">컨설팅 상담 신청</h2>
+        <p class="section-desc">프로젝트 규모와 관계없이, 파트너가 직접 30분 무료 상담을 진행합니다. 영업일 기준 24시간 내 회신드립니다.</p>
+        <div class="consult-features">
+          <div class="consult-feature">
+            <span class="num">1</span>
+            <div><strong>현황 진단</strong><span>귀사의 핵심 과제와 우선순위를 파악합니다.</span></div>
+          </div>
+          <div class="consult-feature">
+            <span class="num">2</span>
+            <div><strong>솔루션 제안</strong><span>맞춤 컨설팅 범위와 예상 일정을 안내합니다.</span></div>
+          </div>
+          <div class="consult-feature">
+            <span class="num">3</span>
+            <div><strong>견적 & 제안서</strong><span>요청 시 1주일 내 상세 제안서를 제공합니다.</span></div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="상담 신청이 접수되었습니다. 24시간 내 파트너가 연락드리겠습니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="company">회사명</label>
+            <input type="text" id="company" placeholder="㈜브릿지파트너스" required>
+          </div>
+          <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" placeholder="name@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" placeholder="010-0000-0000">
+          </div>
+          <div class="form-group full">
+            <label for="service">관심 서비스</label>
+            <select id="service" required>
+              <option value="">선택해 주세요</option>
+              <option>전략 컨설팅</option>
+              <option>M&A 자문</option>
+              <option>DX 전환</option>
+              <option>조직·인사</option>
+              <option>기타 / 복합</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">프로젝트 개요</label>
+            <textarea id="message" rows="4" placeholder="현재 고민하고 계신 과제나 프로젝트 배경을 간략히 적어주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-gold">상담 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Office Locations -->
+<section class="locations-section" id="locations">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Offices</div>
+      <h2 class="section-title">오피스 위치</h2>
+      <p class="section-desc">서울 본사를 중심으로 부산·싱가포르 거점에서 아시아 전역의 고객을 지원합니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="office-list">
+        <div class="office-card">
+          <div class="city">서울 본사</div>
+          <div class="type">Headquarters</div>
+          <p class="addr">서울특별시 영등포구 국제금융로 10<br>IFC 서울 타워 28층</p>
+          <p class="tel">02-6200-8800</p>
+        </div>
+        <div class="office-card">
+          <div class="city">부산</div>
+          <div class="type">Regional Office</div>
+          <p class="addr">부산광역시 해운대구 센텀중앙로 97<br>센텀스카이비즈 15층</p>
+          <p class="tel">051-750-8800</p>
+        </div>
+        <div class="office-card">
+          <div class="city">싱가포르</div>
+          <div class="type">Asia Pacific Hub</div>
+          <p class="addr">1 Raffles Place, Tower 2<br>#18-00, Singapore 048616</p>
+          <p class="tel">+65-6808-8800</p>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>브릿지컨설팅 서울 본사</strong>
+          <span>영등포 IFC · 여의도역 도보 5분</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">브릿지컨설팅 <span>BRIDGE</span></span>
+      <p>전략과 실행을 잇는 경영 컨설팅 파트너. McKinsey, BCG, Bain 출신 파트너들이 기업의 지속 가능한 성장을 함께 만들어갑니다.</p>
+      <div class="footer-contact">
+        <span>📧 contact@bridge-consulting.co.kr</span>
+        <span>📞 02-6200-8800</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>서비스</h4>
+      <a href="#services">전략 컨설팅</a>
+      <a href="#services">M&A 자문</a>
+      <a href="#services">DX 전환</a>
+      <a href="#services">조직·인사</a>
+    </div>
+    <div class="footer-col">
+      <h4>회사</h4>
+      <a href="#team">파트너 팀</a>
+      <a href="#cases">성과 사례</a>
+      <a href="#insights">인사이트</a>
+      <a href="#careers">채용</a>
+    </div>
+    <div class="footer-col">
+      <h4>문의</h4>
+      <a href="#consult">상담 신청</a>
+      <a href="#locations">오피스 위치</a>
+      <p>서울 영등포구 국제금융로 10</p>
+      <p>평일 09:00 – 18:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 브릿지컨설팅 BRIDGE CONSULTING. All rights reserved.</span>
+    <span>사업자등록번호 123-45-67890</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>더마클리닉 — DERMA CLINIC | 프리미엄 피부·성형 피부과</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FDFBFF;
+  --text: #2A2438;
+  --text-muted: #7B6F8E;
+  --accent: #8B5CF6;
+  --accent-light: #EDE9FE;
+  --accent-dark: #6D28D9;
+  --accent-text: #fff;
+  --border: #E8E2F4;
+  --nav-bg: rgba(253,251,255,0.96);
+  --footer-bg: #2A2438;
+  --card-bg: #fff;
+  --btn-radius: 10px;
+  --card-radius: 16px;
+  --footer-text: rgba(255,255,255,0.65);
+}
+
+.site-nav .logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  color: var(--accent-dark);
+}
+
+.site-nav .logo strong {
+  font-size: 1.05em;
+  letter-spacing: -0.02em;
+}
+
+.site-nav .logo span {
+  font-size: 0.58em;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+}
+
+.nav-cta { background: var(--accent); }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 45%, #FDFBFF 100%);
+  padding: clamp(60px, 10vw, 100px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -8%;
+  width: 50%;
+  height: 140%;
+  background: radial-gradient(ellipse, rgba(139,92,246,0.1), transparent 65%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(139,92,246,0.08);
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent-dark);
+}
+
+.hero-grid > div > p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-accent {
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139,92,246,0.35);
+}
+
+.btn-light {
+  padding: 14px 28px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-light:hover { border-color: var(--accent); background: var(--accent-light); }
+
+.hero-visual {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(139,92,246,0.15);
+}
+
+.hero-visual img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.hero-stats {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.hero-stat {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  padding: 14px 12px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.8);
+}
+
+.hero-stat .num {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.hero-stat .lbl {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Trust strip */
+.trust-strip {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+
+.trust-strip .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 48px);
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.trust-item .ico {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+/* Treatments */
+.treatments { background: var(--bg); }
+
+.treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 2.5vw, 20px);
+}
+
+.treatment-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(22px, 3vw, 28px);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  height: 100%;
+}
+
+.treatment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(139,92,246,0.1);
+  border-color: var(--accent);
+}
+
+.treatment-card .icon {
+  width: 48px;
+  height: 48px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+.treatment-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.treatment-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.treatment-card .tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+/* Price menu */
+.price-section { background: #fff; }
+
+.price-tabs-wrap { max-width: 800px; margin: 0 auto; }
+
+.price-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 40px);
+}
+
+.price-card .menu-row .price {
+  color: var(--accent-dark);
+}
+
+.price-note {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: var(--accent-light);
+  border-radius: var(--btn-radius);
+  font-size: 0.82rem;
+  color: var(--accent-dark);
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* Doctors */
+.doctors { background: var(--bg); }
+
+.doctor-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(139,92,246,0.1);
+}
+
+.doctor-photo {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.doctor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.doctor-card:hover .doctor-photo img { transform: scale(1.04); }
+
+.doctor-info { padding: clamp(20px, 3vw, 28px); }
+
+.doctor-info h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.doctor-info .role {
+  font-size: 0.82rem;
+  color: var(--accent-dark);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.doctor-info .creds {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.doctor-info .spec {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Before/After */
+.ba-section { background: #fff; }
+
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.ba-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ba-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(139,92,246,0.1);
+}
+
+.ba-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+}
+
+.ba-images img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.ba-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 10px;
+  background: rgba(42,36,56,0.75);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.ba-img-wrap { position: relative; }
+
+.ba-img-wrap .ba-label.after { left: auto; right: 8px; background: var(--accent); }
+
+.ba-info {
+  padding: 18px 20px;
+}
+
+.ba-info h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.ba-info p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.ba-info .ba-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+/* Process */
+.process-section { background: var(--bg); }
+
+.process-section .process-step::before {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Reviews */
+.reviews-section { background: #fff; }
+
+.review-card {
+  border-color: var(--border);
+  height: 100%;
+}
+
+.review-card .treatment-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.review-avatar { background: var(--accent); }
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* Booking */
+.booking-section { background: #fff; }
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.booking-info .section-desc { margin-bottom: 32px; }
+
+.booking-features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.booking-feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.booking-feature .num {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.booking-feature strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.booking-feature span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.booking-grid .btn-accent {
+  width: 100%;
+  margin-top: 8px;
+  padding: 16px;
+}
+
+/* Location */
+.location-section { background: var(--bg); }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.location-detail .ico {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.location-detail strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.location-detail span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.hours-box {
+  margin-top: 24px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+
+.hours-box h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--accent-dark);
+}
+
+/* Footer */
+.footer-brand .logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 16px;
+  display: block;
+  line-height: 1.3;
+}
+
+.footer-brand .logo small {
+  display: block;
+  font-size: 0.65em;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .treatment-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .ba-grid { grid-template-columns: repeat(2, 1fr); }
+  .booking-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .treatment-grid { grid-template-columns: 1fr; }
+  .ba-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .hero-stats { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">
+    <strong>더마클리닉</strong>
+    <span>DERMA CLINIC</span>
+  </a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#treatments">진료과목</a>
+    <a href="#prices">시술안내</a>
+    <a href="#doctors">의료진</a>
+    <a href="#before-after">전후사진</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#booking" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">청담 프리미엄 피부과 · 12년 임상 경험</div>
+        <h1>당신의 피부를<br><em>과학과 감각</em>으로 완성합니다</h1>
+        <p>더마클리닉은 피부과 전문의가 직접 진료하는 프리미엄 피부·성형 피부 클리닉입니다. 최신 레이저 장비와 1:1 맞춤 시술 설계로 자연스럽고 건강한 아름다움을 선사합니다. 편안한 프라이빗 진료 공간에서 당신만의 피부 솔루션을 만나보세요.</p>
+        <div class="hero-actions">
+          <a href="#booking" class="btn-accent">온라인 예약하기</a>
+          <a href="#treatments" class="btn-light">진료과목 보기</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1570172619644-d3b3d21f9f1a?w=800&q=80" alt="더마클리닉 시술실">
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">12+</div><div class="lbl">운영 연수</div></div>
+          <div class="hero-stat"><div class="num">28,000+</div><div class="lbl">누적 시술</div></div>
+          <div class="hero-stat"><div class="num">97%</div><div class="lbl">재방문율</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-item"><div class="ico">✨</div>피부과 전문의 직접 진료</div>
+    <div class="trust-item"><div class="ico">🔬</div>FDA 승인 정품 사용</div>
+    <div class="trust-item"><div class="ico">🏥</div>1:1 프라이빗 시술실</div>
+    <div class="trust-item"><div class="ico">💜</div>시술 후 맞춤 관리 프로그램</div>
+  </div>
+</div>
+
+<!-- Treatments -->
+<section class="treatments" id="treatments">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Treatments</div>
+      <h2 class="section-title">진료 과목</h2>
+      <p class="section-desc">여드름부터 안티에이징까지, 피부 고민별 맞춤 솔루션을 제공합니다.</p>
+    </div>
+    <div class="treatment-grid">
+      <div class="treatment-card">
+        <div class="icon">🫧</div>
+        <h3>여드름</h3>
+        <p>성인·청소년 여드름, 좁쌀 여드름, 화농성 여드름까지 원인별 맞춤 치료. IPL, 포텐자, 약물 치료를 병행하여 재발을 줄이고 흉터 예방까지 관리합니다.</p>
+        <span class="tag">재발 방지 케어</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🌙</div>
+        <h3>기미 · 색소</h3>
+        <p>기미, 잡티, 주근깨, 오타모반 등 색소 질환을 레이저 토닝과 피코 레이저로 정밀 치료. 피부 타입별 에너지 조절로 안전하고 균일한 톤업을 구현합니다.</p>
+        <span class="tag">피코 레이저 토닝</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">⚡</div>
+        <h3>레이저</h3>
+        <p>프락셀, CO2 레이저, 롱펄스 Nd:YAG 등 다양한 레이저로 모공, 흉터, 탄력 개선. 시술 전 피부 분석기로 최적 파라미터를 설정하여 효과를 극대화합니다.</p>
+        <span class="tag">프락셀 · 흉터 치료</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">💉</div>
+        <h3>보톡스</h3>
+        <p>이마, 미간, 눈가 주름 및 사각턱, 승모근 축소. 정품 보톡스를 정확한 용량으로 주입하여 자연스러운 표정과 슬림한 라인을 완성합니다.</p>
+        <span class="tag">정품 알러간 · 제오민</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">✨</div>
+        <h3>필러</h3>
+        <p>팔자주름, 볼·턱 라인, 입술 볼륨 등 부위별 맞춤 필러 시술. 하이알루론산 필러로 자연스러운 볼륨감과 입체감을 더하며, 이물감 없는 섬세한 디자인을 추구합니다.</p>
+        <span class="tag">맞춤 라인 디자인</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">💧</div>
+        <h3>스킨부스터</h3>
+        <p>리쥬란, 쥬베룩, 물광 주사 등 피부 속 수분·콜라겐을 채워 촉촉하고 탄력 있는 피부로. 시술 후 광채와 피부결 개선 효과를 빠르게 경험할 수 있습니다.</p>
+        <span class="tag">리쥬란 · 쥬베룩</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🌿</div>
+        <h3>제모</h3>
+        <p>다이오드·알렉산드라이트 레이저로 안전하고 효과적인 영구 제모. 피부 톤과 모발 굵기에 맞춘 에너지 설정으로 통증을 줄이고 빠른 효과를 제공합니다.</p>
+        <span class="tag">5회 패키지</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🧴</div>
+        <h3>피부관리</h3>
+        <p>아쿠아필, LDM, 고주파, LED 테라피 등 의료 기반 피부 관리. 시술 후 진정 케어와 홈케어 가이드를 함께 제공하여 피부 컨디션을 꾸준히 유지합니다.</p>
+        <span class="tag">시술 후 진정 케어</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Price Menu -->
+<section class="price-section" id="prices">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Price Guide</div>
+      <h2 class="section-title">시술 안내 · 가격</h2>
+      <p class="section-desc">대표 시술 가격을 안내해 드립니다. 정확한 비용은 상담 후 개인별 플랜에 따라 달라질 수 있습니다.</p>
+    </div>
+    <div class="price-tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="laser">레이저 · 색소</button>
+        <button class="tab-btn" data-tab="injection">보톡스 · 필러</button>
+        <button class="tab-btn" data-tab="skin">스킨 · 관리</button>
+      </div>
+      <div class="price-card tab-panel active" data-tab="laser">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>피코 레이저 토닝</h4>
+              <p>기미·잡티·색소 침착 개선, 1회 기준</p>
+            </div>
+            <span class="price">150,000원~</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>프락셀 (모공·흉터)</h4>
+              <p>여드름 흉터, 모공, 피부결 개선</p>
+            </div>
+            <span class="price">200,000원~</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>IPL 광치료</h4>
+              <p>홍조, 모세혈관, 잡티 복합 개선</p>
+            </div>
+            <span class="price">120,000원~</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>여드름 레이저 패키지</h4>
+              <p>레이저 + 압출 + 진정 케어 5회</p>
+            </div>
+            <span class="price">550,000원</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>레이저 제모 (남성 얼굴)</h4>
+              <p>5회 패키지, 수염 제모 포함</p>
+            </div>
+            <span class="price">350,000원</span>
+          </div>
+        </div>
+      </div>
+      <div class="price-card tab-panel" data-tab="injection">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>보톡스 (이마·미간·눈가)</h4>
+              <p>정품 알러간, 3부위 세트</p>
+            </div>
+            <span class="price">180,000원</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>사각턱 보톡스</h4>
+              <p>슬림 V라인, 50U 기준</p>
+            </div>
+            <span class="price">120,000원</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>입술 필러</h4>
+              <p>1cc 기준, 자연 볼륨 디자인</p>
+            </div>
+            <span class="price">280,000원~</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>팔자주름 필러</h4>
+              <p>1cc 기준, 부드러운 라인 교정</p>
+            </div>
+            <span class="price">320,000원~</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>풀페이스 필러</h4>
+              <p>볼·턱·이마 복합, 3cc 패키지</p>
+            </div>
+            <span class="price">890,000원</span>
+          </div>
+        </div>
+      </div>
+      <div class="price-card tab-panel" data-tab="skin">
+        <div class="menu-list">
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>리쥬란 힐러</h4>
+              <p>2cc 기준, 피부 재생·탄력</p>
+            </div>
+            <span class="price">350,000원</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>쥬베룩 스킨부스터</h4>
+              <p>2cc 기준, 모공·탄력 개선</p>
+            </div>
+            <span class="price">380,000원</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>물광 주사</h4>
+              <p>히알루론산 수분 충전, 2cc</p>
+            </div>
+            <span class="price">180,000원</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>아쿠아필 + LDM</h4>
+              <p>딥클렌징 + 진정 테라피 1회</p>
+            </div>
+            <span class="price">90,000원</span>
+          </div>
+          <div class="menu-row">
+            <div class="menu-row-info">
+              <h4>프리미엄 피부관리 패키지</h4>
+              <p>아쿠아필 + 고주파 + LED 10회</p>
+            </div>
+            <span class="price">750,000원</span>
+          </div>
+        </div>
+      </div>
+      <p class="price-note">※ 위 가격은 VAT 포함 기준이며, 이벤트·패키지에 따라 변동될 수 있습니다. 정확한 견적은 무료 상담 후 안내해 드립니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Doctors -->
+<section class="doctors" id="doctors">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Medical Team</div>
+      <h2 class="section-title">의료진 소개</h2>
+      <p class="section-desc">피부과 전문의 3인이 1:1 맞춤 진료와 시술을 책임집니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&q=80" alt="한서윤 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>한서윤 원장</h3>
+          <div class="role">대표원장 · 피부과 전문의</div>
+          <p class="creds">서울대학교 의과대학 졸업<br>서울대병원 피부과 전문의<br>대한피부과학회 정회원</p>
+          <span class="spec">레이저 · 색소 · 안티에이징 12년</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80" alt="김도현 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>김도현 원장</h3>
+          <div class="role">보톡스 · 필러 · 성형 피부</div>
+          <p class="creds">연세대학교 의과대학 졸업<br>세브란스병원 피부과 전문의<br>대한미용피부외과학회 정회원</p>
+          <span class="spec">필러 8,000건+ · 자연 라인 디자인</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&q=80" alt="이지은 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>이지은 원장</h3>
+          <div class="role">여드름 · 스킨부스터 전문</div>
+          <p class="creds">성균관대학교 의과대학 졸업<br>삼성서울병원 피부과 전문의<br>대한여드름학회 정회원</p>
+          <span class="spec">여드름 치료 6,000건+ · 재발 관리</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Before/After -->
+<section class="ba-section" id="before-after">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Before & After</div>
+      <h2 class="section-title">시술 전후 사진</h2>
+      <p class="section-desc">실제 시술 결과입니다. 개인별 피부 상태에 따라 효과는 차이가 있을 수 있습니다.</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=300&q=80" alt="기미 치료 전">
+            <span class="ba-label">BEFORE</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1570172619644-d3b3d21f9f1a?w=300&q=80" alt="기미 치료 후">
+            <span class="ba-label after">AFTER</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>기미 · 잡티 토닝</h4>
+          <p>피코 레이저 토닝 5회, 3개월 경과</p>
+          <span class="ba-tag">색소 치료</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=300&q=80" alt="여드름 치료 전">
+            <span class="ba-label">BEFORE</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=300&q=80" alt="여드름 치료 후">
+            <span class="ba-label after">AFTER</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>여드름 · 흉터 개선</h4>
+          <p>포텐자 + 약물 치료 6회, 4개월 경과</p>
+          <span class="ba-tag">여드름</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=300&q=80" alt="모공 치료 전">
+            <span class="ba-label">BEFORE</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=300&q=80" alt="모공 치료 후">
+            <span class="ba-label after">AFTER</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>모공 · 피부결 개선</h4>
+          <p>프락셀 3회 + 스킨부스터, 2개월 경과</p>
+          <span class="ba-tag">레이저</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80" alt="보톡스 전">
+            <span class="ba-label">BEFORE</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="보톡스 후">
+            <span class="ba-label after">AFTER</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>이마 · 미간 주름</h4>
+          <p>보톡스 시술 2주 후, 자연스러운 표정 유지</p>
+          <span class="ba-tag">보톡스</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80" alt="필러 전">
+            <span class="ba-label">BEFORE</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80" alt="필러 후">
+            <span class="ba-label after">AFTER</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>팔자주름 · 볼 볼륨</h4>
+          <p>필러 1cc, 시술 직후 자연스러운 라인</p>
+          <span class="ba-tag">필러</span>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-images">
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="스킨부스터 전">
+            <span class="ba-label">BEFORE</span>
+          </div>
+          <div class="ba-img-wrap">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" alt="스킨부스터 후">
+            <span class="ba-label after">AFTER</span>
+          </div>
+        </div>
+        <div class="ba-info">
+          <h4>리쥬란 · 물광 케어</h4>
+          <p>리쥬란 3회, 1개월 후 광채·탄력 개선</p>
+          <span class="ba-tag">스킨부스터</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">시술 프로세스</h2>
+      <p class="section-desc">상담부터 사후 관리까지, 체계적인 4단계 케어 시스템을 운영합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>예약 · 접수</h4>
+        <p>온라인, 전화(02-555-7890), 카카오톡으로 편리하게 예약합니다. 내원 시 전담 상담사가 피부 고민과 시술 이력을 상세히 파악합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>피부 진단 · 상담</h4>
+        <p>피부 분석기와 전문의 직접 진료로 정확한 피부 상태를 진단합니다. 시술 옵션, 예상 효과, 비용을 투명하게 안내해 드립니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>맞춤 시술</h4>
+        <p>1:1 프라이빗 시술실에서 전문의가 직접 시술합니다. FDA 승인 정품만 사용하며, 통증 관리와 안전 프로토콜을 철저히 준수합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>사후 관리</h4>
+        <p>시술 후 맞춤 홈케어 가이드와 진정 케어를 제공합니다. 정기 관리 프로그램과 카카오 알림으로 최적의 결과를 유지하도록 돕습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">시술 후기</h2>
+      <p class="section-desc">더마클리닉을 방문하신 분들의 생생한 후기입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <span class="treatment-tag">기미 토닝</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>10년 넘게 고민이던 기미가 5회 토닝 후 눈에 띄게 옅어졌어요. 한서윤 원장님이 피부 타입에 맞게 에너지를 조절해 주셔서 붉어짐도 거의 없었습니다. 직원분들도 친절하고 시설이 정말 깨끗해요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정미라</strong><span>피코 토닝 5회 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">여드름</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>20대 후반에도 계속 나던 여드름이 이지은 원장님 치료 후 많이 좋아졌습니다. 레이저와 약물을 병행해 주시고, 홈케어까지 꼼꼼히 알려주셔서 재발도 줄었어요. 이제 화장도 훨씬 잘 먹습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박준혁</strong><span>여드름 패키지 · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">보톡스</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>보톡스가 처음이라 걱정했는데, 김도현 원장님이 자연스러운 용량으로 시술해 주셔서 표정이 어색하지 않아요. 미간 주름이 확실히 줄었고 주변에서도 피부가 좋아졌다고 합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김수연</strong><span>이마·미간 보톡스 · 2025.05</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">필러</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>팔자주름이 신경 쓰여서 필러 시술을 받았는데, 너무 인위적이지 않고 자연스럽게 채워졌어요. 상담 때 여러 옵션을 비교해 보여주셔서 믿고 결정할 수 있었습니다. 시술실이 프라이빗해서 편안했어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이하늘</strong><span>팔자 필러 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">리쥬란</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>건조하고 칙칙한 피부가 리쥬란 3회 후 확 달라졌어요. 광채가 살아나고 화장이 잘 먹는 느낌입니다. 시술 후 진정 케어까지 꼼꼼해서 붓기도 빨리 빠졌습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최유진</strong><span>리쥬란 3회 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">제모</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>겨드랑이 제모 5회 패키지 받았는데 3회만에 효과가 확실히 보여요. 통증도 생각보다 적었고, 예약 변경도 유연하게 해 주셔서 직장인에게 딱입니다. 앞으로 다른 부위도 여기서 할 예정이에요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한소희</strong><span>레이저 제모 5회 · 2025.01</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">시술 전 많이 물어보시는 질문을 모았습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">첫 방문 시 상담 비용이 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">첫 방문 기본 상담과 피부 진단은 무료입니다. 피부 분석기 검사를 포함하며, 전문의가 직접 피부 상태를 확인하고 맞춤 시술 플랜을 제안해 드립니다. 시술을 결정하지 않으셔도 부담 없이 상담만 받으실 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">시술 후 바로 일상생활이 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">시술 종류에 따라 다릅니다. 보톡스·필러·스킨부스터는 당일 세안·메이크업이 가능하며, 레이저·프락셀은 2~3일간 자극을 피해 주시는 것이 좋습니다. 시술 후 상세한 주의사항과 홈케어 가이드를 개별 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">보톡스·필러는 정품인가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">더마클리닉은 FDA 승인 정품만 사용합니다. 알러간, 제오민, 쥬비덤 등 공식 유통 제품을 개봉 전 확인 가능하며, 시술 기록과 제품 정보를 환자에게 투명하게 안내합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차가 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">건물 지하 1~2층 주차장을 이용하실 수 있으며, 내원 고객에게 2시간 무료 주차를 제공합니다. 주차 등록은 접수 데스크에서 도와드리며, 만차 시 인근 발렛·공영주차장 안내도 가능합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">예약 변경이나 취소는 어떻게 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">전화(02-555-7890), 카카오톡 채널(@더마클리닉), 또는 온라인 예약 페이지에서 변경·취소가 가능합니다. 예약 시간 24시간 전까지 변경해 주시면 원활한 진료 운영에 도움이 됩니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Booking -->
+<section class="booking-section" id="booking">
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-info">
+        <div class="section-label">Reservation</div>
+        <h2 class="section-title">온라인 예약</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 전담 상담사가 연락드립니다. 급한 경우 전화(02-555-7890)로 문의해 주세요.</p>
+        <div class="booking-features">
+          <div class="booking-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>빠른 예약 확정</strong>
+              <span>접수 후 24시간 이내 예약 일시를 확정해 드립니다.</span>
+            </div>
+          </div>
+          <div class="booking-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>무료 피부 상담</strong>
+              <span>전문의 1:1 상담과 피부 분석을 무료로 제공합니다.</span>
+            </div>
+          </div>
+          <div class="booking-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>맞춤 시술 플랜</strong>
+              <span>피부 고민에 맞는 최적의 시술 조합을 제안해 드립니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="예약 요청이 접수되었습니다! 24시간 내 연락드릴게요.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="treatment">희망 시술</label>
+            <select id="treatment" name="treatment" required>
+              <option value="">시술을 선택해 주세요</option>
+              <option value="acne">여드름</option>
+              <option value="pigment">기미 · 색소</option>
+              <option value="laser">레이저</option>
+              <option value="botox">보톡스</option>
+              <option value="filler">필러</option>
+              <option value="booster">스킨부스터</option>
+              <option value="hair">제모</option>
+              <option value="skincare">피부관리</option>
+              <option value="consult">상담만 (진단)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">희망 날짜</label>
+            <input type="date" id="date" name="date">
+          </div>
+          <div class="form-group">
+            <label for="time">희망 시간</label>
+            <select id="time" name="time">
+              <option value="">시간 선택</option>
+              <option value="10">오전 10:00</option>
+              <option value="11">오전 11:00</option>
+              <option value="14">오후 2:00</option>
+              <option value="15">오후 3:00</option>
+              <option value="16">오후 4:00</option>
+              <option value="17">오후 5:00</option>
+              <option value="18">오후 6:00</option>
+              <option value="19">오후 7:00 (야간)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">피부 고민 · 문의사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="피부 고민, 이전 시술 이력, 궁금한 점 등을 적어 주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-accent">예약 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길 · 진료시간</h2>
+      <p class="section-desc">청담역 2번 출구 도보 5분, 지하 주차장 완비.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>더마클리닉 DERMA CLINIC</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 강남구 도산대로 123, 더마타워 6층<br>(청담역 2번 출구 도보 5분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>전화: 02-555-7890<br>카카오톡: @더마클리닉<br>이메일: info@derma-clinic.co.kr</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>대중교통</strong>
+            <span>지하철 7호선 청담역 2번 출구 도보 5분<br>간선버스 145, 301 · 청담사거리 하차</span>
+          </div>
+        </div>
+        <div class="hours-box">
+          <h4>진료 시간</h4>
+          <table class="hours-table">
+            <tr><td>평일</td><td>10:00 — 19:00</td></tr>
+            <tr><td>토요일</td><td>10:00 — 16:00</td></tr>
+            <tr><td>점심시간</td><td>13:00 — 14:00</td></tr>
+            <tr><td>일·공휴일</td><td>휴진</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>더마클리닉</strong>
+          <span>서울 강남구 도산대로 123</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">더마클리닉<small>DERMA CLINIC</small></span>
+      <p>피부과 전문의가 직접 진료하는 프리미엄 피부·성형 피부 클리닉. 과학적 진단과 섬세한 시술로 당신만의 아름다움을 완성합니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 강남구 도산대로 123, 더마타워 6층</span>
+        <span>📞 02-555-7890</span>
+        <span>✉️ info@derma-clinic.co.kr</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>진료 과목</h4>
+      <a href="#treatments">여드름</a>
+      <a href="#treatments">기미 · 색소</a>
+      <a href="#treatments">레이저</a>
+      <a href="#treatments">보톡스 · 필러</a>
+      <a href="#treatments">스킨부스터</a>
+    </div>
+    <div class="footer-col">
+      <h4>클리닉 안내</h4>
+      <a href="#doctors">의료진 소개</a>
+      <a href="#before-after">전후 사진</a>
+      <a href="#prices">시술 가격</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a href="#location">오시는 길</a>
+    </div>
+    <div class="footer-col">
+      <h4>예약 · 상담</h4>
+      <a href="#booking">온라인 예약</a>
+      <a href="tel:025557890">전화 예약</a>
+      <a href="#" data-toast="카카오톡 채널 @더마클리닉으로 연결됩니다.">카카오톡 상담</a>
+      <a href="#reviews">시술 후기</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 더마클리닉 DERMA CLINIC. All rights reserved.</span>
+    <span>대표: 한서윤 · 사업자등록번호 123-45-67890</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

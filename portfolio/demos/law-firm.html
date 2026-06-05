@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>법무법인 정의 — 의뢰인을 위한 정의를 실현합니다</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Noto Serif KR', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFFFF;
+  --text: #0F172A;
+  --text-muted: #64748B;
+  --accent: #1E3A5F;
+  --accent-gold: #B8953F;
+  --accent-text: #fff;
+  --border: #E2E8F0;
+  --nav-bg: rgba(255,255,255,0.97);
+  --footer-bg: #0F172A;
+  --card-bg: #F8FAFC;
+  --btn-radius: 4px;
+  --card-radius: 8px;
+  --footer-text: rgba(255,255,255,0.6);
+}
+
+.site-nav .logo { color: var(--accent); }
+.nav-cta { background: var(--accent-gold); color: #fff; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%);
+  color: #fff;
+  padding: clamp(60px, 10vw, 100px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 60%; height: 200%;
+  background: radial-gradient(ellipse, rgba(184,149,63,0.08), transparent 70%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid rgba(184,149,63,0.4);
+  color: var(--accent-gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.35;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.hero p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: #94A3B8;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-gold {
+  padding: 14px 28px;
+  background: var(--accent-gold);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.btn-gold:hover { transform: translateY(-2px); opacity: 0.92; }
+
+.btn-ghost {
+  padding: 14px 28px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-ghost:hover { border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.06); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(184,149,63,0.2);
+  padding: clamp(20px, 3vw, 28px);
+  text-align: center;
+  border-radius: var(--card-radius);
+}
+
+.stat-card .num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.stat-card .lbl { font-size: 0.78rem; color: #94A3B8; margin-top: 4px; }
+
+/* Practice areas */
+.areas-header { text-align: center; margin-bottom: 48px; }
+
+.area-card {
+  padding: clamp(28px, 4vw, 36px) clamp(20px, 3vw, 28px);
+  background: var(--card-bg);
+  border-top: 3px solid var(--accent-gold);
+  text-align: center;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  transition: all 0.3s;
+  height: 100%;
+}
+
+.area-card:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+.area-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+.area-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+.area-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; }
+.area-card:hover p { color: rgba(255,255,255,0.75); }
+
+/* Why choose us */
+.why-section { background: var(--card-bg); }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.why-box {
+  padding: 32px 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.why-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(30,58,95,0.08);
+}
+
+.why-box .icon {
+  width: 52px; height: 52px;
+  margin: 0 auto 16px;
+  background: rgba(30,58,95,0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.why-box h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.why-box p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+/* Attorneys */
+.lawyers { background: #fff; }
+
+.lawyer-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.lawyer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+.lawyer-photo { aspect-ratio: 4/3; overflow: hidden; }
+.lawyer-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.lawyer-info { padding: 24px; }
+.lawyer-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.lawyer-info .role { font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 12px; font-weight: 500; }
+.lawyer-info .creds { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
+.lawyer-info .spec { font-size: 0.75rem; color: var(--accent); font-weight: 500; }
+
+/* Success cases */
+.cases-section { background: var(--card-bg); }
+
+.case-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 3vw, 28px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+}
+
+.case-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(30,58,95,0.08);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.case-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+.case-card .desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+
+.case-outcome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+
+.case-outcome::before { content: '✓'; font-weight: 700; }
+
+/* Process */
+.process-section .process-step::before {
+  background: var(--accent);
+  border: 2px solid var(--accent-gold);
+}
+
+/* News */
+.news-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+}
+
+.news-thumb {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.news-body { padding: 24px; }
+.news-date { font-size: 0.72rem; color: var(--accent-gold); font-weight: 600; margin-bottom: 8px; }
+.news-body h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+.news-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+/* FAQ */
+.faq-section { background: var(--card-bg); }
+
+.faq-item.open .faq-q { color: var(--accent); }
+.faq-item .faq-q::after { color: var(--accent-gold); }
+
+/* Consultation form */
+.consult-section {
+  background: linear-gradient(180deg, #fff 0%, var(--card-bg) 100%);
+}
+
+.consult-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.consult-info h2 { margin-bottom: 16px; }
+.consult-info .section-desc { margin-bottom: 28px; }
+
+.consult-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.consult-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.consult-feature .num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  background: var(--accent);
+  color: var(--accent-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.consult-feature strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.consult-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.form-card .btn-gold {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* Location */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.location-detail .ico {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: rgba(30,58,95,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.location-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.map-box { border: 1px solid var(--border); }
+
+/* Footer */
+.site-footer .footer-brand .logo { color: #fff; }
+.footer-col a:hover { color: var(--accent-gold); }
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .consult-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">법무법인 정의</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#areas">업무분야</a>
+    <a href="#lawyers">변호사</a>
+    <a href="#cases">성공사례</a>
+    <a href="#process">상담절차</a>
+    <a href="#news">소식</a>
+    <a href="#faq">FAQ</a>
+    <a href="#consult" class="nav-cta">상담신청</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">서울중앙지방법원 인근 · 20년 경력</div>
+        <h1>의뢰인을 위한<br>정의를 실현합니다</h1>
+        <p>형사 · 민사 · 기업법무 · 가사 분야 전문 변호사 12인이 신속하고 정확한 법률 서비스를 제공합니다. 수사 단계부터 재판, 합의까지 의뢰인의 권익을 최우선으로 보호합니다.</p>
+        <div class="hero-actions">
+          <a href="#consult" class="btn-gold">무료 법률 상담</a>
+          <a href="#cases" class="btn-ghost">성공사례 보기</a>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="num">2,500+</div><div class="lbl">누적 승소 사례</div></div>
+        <div class="stat-card"><div class="num">98%</div><div class="lbl">의뢰인 만족도</div></div>
+        <div class="stat-card"><div class="num">12</div><div class="lbl">전문 변호사</div></div>
+        <div class="stat-card"><div class="num">20년</div><div class="lbl">업무 경력</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Practice Areas -->
+<section id="areas">
+  <div class="container">
+    <div class="areas-header">
+      <div class="section-label">Practice Areas</div>
+      <h2 class="section-title">업무 분야</h2>
+      <p class="section-desc" style="margin:0 auto">각 분야별 전담 변호사가 체계적인 법률 전략을 수립하여 최적의 결과를 도출합니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="area-card">
+        <div class="icon">⚖️</div>
+        <h3>형사 변호</h3>
+        <p>경찰·검찰 수사 단계부터 재판까지 전 과정을 변호합니다. 구속영장 실질심사, 피의자 조사 동행, 공소제기 이후 재판 전략 수립까지 일관된 대응으로 무혐의·무죄를 이끌어냅니다. 특히 사기, 횡령, 성범죄, 교통사고 등 주요 형사 사건에 풍부한 경험을 보유하고 있습니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">📋</div>
+        <h3>민사 소송</h3>
+        <p>손해배상, 계약 분쟁, 부동산, 채권추심 등 민사 분쟁 전반을 다룹니다. 소송 전 조정·중재를 통한 신속한 해결부터 본안 소송, 강제집행까지 원스톱으로 지원합니다. 대형 로펌 출신 변호사들이 복잡한 금전 분쟁에서도 의뢰인의 실질적 이익을 극대화합니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">🏢</div>
+        <h3>기업 법무</h3>
+        <p>M&A, 계약 검토, 노동 분쟁, 지적재산권, 컴플라이언스 등 기업 법무 전반을 담당합니다. 스타트업부터 중견기업까지 성장 단계에 맞는 법률 자문을 제공하며, 분쟁 예방을 위한 계약서 표준화와 내부 규정 정비도 함께 지원합니다.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">👨‍👩‍👧</div>
+        <h3>가사 · 상속</h3>
+        <p>이혼, 양육권, 재산분할, 상속, 유언, 성년후견 등 가정법률 문제를 섬세하게 다룹니다. 감정적 갈등 속에서도 의뢰인과 자녀의 이익을 최우선으로 하며, 재판보다 조정·합의를 통한 원만한 해결을 우선 추구합니다. 상속세 절감을 위한 사전 설계도 함께 제공합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">법무법인 정의를 선택하는 이유</h2>
+      <p class="section-desc">20년간 쌓아온 신뢰와 실적, 의뢰인 중심의 법률 서비스로 최선의 결과를 약속합니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-box">
+        <div class="icon">🏛️</div>
+        <h4>20년 경력</h4>
+        <p>2005년 설립 이래 20년간 형사·민사·기업·가사 전 분야에서 축적된 풍부한 실무 경험과 법원·검찰 네트워크를 보유하고 있습니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">📊</div>
+        <h4>2,500+ 승소</h4>
+        <p>누적 2,500건 이상의 승소·무혐의·유리한 합의 사례를 보유하며, 사건별 맞춤 전략으로 높은 성공률을 유지하고 있습니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">🤝</div>
+        <h4>1:1 전담</h4>
+        <p>상담부터 사건 종결까지 한 명의 전담 변호사가 책임지고 진행합니다. 진행 상황을 실시간으로 공유하며 의뢰인의 불안을 최소화합니다.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">💬</div>
+        <h4>무료 초기 상담</h4>
+        <p>첫 법률 상담은 무료로 진행됩니다. 사건의 쟁점과 예상 절차, 비용을 투명하게 안내해 드리며, 상담 후에도 부담 없이 결정하실 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Attorneys -->
+<section class="lawyers" id="lawyers">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Attorneys</div>
+      <h2 class="section-title">전문 변호사</h2>
+      <p class="section-desc">각 분야 최고의 전문성을 갖춘 변호사들이 의뢰인의 권익을 위해 최선을 다합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="lawyer-card">
+        <div class="lawyer-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="김정의 변호사">
+        </div>
+        <div class="lawyer-info">
+          <h3>김정의 변호사</h3>
+          <div class="role">대표변호사 · 형사 전문</div>
+          <p class="creds">서울대학교 법학전문대학원 졸업<br>제47회 사법시험 합격 · 전 서울중앙지검 검사</p>
+          <div class="spec">사기·횡령·성범죄 변호 500건+</div>
+        </div>
+      </div>
+      <div class="lawyer-card">
+        <div class="lawyer-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80" alt="이민준 변호사">
+        </div>
+        <div class="lawyer-info">
+          <h3>이민준 변호사</h3>
+          <div class="role">파트너 · 민사 전문</div>
+          <p class="creds">연세대학교 법학전문대학원 졸업<br>김·장 법률사무소 출신 · 대한변호사협회 민사법연구회 위원</p>
+          <div class="spec">손해배상·계약분쟁 400건+</div>
+        </div>
+      </div>
+      <div class="lawyer-card">
+        <div class="lawyer-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="박서연 변호사">
+        </div>
+        <div class="lawyer-info">
+          <h3>박서연 변호사</h3>
+          <div class="role">파트너 · 가사 전문</div>
+          <p class="creds">고려대학교 법학전문대학원 졸업<br>가정법원 조정위원 경력 · 이혼전문변호사 인증</p>
+          <div class="spec">이혼·상속 사건 350건+</div>
+        </div>
+      </div>
+      <div class="lawyer-card">
+        <div class="lawyer-photo">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" alt="최우진 변호사">
+        </div>
+        <div class="lawyer-info">
+          <h3>최우진 변호사</h3>
+          <div class="role">파트너 · 기업법무 전문</div>
+          <p class="creds">성균관대학교 법학전문대학원 졸업<br>전 삼성전자 법무팀 · M&A·스타트업 자문 10년</p>
+          <div class="spec">기업 자문·M&A 200건+</div>
+        </div>
+      </div>
+      <div class="lawyer-card">
+        <div class="lawyer-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="한지원 변호사">
+        </div>
+        <div class="lawyer-info">
+          <h3>한지원 변호사</h3>
+          <div class="role">선임변호사 · 형사 전문</div>
+          <p class="creds">이화여자대학교 법학전문대학원 졸업<br>전 인천지방검찰청 검사 · 교통사고·음주운전 전문</p>
+          <div class="spec">교통사고 형사·민사 280건+</div>
+        </div>
+      </div>
+      <div class="lawyer-card">
+        <div class="lawyer-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="정태호 변호사">
+        </div>
+        <div class="lawyer-info">
+          <h3>정태호 변호사</h3>
+          <div class="role">선임변호사 · 부동산·건설 전문</div>
+          <p class="creds">한양대학교 법학전문대학원 졸업<br>대한변호사협회 부동산법연구회 회장<br>건설·분양 분쟁 전문</p>
+          <div class="spec">부동산 분쟁 320건+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Success Cases -->
+<section class="cases-section" id="cases">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Success Cases</div>
+      <h2 class="section-title">주요 성공 사례</h2>
+      <p class="section-desc">실제 의뢰 사건을 바탕으로 한 대표 성공 사례입니다. 개인정보 보호를 위해 일부 내용은 각색되었습니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="case-card">
+        <span class="case-tag">형사 · 무혐의</span>
+        <h3>투자 사기 혐의 피의자 무혐의 불기소</h3>
+        <p class="desc">온라인 투자 플랫폼 운영자가 50억 원 규모 사기 혐의로 수사를 받은 사건입니다. 피의자 신문 동행과 증거 자료 정밀 분석을 통해 고의성이 없음을 입증하였고, 검찰은 혐의없음 불기소 처분을 내렸습니다.</p>
+        <div class="case-outcome">혐의없음 불기소 처분 확정</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">민사 · 승소</span>
+        <h3>건설 공사대금 3억 2천만 원 전액 승소</h3>
+        <p class="desc">하도급 업체가 원수급인으로부터 공사대금 미지급으로 소송을 제기한 사건입니다. 계약서 해석과 공사 완료 증거를 체계적으로 제출하여 원고 전액 승소 판결을 이끌어냈으며, 이후 강제집행까지 완료하였습니다.</p>
+        <div class="case-outcome">전액 승소 판결 및 강제집행 완료</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">가사 · 조정</span>
+        <h3>이혼 재산분할 70:30 유리한 합의</h3>
+        <p class="desc">20년 혼인 기간 중 배우자의 재산 은닉이 의심되는 이혼 사건이었습니다. 금융거래 추적과 재산 조사 신청을 통해 숨겨진 자산을 파악하고, 조정 절차에서 의뢰인에게 재산의 70%를 분배받는 조건으로 합의하였습니다.</p>
+        <div class="case-outcome">재산 70% 분배 조정 성립</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">형사 · 무죄</span>
+        <h3>성범죄 혐의 1심 무죄 판결</h3>
+        <p class="desc">직장 내 성희롱 혐의로 기소된 피고인의 변호를 맡은 사건입니다. 디지털 포렌식을 통한 메시지 분석과 목격자 증언 확보로 무죄를 입증하였고, 1심에서 전면 무죄 판결을 받아 의뢰인의 명예를 회복하였습니다.</p>
+        <div class="case-outcome">1심 전면 무죄 판결</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">기업 · 자문</span>
+        <h3>스타트업 M&A 120억 원 성공적 매각</h3>
+        <p class="desc">IT 스타트업의 전략적 매각(M&A) 자문을 진행한 사건입니다. 실사 대응, 계약서 협상, 임직원 스톡옵션 처리까지 종합 지원하여 120억 원에 성공적으로 매각하였으며, 창업자의 세금 부담도 최소화하였습니다.</p>
+        <div class="case-outcome">120억 원 M&A 클로징 완료</div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">민사 · 승소</span>
+        <h3>임대차 보증금 8,500만 원 반환 승소</h3>
+        <p class="desc">임대인이 계약 만료 후 보증금 반환을 거부한 사건입니다. 임대차 종료 증명과 원상회복 비용의 부당함을 입증하여 원고 전액 승소 판결을 받았고, 집행권원에 따른 보증금 전액 회수까지 완료하였습니다.</p>
+        <div class="case-outcome">보증금 전액 반환 판결 확정</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Consultation Process -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Consultation Process</div>
+      <h2 class="section-title">상담 절차</h2>
+      <p class="section-desc">간편한 4단계 절차로 신속하게 법률 도움을 받으실 수 있습니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>상담 신청</h4>
+        <p>온라인 폼, 전화(02-1234-5678), 또는 방문을 통해 상담을 신청합니다. 사건 개요를 간략히 알려주시면 해당 분야 전담 변호사를 배정해 드립니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>초기 상담</h4>
+        <p>무료 초기 상담(30~60분)을 통해 사건의 쟁점, 예상 절차, 소요 기간, 비용을 상세히 안내합니다. 필요 시 관련 서류 검토도 함께 진행합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>수임 및 전략 수립</h4>
+        <p>수임 계약 체결 후 전담 변호사가 사건 분석 보고서를 작성하고, 최적의 법률 전략을 수립합니다. 의뢰인과 충분히 협의한 후 절차를 시작합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>사건 진행 · 결과 보고</h4>
+        <p>수사·재판·협상 등 사건을 적극 진행하며, 주요 진행 상황을 수시로 보고합니다. 사건 종결 후 결과 보고서와 향후 유의사항을 안내해 드립니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">News & Insights</div>
+      <h2 class="section-title">법률 소식</h2>
+      <p class="section-desc">최신 법률 동향과 법무법인 정의의 소식을 전해 드립니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80" alt="형사법 개정">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.28</div>
+          <h3>2025년 형사법 주요 개정 내용과 실무 대응 전략</h3>
+          <p>디지털 증거 수집 절차 강화와 피의자 권리 보호 확대 등 올해 형사법 개정 사항을 정리하고, 실무에서의 대응 방안을 김정의 대표변호사가 설명합니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="이혼 법률">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.15</div>
+          <h3>이혼 시 재산분할, 반드시 알아야 할 5가지</h3>
+          <p>혼인 기간 중 형성된 재산의 범위, 특유재산 인정 요건, 기여도 산정 방법 등 이혼 재산분할의 핵심 쟁점을 박서연 파트너 변호사가 쉽게 풀어 드립니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80" alt="기업 법무">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.04.30</div>
+          <h3>스타트업을 위한 투자 계약서 핵심 체크리스트</h3>
+          <p>VC 투자 유치 시 반드시 검토해야 할 전환상환우선주 조건, 동반매도권, 경업금지 조항 등 핵심 조항을 최우진 파트너 변호사가 짚어 드립니다.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" alt="법무법인 소식">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.04.10</div>
+          <h3>법무법인 정의, '2025 대한민국 우수 로펌' 선정</h3>
+          <p>대한변호사협회 주관 '2025 대한민국 우수 로펌' 평가에서 형사·민사 분야 우수 로펌으로 선정되었습니다. 의뢰인 여러분의 신뢰에 감사드립니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">법률 상담 전 많이 물어보시는 질문들을 모았습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">첫 상담은 정말 무료인가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 초기 상담(30~60분)은 무료입니다. 사건의 쟁점, 예상 절차, 비용 범위를 안내해 드리며, 상담 후 수임 여부를 결정하시면 됩니다. 단, 복잡한 사건으로 서류 검토가 필요한 경우 사전에 안내 후 진행합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">변호사 비용은 어떻게 산정되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">사건의 유형, 난이도, 예상 소요 기간에 따라 착수금과 성공보수로 구성됩니다. 수임 계약 전 반드시 비용 내역을 서면으로 안내하며, 추가 비용 발생 시 사전 동의를 받습니다. 분납도 가능합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">수사 단계에서도 변호사가 필요한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">수사 단계에서의 변호사 참여가 매우 중요합니다. 피의자 조사 동행, 구속영장 실질심사 대응, 증거 수집 등 초기 대응이 최종 결과에 큰 영향을 미칩니다. 특히 경찰·검찰 조사 전에 미리 상담받으시기를 권합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">지방에 거주해도 상담이 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">전화, 화상(Zoom), 이메일을 통한 원격 상담이 가능합니다. 수사·재판 출석이 필요한 경우에만 방문하시면 되며, 전국 어느 법원이든 출석 대리가 가능합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">이혼 상담 시 배우자와 함께 와야 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">개별 상담을 원칙으로 합니다. 배우자와 별도로 상담해야 정확한 상황 파악과 전략 수립이 가능합니다. 이혼 조정이 필요한 경우에도 각자의 변호사를 통해 진행하는 것이 바람직합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">상담 내용은 비밀이 보장되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">변호사 비밀유지 의무에 따라 상담 내용은 철저히 보호됩니다. 상담 기록, 서류, 의뢰인 정보는 외부에 절대 공개되지 않으며, 개인정보보호법에 따라 안전하게 관리합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Consultation Form -->
+<section class="consult-section" id="consult">
+  <div class="container">
+    <div class="consult-grid">
+      <div class="consult-info">
+        <div class="section-label">Free Consultation</div>
+        <h2 class="section-title">무료 법률 상담 신청</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 전담 변호사가 연락드립니다. 긴급한 사건은 전화(02-1234-5678)로 연락해 주세요.</p>
+        <div class="consult-features">
+          <div class="consult-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>신속한 연락</strong>
+              <span>접수 후 24시간 이내 전담 변호사가 직접 연락드립니다.</span>
+            </div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>비밀 보장</strong>
+              <span>상담 내용은 변호사 비밀유지 의무에 따라 철저히 보호됩니다.</span>
+            </div>
+          </div>
+          <div class="consult-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>맞춤 전략</strong>
+              <span>사건 유형에 맞는 분야 전문 변호사가 1:1로 상담합니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="상담 신청이 접수되었습니다! 24시간 내 전담 변호사가 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="case-type">사건 유형</label>
+            <select id="case-type" name="case-type" required>
+              <option value="">사건 유형을 선택해 주세요</option>
+              <option value="criminal">형사 사건</option>
+              <option value="civil">민사 소송</option>
+              <option value="corporate">기업 법무</option>
+              <option value="family">가사 · 상속</option>
+              <option value="realestate">부동산 분쟁</option>
+              <option value="other">기타</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">상담 내용</label>
+            <textarea id="message" name="message" rows="5" placeholder="사건 개요를 간략히 작성해 주세요. (예: 계약 분쟁, 피해 금액, 현재 진행 상황 등)" required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-gold">상담 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Office Location -->
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Office Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">서울중앙지방법원 인근, 서초역에서 도보 5분 거리에 위치해 있습니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>법무법인 정의</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 서초구 서초대로 123, 정의빌딩 8층<br>(서초동, 서울중앙지방법원 건너편)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>전화: 02-1234-5678<br>팩스: 02-1234-5679<br>이메일: contact@jeongui-law.com</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>교통 안내</strong>
+            <span>지하철 2호선·신분당선 서초역 4번 출구 도보 5분<br>버스: 서초역.서울중앙지법 정류장 하차</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>09:00 – 18:00</td></tr>
+          <tr><td>토요일</td><td>09:00 – 13:00 (예약제)</td></tr>
+          <tr><td>일·공휴일</td><td>휴무</td></tr>
+          <tr><td>야간 상담</td><td>평일 18:00 – 21:00 (사전 예약)</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>법무법인 정의</strong>
+          <span>서울 서초구 서초대로 123</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">법무법인 정의</a>
+      <p>2005년 설립 이래 의뢰인의 권익 보호를 최우선으로 하는 법률 서비스를 제공해 왔습니다. 정의로운 결과, 신뢰할 수 있는 파트너가 되겠습니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 서초구 서초대로 123, 정의빌딩 8층</span>
+        <span>📞 02-1234-5678</span>
+        <span>✉️ contact@jeongui-law.com</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>업무 분야</h4>
+      <a href="#areas">형사 변호</a>
+      <a href="#areas">민사 소송</a>
+      <a href="#areas">기업 법무</a>
+      <a href="#areas">가사 · 상속</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#lawyers">변호사 소개</a>
+      <a href="#cases">성공 사례</a>
+      <a href="#process">상담 절차</a>
+      <a href="#news">법률 소식</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>상담 안내</h4>
+      <a href="#consult">무료 상담 신청</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 09:00 – 18:00</p>
+      <p>토요일 09:00 – 13:00</p>
+      <p>긴급 형사 사건 24시간 대응</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 법무법인 정의. All rights reserved.</span>
+    <span>대표변호사 김정의 · 사업자등록번호 123-45-67890</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

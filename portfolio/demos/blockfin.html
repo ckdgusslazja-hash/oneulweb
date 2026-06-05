@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>블록핀 BLOCKFIN — DeFi & Fintech Infrastructure</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+:root {
+  --font-display: 'IBM Plex Sans', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --bg: #0A0F0A;
+  --text: #F0FFF4;
+  --text-muted: #6EE7A0;
+  --accent: #00FF88;
+  --accent-2: #39FF14;
+  --accent-text: #fff;
+  --border: rgba(0,255,136,0.18);
+  --nav-bg: rgba(10,15,10,0.94);
+  --footer-bg: #050805;
+  --card-bg: #0F1610;
+  --surface: #0C120C;
+  --alt-bg: #0A0F0A;
+  --btn-radius: 10px;
+  --card-radius: 16px;
+  --logo-weight: 700;
+  --footer-text: rgba(255,255,255,0.55);
+}
+body { background: var(--bg); color: var(--text); }
+.site-nav { border-bottom-color: var(--border); }
+.site-nav .logo { color: #00FF88; font-weight: 800; letter-spacing: -0.03em; }
+.site-nav .logo span { color: var(--text-muted); font-size: 0.72em; font-weight: 500; margin-left: 6px; }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { background: linear-gradient(135deg, #00FF88, #39FF14); color: var(--accent-text); }
+.nav-toggle { color: var(--text); }
+@media (max-width: 768px) { .nav-links { background: var(--nav-bg); border-color: var(--border); } }
+
+.hero { position: relative; padding: clamp(48px,8vw,88px) 0 clamp(40px,6vw,64px); overflow: hidden; }
+.hero-mesh { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 10% 0%, rgba(0,255,136,0.12), transparent), radial-gradient(ellipse 50% 40% at 90% 80%, rgba(57,255,20,0.08), transparent); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,64px); align-items: center; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3); border-radius: 100px; font-size: 0.76rem; color: #00FF88; margin-bottom: 22px; font-weight: 600; }
+.hero-badge .dot { width: 6px; height: 6px; background: #39FF14; border-radius: 50%; animation: pulse-dot 2s ease infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.1rem,5vw,3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 20px; }
+.hero h1 em { font-style: normal; color: #00FF88; text-shadow: 0 0 24px rgba(0,255,136,0.4); }
+.hero-lead { font-size: clamp(0.92rem,2vw,1.08rem); color: var(--text-muted); line-height: 1.8; max-width: 520px; margin-bottom: 28px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.btn-primary { background: linear-gradient(135deg, #00FF88, #39FF14); color: var(--accent-text); box-shadow: 0 4px 24px rgba(0,255,136,0.25); }
+.btn-outline { border: 1.5px solid rgba(0,255,136,0.4); color: #00FF88; }
+.btn-outline:hover { background: rgba(0,255,136,0.06); }
+.hero-stats { display: flex; gap: clamp(20px,4vw,40px); flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
+.hero-stat strong { display: block; font-family: var(--font-display); font-size: clamp(1.2rem,2.5vw,1.55rem); font-weight: 800; color: #00FF88; }
+.hero-stat span { font-size: 0.72rem; color: var(--text-muted); }
+
+.product-mock { background: #0F1610; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,255,136,0.12); }
+.mock-top { padding: 12px 16px; background: #0C120C; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid var(--border); }
+.mock-top span { width: 10px; height: 10px; border-radius: 50%; }
+.mock-top span:nth-child(1){background:#EF4444} .mock-top span:nth-child(2){background:#EAB308} .mock-top span:nth-child(3){background:#22C55E}
+.mock-url { margin-left: auto; font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono); }
+.mock-body { padding: clamp(16px,3vw,24px); }
+.mock-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+.mock-metric { background: #0C120C; border-radius: 12px; padding: 14px; border: 1px solid var(--border); }
+.mock-metric .lbl { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.mock-metric .val { font-size: 1.15rem; font-weight: 700; color: #00FF88; font-family: var(--font-display); }
+.mock-metric .sub { font-size: 0.66rem; color: #00FF88; margin-top: 4px; }
+.mock-code { background: #060A06; border-radius: 12px; padding: 16px; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.7; color: #D1FAE5; overflow-x: auto; }
+.mock-code .kw { color: #00FF88; }
+.mock-code .str { color: #FDE68A; }
+.mock-code .cm { color: #4B5563; opacity: 0.7; }
+.mock-rows { display: flex; flex-direction: column; gap: 8px; }
+.mock-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #0C120C; border-radius: 8px; font-size: 0.8rem; border: 1px solid var(--border); }
+.mock-row .tag { font-size: 0.65rem; padding: 3px 8px; border-radius: 100px; font-weight: 700; background: rgba(0,255,136,0.12); color: #00FF88; }
+.mock-chart { background: #0C120C; border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin-top: 12px; }
+.chart-bars .bar { flex: 1; background: linear-gradient(180deg, #00FF88, #39FF14); border-radius: 4px 4px 0 0; min-height: 12px; opacity: 0.85; }
+.chart-bars .bar:nth-child(1){height:45%} .chart-bars .bar:nth-child(2){height:72%} .chart-bars .bar:nth-child(3){height:58%}
+.chart-bars .bar:nth-child(4){height:90%} .chart-bars .bar:nth-child(5){height:65%} .chart-bars .bar:nth-child(6){height:78%} .chart-bars .bar:nth-child(7){height:55%}
+
+.trust-strip { padding: 28px 0; background: #0C120C; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.trust-inner { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(16px,3vw,32px); justify-content: center; }
+.trust-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.trust-logos { display: flex; flex-wrap: wrap; gap: clamp(20px,4vw,40px); align-items: center; justify-content: center; }
+.trust-logos span { font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: #3D6B4F; }
+
+.section-label { color: #00FF88; }
+.alt-section { background: var(--alt-bg); }
+.surface-section { background: var(--surface); }
+
+.bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.bento-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,3vw,32px); transition: box-shadow 0.3s, transform 0.3s; }
+.bento-item:hover { box-shadow: 0 16px 40px rgba(0,255,136,0.1); transform: translateY(-3px); }
+.bento-item.wide { grid-column: span 2; }
+.bento-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.bento-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #00FF88; background: rgba(0,255,136,0.12); padding: 4px 10px; border-radius: 100px; margin-bottom: 12px; }
+.bento-item h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.bento-item p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+.process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; counter-reset: step; }
+.process-step { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 28px 22px; position: relative; }
+.process-step::before { counter-increment: step; content: counter(step); position: absolute; top: -14px; left: 22px; width: 28px; height: 28px; background: linear-gradient(135deg, #00FF88, #39FF14); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.process-step h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; margin-top: 8px; }
+.process-step p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,5vw,56px); align-items: center; }
+.about-img { position: relative; border-radius: var(--card-radius); overflow: hidden; }
+.about-img img { width: 100%; height: 360px; object-fit: cover; }
+.about-float { position: absolute; bottom: 20px; left: 20px; background: var(--card-bg); padding: 16px 20px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); border: 1px solid var(--border); }
+.about-float strong { display: block; font-size: 1.5rem; font-weight: 800; color: #00FF88; }
+.about-float span { font-size: 0.78rem; color: var(--text-muted); }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.tech-chip { padding: 8px 14px; background: rgba(0,255,136,0.12); border: 1px solid var(--border); border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: #00FF88; }
+
+.case-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,3vw,32px); height: 100%; transition: box-shadow 0.3s; }
+.case-card:hover { box-shadow: 0 16px 40px rgba(0,255,136,0.1); }
+.case-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; color: #00FF88; margin-bottom: 6px; }
+.case-industry { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 14px; }
+.case-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; }
+.case-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+.case-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.case-metric { text-align: center; padding: 12px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); }
+.case-metric strong { display: block; font-size: 1.2rem; font-weight: 800; color: #00FF88; }
+.case-metric span { font-size: 0.66rem; color: var(--text-muted); }
+
+.integ-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.integ-chip { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); transition: all 0.25s; }
+.integ-chip:hover { border-color: #00FF88; background: rgba(0,255,136,0.12); color: var(--text); }
+.integ-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+.pricing-toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; font-size: 0.88rem; color: var(--text-muted); }
+.pricing-toggle-wrap .active { color: var(--text); font-weight: 600; }
+.pricing-badge-save { font-size: 0.68rem; padding: 3px 10px; background: rgba(0,255,136,0.12); color: #00FF88; border-radius: 100px; font-weight: 700; }
+.pricing-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(28px,4vw,36px); display: flex; flex-direction: column; }
+.pricing-card.featured { border-color: #00FF88; box-shadow: 0 0 48px rgba(0,255,136,0.15); position: relative; }
+.pricing-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,#00FF88,#39FF14); padding: 4px 16px; border-radius: 100px; font-size: 0.64rem; font-weight: 700; color: #fff; }
+.pricing-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.pricing-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+.pricing-card .price { font-family: var(--font-display); font-size: clamp(2rem,4vw,2.5rem); font-weight: 800; margin-bottom: 6px; color: #00FF88; }
+.pricing-card .price span { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.pricing-billing { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 24px; }
+.pricing-card .btn { width: 100%; margin-bottom: 24px; }
+.pricing-features li { display: flex; gap: 10px; padding: 9px 0; font-size: 0.84rem; color: var(--text-muted); border-bottom: 1px solid var(--border); line-height: 1.5; }
+.pricing-features li::before { content: '✓'; color: #00FF88; font-weight: 700; }
+.pricing-features li.muted { opacity: 0.45; }
+.pricing-features li.muted::before { content: '—'; }
+
+.review-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 24px; height: 100%; transition: transform 0.3s, box-shadow 0.3s; }
+.review-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,255,136,0.1); }
+.review-stars { color: #FBBF24; margin-bottom: 12px; }
+.review-card blockquote { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+.review-author { display: flex; gap: 12px; align-items: center; }
+.review-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#00FF88,#39FF14); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.review-author strong { display: block; font-size: 0.88rem; }
+.review-author span { font-size: 0.75rem; color: var(--text-muted); }
+
+.faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+.faq-q { width: 100%; text-align: left; padding: 18px 22px; font-size: 0.92rem; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
+.faq-q::after { content: '+'; font-size: 1.2rem; color: #00FF88; }
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s; }
+.faq-item.open .faq-a { max-height: 320px; }
+.faq-a-inner { padding: 0 22px 18px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+
+.cta-band { background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(57,255,20,0.06)); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px,8vw,72px) 0; }
+.cta-band h2 { font-family: var(--font-display); font-size: clamp(1.6rem,4vw,2.2rem); font-weight: 800; margin-bottom: 12px; }
+.cta-band p { color: var(--text-muted); margin-bottom: 28px; }
+
+.contact-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px,5vw,56px); }
+.contact-info h3 { font-family: var(--font-display); font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; margin-bottom: 16px; }
+.contact-info > p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 32px; }
+.contact-perks { display: flex; flex-direction: column; gap: 16px; }
+.contact-perk { display: flex; gap: 14px; }
+.contact-perk-icon { width: 40px; height: 40px; background: rgba(0,255,136,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.contact-perk strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.contact-perk span { font-size: 0.82rem; color: var(--text-muted); }
+.form-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: clamp(24px,4vw,36px); }
+.form-group label { color: var(--text); font-size: 0.84rem; font-weight: 600; }
+.form-group input, .form-group select, .form-group textarea { background: #0C120C; border: 1px solid var(--border); color: var(--text); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #00FF88; }
+
+.tabs-wrap .tab-panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 28px; margin-top: 16px; }
+.tab-panel h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: #00FF88; }
+.tab-panel p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+.feature-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.feature-list li { padding: 12px 16px; background: var(--surface); border-radius: 10px; font-size: 0.84rem; font-weight: 600; border: 1px solid var(--border); }
+
+.bf-deep { background: var(--surface); }
+.bf-split { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px,5vw,48px); align-items: center; }
+.bf-hero-img { border-radius: var(--card-radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(0,255,136,0.1); }
+.bf-hero-img img { width: 100%; height: auto; display: block; aspect-ratio: 4/3; object-fit: cover; }
+.bf-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.bf-list li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+.bf-list li strong { color: var(--text); display: block; margin-bottom: 4px; }
+.bf-metrics { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.bf-metric { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.bf-metric strong { display: block; font-size: 0.92rem; color: #00FF88; margin-bottom: 6px; }
+.bf-metric span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+.site-footer { background: var(--footer-bg); color: var(--footer-text); }
+.site-footer .logo { color: #fff; }
+.footer-col h4 { color: #fff; }
+.footer-col a:hover { color: #00FF88; }
+.footer-newsletter input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; border-radius: 8px; padding: 10px 14px; flex: 1; }
+.footer-newsletter button { background: #00FF88; color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; }
+
+@media (max-width: 1280px) {
+  .hero-grid { gap: clamp(24px,4vw,48px); }
+  .bf-hero-img img { object-position: center 30%; }
+}
+@media (max-width: 1024px) {
+  .integ-grid { grid-template-columns: repeat(3,1fr); }
+  .bento { grid-template-columns: repeat(2,1fr); }
+  .bento-item.wide { grid-column: span 1; }
+  .mock-metrics { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .contact-wrap, .bf-split { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: repeat(2,1fr); }
+  .product-mock { order: -1; }
+}
+@media (max-width: 768px) {
+  .hero h1 { font-size: clamp(1.9rem,8vw,2.6rem); }
+  .trust-logos { gap: 16px; }
+  .bf-metrics { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .process-steps, .integ-grid, .bento, .feature-list, .mock-metrics { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; text-align: center; }
+}
+
+/* Extended component layer */
+.section-header { margin-bottom: clamp(32px, 5vw, 48px); }
+.section-header.center { text-align: center; }
+.section-header.center .section-desc { max-width: 640px; margin-left: auto; margin-right: auto; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3.5vw, 2.25rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.section-desc { font-size: clamp(0.88rem, 2vw, 1rem); color: var(--text-muted); line-height: 1.75; }
+
+.features, .how-section, .tabs-section, #integrations, #pricing, #testimonials, #faq, #contact, #case-studies, #about, #platform {
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 3vw, 24px); }
+@media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.tab-btn {
+  padding: 10px 20px; font-size: 0.84rem; font-weight: 600; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--text-muted); transition: all 0.25s;
+}
+.tab-btn:hover { border-color: #00FF88; color: var(--text); }
+.tab-btn.active { background: linear-gradient(135deg, #00FF88, #39FF14); color: var(--accent-text); border-color: transparent; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.pricing-features { list-style: none; flex: 1; }
+.pricing-card .btn-sm { padding: 12px 20px; font-size: 0.84rem; border-radius: var(--btn-radius); display: inline-block; text-align: center; }
+
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: clamp(24px, 4vw, 48px); padding: clamp(48px, 6vw, 72px) clamp(20px, 4vw, 48px); max-width: 1200px; margin: 0 auto; }
+.footer-brand p { font-size: 0.84rem; line-height: 1.7; margin-top: 12px; max-width: 280px; }
+.footer-col { display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 0.82rem; color: var(--footer-text); transition: color 0.25s; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 20px clamp(20px, 4vw, 48px); border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; max-width: 1200px; margin: 0 auto; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: span 2; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-brand { grid-column: span 1; } }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: span 2; }
+.form-group input, .form-group select, .form-group textarea { padding: 12px 14px; border-radius: 10px; font-size: 0.88rem; width: 100%; }
+.form-group textarea { min-height: 100px; resize: vertical; }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-group.full { grid-column: span 1; } }
+
+/* Brand accent animations */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.hero-badge .dot { animation: glow-pulse 2s ease infinite, pulse-dot 2s ease infinite; }
+.product-mock { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.product-mock:hover { transform: translateY(-4px); }
+
+/* Code syntax highlight refinements */
+.mock-code .num { color: #FDE68A; }
+.mock-code .fn { color: #00FF88; }
+
+/* Status indicators in mock rows */
+.mock-row .status-ok { color: #22C55E; margin-left: auto; font-size: 0.72rem; font-weight: 600; }
+.mock-row .status-run { color: #00FF88; margin-left: auto; font-size: 0.72rem; font-weight: 600; }
+
+/* Chart label styling */
+.mock-chart .chart-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Deep section copy refinements */
+.bf-copy { display: flex; flex-direction: column; justify-content: center; }
+
+/* Review card quote styling */
+.review-card blockquote { font-style: normal; position: relative; padding-left: 0; }
+.review-card blockquote::before { content: '"'; font-size: 2rem; color: #00FF88; opacity: 0.3; line-height: 0; display: block; margin-bottom: 8px; }
+
+/* CTA band button spacing */
+.cta-band .btn { margin-top: 4px; }
+
+/* Nav scroll shadow enhancement */
+.site-nav { transition: box-shadow 0.3s; }
+
+/* Bento grid gap responsive */
+@media (max-width: 1280px) {
+  .bento { gap: 14px; }
+  .process-steps { gap: 16px; }
+}
+@media (max-width: 768px) {
+  .features, .how-section, .tabs-section, #integrations, #pricing, #testimonials, #faq, #contact, #case-studies, #about, #platform, #security {
+    padding: clamp(40px, 6vw, 64px) 0;
+  }
+}
+
+.security-section { background: var(--surface); }
+.security-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
+.security-badge {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px 20px;
+  text-align: center;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.security-badge:hover { border-color: rgba(0,255,136,0.45); box-shadow: 0 0 24px rgba(0,255,136,0.12); }
+.security-badge .ico { font-size: 1.8rem; margin-bottom: 12px; }
+.security-badge strong { display: block; font-size: 0.9rem; margin-bottom: 6px; color: #00FF88; }
+.security-badge span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+.security-note {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: rgba(0,255,136,0.06);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  text-align: center;
+}
+@media (max-width: 900px) { .security-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .security-grid { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">블록핀 <span>BLOCKFIN</span></a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#product">Product</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-mesh"></div>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge"><span class="dot"></span> v2.8 — Cross-chain Settlement Live</div>
+      <h1>DeFi 인프라로<br><em>금융을 재설계</em></h1>
+      <p class="hero-lead">Payments, crypto settlement, smart contracts — institutional-grade DeFi/fintech platform. Cross-chain swaps, merchant payouts, programmable escrow를 하나의 API로.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Launch App →</a>
+        <a href="#contact" class="btn btn-outline">Read Whitepaper</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>$842M</strong><span>Total Value Locked</span></div>
+        <div class="hero-stat"><strong>12.4K</strong><span>Tx per second</span></div>
+        <div class="hero-stat"><strong>99.97%</strong><span>Settlement SLA</span></div>
+      </div>
+    </div>
+    <div class="product-mock" id="product">
+      <div class="mock-top"><span></span><span></span><span></span><span class="mock-url">app.blockfin.io/treasury</span></div>
+      <div class="mock-body">
+        <div class="mock-metrics">
+          <div class="mock-metric"><div class="lbl">TVL</div><div class="val">$842M</div><div class="sub">↑ 4.2%</div></div>
+          <div class="mock-metric"><div class="lbl">Tx / sec</div><div class="val">12,400</div><div class="sub">peak 18K</div></div>
+          <div class="mock-metric"><div class="lbl">Gas Saved</div><div class="val">38%</div><div class="sub">L2 rollup</div></div>
+        </div>
+        <div class="mock-chart">
+          <div style="font-size:0.72rem;color:var(--text-muted)">Cross-chain settlement volume (7d)</div>
+          <div class="chart-bars"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+        </div>
+        <div class="mock-rows" style="margin-top:14px">
+          <div class="mock-row"><span class="tag">SWAP</span> ETH→USDC — $2.4M settled</div>
+          <div class="mock-row"><span class="tag">PAY</span> Merchant payout KRW — confirmed</div>
+          <div class="mock-row"><span class="tag">SC</span> Escrow contract #8841 — executed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container trust-inner">
+    <span class="trust-label">Trusted by fintech pioneers</span>
+    <div class="trust-logos">
+      <span>Dunamu</span>
+      <span>Korbit</span>
+      <span>Hashed</span>
+      <span>Terraform Labs</span>
+      <span>ConsenSys</span>
+      <span>Circle</span>
+      <span>Chainlink</span>
+      <span>Polygon</span>
+    </div>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">차세대 금융 인프라의 모든 것</h2>
+      <p class="section-desc">From on-chain payments to programmable finance — composable DeFi stack for fintech builders.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-item wide">
+        <div class="bento-icon">💸</div>
+        <span class="bento-tag">Payments · Core</span>
+        <h3>Instant Cross-border Payments</h3>
+        <p>KRW, USD, USDC, ETH — real-time settlement across 40+ corridors. FX oracle, compliance screening, merchant API.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🔗</div>
+        <span class="bento-tag">DeFi</span>
+        <h3>Liquidity & Swaps</h3>
+        <p>AMM pools, limit orders, cross-chain bridges. MEV protection, slippage optimization, institutional liquidity.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">📜</div>
+        <span class="bento-tag">Smart Contracts</span>
+        <h3>Programmable Escrow</h3>
+        <p>Multi-sig escrow, milestone payments, conditional release. Audited Solidity templates, no-code deploy.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🏦</div>
+        <span class="bento-tag">CeFi Bridge</span>
+        <h3>Fiat On/Off Ramp</h3>
+        <p>Bank transfer, card, mobile pay → crypto. KYC/AML automated, Korean FSC guidelines compliant.</p>
+      </div>
+      <div class="bento-item">
+        <div class="bento-icon">🛡️</div>
+        <span class="bento-tag">Security</span>
+        <h3>Institutional Security</h3>
+        <p>Multi-party computation custody, hardware security modules, real-time fraud detection, insurance fund.</p>
+      </div>
+      <div class="bento-item wide">
+        <div class="bento-icon">📊</div>
+        <span class="bento-tag">Analytics</span>
+        <h3>Treasury Dashboard</h3>
+        <p>Real-time P&L, yield farming positions, risk exposure, regulatory reporting. API for ERP integration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">4단계로 DeFi fintech 구축</h2>
+      <p class="section-desc">Onboard, connect wallet, deploy contracts, scale — sandbox에서 production까지 48시간.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step"><h4>Create Account</h4><p>Business KYC 완료, sandbox API key 발급. Testnet ETH/USDC faucet 제공.</p></div>
+      <div class="process-step"><h4>Connect Wallets</h4><p>Multi-sig treasury wallet 생성. Hardware wallet, MPC custody 옵션.</p></div>
+      <div class="process-step"><h4>Deploy Products</h4><p>Payment links, escrow contracts, swap pools — no-code 또는 Solidity SDK.</p></div>
+      <div class="process-step"><h4>Go Live</h4><p>Mainnet deploy, compliance review, 24/7 monitoring. Institutional SLA 적용.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1639765482687-fb7a9d7c8b8e?w=800&q=80" alt="블록핀 DeFi 인프라" loading="lazy">
+        <div class="about-float"><strong>$842M</strong><span>TVL across chains</span></div>
+      </div>
+      <div>
+        <div class="section-label">About BLOCKFIN</div>
+        <h2 class="section-title">Programmable money<br>for the real economy</h2>
+        <p class="section-desc">2021년 서울에서 시작한 BLOCKFIN은 'crypto와 traditional finance의 gap'을 메웁니다. DeFi composability + fintech compliance — merchant, exchange, neobank가 신뢰할 수 있는 infrastructure.</p>
+        <div class="tech-chips">
+          <span class="tech-chip">Ethereum</span>
+          <span class="tech-chip">Polygon</span>
+          <span class="tech-chip">Arbitrum</span>
+          <span class="tech-chip">USDC</span>
+          <span class="tech-chip">Solidity</span>
+          <span class="tech-chip">MPC Custody</span>
+          <span class="tech-chip">AML/KYC</span>
+          <span class="tech-chip">ISO 27001</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="case-studies">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">고객들이 만든 DeFi impact</h2>
+      <p class="section-desc">Exchange, neobank, merchant — BLOCKFIN으로 settlement를 혁신한 fintech.</p>
+    </div>
+    <div class="grid-3">
+      <article class="case-card">
+        <div class="case-logo">PayNova</div>
+        <div class="case-industry">Neobank · Series C</div>
+        <h3>Cross-border remittance 90% cheaper</h3>
+        <p>USDC corridor로 해외 송금 수수료 90% 절감. Settlement 3초, 40개국 지원.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>90%</strong><span>Fee reduction</span></div>
+          <div class="case-metric"><strong>3s</strong><span>Settlement</span></div>
+          <div class="case-metric"><strong>2.1M</strong><span>Monthly tx</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">GameVault</div>
+        <div class="case-industry">Gaming · Web3</div>
+        <h3>In-game economy $120M volume</h3>
+        <p>NFT marketplace + token swaps on BLOCKFIN L2. Gas fee 95% 절감, 50K TPS.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>$120M</strong><span>Volume</span></div>
+          <div class="case-metric"><strong>95%</strong><span>Gas saved</span></div>
+          <div class="case-metric"><strong>50K</strong><span>TPS</span></div>
+        </div>
+      </article>
+      <article class="case-card">
+        <div class="case-logo">TradeLink</div>
+        <div class="case-industry">B2B Trade · Enterprise</div>
+        <h3>Smart escrow $500M secured</h3>
+        <p>국제 무역 milestone escrow. 분쟁 0건, settlement time 7일 → 4시간.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>$500M</strong><span>Escrowed</span></div>
+          <div class="case-metric"><strong>0</strong><span>Disputes</span></div>
+          <div class="case-metric"><strong>4hr</strong><span>Settlement</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section tabs-section" id="product-tabs">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product Modules</div>
+      <h2 class="section-title">DeFi 모듈 deep dive</h2>
+      <p class="section-desc">Payments, Swaps, Escrow, Custody — 각 모듈의 핵심 기능.</p>
+    </div>
+    <div class="tabs-wrap" style="max-width:920px;margin:0 auto">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="pay">Payments</button>
+        <button class="tab-btn" data-tab="swap">Swaps</button>
+        <button class="tab-btn" data-tab="escrow">Escrow</button>
+        <button class="tab-btn" data-tab="custody">Custody</button>
+      </div>
+      <div class="tab-panel active" data-tab="pay">
+        <h4>Global Payment Rails</h4>
+        <p>Fiat and crypto payment processing with real-time settlement.</p>
+        <ul class="feature-list">
+          <li>40+ payment corridors</li>
+          <li>KRW/USD/USDC/ETH</li>
+          <li>Merchant payment links</li>
+          <li>Recurring billing</li>
+          <li>FX oracle integration</li>
+          <li>PCI-DSS compliant</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="swap">
+        <h4>Liquidity & DEX</h4>
+        <p>Institutional-grade swapping with MEV protection and deep liquidity.</p>
+        <ul class="feature-list">
+          <li>AMM + limit orders</li>
+          <li>Cross-chain bridges</li>
+          <li>MEV protection</li>
+          <li>Slippage controls</li>
+          <li>LP yield farming</li>
+          <li>Flash loan protection</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="escrow">
+        <h4>Smart Contract Escrow</h4>
+        <p>Programmable conditional payments for B2B and marketplace use cases.</p>
+        <ul class="feature-list">
+          <li>Milestone release</li>
+          <li>Multi-sig approval</li>
+          <li>Dispute arbitration</li>
+          <li>Audited templates</li>
+          <li>No-code deploy</li>
+          <li>Event webhooks</li>
+        </ul>
+      </div>
+      <div class="tab-panel" data-tab="custody">
+        <h4>Institutional Custody</h4>
+        <p>MPC-based custody with insurance and regulatory compliance.</p>
+        <ul class="feature-list">
+          <li>MPC key management</li>
+          <li>Hardware security module</li>
+          <li>Insurance fund ($50M)</li>
+          <li>Cold/hot wallet tiers</li>
+          <li>Audit trail</li>
+          <li>FSC guidelines</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="integrations">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Integrations</div>
+      <h2 class="section-title">Fintech 스택과 연동</h2>
+      <p class="section-desc">REST API, webhooks, ERP connectors — 기존 banking infrastructure에 plug-in.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-chip"><span class="integ-icon">💳</span> Stripe</div>
+      <div class="integ-chip"><span class="integ-icon">🏦</span> Plaid</div>
+      <div class="integ-chip"><span class="integ-icon">⛓️</span> Chainlink</div>
+      <div class="integ-chip"><span class="integ-icon">💵</span> Circle USDC</div>
+      <div class="integ-chip"><span class="integ-icon">🔷</span> Ethereum</div>
+      <div class="integ-chip"><span class="integ-icon">🟣</span> Polygon</div>
+      <div class="integ-chip"><span class="integ-icon">📊</span> SAP</div>
+      <div class="integ-chip"><span class="integ-icon">🔐</span> Fireblocks</div>
+      <div class="integ-chip"><span class="integ-icon">📱</span> KakaoPay</div>
+      <div class="integ-chip"><span class="integ-icon">⚡</span> Zapier</div>
+      <div class="integ-chip"><span class="integ-icon">🐙</span> GitHub</div>
+      <div class="integ-chip"><span class="integ-icon">📈</span> TradingView</div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section bf-deep" id="platform">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product</div>
+      <h2 class="section-title">Institutional DeFi infrastructure</h2>
+      <p class="section-desc">Cross-chain settlement, programmable escrow, MPC custody — regulated fintech를 위한 DeFi layer.</p>
+    </div>
+    <div class="bf-split">
+      <div class="bf-hero-img"><img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1200&q=80" alt="Institutional DeFi infrastructure" loading="lazy"></div>
+      <div class="bf-copy">
+        <ul class="bf-list">
+          <li><strong>L2 Rollup</strong>자체 L2로 gas fee 95% 절감. 50K TPS, 2초 finality.</li>
+          <li><strong>Compliance Engine</strong>KYC/AML real-time screening. 한국 FSC, EU MiCA guidelines 대응.</li>
+          <li><strong>MPC Custody</strong>Multi-party computation으로 private key 분산. $50M insurance fund.</li>
+          <li><strong>Developer SDK</strong>TypeScript, Python, Solidity SDK. Sandbox → mainnet 48시간.</li>
+        </ul>
+        <div class="bf-metrics">
+          <div class="bf-metric"><strong>L2 Rollup</strong><span>자체 L2로 gas fee 95% 절감. 50K TPS, 2초 finality.</span></div>
+          <div class="bf-metric"><strong>Compliance Engine</strong><span>KYC/AML real-time screening. 한국 FSC, EU MiCA guidelines 대응.</span></div>
+          <div class="bf-metric"><strong>MPC Custody</strong><span>Multi-party computation으로 private key 분산. $50M insurance fund.</span></div>
+          <div class="bf-metric"><strong>Developer SDK</strong><span>TypeScript, Python, Solidity SDK. Sandbox → mainnet 48시간.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface-section" id="pricing">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Volume-based DeFi pricing</h2>
+      <p class="section-desc">Free sandbox. Transaction fee 0.1% or committed enterprise volume.</p>
+    </div>
+    <div class="pricing-toggle-wrap">
+      <span class="active">Monthly</span><span>·</span><span>Annual</span>
+      <span class="pricing-badge-save">Save 20%</span>
+    </div>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <h3>Sandbox</h3>
+        <p class="pricing-desc">Developers & PoC projects.</p>
+        <div class="price">₩0<span>/월</span></div>
+        <p class="pricing-billing">Testnet unlimited</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Get API Key</a>
+        <ul class="pricing-features">
+          <li>Testnet access</li>
+          <li>Payment API (sandbox)</li>
+          <li>Smart contract templates</li>
+          <li>Community Discord</li>
+          <li class="muted">Mainnet access</li>
+          <li class="muted">MPC custody</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Growth</h3>
+        <p class="pricing-desc">Fintech startups shipping products.</p>
+        <div class="price">0.1%<span>/tx</span></div>
+        <p class="pricing-billing">min ₩500K/mo · volume tiers</p>
+        <a href="#contact" class="btn btn-primary btn-sm">Apply Now</a>
+        <ul class="pricing-features">
+          <li>Mainnet payments & swaps</li>
+          <li>Escrow contracts</li>
+          <li>Fiat on/off ramp</li>
+          <li>Treasury dashboard</li>
+          <li>KYC/AML engine</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Institutional</h3>
+        <p class="pricing-desc">Banks, exchanges, enterprise fintech.</p>
+        <div class="price">Custom<span></span></div>
+        <p class="pricing-billing">committed volume · annual</p>
+        <a href="#contact" class="btn btn-outline btn-sm">Contact Sales</a>
+        <ul class="pricing-features">
+          <li>Dedicated L2 instance</li>
+          <li>MPC custody + insurance</li>
+          <li>Custom smart contracts</li>
+          <li>Regulatory reporting</li>
+          <li>99.97% SLA</li>
+          <li>Dedicated account team</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">Fintech builders가 말하는 BLOCKFIN</h2>
+      <p class="section-desc">CTOs, DeFi engineers — 4.8/5 on crypto developer surveys.</p>
+    </div>
+    <div class="grid-4">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Cross-chain settlement이 정말 빠릅니다. 해외 송금 수수료 90% 절감 — neobank 핵심 인프라."</blockquote>
+        <div class="review-author"><div class="review-avatar">JK</div><div><strong>김준혁</strong><span>CTO · PayNova</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"L2 rollup으로 gaming economy $120M volume 처리. Gas fee 걱정 없이 scale."</blockquote>
+        <div class="review-author"><div class="review-avatar">SL</div><div><strong>Sarah Lim</strong><span>Head of Web3 · GameVault</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"Smart escrow로 B2B 무역 $500M secured. 분쟁 0건 — legal team도 approve."</blockquote>
+        <div class="review-author"><div class="review-avatar">PM</div><div><strong>박민수</strong><span>VP Finance · TradeLink</span></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"MPC custody + compliance engine이 institutional 요구사항 충족. FSC audit seamless."</blockquote>
+        <div class="review-author"><div class="review-avatar">EC</div><div><strong>Emily Cho</strong><span>CISO · CryptoBank</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-section security-section" id="security">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Security & Compliance</div>
+      <h2 class="section-title">기관급 DeFi 보안 인프라</h2>
+      <p class="section-desc">금융 규제·자산 보관·스마트 컨트랙트 감사를 통합한 institutional-grade security stack.</p>
+    </div>
+    <div class="security-grid">
+      <div class="security-badge">
+        <div class="ico">🔑</div>
+        <strong>MPC Custody</strong>
+        <span>분산 키 관리 · cold 95% · $50M insurance</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">⚖️</div>
+        <strong>Regulatory</strong>
+        <span>FSC · MiCA · MSB — KYC/AML real-time</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">📝</div>
+        <strong>Smart Contract Audit</strong>
+        <span>CertiK · Trail of Bits 정기 감사</span>
+      </div>
+      <div class="security-badge">
+        <div class="ico">🛡️</div>
+        <strong>On-chain Monitoring</strong>
+        <span>24/7 anomaly detection · auto pause</span>
+      </div>
+    </div>
+    <p class="security-note">Travel Rule compliance, transaction screening, multi-sig governance — institutional DeFi에 필요한 보안 레이어를 API 하나로 제공합니다.</p>
+  </div>
+</section>
+
+<section class="surface-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">support@blockfin.io 또는 Telegram dev channel로 문의해 주세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" type="button">어떤 블록체인을 지원하나요?</button><div class="faq-a"><div class="faq-a-inner">Ethereum, Polygon, Arbitrum, Optimism, Base — EVM 호환 12 chains. 자체 L2 rollup (BlockFin Chain)으로 50K TPS, 2초 finality.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">규제 compliance는 어떻게 되나요?</button><div class="faq-a"><div class="faq-a-inner">한국 FSC 가이드라인, EU MiCA, US MSB 등록. KYC/AML real-time screening, travel rule compliance, transaction monitoring.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">수수료 구조는?</button><div class="faq-a"><div class="faq-a-inner">Growth: 0.1%/tx (volume tier discount). Swap: 0.05% + gas. Escrow: 0.2% release fee. Institutional: committed volume 협의.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">자산 보관은 안전한가요?</button><div class="faq-a"><div class="faq-a-inner">MPC custody — private key 분산 저장. $50M insurance fund. Cold wallet 95% + hot wallet 5%. SOC 2, ISO 27001 인증.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Fiat on/off ramp이 가능한가요?</button><div class="faq-a"><div class="faq-a-inner">KRW (국내 은행), USD (Wire/ACH), EUR (SEPA). Card, mobile pay 지원. KYC 완료 후 24시간 내 활성화.</div></div></div>
+      <div class="faq-item"><button class="faq-q" type="button">Smart contract audit은?</button><div class="faq-a"><div class="faq-a-inner">모든 template은 CertiK, Trail of Bits audit 완료. Custom contract은 audit service 연계. Bug bounty program $500K.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>지금 바로 DeFi fintech를 구축하세요</h2>
+    <p>Free sandbox · Testnet unlimited · Mainnet in 48h</p>
+    <a href="#contact" class="btn btn-primary">Launch Sandbox →</a>
+  </div>
+</section>
+
+<section class="alt-section" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-label">Contact</div>
+        <h3>Institutional DeFi 상담</h3>
+        <p>30분 미팅으로 BLOCKFIN이 귀사 fintech infrastructure에 맞는지 확인해 보세요.</p>
+        <div class="contact-perks">
+          <div class="contact-perk"><span class="contact-perk-icon">🎯</span><div><strong>Architecture Workshop</strong><span>DeFi product design & compliance review</span></div></div>
+          <div class="contact-perk"><span class="contact-perk-icon">📅</span><div><strong>Sandbox Access</strong><span>48시간 내 testnet → mainnet migration</span></div></div>
+          <div class="contact-perk"><span class="contact-perk-icon">🌏</span><div><strong>Global Rails</strong><span>Seoul · Singapore · Dubai settlement hubs</span></div></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="상담 요청 접수! 24시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group"><label for="bf-name">이름</label><input type="text" id="bf-name" placeholder="홍길동" required></div>
+            <div class="form-group"><label for="bf-email">Work Email</label><input type="email" id="bf-email" placeholder="you@company.com" required></div>
+            <div class="form-group"><label for="bf-co">회사명</label><input type="text" id="bf-co" placeholder="BLOCKFIN Inc."></div>
+            <div class="form-group"><label for="bf-size">팀 규모</label><select id="bf-size"><option>1–10명</option><option>11–50명</option><option>51–200명</option><option>200명+</option></select></div>
+            <div class="form-group full"><label for="bf-msg">메시지</label><textarea id="bf-msg" placeholder="관심 모듈 (Payments/Swap/Escrow), 현재 fintech stack 등"></textarea></div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Request Demo →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">블록핀 BLOCKFIN</a>
+      <p>DeFi & fintech infrastructure. Payments, crypto, smart contracts — Seoul & Singapore.</p>
+      <div class="footer-social" style="display:flex;gap:12px;margin-top:20px">
+        <a href="#" data-toast="Twitter — coming soon" style="color:#fff">X</a>
+        <a href="#" data-toast="LinkedIn — coming soon" style="color:#fff">in</a>
+        <a href="#" data-toast="GitHub — coming soon" style="color:#fff">GH</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="#" data-toast="About — demo">About</a><a href="#case-studies">Customers</a><a href="#" data-toast="Careers — hiring">Careers</a><a href="#contact">Contact</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="#" data-toast="Docs — demo">Documentation</a><a href="#" data-toast="API — demo">API</a><a href="#" data-toast="Status — operational">Status</a>
+      <form class="footer-newsletter demo-form" data-success="구독 감사합니다!" style="display:flex;gap:8px;margin-top:12px"><input type="email" placeholder="Email" required><button type="submit">→</button></form>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 BLOCKFIN Inc.</span><span><a href="#" data-toast="Privacy — demo">Privacy</a> · <a href="#" data-toast="Terms — demo">Terms</a></span></div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

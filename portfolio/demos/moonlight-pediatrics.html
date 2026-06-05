@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>달빛소아과의원 — MOONLIGHT PEDIATRICS | 프리미엄 소아과 클리닉</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Nunito', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFBF5;
+  --text: #1E3A5F;
+  --text-muted: #5A7A9E;
+  --accent: #3B82C4;
+  --accent-light: #E8F4FC;
+  --accent-dark: #2563A8;
+  --accent-warm: #F5B942;
+  --accent-warm-light: #FFF4D6;
+  --accent-text: #fff;
+  --border: #D4E6F5;
+  --nav-bg: rgba(255,251,245,0.96);
+  --footer-bg: #1E3A5F;
+  --card-bg: #fff;
+  --btn-radius: 12px;
+  --card-radius: 16px;
+  --footer-text: rgba(255,255,255,0.65);
+}
+
+.site-nav .logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  color: var(--accent-dark);
+}
+
+.site-nav .logo strong {
+  font-size: 1.05em;
+  letter-spacing: -0.02em;
+}
+
+.site-nav .logo span {
+  font-size: 0.58em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.nav-cta { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); }
+
+/* Hero */
+.hero {
+  background: linear-gradient(160deg, #FFF9ED 0%, #E8F4FC 45%, #FFFBF5 100%);
+  padding: clamp(60px, 10vw, 100px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -5%;
+  width: 50%;
+  height: 140%;
+  background: radial-gradient(ellipse, rgba(245,185,66,0.12), transparent 60%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: -10%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(59,130,196,0.08), transparent 65%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(59,130,196,0.1);
+}
+
+.hero-badge::before {
+  content: '🌙';
+  font-size: 0.9rem;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.28;
+  margin-bottom: 20px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+  position: relative;
+}
+
+.hero h1 em::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: rgba(245,185,66,0.35);
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.hero-grid > div > p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-accent {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(59,130,196,0.35);
+}
+
+.btn-light {
+  padding: 14px 28px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-light:hover {
+  border-color: var(--accent-warm);
+  background: var(--accent-warm-light);
+}
+
+.hero-visual {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(59,130,196,0.18);
+}
+
+.hero-visual img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.hero-stats {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.hero-stat {
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  padding: 14px 10px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+.hero-stat .num {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.hero-stat .lbl {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.hero-deco {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 6px;
+}
+
+.hero-deco span {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-warm-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(245,185,66,0.25);
+}
+
+/* Trust strip */
+.trust-strip {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0;
+}
+
+.trust-strip .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.trust-item .ico {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* Services */
+.services-section { background: #fff; }
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 3vw, 28px);
+}
+
+.service-card {
+  padding: clamp(28px, 4vw, 36px);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent), var(--accent-warm));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(59,130,196,0.1);
+}
+
+.service-card:hover::before { opacity: 1; }
+
+.service-card .icon {
+  width: 56px;
+  height: 56px;
+  background: var(--accent-light);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.service-card:nth-child(even) .icon {
+  background: var(--accent-warm-light);
+}
+
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.service-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.service-card .tag {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.service-card:nth-child(even) .tag {
+  background: var(--accent-warm-light);
+  color: #B8860B;
+}
+
+/* Vaccination */
+.vaccine-section { background: var(--bg); }
+
+.vaccine-wrap {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(59,130,196,0.06);
+}
+
+.vaccine-note {
+  padding: 20px 28px;
+  background: var(--accent-warm-light);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.vaccine-note strong { color: var(--accent-dark); }
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.schedule-table thead {
+  background: var(--accent-light);
+}
+
+.schedule-table th {
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-size: 0.82rem;
+}
+
+.schedule-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+
+.schedule-table tbody tr:last-child td { border-bottom: none; }
+
+.schedule-table tbody tr:hover { background: rgba(232,244,252,0.4); }
+
+.schedule-table .age {
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  width: 100px;
+}
+
+.schedule-table .type {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+
+.schedule-table .type.national {
+  background: #DCFCE7;
+  color: #166534;
+}
+
+/* Doctors */
+.doctors-section { background: #fff; }
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 4vw, 40px);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.doctor-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(59,130,196,0.12);
+}
+
+.doctor-photo {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.doctor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doctor-info {
+  padding: clamp(24px, 3vw, 32px);
+}
+
+.doctor-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.doctor-info .role {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.doctor-info .creds {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.doctor-info .spec {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--accent-warm-light);
+  color: #9A6B00;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Gallery */
+.gallery-section { background: var(--bg); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 2vw, 16px);
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.gallery-item:hover img { transform: scale(1.06); }
+
+.gallery-item.wide {
+  grid-column: span 2;
+  aspect-ratio: 2/1;
+}
+
+.gallery-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Parent guides */
+.guides-section { background: #fff; }
+
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.guide-box {
+  padding: 28px 22px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.guide-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.guide-box .icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-warm-light));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.guide-box h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.guide-box p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Reviews */
+.reviews-section { background: var(--bg); }
+
+.review-card {
+  border-color: var(--border);
+  height: 100%;
+}
+
+.review-card .child-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-warm-light);
+  color: #9A6B00;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+/* FAQ */
+.faq-section { background: #fff; }
+
+/* Appointment */
+.appointment-section { background: var(--bg); }
+
+.appoint-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.appoint-info .section-desc { margin-bottom: 32px; }
+
+.appoint-features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appoint-feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.appoint-feature .num {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-warm-light);
+  color: var(--accent-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.appoint-feature strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.appoint-feature span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.appoint-grid .btn-accent {
+  width: 100%;
+  margin-top: 8px;
+  padding: 16px;
+}
+
+/* Location */
+.location-section { background: #fff; }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.location-detail .ico {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.location-detail strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.location-detail span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.parking-box {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--accent-warm-light);
+  border: 1px solid rgba(245,185,66,0.3);
+  border-radius: var(--card-radius);
+}
+
+.parking-box h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.parking-box p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.map-box {
+  background: linear-gradient(135deg, #E8F4FC, #D4E6F5);
+}
+
+/* CTA band */
+.cta-band {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff;
+}
+
+.cta-band .section-title { color: #fff; }
+.cta-band .section-desc { color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto 28px; }
+
+.cta-band .btn-light {
+  background: #fff;
+  border-color: #fff;
+  color: var(--accent-dark);
+}
+
+/* Footer */
+.footer-brand .logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 16px;
+  display: block;
+  line-height: 1.3;
+}
+
+.footer-brand .logo small {
+  display: block;
+  font-size: 0.65em;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .trust-strip .container { grid-template-columns: repeat(2, 1fr); }
+  .service-grid { grid-template-columns: 1fr; }
+  .doctor-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .guides-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item.wide { grid-column: span 2; }
+  .appoint-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+  .schedule-table { font-size: 0.8rem; }
+  .schedule-table th, .schedule-table td { padding: 12px 14px; }
+}
+
+@media (max-width: 768px) {
+  .trust-strip .container { grid-template-columns: 1fr; }
+  .guides-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .gallery-item.wide { grid-column: span 1; aspect-ratio: 1; }
+}
+
+@media (max-width: 480px) {
+  .hero-stats { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">
+    <strong>달빛소아과의원</strong>
+    <span>MOONLIGHT PEDIATRICS</span>
+  </a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#services">진료안내</a>
+    <a href="#vaccination">예방접종</a>
+    <a href="#doctors">의료진</a>
+    <a href="#facility">시설</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#appointment" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">서울대병원 출신 소아청소년과 전문의 · 12년 프리미엄 소아과</div>
+        <h1>우리 아이의 건강한<br><em>오늘과 내일</em>을 함께합니다</h1>
+        <p>달빛소아과의원은 아이 한 명 한 명을 가족처럼 돌보는 프리미엄 소아과입니다. 따뜻한 진료 환경과 체계적인 성장·예방 관리로, 부모님의 마음까지 편안한 진료를 약속드립니다.</p>
+        <div class="hero-actions">
+          <a href="#appointment" class="btn-accent">온라인 예약하기</a>
+          <a href="#services" class="btn-light">진료 안내 보기</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-deco">
+          <span>🧸</span>
+          <span>💙</span>
+          <span>🌟</span>
+        </div>
+        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&q=80" alt="달빛소아과의원 — 아이와 의료진">
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">12+</div><div class="lbl">운영 연수</div></div>
+          <div class="hero-stat"><div class="num">8,500+</div><div class="lbl">누적 환아</div></div>
+          <div class="hero-stat"><div class="num">99%</div><div class="lbl">재방문율</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-item"><div class="ico">🏥</div>소아청소년과 전문의 2인 진료</div>
+    <div class="trust-item"><div class="ico">💉</div>국가예방접종 지정 의료기관</div>
+    <div class="trust-item"><div class="ico">🌙</div>야간·토요 진료 운영</div>
+    <div class="trust-item"><div class="ico">🛡️</div>소아 전용 무균 진료실</div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">진료 안내</h2>
+      <p class="section-desc">신생아부터 청소년까지, 성장 단계별 맞춤 진료와 예방 관리를 제공합니다.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="icon">🩺</div>
+        <h3>일반진료</h3>
+        <p>감기, 발열, 소화기·호흡기 질환 등 소아 전반의 급·만성 질환을 정확하게 진단합니다. 소아 전용 청진기와 무통 채혈 시스템으로 아이의 불안을 최소화하며, 입원이 필요한 경우 인근 대학병원과 신속 연계합니다.</p>
+        <span class="tag">24시간 응급 상담</span>
+      </div>
+      <div class="service-card">
+        <div class="icon">💉</div>
+        <h3>예방접종</h3>
+        <p>국가예방접종 및 추가 권장 백신을 안전하게 시행합니다. 접종 전 건강 상태 확인, 접종 후 30분 관찰실 운영으로 부작용에 대비하며, 개인별 접종 스케줄 카드를 발급해 드립니다.</p>
+        <span class="tag">국가 지정 접종기관</span>
+      </div>
+      <div class="service-card">
+        <div class="icon">📏</div>
+        <h3>성장클리닉</h3>
+        <p>키·몸무게 성장 곡선 분석, 골연령 검사, 성조숙증·저신장 상담을 제공합니다. 영양·수면·운동 가이드와 함께 성장 호르몬 치료 필요 여부를 체계적으로 평가합니다.</p>
+        <span class="tag">성장 곡선 정밀 분석</span>
+      </div>
+      <div class="service-card">
+        <div class="icon">🌿</div>
+        <h3>알레르기</h3>
+        <p>아토피, 천식, 알레르기 비염, 식품 알레르기 등 면역 관련 질환을 전문적으로 관리합니다. 혈액·피부 반응 검사, 면역치료 상담 및 생활 습관 교육을 병행합니다.</p>
+        <span class="tag">면역치료 · 식이 상담</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vaccination Schedule -->
+<section class="vaccine-section" id="vaccination">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Vaccination</div>
+      <h2 class="section-title">예방접종 일정</h2>
+      <p class="section-desc">국가예방접종 지원 사업 대상 백신 일정입니다. 개인별 접종 이력에 따라 조정될 수 있습니다.</p>
+    </div>
+    <div class="vaccine-wrap">
+      <div class="vaccine-note">
+        <strong>안내:</strong> 접종 전날 발열·콧물이 있으면 연기해 주세요. 접종 당일 가벼운 식사 후 내원하시고, 접종 후 30분간 관찰실에서 안정을 취해 주세요. 자세한 상담은 <strong>02-555-0123</strong>으로 문의해 주세요.
+      </div>
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>연령</th>
+            <th>접종명</th>
+            <th>횟수 / 비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="age">출생</td>
+            <td><span class="type national">국가</span>B형 간염 (HB) 1차</td>
+            <td>출생 직후 · 1개월 내 2·3차</td>
+          </tr>
+          <tr>
+            <td class="age">2개월</td>
+            <td><span class="type national">국가</span>DTaP, IPV, Hib, 폐렴구균, 로타</td>
+            <td>1차 · 로타는 경구 접종</td>
+          </tr>
+          <tr>
+            <td class="age">4개월</td>
+            <td><span class="type national">국가</span>DTaP, IPV, Hib, 폐렴구균, 로타</td>
+            <td>2차</td>
+          </tr>
+          <tr>
+            <td class="age">6개월</td>
+            <td><span class="type national">국가</span>DTaP, IPV, Hib, 폐렴구균, B형 간염</td>
+            <td>3차 · B형 3차(미접종 시)</td>
+          </tr>
+          <tr>
+            <td class="age">12개월</td>
+            <td><span class="type national">국가</span>MMR, 수두, A형, 일본뇌염</td>
+            <td>1차 · MMR·수두 동시 가능</td>
+          </tr>
+          <tr>
+            <td class="age">12~15개월</td>
+            <td><span class="type national">국가</span>DTaP, Hib, 폐렴구균</td>
+            <td>4차 · 강화접종</td>
+          </tr>
+          <tr>
+            <td class="age">4~6세</td>
+            <td><span class="type national">국가</span>DTaP, IPV, MMR, 일본뇌염</td>
+            <td>5차 · 취학 전 권장</td>
+          </tr>
+          <tr>
+            <td class="age">11~12세</td>
+            <td><span class="type">추가</span>Tdap, HPV(여), 수막구균</td>
+            <td>청소년기 · 상담 후 접종</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Doctors -->
+<section class="doctors-section" id="doctors">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Medical Team</div>
+      <h2 class="section-title">의료진 소개</h2>
+      <p class="section-desc">대학병원 소아청소년과 출신 전문의 2인이 아이의 건강을 책임집니다.</p>
+    </div>
+    <div class="doctor-grid">
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&q=80" alt="한지우 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>한지우 원장</h3>
+          <div class="role">대표원장 · 소아청소년과 전문의</div>
+          <p class="creds">서울대학교 의과대학 졸업<br>서울대학교병원 소아청소년과 전문의<br>대한소아청소년과학회 정회원</p>
+          <span class="spec">신생아·영유아 · 성장클리닉</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80" alt="오서연 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>오서연 원장</h3>
+          <div class="role">원장 · 소아청소년과 전문의</div>
+          <p class="creds">연세대학교 의과대학 졸업<br>세브란스병원 소아알레르기 전임의<br>대한소아알레르기호흡기학회 정회원</p>
+          <span class="spec">알레르기 · 천식 · 아토피</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Facility Gallery -->
+<section class="gallery-section" id="facility">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Facility</div>
+      <h2 class="section-title">시설 안내</h2>
+      <p class="section-desc">아이가 편안하게 머무를 수 있도록 설계된 프리미엄 소아 전용 공간입니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80" alt="로비 및 대기실">
+        <span class="gallery-tag">따뜻한 로비 · 놀이 대기 공간</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1581595220892-b0739db3a8a2?w=400&q=80" alt="진료실">
+        <span class="gallery-tag">소아 전용 진료실</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&q=80" alt="접종실">
+        <span class="gallery-tag">예방접종실</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1503454537845-ff1eef4c496f?w=400&q=80" alt="키즈존">
+        <span class="gallery-tag">키즈 놀이존</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1587854692152-cf660fbb3b3e?w=400&q=80" alt="수유·휴게">
+        <span class="gallery-tag">수유·휴게실</span>
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&q=80" alt="성장검사실">
+        <span class="gallery-tag">성장검사 · 관찰실</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Parent Guides -->
+<section class="guides-section" id="guides">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Parent Guide</div>
+      <h2 class="section-title">부모님 안내</h2>
+      <p class="section-desc">처음 방문하시는 부모님을 위한 필수 안내입니다.</p>
+    </div>
+    <div class="guides-grid">
+      <div class="guide-box">
+        <div class="icon">📋</div>
+        <h4>초진 준비물</h4>
+        <p>건강보험증, 소아청소년 건강검진표(있을 경우), 이전 병원 진료·접종 기록을 지참해 주세요.</p>
+      </div>
+      <div class="guide-box">
+        <div class="icon">⏰</div>
+        <h4>진료 시간</h4>
+        <p>평일 09:00–20:00, 토요일 09:00–14:00. 일·공휴일 휴진. 야간 진료는 18:00 이후 예약 우선입니다.</p>
+      </div>
+      <div class="guide-box">
+        <div class="icon">🚗</div>
+        <h4>주차 안내</h4>
+        <p>건물 지하 1·2층 주차 2시간 무료. 만차 시 인근 공영주차장 안내해 드립니다.</p>
+      </div>
+      <div class="guide-box">
+        <div class="icon">📞</div>
+        <h4>응급 연락</h4>
+        <p>야간·휴일 고열·경련 등 응급 시 02-555-0124로 연락 주시면 대학병원 응급실과 연계합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">환자 후기</h2>
+      <p class="section-desc">달빛소아과를 찾아주신 부모님들의 진심 어린 후기입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <span class="child-tag">만 2세 · 예방접종</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>접종이 무서워하던 우리 아이가 간호사 선생님과 원장님 덕분에 울지 않고 맞았어요. 접종 후 관찰실도 편해서 다음에도 여기로 올 거예요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김○○ 보호자</strong><span>2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="child-tag">만 5세 · 일반진료</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>밤늦게 갑자기 열이 나서 방문했는데 야간 진료가 있어서 정말 다행이었어요. 원장님이 꼼꼼히 설명해 주셔서 불안이 많이 줄었습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이○○ 보호자</strong><span>2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="child-tag">만 8세 · 성장클리닉</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>키 걱정으로 성장클리닉 상담을 받았는데, 곡선 분석과 생활 습관 가이드를 함께 받아서 방향이 잡혔어요. 6개월 후 재검사도 예약해 두었습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박○○ 보호자</strong><span>2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="child-tag">만 3세 · 알레르기</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>아토피 때문에 여러 병원을 다녔는데, 오서연 원장님께서 식이·생활 관리까지 체계적으로 잡아 주셨어요. 가려움이 눈에 띄게 줄었습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최○○ 보호자</strong><span>2024.12</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="child-tag">신생아 · 일반진료</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>첫아이라 걱정이 많았는데, 한지우 원장님이 신생아 검진 때마다 차근차근 알려 주셔서 믿고 맡기고 있어요. 수유실도 깨끗해서 좋아요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정○○ 보호자</strong><span>2024.11</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="child-tag">만 6세 · 예방접종</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>접종 스케줄 카드 덕분에 놓치는 백신 없이 관리하고 있어요. 직원분들이 모두 친절하고 대기실도 아이가 지루해하지 않게 잘 되어 있습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">윤</div>
+          <div><strong>윤○○ 보호자</strong><span>2024.10</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">부모님들이 자주 문의하시는 내용을 정리했습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">예약 없이 당일 진료가 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">평일·토요일 모두 당일 접수 가능합니다. 다만 야간 시간대와 주말은 대기가 길 수 있어, 가능하시면 전화(02-555-0123) 또는 온라인 예약을 권장드립니다. 응급 환자는 항상 우선 진료합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">국가예방접종 비용은 무료인가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">국가예방접종 사업 대상 백신은 본인부담 없이 접종 가능합니다. 다만 동시접종 수, 의료기관 종류에 따라 일부 항목은 본인부담이 있을 수 있으며, 접종 전 안내해 드립니다. 추가(자비) 백신은 별도 비용이 발생합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">야간·토요 진료는 어떻게 하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">평일 18:00–20:00 야간 진료, 토요일 09:00–14:00 진료를 운영합니다. 야간에는 예약 환자를 우선하며, 당일 접수도 가능합니다. 일요일·공휴일은 휴진이며, 응급 시 응급 연락처로 문의해 주세요.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">성장클리닉은 몇 살부터 받을 수 있나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">만 2세부터 성장 곡선 검사·상담이 가능하며, 부모님 키와 함께 골연령·호르몬 검사 필요 여부를 평가합니다. 취학 전·사춘기 전 정기 검진을 권장드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차는 어떻게 이용하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">건물 지하 1·2층 기계식 주차장을 이용하실 수 있으며, 진료 접수 시 2시간 무료 주차권을 드립니다. 만차 시 안내데스크에서 인근 공영주차장 위치를 안내해 드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">다른 병원 진료 기록이 있어도 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">이전 병원의 진료·접종 기록, 영상 자료(CD 등)를 가져오시면 연속적인 관리에 도움이 됩니다. 기록이 없어도 진료 가능하며, 필요 시 검사를 통해 상태를 파악합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Appointment -->
+<section class="appointment-section" id="appointment">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Appointment</div>
+      <h2 class="section-title">온라인 예약</h2>
+      <p class="section-desc">아래 양식을 작성해 주시면 확인 후 연락드립니다.</p>
+    </div>
+    <div class="appoint-grid">
+      <div class="appoint-info">
+        <p class="section-desc">예약 확정은 전화 또는 문자로 안내해 드립니다. 당일 급한 증상은 전화로 먼저 문의해 주세요.</p>
+        <div class="appoint-features">
+          <div class="appoint-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>예약 접수</strong>
+              <span>양식 제출 후 1영업일 내 연락</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>일정 확정</strong>
+              <span>희망 일시 조율 및 안내 문자 발송</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>내원</strong>
+              <span>예약 10분 전 도착 · 건강보험증 지참</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="예약 접수되었습니다! 확인 후 연락드릴게요.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="parent-name">보호자 성함</label>
+            <input type="text" id="parent-name" name="parent" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group">
+            <label for="child-name">아이 이름</label>
+            <input type="text" id="child-name" name="child" placeholder="홍아이" required>
+          </div>
+          <div class="form-group">
+            <label for="child-age">나이</label>
+            <input type="text" id="child-age" name="age" placeholder="만 3세" required>
+          </div>
+          <div class="form-group">
+            <label for="visit-type">진료 유형</label>
+            <select id="visit-type" name="type" required>
+              <option value="">선택해 주세요</option>
+              <option>일반진료</option>
+              <option>예방접종</option>
+              <option>성장클리닉</option>
+              <option>알레르기</option>
+              <option>초진 상담</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">희망 일시</label>
+            <input type="text" id="date" name="date" placeholder="예: 3월 15일 오후 2시">
+          </div>
+          <div class="form-group full">
+            <label for="memo">증상 / 문의 내용</label>
+            <textarea id="memo" name="memo" placeholder="아이의 증상이나 접종 종류, 상담 내용을 적어 주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-accent">예약 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Hours & Location -->
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Visit Us</div>
+      <h2 class="section-title">진료시간 · 오시는 길</h2>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>달빛소아과의원</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 강남구 테헤란로 152, 달빛메디컬타워 3층<br>강남역 3번 출구 도보 4분</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>전화</strong>
+            <span>02-555-0123 (진료) · 02-555-0124 (응급)</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>09:00 – 20:00 (야간 18:00–20:00)</td></tr>
+          <tr><td>토요일</td><td>09:00 – 14:00</td></tr>
+          <tr><td>점심시간</td><td>13:00 – 14:00 (평일)</td></tr>
+          <tr><td>일·공휴일</td><td>휴진</td></tr>
+        </table>
+        <div class="parking-box">
+          <h4>🚗 주차 안내</h4>
+          <p>건물 지하 1·2층 주차 2시간 무료. 접수 시 주차권 등록해 드립니다.</p>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>달빛소아과의원</strong>
+          <span>강남역 3번 출구 · 도보 4분</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container">
+    <h2 class="section-title">우리 아이 건강, 달빛과 함께하세요</h2>
+    <p class="section-desc">편안한 진료 환경과 전문적인 소아 의료로 가족의 든든한 동반자가 되겠습니다.</p>
+    <a href="#appointment" class="btn-light">지금 예약하기</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">달빛소아과의원<small>MOONLIGHT PEDIATRICS</small></span>
+      <p>아이의 건강한 성장을 위한 프리미엄 소아과 클리닉. 신생아부터 청소년까지, 가족처럼 따뜻한 진료를 약속합니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 강남구 테헤란로 152, 3층</span>
+        <span>📞 02-555-0123</span>
+        <span>✉️ hello@moonlight-pediatrics.kr</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>진료 안내</h4>
+      <a href="#services">일반진료</a>
+      <a href="#vaccination">예방접종</a>
+      <a href="#services">성장클리닉</a>
+      <a href="#services">알레르기</a>
+    </div>
+    <div class="footer-col">
+      <h4>병원 안내</h4>
+      <a href="#doctors">의료진</a>
+      <a href="#facility">시설</a>
+      <a href="#guides">부모님 안내</a>
+      <a href="#location">오시는 길</a>
+    </div>
+    <div class="footer-col">
+      <h4>고객 지원</h4>
+      <a href="#reviews">환자 후기</a>
+      <a href="#faq">FAQ</a>
+      <a href="#appointment">온라인 예약</a>
+      <a href="#" data-toast="개인정보처리방침 페이지는 데모입니다.">개인정보처리방침</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 달빛소아과의원 MOONLIGHT PEDIATRICS. All rights reserved.</span>
+    <span>사업자등록번호 123-45-67890 · 대표 한지우</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

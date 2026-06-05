@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Lounge — 프리미엄 뷰티 살롱</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFBFC;
+  --text: #3B1228;
+  --text-muted: #8B5A72;
+  --accent: #9D174D;
+  --accent-text: #fff;
+  --border: #F5D0E0;
+  --nav-bg: rgba(255,251,252,0.95);
+  --footer-bg: #3B1228;
+  --card-bg: #fff;
+  --btn-radius: 2px;
+  --card-radius: 4px;
+  --title-weight: 400;
+  --logo-weight: 400;
+  --logo-spacing: 0.2em;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(59,18,40,0.88) 0%, rgba(59,18,40,0.35) 55%, rgba(59,18,40,0.15) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(48px, 10vw, 100px) clamp(20px, 4vw, 48px);
+  color: #fff;
+  max-width: 640px;
+}
+
+.hero-content .label {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 18px;
+  opacity: 0.9;
+}
+
+.hero-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.12;
+  margin-bottom: 18px;
+}
+
+.hero-content p {
+  font-size: clamp(0.9rem, 2vw, 1.08rem);
+  opacity: 0.92;
+  line-height: 1.8;
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-hero {
+  display: inline-block;
+  padding: 14px 36px;
+  border: 1px solid rgba(255,255,255,0.85);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  transition: all 0.3s;
+}
+
+.btn-hero:hover { background: #fff; color: var(--text); }
+
+.btn-hero-fill {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-hero-fill:hover {
+  background: #831843;
+  border-color: #831843;
+  color: #fff;
+}
+
+/* Services */
+.services { background: var(--bg); }
+
+.services-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.services-header .section-desc { margin: 0 auto; }
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 28px);
+}
+
+.svc-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  border-radius: var(--card-radius);
+}
+
+.svc-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.svc-card:hover img { transform: scale(1.06); }
+
+.svc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(59,18,40,0.82) 0%, transparent 65%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px 24px;
+  color: #fff;
+}
+
+.svc-overlay h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.svc-overlay p {
+  font-size: 0.82rem;
+  opacity: 0.88;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.svc-overlay .price {
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+/* Process */
+.process { background: #FDF2F8; }
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(10px, 2vw, 16px);
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  aspect-ratio: 1;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img { transform: scale(1.05); }
+
+.gallery-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 12px;
+  background: rgba(255,255,255,0.92);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  border-radius: 2px;
+}
+
+.gallery-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
+
+/* Team */
+.team { background: #FDF2F8; }
+
+/* Reviews */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.review-card blockquote {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.75;
+}
+
+/* FAQ */
+.faq { background: #FDF2F8; }
+
+/* Reserve */
+.reserve {
+  background: var(--bg);
+}
+
+.reserve-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.reserve-info h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.reserve-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.reserve-perks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.reserve-perks li::before {
+  content: '✦';
+  color: var(--accent);
+  font-size: 0.7rem;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* Location */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.contact-list .icon {
+  width: 36px;
+  height: 36px;
+  background: #FDF2F8;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.contact-list strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.82rem;
+  margin-bottom: 2px;
+}
+
+.hours-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px;
+}
+
+.hours-wrap h4 {
+  font-size: 0.88rem;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+/* Footer extras */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  transition: all 0.25s;
+}
+
+.footer-social a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .svc-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .reserve-wrap { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+  .gallery-item.wide { grid-column: span 1; aspect-ratio: 1; }
+}
+
+@media (max-width: 768px) {
+  .svc-grid,
+  .gallery-grid,
+  .reviews-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">BEAUTY LOUNGE</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#services">SERVICES</a>
+    <a href="#process">PROCESS</a>
+    <a href="#gallery">GALLERY</a>
+    <a href="#reviews">REVIEWS</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">CONTACT</a>
+    <a href="#reserve" class="nav-cta">RESERVE</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=80" alt="Beauty Lounge 인테리어">
+  </div>
+  <div class="hero-content">
+    <div class="label">PREMIUM BEAUTY · 강남 압구정</div>
+    <h1>당신만의<br>아름다움을<br>발견하세요</h1>
+    <p>1:1 맞춤 스킨케어와 프리미엄 뷰티 케어.<br>15년 노하우의 전문가가 당신의 빛나는 순간을 함께합니다.</p>
+    <div class="hero-actions">
+      <a href="#reserve" class="btn-hero btn-hero-fill">온라인 예약</a>
+      <a href="#services" class="btn-hero">서비스 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">프리미엄 케어 프로그램</h2>
+      <p class="section-desc">피부 타입과 라이프스타일에 맞춘 1:1 맞춤 뷰티 케어를 제공합니다. 모든 시술은 국제 자격증 보유 전문가가 직접 진행합니다.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80" alt="페이셜 케어">
+        <div class="svc-overlay">
+          <h3>페이셜</h3>
+          <p>피부 타입 맞춤 딥클렌징 · 수분 · 안티에이징</p>
+          <div class="price">₩80,000~</div>
+        </div>
+      </div>
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80" alt="네일 아트">
+        <div class="svc-overlay">
+          <h3>네일</h3>
+          <p>젤 네일 · 프리미엄 아트 · 케어 매니큐어</p>
+          <div class="price">₩50,000~</div>
+        </div>
+      </div>
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80" alt="스파 테라피">
+        <div class="svc-overlay">
+          <h3>스파</h3>
+          <p>아로마 오일 전신 릴렉싱 · 핫스톤 테라피</p>
+          <div class="price">₩120,000~</div>
+        </div>
+      </div>
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80" alt="왁싱">
+        <div class="svc-overlay">
+          <h3>왁싱</h3>
+          <p>브라질리언 · 바디 · 페이스 섬세 왁싱</p>
+          <div class="price">₩40,000~</div>
+        </div>
+      </div>
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80" alt="메이크업">
+        <div class="svc-overlay">
+          <h3>메이크업</h3>
+          <p>데일리 · 웨딩 · 특별 행사 프로 메이크업</p>
+          <div class="price">₩70,000~</div>
+        </div>
+      </div>
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80" alt="패키지">
+        <div class="svc-overlay">
+          <h3>패키지</h3>
+          <p>페이셜 + 스파 + 메이크업 올인원 코스</p>
+          <div class="price">₩250,000~</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">시술 프로세스</h2>
+      <p class="section-desc">첫 방문부터 애프터케어까지, 체계적인 4단계 케어 시스템으로 최상의 결과를 약속합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>상담</h4>
+        <p>피부 고민과 원하시는 스타일을 자세히 듣고, 라이프스타일에 맞는 케어 방향을 함께 설계합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>피부진단</h4>
+        <p>전문 피부 분석기로 수분·유분·탄력을 측정하고, 개인별 맞춤 시술 플랜을 수립합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>시술</h4>
+        <p>프리미엄 유기농 제품과 최신 장비로 1:1 프라이빗 공간에서 편안하게 시술을 진행합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>애프터케어</h4>
+        <p>시술 후 홈케어 가이드를 제공하고, 7일간 A/S 상담으로 지속적인 관리를 돕습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">Before & After</h2>
+      <p class="section-desc">실제 고객님들의 변화를 확인해 보세요. 모든 사진은 동의 하에 게시되었습니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=800&q=80" alt="페이셜 Before & After">
+        <span class="gallery-tag">페이셜 · 4주 후</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500&q=80" alt="네일 아트">
+        <span class="gallery-tag">네일</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=500&q=80" alt="스킨케어 결과">
+        <span class="gallery-tag">스킨케어</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&q=80" alt="메이크업">
+        <span class="gallery-tag">메이크업</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=500&q=80" alt="스파">
+        <span class="gallery-tag">스파</span>
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80" alt="패키지 Before & After">
+        <span class="gallery-tag">패키지 · 6주 후</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team" id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Team</div>
+      <h2 class="section-title">전문 스타일리스트</h2>
+      <p class="section-desc">국제 뷰티 자격증을 보유한 15년 이상 경력의 전문가들이 직접 케어합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="team-card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=500&q=80" alt="이수진 디렉터">
+        </div>
+        <h4>이수진</h4>
+        <div class="role">수석 에스테티션 · 디렉터</div>
+        <p>CIDESCO 국제자격 · 페이셜·안티에이징 전문 · 18년 경력</p>
+      </div>
+      <div class="team-card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf6?w=500&q=80" alt="박하은 네일리스트">
+        </div>
+        <h4>박하은</h4>
+        <div class="role">수석 네일리스트</div>
+        <p>JNAA 자격 · 젤·아트 네일 전문 · 네일 대회 수상</p>
+      </div>
+      <div class="team-card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80" alt="최윤아 메이크업 아티스트">
+        </div>
+        <h4>최윤아</h4>
+        <div class="role">메이크업 아티스트</div>
+        <p>KBS·MBC 방송 메이크업 · 웨딩·특수 메이크업 전문</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">고객 후기</h2>
+      <p class="section-desc">Beauty Lounge를 방문하신 고객님들의 생생한 리뷰입니다.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"피부가 정말 좋아졌어요. 상담부터 시술까지 너무 꼼꼼하고 친절해서 강남에서 제일 좋은 살롱이에요."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div>
+            <strong>김지현 님</strong>
+            <span>페이셜 케어 · 재방문 5회</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"네일 아트가 너무 예뻐요! 디자인 상담도 세심하고 오래가서 매번 여기만 옵니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div>
+            <strong>이서연 님</strong>
+            <span>젤 네일 아트</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"스파 코스 받고 나면 몸이 정말 가벼워져요. 프라이빗 룸이라 편안하게 힐링할 수 있어요."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div>
+            <strong>박민준 님</strong>
+            <span>아로마 스파 테라피</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"웨딩 메이크업 완벽했어요! 사진에서도 자연스럽고 하루 종일 무너지지 않았습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div>
+            <strong>정하은 님</strong>
+            <span>웨딩 메이크업</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"왁싱이 이렇게 편안할 수 있다니! 통증 관리도 잘 해주시고 결과도 깔끔해요."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div>
+            <strong>한소희 님</strong>
+            <span>브라질리언 왁싱</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"패키지 코스 강추! 페이셜, 스파, 메이크업을 한 번에 받을 수 있어서 특별한 날에 딱이에요."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">윤</div>
+          <div>
+            <strong>윤채원 님</strong>
+            <span>프리미엄 패키지</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">예약과 시술에 대해 궁금하신 점을 확인해 보세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" type="button">예약은 어떻게 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">홈페이지 온라인 예약, 전화(02-9876-5432), 또는 카카오톡 채널을 통해 예약하실 수 있습니다. 당일 예약은 전화 문의 부탁드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">시술 시간은 얼마나 걸리나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">시술 종류에 따라 다릅니다. 페이셜 60~90분, 네일 60~120분, 스파 90~120분, 메이크업 60~90분, 패키지 3~4시간 소요됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">예약 변경·취소는 어떻게 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">방문 24시간 전까지 무료 변경·취소가 가능합니다. 당일 취소 시 시술 금액의 50%가 취소 수수료로 부과됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">주차가 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">건물 지하 1~2층 주차장을 이용하실 수 있습니다. 시술 고객님께는 2시간 무료 주차를 제공해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">첫 방문 시 준비할 것이 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">특별히 준비하실 것은 없습니다. 메이크업 시술의 경우 클렌징 후 진행되며, 모든 제품과 도구는 살롱에서 제공됩니다. 피부 알레르기가 있으시면 상담 시 말씀해 주세요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reserve -->
+<section class="reserve" id="reserve">
+  <div class="container">
+    <div class="reserve-wrap">
+      <div class="reserve-info">
+        <div class="section-label">Reserve</div>
+        <h3>온라인 예약</h3>
+        <p class="section-desc">원하시는 시술과 날짜를 선택해 주시면 확인 후 연락드립니다. 평일 오전 시간대 예약 시 10% 할인 혜택이 적용됩니다.</p>
+        <ul class="reserve-perks">
+          <li>예약 확정 시 카카오톡으로 안내 메시지 발송</li>
+          <li>첫 방문 고객 페이셜 20% 할인 쿠폰 제공</li>
+          <li>시술 후 7일간 무료 A/S 상담</li>
+          <li>패키지 예약 시 전용 프라이빗 룸 배정</li>
+        </ul>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="예약 요청이 접수되었습니다! 확인 후 연락드릴게요.">
+          <div class="form-group">
+            <label for="service">시술 선택</label>
+            <select id="service" name="service" required>
+              <option value="">시술을 선택해 주세요</option>
+              <option value="facial">페이셜 케어</option>
+              <option value="nail">네일 아트</option>
+              <option value="spa">스파 테라피</option>
+              <option value="waxing">왁싱</option>
+              <option value="makeup">메이크업</option>
+              <option value="package">프리미엄 패키지</option>
+            </select>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="date">희망 날짜</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="time">희망 시간</label>
+              <select id="time" name="time" required>
+                <option value="">시간 선택</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">예약 신청하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">오시는 길 & 운영 시간</h2>
+      <p class="section-desc">강남 압구정역 3번 출구에서 도보 5분 거리에 위치해 있습니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>Beauty Lounge</h3>
+        <ul class="contact-list">
+          <li>
+            <span class="icon">📍</span>
+            <div>
+              <strong>주소</strong>
+              서울 강남구 압구정로 123, 3층
+            </div>
+          </li>
+          <li>
+            <span class="icon">📞</span>
+            <div>
+              <strong>전화</strong>
+              02-9876-5432
+            </div>
+          </li>
+          <li>
+            <span class="icon">✉️</span>
+            <div>
+              <strong>이메일</strong>
+              hello@beautylounge.kr
+            </div>
+          </li>
+          <li>
+            <span class="icon">🅿️</span>
+            <div>
+              <strong>주차</strong>
+              건물 지하 주차장 · 시술 고객 2시간 무료
+            </div>
+          </li>
+        </ul>
+        <div class="hours-wrap">
+          <h4>운영 시간</h4>
+          <table class="hours-table">
+            <tr><td>화요일 – 일요일</td><td>10:00 – 21:00</td></tr>
+            <tr><td>월요일</td><td>정기 휴무</td></tr>
+            <tr><td>공휴일</td><td>10:00 – 18:00</td></tr>
+            <tr><td>라스트 오더</td><td>19:30</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>Beauty Lounge</strong>
+          <span>서울 강남구 압구정로 123</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">BEAUTY LOUNGE</span>
+      <p>15년의 노하우로 당신만의 아름다움을 찾아드립니다. 프리미엄 유기농 코스메틱과 1:1 맞춤 케어로 특별한 경험을 선사합니다.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="KakaoTalk">KT</a>
+        <a href="#" aria-label="Blog">BL</a>
+        <a href="#" aria-label="YouTube">YT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">페이셜 케어</a>
+      <a href="#services">네일 아트</a>
+      <a href="#services">스파 테라피</a>
+      <a href="#services">왁싱</a>
+      <a href="#services">메이크업</a>
+      <a href="#services">패키지</a>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <a href="#process">시술 프로세스</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#reviews">고객 후기</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a href="#contact">오시는 길</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>02-9876-5432</p>
+      <p>hello@beautylounge.kr</p>
+      <p>서울 강남구 압구정로 123</p>
+      <a href="#reserve">온라인 예약 →</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Beauty Lounge. All rights reserved.</span>
+    <span>사업자등록번호 123-45-67890 · 대표 이수진</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

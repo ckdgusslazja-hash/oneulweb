@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울중앙병원 — SEOUL CENTRAL HOSPITAL | 종합병원</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'DM Sans', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #F8FCFB;
+  --text: #0F2D2A;
+  --text-muted: #5A7A76;
+  --accent: #0D9488;
+  --accent-light: #CCFBF1;
+  --accent-dark: #0F766E;
+  --accent-text: #fff;
+  --emergency: #DC2626;
+  --emergency-bg: #FEF2F2;
+  --border: #D1E9E6;
+  --nav-bg: rgba(255,255,255,0.97);
+  --footer-bg: #0A2E2A;
+  --card-bg: #fff;
+  --btn-radius: 8px;
+  --card-radius: 14px;
+  --footer-text: rgba(255,255,255,0.62);
+}
+
+.site-nav .logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  color: var(--accent-dark);
+}
+.site-nav .logo strong { font-size: 1.02em; letter-spacing: -0.02em; }
+.site-nav .logo span {
+  font-size: 0.55em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+.nav-cta { background: var(--accent); }
+
+/* Emergency banner */
+.emergency-banner {
+  background: linear-gradient(90deg, #991B1B, var(--emergency));
+  color: #fff;
+  padding: 12px 0;
+  text-align: center;
+  font-size: clamp(0.78rem, 2vw, 0.88rem);
+  font-weight: 600;
+}
+.emergency-banner .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 28px);
+  flex-wrap: wrap;
+}
+.emergency-banner .hotline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.emergency-banner .hotline::before { content: '🚨'; }
+.emergency-banner .sep { opacity: 0.5; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(160deg, #F0FDFA 0%, #E6FFFA 45%, #F8FCFB 100%);
+  padding: clamp(56px, 9vw, 96px) 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -8%;
+  width: 50%;
+  height: 140%;
+  background: radial-gradient(ellipse, rgba(13,148,136,0.07), transparent 70%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 22px;
+  box-shadow: 0 4px 16px rgba(13,148,136,0.08);
+}
+.hero-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.28;
+  margin-bottom: 18px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-grid > div > p {
+  font-size: clamp(0.9rem, 2vw, 1.02rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 28px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-accent {
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13,148,136,0.28);
+}
+.btn-light {
+  padding: 14px 28px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+.btn-light:hover { border-color: var(--accent); background: var(--accent-light); }
+.hero-visual {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(13,148,136,0.14);
+}
+.hero-visual img {
+  width: 100%;
+  aspect-ratio: 5/4;
+  object-fit: cover;
+}
+.hero-cert {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero-cert span {
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+/* Stats */
+.stats-section {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(40px, 6vw, 56px) 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+.stat-card {
+  text-align: center;
+  padding: clamp(20px, 3vw, 28px);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+.stat-card .num {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+.stat-card .lbl {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-weight: 500;
+}
+.stat-card .ico { font-size: 1.6rem; margin-bottom: 10px; }
+
+/* About */
+.about-section { background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+.about-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(13,148,136,0.12);
+}
+.about-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.about-points {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 28px;
+}
+.about-point {
+  padding: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.about-point strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+  color: var(--accent-dark);
+}
+.about-point span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+
+/* Departments */
+.dept-section { background: #fff; }
+.dept-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 2vw, 18px);
+}
+.dept-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(18px, 3vw, 24px);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.dept-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(13,148,136,0.1);
+  border-color: var(--accent);
+}
+.dept-card .icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+.dept-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.dept-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.55; }
+
+/* Centers */
+.centers-section { background: var(--accent-light); }
+.center-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+.center-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.center-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(13,148,136,0.12);
+}
+.center-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+}
+.center-body { padding: clamp(20px, 3vw, 28px); }
+.center-body .tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+.center-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.center-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.center-body a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Doctors */
+.doctors-section { background: #fff; }
+.doctor-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(13,148,136,0.1);
+}
+.doctor-photo { aspect-ratio: 1; overflow: hidden; }
+.doctor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.doctor-card:hover .doctor-photo img { transform: scale(1.04); }
+.doctor-info { padding: clamp(18px, 3vw, 24px); }
+.doctor-info h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+.doctor-info .dept {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.doctor-info .creds {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+.doctor-info .spec {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+.doctors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+
+/* Facilities */
+.facilities-section { background: var(--bg); }
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 2vw, 16px);
+}
+.facility-item {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.facility-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.facility-item:hover img { transform: scale(1.05); }
+.facility-tag {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 16px;
+  background: linear-gradient(transparent, rgba(15,45,42,0.85));
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Checkup */
+.checkup-section { background: #fff; }
+.checkup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+  align-items: stretch;
+}
+.checkup-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.checkup-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 16px 48px rgba(13,148,136,0.15);
+  transform: scale(1.02);
+}
+.checkup-card.featured::before {
+  content: '인기';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 50px;
+}
+.checkup-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.checkup-card .price {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.checkup-card .price span { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); }
+.checkup-card .desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.checkup-list {
+  flex: 1;
+  margin-bottom: 24px;
+}
+.checkup-list li {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+.checkup-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.checkup-card .btn-accent,
+.checkup-card .btn-light {
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+}
+.checkup-card .btn-light {
+  display: block;
+  border: 1.5px solid var(--border);
+}
+
+/* Outpatient */
+.outpatient-section { background: var(--accent-light); }
+.outpatient-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+.outpatient-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+}
+.outpatient-box .icon {
+  width: 48px;
+  height: 48px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+.outpatient-box h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 14px; }
+.outpatient-box ul li {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.6;
+}
+.outpatient-box ul li:last-child { border-bottom: none; }
+.outpatient-box ul li strong { color: var(--text); font-weight: 600; }
+
+/* Reviews */
+.reviews-section { background: #fff; }
+.review-card { height: 100%; border-color: var(--border); }
+.review-card .dept-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* Appointment */
+.appointment-section { background: #fff; }
+.appoint-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+.appoint-info .section-desc { margin-bottom: 28px; }
+.appoint-features { display: flex; flex-direction: column; gap: 18px; }
+.appoint-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.appoint-feature .num {
+  width: 38px;
+  height: 38px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.88rem;
+  flex-shrink: 0;
+}
+.appoint-feature strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.appoint-feature span { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+.appoint-grid .btn-accent { width: 100%; margin-top: 8px; padding: 16px; }
+
+/* Location */
+.location-section { background: var(--bg); }
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+.location-info h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 22px;
+  color: var(--text);
+}
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.location-detail .ico {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.location-detail strong { display: block; font-size: 0.86rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+.transit-box {
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+.transit-box h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 12px; color: var(--accent-dark); }
+.transit-list { display: flex; flex-direction: column; gap: 10px; }
+.transit-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.transit-item .line {
+  padding: 3px 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.parking-box {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: var(--accent-dark);
+  line-height: 1.65;
+}
+.parking-box strong { display: block; margin-bottom: 6px; }
+
+/* Footer */
+.footer-brand .logo {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: #fff;
+  margin-bottom: 14px;
+  display: block;
+  line-height: 1.3;
+}
+.footer-brand .logo small {
+  display: block;
+  font-size: 0.6em;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.45);
+  font-weight: 500;
+  margin-top: 4px;
+}
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+.footer-contact span { font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+.footer-emergency {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(220,38,38,0.2);
+  border: 1px solid rgba(220,38,38,0.35);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #FCA5A5;
+}
+.footer-emergency strong { color: #fff; display: block; margin-bottom: 4px; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dept-grid { grid-template-columns: repeat(3, 1fr); }
+  .center-card { grid-template-columns: 1fr; }
+  .center-card img { aspect-ratio: 16/9; min-height: auto; }
+}
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .appoint-grid, .location-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .dept-grid { grid-template-columns: repeat(2, 1fr); }
+  .doctors-grid { grid-template-columns: repeat(2, 1fr); }
+  .checkup-grid { grid-template-columns: 1fr; }
+  .checkup-card.featured { transform: none; }
+  .outpatient-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .facility-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-points { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .stats-grid, .dept-grid, .doctors-grid, .reviews-grid, .facility-grid { grid-template-columns: 1fr; }
+  .center-grid { grid-template-columns: 1fr; }
+  .emergency-banner .sep { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">
+    <strong>서울중앙병원</strong>
+    <span>SEOUL CENTRAL HOSPITAL</span>
+  </a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">병원소개</a>
+    <a href="#departments">진료과</a>
+    <a href="#doctors">의료진</a>
+    <a href="#facilities">시설</a>
+    <a href="#checkup">건강검진</a>
+    <a href="#outpatient">외래안내</a>
+    <a href="#appointment" class="nav-cta">예약</a>
+    <a href="#location">오시는길</a>
+  </div>
+</nav>
+
+<!-- Emergency Banner -->
+<div class="emergency-banner" role="alert">
+  <div class="container">
+    <span>24시간 응급실 운영 · 응급환자 즉시 진료</span>
+    <span class="sep">|</span>
+    <span class="hotline">응급실 1588-0001</span>
+    <span class="sep">|</span>
+    <span>구급차 직통 · 응급의료센터 Level 1</span>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">보건복지부 인증 종합병원 · 1985년 개원</div>
+        <h1>생명을 지키는<br><em>서울의 중심</em>, 서울중앙병원</h1>
+        <p>180명 이상의 전문의와 850병상 규모의 최첨단 의료 인프라로, 정확한 진단과 환자 중심 치료를 제공합니다. 24시간 응급의료센터와 4대 전문센터가 지역 사회의 건강을 책임집니다.</p>
+        <div class="hero-actions">
+          <a href="#appointment" class="btn-accent">진료 예약하기</a>
+          <a href="#departments" class="btn-light">진료과 안내</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=900&q=80" alt="서울중앙병원 본관">
+        <div class="hero-cert">
+          <span>🏥 종합병원</span>
+          <span>⭐ JCI 인증</span>
+          <span>🚑 응급 Level 1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-section" aria-label="병원 현황">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="ico">👨‍⚕️</div>
+        <div class="num">180+</div>
+        <div class="lbl">전문의</div>
+      </div>
+      <div class="stat-card">
+        <div class="ico">🛏️</div>
+        <div class="num">850</div>
+        <div class="lbl">병상</div>
+      </div>
+      <div class="stat-card">
+        <div class="ico">📊</div>
+        <div class="num">50만+</div>
+        <div class="lbl">연간 환자</div>
+      </div>
+      <div class="stat-card">
+        <div class="ico">🚨</div>
+        <div class="num">24시</div>
+        <div class="lbl">응급실 운영</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1516549656339-9a383e4eecc1?w=800&q=80" alt="서울중앙병원 로비">
+      </div>
+      <div>
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">병원 소개</h2>
+        <p class="section-desc">1985년 개원 이래 40년간 서울 시민의 건강을 지켜온 대표 종합병원입니다. 환자 안전과 의료 질 향상을 최우선 가치로 삼으며, 연구·교육·진료가 통합된 의료기관으로 성장해 왔습니다.</p>
+        <div class="about-points">
+          <div class="about-point">
+            <strong>환자 중심 진료</strong>
+            <span>1:1 맞춤 치료 계획과 다학제 협진 시스템</span>
+          </div>
+          <div class="about-point">
+            <strong>최첨단 의료장비</strong>
+            <span>로봇 수술, PET-CT, 3T MRI 등 첨단 장비 완비</span>
+          </div>
+          <div class="about-point">
+            <strong>국제 의료 인증</strong>
+            <span>JCI 인증 · 보건복지부 의료기관 인증</span>
+          </div>
+          <div class="about-point">
+            <strong>지역 거점 병원</strong>
+            <span>응급·중증·암·심뇌혈관 전문 치료 거점</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Departments -->
+<section class="dept-section" id="departments">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Departments</div>
+      <h2 class="section-title">진료 과목</h2>
+      <p class="section-desc">12개 주요 진료과와 4대 전문센터가 협력하여 통합 진료를 제공합니다.</p>
+    </div>
+    <div class="dept-grid">
+      <div class="dept-card">
+        <div class="icon">🫀</div>
+        <h3>내과</h3>
+        <p>소화기·호흡기·내분비·류마티스 등 전신 질환 진단·치료</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">🔪</div>
+        <h3>외과</h3>
+        <p>일반·유방·갑상선·로봇 수술 등 다양한 외과적 치료</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">🦴</div>
+        <h3>정형외과</h3>
+        <p>관절·척추·스포츠 손상, 인공관절 수술 전문</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">👶</div>
+        <h3>산부인과</h3>
+        <p>임신·출산·부인종양, 고위험 임신 집중 관리</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">🧒</div>
+        <h3>소아청소년과</h3>
+        <p>신생아부터 청소년까지 성장기 맞춤 진료</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">📷</div>
+        <h3>영상의학과</h3>
+        <p>MRI·CT·초음파·PET-CT 등 정밀 영상 진단</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">🧠</div>
+        <h3>신경외과</h3>
+        <p>뇌종양·뇌혈관·척추 신경외과 수술</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">❤️</div>
+        <h3>심장내과</h3>
+        <p>관상동맥·부정맥·심부전 등 심혈관 질환</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">💧</div>
+        <h3>비뇨의학과</h3>
+        <p>전립선·신장·요로결석, 로봇 신장 수술</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">👁️</div>
+        <h3>안과</h3>
+        <p>백내장·녹내장·망막·시력교정 수술</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">👂</div>
+        <h3>이비인후과</h3>
+        <p>난청·이명·축농증·갑상선·두경부 종양</p>
+      </div>
+      <div class="dept-card">
+        <div class="icon">🏃</div>
+        <h3>재활의학과</h3>
+        <p>뇌졸중·척수손상 재활, 물리·작업치료</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Centers of Excellence -->
+<section class="centers-section" id="centers">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Centers of Excellence</div>
+      <h2 class="section-title">전문 센터</h2>
+      <p class="section-desc">분야별 최고 전문의와 첨단 장비로 집중 치료하는 4대 핵심 센터입니다.</p>
+    </div>
+    <div class="center-grid">
+      <div class="center-card">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80" alt="암센터">
+        <div class="center-body">
+          <span class="tag">Cancer Center</span>
+          <h3>암센터</h3>
+          <p>유방암·폐암·대장암·간암 등 전 암종에 대한 수술·항암·방사선·면역치료를 다학제 협진으로 제공합니다. PET-CT 기반 조기 발견과 맞춤형 치료 프로토콜을 운영합니다.</p>
+          <a href="#appointment" data-toast="암센터 상담 예약 페이지로 이동합니다.">상담 예약 →</a>
+        </div>
+      </div>
+      <div class="center-card">
+        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80" alt="심혈관센터">
+        <div class="center-body">
+          <span class="tag">Cardiovascular Center</span>
+          <h3>심혈관센터</h3>
+          <p>관상동맥 중재술, TAVR, 부정맥 시술, 심부전 클리닉을 운영합니다. 24시간 심근경색 대응 체계와 심장재활 프로그램으로 삶의 질을 회복합니다.</p>
+          <a href="#appointment" data-toast="심혈관센터 상담 예약 페이지로 이동합니다.">상담 예약 →</a>
+        </div>
+      </div>
+      <div class="center-card">
+        <img src="https://images.unsplash.com/photo-1559757175-0eb406f8a7b2?w=600&q=80" alt="뇌신경센터">
+        <div class="center-body">
+          <span class="tag">Neuroscience Center</span>
+          <h3>뇌신경센터</h3>
+          <p>뇌졸중·뇌동맥류·뇌종양·척추질환을 신경외과·신경과·재활의학과가 협력하여 치료합니다. 응급 뇌졸중 클리닉과 신경중재 시술을 24시간 가동합니다.</p>
+          <a href="#appointment" data-toast="뇌신경센터 상담 예약 페이지로 이동합니다.">상담 예약 →</a>
+        </div>
+      </div>
+      <div class="center-card">
+        <img src="https://images.unsplash.com/photo-1584982751601-97dcc0966596?w=600&q=80" alt="응급의료센터">
+        <div class="center-body">
+          <span class="tag">Emergency Medicine</span>
+          <h3>응급의료센터</h3>
+          <p>보건복지부 지정 응급의료기관 Level 1. 외상·중증·소아 응급을 24시간 전문의가 직접 진료하며, 중환자실·수술실과 즉시 연계됩니다.</p>
+          <a href="tel:15880001" data-toast="응급실 1588-0001로 연결됩니다.">응급실 1588-0001 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Doctors -->
+<section class="doctors-section" id="doctors">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Medical Team</div>
+      <h2 class="section-title">의료진 소개</h2>
+      <p class="section-desc">국내외 명문 대학병원 출신 전문의가 환자 맞춤형 치료를 책임집니다.</p>
+    </div>
+    <div class="doctors-grid">
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80" alt="김태윤 교수">
+        </div>
+        <div class="doctor-info">
+          <h3>김태윤 교수</h3>
+          <div class="dept">외과 · 암센터 센터장</div>
+          <p class="creds">서울대학교 의과대학 졸업<br>대한외과학회 정회원 · 로봇수술 2,000건+</p>
+          <span class="spec">위·대장암 · 로봇 수술</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&q=80" alt="이수진 교수">
+        </div>
+        <div class="doctor-info">
+          <h3>이수진 교수</h3>
+          <div class="dept">심장내과 · 심혈관센터</div>
+          <p class="creds">연세대학교 의과대학 졸업<br>대한심장학회 인정의 · TAVR 전문</p>
+          <span class="spec">관상동맥 · 부정맥</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&q=80" alt="박준호 교수">
+        </div>
+        <div class="doctor-info">
+          <h3>박준호 교수</h3>
+          <div class="dept">신경외과 · 뇌신경센터</div>
+          <p class="creds">고려대학교 의과대학 졸업<br>뇌졸중 응급 클리닉 책임의</p>
+          <span class="spec">뇌혈관 · 뇌종양</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1537368910025-700350fec6bd?w=500&q=80" alt="최은영 교수">
+        </div>
+        <div class="doctor-info">
+          <h3>최은영 교수</h3>
+          <div class="dept">산부인과</div>
+          <p class="creds">성균관대학교 의과대학 졸업<br>고위험 임신 · 난임 클리닉</p>
+          <span class="spec">분만 · 부인종양</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1582750433449-648ed127b54e?w=500&q=80" alt="정민재 교수">
+        </div>
+        <div class="doctor-info">
+          <h3>정민재 교수</h3>
+          <div class="dept">정형외과</div>
+          <p class="creds">울산대학교 의과대학 졸업<br>인공관절 · 스포츠의학 전문</p>
+          <span class="spec">무릎·고관절 · 척추</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80" alt="한지원 교수">
+        </div>
+        <div class="doctor-info">
+          <h3>한지원 교수</h3>
+          <div class="dept">소아청소년과</div>
+          <p class="creds">이화여자대학교 의과대학 졸업<br>소아 응급·알레르기 전문</p>
+          <span class="spec">신생아 · 소아 감염</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Facilities -->
+<section class="facilities-section" id="facilities">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Facilities</div>
+      <h2 class="section-title">시설 안내</h2>
+      <p class="section-desc">환자와 보호자를 위한 쾌적하고 안전한 의료 환경을 제공합니다.</p>
+    </div>
+    <div class="facility-grid">
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80" alt="본관 로비">
+        <span class="facility-tag">본관 로비</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1516549656339-9a383e4eecc1?w=600&q=80" alt="외래 진료동">
+        <span class="facility-tag">외래 진료동</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80" alt="수술센터">
+        <span class="facility-tag">수술센터</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1512678080860-9d8f83a5d2eb?w=600&q=80" alt="건강검진센터">
+        <span class="facility-tag">건강검진센터</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1586773860418-d37222d8d329?w=600&q=80" alt="입원 병동">
+        <span class="facility-tag">프리미엄 입원 병동</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1631217868264-e178b50f1a40?w=600&q=80" alt="카페테리아">
+        <span class="facility-tag">카페테리아 · 휴게공간</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Health Checkup -->
+<section class="checkup-section" id="checkup">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Health Screening</div>
+      <h2 class="section-title">건강검진 프로그램</h2>
+      <p class="section-desc">연령·성별·가족력에 맞춘 3단계 맞춤 검진 패키지를 제공합니다.</p>
+    </div>
+    <div class="checkup-grid">
+      <div class="checkup-card">
+        <h3>기본 검진</h3>
+        <div class="price">35만원 <span>/ 1일</span></div>
+        <p class="desc">직장인·20~30대를 위한 필수 항목 중심 검진</p>
+        <ul class="checkup-list">
+          <li>기초 혈액·소변 검사</li>
+          <li>흉부 X-ray</li>
+          <li>복부 초음파</li>
+          <li>위·대장 내시경 (선택)</li>
+          <li>안과·청력 검사</li>
+          <li>전문의 종합 소견</li>
+        </ul>
+        <a href="#appointment" class="btn-light" data-toast="기본 검진 예약이 접수됩니다.">예약하기</a>
+      </div>
+      <div class="checkup-card featured">
+        <h3>프리미엄 검진</h3>
+        <div class="price">85만원 <span>/ 1~2일</span></div>
+        <p class="desc">40~50대 권장, 암·심혈관 질환 조기 발견</p>
+        <ul class="checkup-list">
+          <li>기본 검진 전 항목 포함</li>
+          <li>위·대장 내시경 (수면)</li>
+          <li>갑상선·유방·전립선 초음파</li>
+          <li>저선량 흉부 CT</li>
+          <li>심전도·운동부하 검사</li>
+          <li>영양·생활습관 상담</li>
+        </ul>
+        <a href="#appointment" class="btn-accent" data-toast="프리미엄 검진 예약이 접수됩니다.">예약하기</a>
+      </div>
+      <div class="checkup-card">
+        <h3>VIP 종합검진</h3>
+        <div class="price">180만원 <span>/ 2일</span></div>
+        <p class="desc">50대 이상·임원급, 전신 정밀 검진 + 1:1 케어</p>
+        <ul class="checkup-list">
+          <li>프리미엄 검진 전 항목 포함</li>
+          <li>뇌 MRI · PET-CT (선택)</li>
+          <li>심장 CT·경동맥 초음파</li>
+          <li>전용 검진실 · 개인 코디네이터</li>
+          <li>2일차 식이·운동 처방</li>
+          <li>6개월 후 추적 상담</li>
+        </ul>
+        <a href="#appointment" class="btn-light" data-toast="VIP 검진 예약이 접수됩니다.">예약하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Outpatient Guide -->
+<section class="outpatient-section" id="outpatient">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Outpatient Guide</div>
+      <h2 class="section-title">외래 진료 안내</h2>
+      <p class="section-desc">진료 시간, 예약 방법, 필요 서류를 확인하시고 편리하게 내원해 주세요.</p>
+    </div>
+    <div class="outpatient-grid">
+      <div class="outpatient-box">
+        <div class="icon">🕐</div>
+        <h3>진료 시간</h3>
+        <ul>
+          <li><strong>평일 오전</strong> 08:30 – 12:00</li>
+          <li><strong>평일 오후</strong> 13:30 – 17:30</li>
+          <li><strong>토요일</strong> 08:30 – 12:30 (일부 과)</li>
+          <li><strong>점심시간</strong> 12:00 – 13:30</li>
+          <li><strong>일·공휴일</strong> 응급실만 운영</li>
+          <li><strong>야간 외래</strong> 평일 18:00 – 20:00 (예약제)</li>
+        </ul>
+      </div>
+      <div class="outpatient-box">
+        <div class="icon">📋</div>
+        <h3>예약 방법</h3>
+        <ul>
+          <li><strong>온라인</strong> 홈페이지 예약 · 모바일 앱</li>
+          <li><strong>전화</strong> 대표 02-2000-0000 (평일 08:00–18:00)</li>
+          <li><strong>방문</strong> 1층 원무과 접수 (당일 잔여 진료)</li>
+          <li><strong>진료 예약 변경</strong> 최소 1일 전까지</li>
+          <li><strong>초진</strong> 신분증 + 진료의뢰서(타 병원 시)</li>
+          <li><strong>재진</strong> 진료카드 또는 본인 확인</li>
+        </ul>
+      </div>
+      <div class="outpatient-box">
+        <div class="icon">📄</div>
+        <h3>필요 서류</h3>
+        <ul>
+          <li><strong>신분증</strong> 주민등록증·운전면허증·여권</li>
+          <li><strong>건강보험증</strong> (또는 모바일 건강보험)</li>
+          <li><strong>진료의뢰서</strong> 타 병원 전원 시 (권장)</li>
+          <li><strong>영상 CD·검사지</strong> 이전 병원 자료</li>
+          <li><strong>입원 시</strong> 보호자 신분증, 세면도구</li>
+          <li><strong>건강검진</strong> 예약 확인서, 금식 안내 준수</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Patient Stories</div>
+      <h2 class="section-title">환자 후기</h2>
+      <p class="section-desc">서울중앙병원을 이용하신 분들의 생생한 경험을 나눕니다.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <span class="dept-tag">암센터</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>유방암 수술과 항암을 받았는데, 김태윤 교수님과 간호사분들이 정말 따뜻하게 돌봐주셨습니다. 다학제 협진으로 치료 계획을 투명하게 설명해 주셔서 가족 모두 안심할 수 있었어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김미경</strong><span>유방암 치료 · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="dept-tag">심혈관센터</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>갑작스러운 흉통으로 응급실에 왔는데 30분 만에 시술이 시작됐습니다. 이수진 교수님께서 관상동맥 스텐트를 넣어주셨고, 지금은 일상생활이 가능합니다. 응급 대응이 정말 빨랐어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이정호</strong><span>관상동맥 시술 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="dept-tag">뇌신경센터</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>아버지 뇌졸중으로 응급 이송 후 박준호 교수님이 즉시 수술해 주셨습니다. 재활까지 원스톱으로 이어져 회복이 빨랐고, 의료진·직원 모두 친절했습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박서연</strong><span>뇌졸중 치료 · 2024.11</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="dept-tag">건강검진</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>프리미엄 검진 패키지를 받았는데 시설이 깨끗하고 대기 시간이 짧았어요. 결과 설명도 꼼꼼했고, 생활습관 개선 상담까지 받아서 매우 만족합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최윤아</strong><span>프리미엄 검진 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="dept-tag">산부인과</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>첫 아이 출산을 최은영 교수님께 맡겼습니다. 고위험 임신이었는데 세심하게 관리해 주셔서 건강하게 출산할 수 있었어요. 산후 조리도 잘 되어 있어 추천합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">한</div>
+          <div><strong>한소희</strong><span>분만 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="dept-tag">정형외과</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>무릎 인공관절 수술 후 3개월 만에 등산을 다시 시작했습니다. 정민재 교수님의 로봇 수술 덕분에 회복이 빨랐고, 재활 프로그램도 체계적이었습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">윤</div>
+          <div><strong>윤대현</strong><span>인공관절 · 2024.09</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">내원 전 많이 문의하시는 내용을 정리했습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">응급실은 24시간 운영하나요? 구급차도 받나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 응급실은 24시간 365일 전문의가 상주하며 진료합니다. 구급차 직통 입원이 가능하며, 응급실 전화(1588-0001)로 사전 연락 시 신속한 대응이 가능합니다. 중증 외상·뇌졸중·심근경색 등은 즉시 전문센터와 연계됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">초진 예약 없이 방문해도 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">예약 환자를 우선 진료하며, 당일 잔여 진료 슬롯이 있을 경우 접수가 가능합니다. 대기 시간을 줄이려면 온라인·전화 예약을 권장합니다. 초진 시 신분증, 건강보험증, 진료의뢰서(해당 시)를 지참해 주세요.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">건강검진 전 금식이 필요한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">위·대장 내시경이 포함된 패키지는 검진 전날 저녁 8시 이후 금식, 당일 아침 물도 금합니다. 기본 검진(혈액·소변·X-ray)만 받을 경우 8시간 금식이면 됩니다. 예약 확인서에 상세 안내가 포함되어 있습니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차 시설과 요금은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">지하 1~4층 주차장(약 1,200대)을 이용하실 수 있습니다. 외래·입원 환자 3시간 무료, 건강검진 5시간 무료입니다. 접수 시 차량번호 등록이 필요하며, 만차 시 인근 공영주차장 안내를 제공합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">입원 병실 종류와 비용은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">일반실(6인), 2인실, 1인실, VIP실이 있으며 건강보험 적용 여부와 병실 차액이 다릅니다. 입원 예정 시 사회사업팀에서 병실 안내와 비용 상담을 도와드립니다. 보호자 1인 상주가 가능한 병실도 있습니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">외국인 환자도 진료받을 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">국제진료센터에서 영어·중국어·일본어 통역 서비스를 제공합니다. 여권·보험 정보 확인 후 예약·진료를 안내해 드립니다. 국제진료 전용 02-2000-0099로 문의해 주세요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Appointment -->
+<section class="appointment-section" id="appointment">
+  <div class="container">
+    <div class="appoint-grid">
+      <div class="appoint-info">
+        <div class="section-label">Appointment</div>
+        <h2 class="section-title">진료 예약</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 예약 담당자가 연락드립니다. 응급 증상 시 1588-0001로 바로 연락해 주세요.</p>
+        <div class="appoint-features">
+          <div class="appoint-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>빠른 예약 확정</strong>
+              <span>접수 후 영업일 기준 24시간 이내 일시 확정</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>진료과별 전문 상담</strong>
+              <span>증상에 맞는 진료과·의료진 안내</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>내원 안내 문자 발송</strong>
+              <span>예약일·장소·필요 서류 SMS 안내</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="진료 예약이 접수되었습니다! 24시간 내 연락드릴게요.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="department">진료 과목</label>
+            <select id="department" name="department" required>
+              <option value="">진료과를 선택해 주세요</option>
+              <option value="internal">내과</option>
+              <option value="surgery">외과</option>
+              <option value="ortho">정형외과</option>
+              <option value="obgyn">산부인과</option>
+              <option value="pediatric">소아청소년과</option>
+              <option value="cardio">심장내과</option>
+              <option value="neuro">신경외과</option>
+              <option value="cancer">암센터</option>
+              <option value="checkup">건강검진</option>
+              <option value="consult">상담만 (진료과 미정)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="date">희망 날짜</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-accent">예약 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">서울특별시 중구, 지하철·버스 접근이 편리하며 대규모 주차장을 운영합니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>서울중앙병원 SEOUL CENTRAL HOSPITAL</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 중구 세종대로 120, 서울중앙병원<br>(을지로입구역 5번 출구 도보 5분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>대표: 02-2000-0000<br>응급실: 1588-0001<br>건강검진: 02-2000-1000</span>
+          </div>
+        </div>
+        <div class="parking-box">
+          <strong>🅿️ 주차 안내</strong>
+          지하 1~4층 (1,200대) · 외래 3시간 / 검진 5시간 무료<br>
+          접수·원무과에서 차량번호 등록 후 출차
+        </div>
+        <div class="transit-box">
+          <h4>대중교통</h4>
+          <div class="transit-list">
+            <div class="transit-item">
+              <span class="line">2호선</span>
+              <span>을지로입구역 5번 출구 도보 5분</span>
+            </div>
+            <div class="transit-item">
+              <span class="line">5호선</span>
+              <span>을지로4가역 2번 출구 도보 8분</span>
+            </div>
+            <div class="transit-item">
+              <span class="line">버스</span>
+              <span>을지로입구·시청 앞 정류장 (간선 104, 172 등)</span>
+            </div>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>외래 (평일)</td><td>08:30 – 17:30</td></tr>
+          <tr><td>외래 (토)</td><td>08:30 – 12:30</td></tr>
+          <tr><td>응급실</td><td>24시간</td></tr>
+          <tr><td>원무과</td><td>07:30 – 18:00</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>서울중앙병원</strong>
+          <span>서울 중구 세종대로 120</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">서울중앙병원<small>SEOUL CENTRAL HOSPITAL</small></a>
+      <p>1985년 개원 이래 서울 시민의 건강을 지켜온 대표 종합병원입니다. 180명 이상의 전문의, 850병상, 4대 전문센터로 정확하고 안전한 의료 서비스를 제공합니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 중구 세종대로 120</span>
+        <span>📞 02-2000-0000</span>
+        <span>✉️ info@seoul-central.or.kr</span>
+      </div>
+      <div class="footer-emergency">
+        <strong>🚨 응급실 24시간</strong>
+        1588-0001 · 구급차 직통 입원
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>진료 안내</h4>
+      <a href="#departments">진료 과목</a>
+      <a href="#centers">전문 센터</a>
+      <a href="#doctors">의료진</a>
+      <a href="#checkup">건강검진</a>
+      <a href="#outpatient">외래 안내</a>
+    </div>
+    <div class="footer-col">
+      <h4>병원 안내</h4>
+      <a href="#about">병원 소개</a>
+      <a href="#facilities">시설 안내</a>
+      <a href="#reviews">환자 후기</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a href="#location">오시는 길</a>
+    </div>
+    <div class="footer-col">
+      <h4>예약 · 상담</h4>
+      <a href="#appointment">온라인 예약</a>
+      <p>외래 02-2000-0000</p>
+      <p>검진 02-2000-1000</p>
+      <p>평일 08:30 – 17:30</p>
+      <p>토 08:30 – 12:30</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 서울중앙병원 SEOUL CENTRAL HOSPITAL. All rights reserved.</span>
+    <span>병원장 김태윤 · 사업자등록번호 110-82-00001</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

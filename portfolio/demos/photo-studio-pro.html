@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로포토 PRO PHOTO — 프로필 & 상업 촬영 전문 스튜디오</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFFFF;
+  --bg-dark: #0A0A0A;
+  --bg-card: #1A1A1A;
+  --text: #0A0A0A;
+  --text-muted: #666666;
+  --text-light: rgba(255,255,255,0.65);
+  --accent: #0A0A0A;
+  --accent-text: #FFFFFF;
+  --border: #E5E5E5;
+  --border-dark: rgba(255,255,255,0.12);
+  --nav-bg: rgba(255,255,255,0.97);
+  --footer-bg: #0A0A0A;
+  --card-bg: #FFFFFF;
+  --btn-radius: 0;
+  --card-radius: 0;
+  --footer-text: rgba(255,255,255,0.55);
+  --logo-spacing: 0.06em;
+}
+
+.site-nav .logo { color: var(--text); letter-spacing: var(--logo-spacing); }
+.nav-cta { background: var(--bg-dark); color: #fff; }
+
+/* Hero */
+.hero {
+  background: var(--bg-dark);
+  color: #fff;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(520px, 85vh, 720px);
+  display: flex;
+  align-items: stretch;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  min-height: inherit;
+  width: 100%;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(48px, 8vw, 80px) clamp(20px, 4vw, 48px);
+  max-width: 640px;
+  margin-left: auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  width: fit-content;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.hero .sub-en {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.hero p {
+  font-size: clamp(0.9rem, 2vw, 1.02rem);
+  color: var(--text-light);
+  line-height: 1.85;
+  margin-bottom: 36px;
+  max-width: 420px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-white {
+  padding: 14px 32px;
+  background: #fff;
+  color: var(--bg-dark);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.btn-white:hover { transform: translateY(-2px); opacity: 0.92; }
+
+.btn-outline-white {
+  padding: 14px 32px;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.06); }
+
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+}
+
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--bg-dark) 0%, transparent 35%);
+}
+
+.hero-stats {
+  display: flex;
+  gap: clamp(24px, 4vw, 48px);
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.hero-stat .num {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.hero-stat .lbl {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Services */
+.services-section { background: #fff; }
+
+.service-card {
+  padding: clamp(32px, 4vw, 44px) clamp(24px, 3vw, 32px);
+  border: 1px solid var(--border);
+  height: 100%;
+  transition: all 0.35s;
+  position: relative;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--bg-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s;
+}
+
+.service-card:hover {
+  background: var(--bg-dark);
+  color: #fff;
+  border-color: var(--bg-dark);
+  transform: translateY(-4px);
+}
+
+.service-card:hover::before { transform: scaleX(1); background: #fff; }
+.service-card:hover p { color: rgba(255,255,255,0.7); }
+.service-card:hover .service-num { color: rgba(255,255,255,0.3); }
+
+.service-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.service-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+
+/* Portfolio */
+.portfolio-section { background: var(--bg-dark); color: #fff; }
+.portfolio-section .section-label { color: rgba(255,255,255,0.45); }
+.portfolio-section .section-title { color: #fff; }
+.portfolio-section .section-desc { color: var(--text-light); }
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.portfolio-item.tall { grid-row: span 2; aspect-ratio: auto; }
+.portfolio-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.4s;
+  filter: grayscale(30%);
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0%);
+}
+
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+.portfolio-overlay .cat {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+}
+
+.portfolio-overlay h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Equipment */
+.equipment-section { background: #FAFAFA; }
+
+.equip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.equip-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.equip-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+.equip-img { aspect-ratio: 16/10; overflow: hidden; }
+.equip-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%); transition: filter 0.4s; }
+.equip-card:hover .equip-img img { filter: grayscale(0%); }
+
+.equip-body { padding: 24px; }
+.equip-body .tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.equip-body h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.equip-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+/* Team */
+.team-section { background: #fff; }
+
+.team-card {
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+.team-photo { aspect-ratio: 3/4; overflow: hidden; }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(25%); transition: filter 0.4s; }
+.team-card:hover .team-photo img { filter: grayscale(0%); }
+
+.team-info { padding: 24px; }
+.team-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.team-info .role {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.team-info .bio { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.team-info .spec { font-size: 0.75rem; font-weight: 600; color: var(--text); }
+
+/* Process */
+.process-section { background: var(--bg-dark); color: #fff; }
+.process-section .section-label { color: rgba(255,255,255,0.45); }
+.process-section .section-title { color: #fff; }
+.process-section .section-desc { color: var(--text-light); }
+
+.process-section .process-step::before {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+}
+
+.process-section .process-step h4 { color: #fff; }
+.process-section .process-step p { color: var(--text-light); }
+
+/* Packages */
+.packages-section { background: #FAFAFA; }
+.package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.package-card { background: #fff; border: 1px solid var(--border); padding: clamp(32px, 4vw, 40px) clamp(24px, 3vw, 32px); transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+.package-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+.package-card.featured { background: var(--bg-dark); color: #fff; border-color: var(--bg-dark); }
+.package-card.featured .desc, .package-card.featured .price small, .package-card.featured li { color: rgba(255,255,255,0.55); }
+.package-card.featured .price { color: #fff; }
+.package-card.featured li { border-color: rgba(255,255,255,0.12); }
+.package-card.featured::before { content: 'BEST'; position: absolute; top: 16px; right: 16px; font-size: 0.62rem; letter-spacing: 0.15em; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.35); color: rgba(255,255,255,0.75); }
+.package-card h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; margin-bottom: 8px; }
+.package-card .desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px; }
+.package-card .price { font-family: var(--font-display); font-size: 2rem; font-weight: 600; margin-bottom: 24px; }
+.package-card .price small { font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; color: var(--text-muted); }
+.package-card ul { margin-bottom: 28px; }
+.package-card li { font-size: 0.82rem; color: var(--text-muted); padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; line-height: 1.5; }
+.package-card li::before { content: '—'; flex-shrink: 0; font-weight: 600; }
+.package-card.featured li::before { color: #fff; }
+.btn-package { display: block; width: 100%; padding: 14px; text-align: center; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; border: 1px solid var(--border); transition: all 0.25s; }
+.btn-package:hover { background: var(--bg-dark); color: #fff; border-color: var(--bg-dark); }
+.package-card.featured .btn-package { background: #fff; color: var(--bg-dark); border-color: #fff; }
+.package-card.featured .btn-package:hover { background: transparent; color: #fff; }
+
+/* Clients */
+.clients-section {
+  background: var(--bg-card);
+  padding: clamp(48px, 8vw, 72px) 0;
+}
+
+.clients-section .section-header { margin-bottom: 32px; }
+.clients-section .section-label { color: rgba(255,255,255,0.4); }
+.clients-section .section-title { color: #fff; font-size: clamp(1.2rem, 3vw, 1.6rem); }
+
+.logo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+}
+
+.logo-strip span {
+  padding: 14px 28px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.45);
+  font-size: clamp(0.75rem, 1.5vw, 0.88rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+
+.logo-strip span:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.85);
+}
+
+/* Reviews */
+.reviews-section { background: #fff; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.review-card { border: 1px solid var(--border); padding: clamp(28px, 4vw, 36px); transition: transform 0.3s, box-shadow 0.3s; }
+.review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+.review-stars { color: var(--text); letter-spacing: 3px; font-size: 0.78rem; margin-bottom: 16px; }
+.review-card blockquote { font-family: var(--font-display); font-size: 1.02rem; font-style: italic; line-height: 1.75; margin-bottom: 20px; color: var(--text); }
+.review-author .review-avatar { background: var(--bg-dark); color: #fff; font-family: var(--font-display); }
+
+.news-section { background: #FAFAFA; }
+.news-card { background: #fff; border: 1px solid var(--border); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+.news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+.news-thumb { aspect-ratio: 16/9; overflow: hidden; }
+.news-thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%); transition: filter 0.4s; }
+.news-card:hover .news-thumb img { filter: grayscale(0%); }
+.news-body { padding: 24px; }
+.news-date { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 10px; }
+.news-body h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 500; margin-bottom: 10px; line-height: 1.5; }
+.news-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+/* FAQ */
+.faq-section { background: #fff; }
+
+.faq-item.open .faq-q { color: var(--text); }
+.faq-item .faq-q::after { color: var(--text-muted); }
+
+/* Booking */
+.booking-section {
+  background: linear-gradient(180deg, #FAFAFA 0%, #fff 100%);
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.booking-info h2 { margin-bottom: 16px; }
+.booking-info .section-desc { margin-bottom: 28px; }
+
+.booking-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.booking-feature .num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  background: var(--bg-dark);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.booking-feature strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.booking-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.form-card .btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--bg-dark);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.25s;
+}
+
+.form-card .btn-submit:hover { opacity: 0.88; }
+
+/* Location */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.location-detail .ico {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: #F5F5F5;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.location-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.map-box {
+  border: 1px solid var(--border);
+  background: #1A1A1A;
+}
+
+.map-box::before {
+  background:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+}
+
+.map-pin {
+  background: var(--bg-dark);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.map-pin strong { color: #fff; }
+.map-pin span { color: rgba(255,255,255,0.55); }
+
+/* Footer */
+.site-footer .footer-brand .logo { color: #fff; }
+.footer-col a:hover { color: #fff; }
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
+  .portfolio-item.wide { grid-column: span 1; aspect-ratio: 1; }
+  .portfolio-item.tall { grid-row: span 1; aspect-ratio: 1; }
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { min-height: 320px; order: -1; }
+  .hero-visual::after { background: linear-gradient(to bottom, transparent 40%, var(--bg-dark) 100%); }
+  .hero-content { margin: 0; max-width: none; }
+  .equip-grid { grid-template-columns: repeat(2, 1fr); }
+  .package-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .booking-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .equip-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">PRO PHOTO</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#services">서비스</a>
+    <a href="#portfolio">포트폴리오</a>
+    <a href="#team">팀</a>
+    <a href="#packages">패키지</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#booking" class="nav-cta">촬영 예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-content container" style="padding-left:clamp(20px,4vw,48px);padding-right:clamp(20px,4vw,48px);">
+      <div class="hero-badge">Seoul · Editorial Studio</div>
+      <div class="sub-en">Pro Photo Studio</div>
+      <h1>당신의 이미지를<br>작품으로 만듭니다</h1>
+      <p>프로필, 상업, 제품 촬영 전문 스튜디오. 15년 경력의 포토그래퍼와 리터처가 브랜드와 개인의 본질을 빛으로 담아냅니다. 촬영 기획부터 보정, 납품까지 원스톱으로 제공합니다.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-white">촬영 예약하기</a>
+        <a href="#portfolio" class="btn-outline-white">포트폴리오 보기</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">3,200+</span><span class="lbl">누적 촬영</span></div>
+        <div class="hero-stat"><span class="num">98%</span><span class="lbl">재의뢰율</span></div>
+        <div class="hero-stat"><span class="num">15년</span><span class="lbl">전문 경력</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1200&q=80" alt="프로포토 스튜디오 촬영 현장">
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">촬영 서비스</h2>
+      <p class="section-desc">프로필부터 대형 브랜드 캠페인까지, 목적에 맞는 전문 촬영 솔루션을 제공합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>프로필 촬영</h3>
+        <p>이력서, LinkedIn, 배우·강사 프로필 등 개인 이미지를 전문적으로 연출합니다. 라이트링·포즈 코칭 포함.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>상업 촬영</h3>
+        <p>기업 홍보, 임원·팀 촬영, 룩북, 광고 캠페인 등 B2B·B2C 상업 촬영. 브랜드 가이드라인에 맞춘 톤앤매너와 현장 디렉팅.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>제품 촬영</h3>
+        <p>화장품, 식품, IT 기기 등 이커머스·SNS용 제품 사진. 화이트 배경, 라이프스타일, 크리에이티브 연출 등 채널별 최적화.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section class="portfolio-section" id="portfolio">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">포트폴리오</h2>
+      <p class="section-desc">프로필, 상업, 제품 분야의 대표 작업물입니다. 클릭하여 상세 정보를 확인하세요.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item wide">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="임원 프로필 촬영">
+        <div class="portfolio-overlay"><span class="cat">Profile</span><h4>IT 기업 CEO 프로필</h4></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80" alt="모델 프로필">
+        <div class="portfolio-overlay"><span class="cat">Profile</span><h4>배우 프로필 시리즈</h4></div>
+      </div>
+      <div class="portfolio-item tall">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80" alt="패션 룩북">
+        <div class="portfolio-overlay"><span class="cat">Commercial</span><h4>2025 S/S 룩북</h4></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80" alt="제품 촬영">
+        <div class="portfolio-overlay"><span class="cat">Product</span><h4>스마트워치 런칭</h4></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80" alt="뷰티 제품">
+        <div class="portfolio-overlay"><span class="cat">Product</span><h4>스킨케어 라인</h4></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="오피스 상업 촬영">
+        <div class="portfolio-overlay"><span class="cat">Commercial</span><h4>스타트업 팀 촬영</h4></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Equipment -->
+<section class="equipment-section" id="equipment">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Equipment</div>
+      <h2 class="section-title">촬영 장비</h2>
+      <p class="section-desc">프로페셔널급 카메라, 렌즈, 조명 장비로 최상의 화질을 보장합니다.</p>
+    </div>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-img">
+          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&q=80" alt="카메라 바디">
+        </div>
+        <div class="equip-body">
+          <div class="tag">Camera Body</div>
+          <h4>Sony α7R V / Canon EOS R5</h4>
+          <p>6100만 화소 고해상도 센서로 대형 출력과 크롭에도 선명한 디테일을 유지합니다.</p>
+        </div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-img">
+          <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=600&q=80" alt="렌즈">
+        </div>
+        <div class="equip-body">
+          <div class="tag">Lens Collection</div>
+          <h4>G Master · RF L · Zeiss 렌즈</h4>
+          <p>24-70mm, 85mm f/1.4, 100mm Macro 등 용도별 프라임·줌 렌즈 20여 종 보유.</p>
+        </div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-img">
+          <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231bb00?w=600&q=80" alt="조명 장비">
+        </div>
+        <div class="equip-body">
+          <div class="tag">Lighting</div>
+          <h4>Profoto · Aputure 조명 시스템</h4>
+          <p>스튜디오 플래시, LED 패널, 소프트박스 등 풀 세트 조명으로 자연광부터 드라마틱 연출까지.</p>
+        </div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-img">
+          <img src="https://images.unsplash.com/photo-1594041680534-e8c8a6925034?w=600&q=80" alt="스튜디오 공간">
+        </div>
+        <div class="equip-body">
+          <div class="tag">Studio Space</div>
+          <h4>150㎡ 자연광 스튜디오</h4>
+          <p>남향 대형 창문, 사이클론 배경 5색, 메이크업룸·대기실 완비.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">촬영팀 소개</h2>
+      <p class="section-desc">각 분야 전문가들이 촬영 기획부터 후반 작업까지 책임집니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="김준혁 대표">
+        </div>
+        <div class="team-info">
+          <h3>김준혁</h3>
+          <div class="role">대표 포토그래퍼 · Founder</div>
+          <p class="bio">15년 경력의 상업·프로필 전문 포토그래퍼. 삼성, 현대, 네이버 등 200+ 브랜드 캠페인 촬영. 한국광고사진작가협회 정회원.</p>
+          <div class="spec">프로필 · 기업 촬영 1,800건+</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="이서연 포토그래퍼">
+        </div>
+        <div class="team-info">
+          <h3>이서연</h3>
+          <div class="role">시니어 포토그래퍼 · Product</div>
+          <p class="bio">제품·뷰티·푸드 촬영 전문. 이커머스 TOP 50 브랜드 다수 담당. 정밀 라이팅과 크리에이티브 연출로 높은 전환율 이미지를 제작합니다.</p>
+          <div class="spec">제품 촬영 900건+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">촬영 진행 절차</h2>
+      <p class="section-desc">문의부터 납품까지 4단계로 체계적이고 투명하게 진행합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>상담 & 기획</h4>
+        <p>촬영 목적, 용도, 톤앤매너, 예산을 상담합니다. 레퍼런스 분석과 콘셉트 제안서를 48시간 내 제공합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>예약 & 프리프로덕션</h4>
+        <p>일정 확정 후 의상·소품·헤어·메이크업을 조율합니다. 촬영 전날 세트리스트와 라이팅 다이어그램을 공유합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>촬영 Day</h4>
+        <p>전담 팀이 현장에서 디렉팅합니다. 테더링 실시간 프리뷰로 즉시 피드백 반영, 충분한 컷 확보를 보장합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>보정 & 납품</h4>
+        <p>1차 셀렉션 후 3~7영업일 내 보정본 납품. 수정 2회 포함, RAW·JPEG·웹용 등 용도별 파일 제공.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packages -->
+<section class="packages-section" id="packages">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Packages</div>
+      <h2 class="section-title">촬영 패키지</h2>
+      <p class="section-desc">목적과 예산에 맞는 패키지를 선택하세요. 맞춤 견적도 가능합니다.</p>
+    </div>
+    <div class="package-grid">
+      <div class="package-card">
+        <h3>프로필 베이직</h3>
+        <p class="desc">이력서, SNS, LinkedIn용 프로필 촬영에 최적화된 입문 패키지입니다.</p>
+        <div class="price">₩280,000 <small>/ 1인 기준</small></div>
+        <ul>
+          <li>보정본 5장 제공</li>
+          <li>2벌 의상 · 배경 2종</li>
+          <li>포즈·표정 코칭 포함</li>
+        </ul>
+        <a href="#booking" class="btn-package">예약하기</a>
+      </div>
+      <div class="package-card featured">
+        <h3>프로필 프로</h3>
+        <p class="desc">전문직·임원·배우를 위한 프리미엄 프로필 패키지. 헤어·메이크업 포함.</p>
+        <div class="price">₩550,000 <small>/ 1인 기준</small></div>
+        <ul>
+          <li>보정본 12장 · RAW 제공</li>
+          <li>헤어·메이크업 포함</li>
+          <li>3벌 의상 · 수정 2회</li>
+        </ul>
+        <a href="#booking" class="btn-package">예약하기</a>
+      </div>
+      <div class="package-card">
+        <h3>상업 · 제품</h3>
+        <p class="desc">기업 홍보, 제품, 룩북 등 상업 촬영. 규모에 따라 맞춤 견적 제공.</p>
+        <div class="price">₩880,000~ <small>/ 프로젝트</small></div>
+        <ul>
+          <li>반일·종일 촬영 선택</li>
+          <li>보정본 20~50장</li>
+          <li>스타일리스트·조명팀 포함</li>
+        </ul>
+        <a href="#booking" class="btn-package">견적 문의</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Clients -->
+<section class="clients-section" id="clients">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Clients</div>
+      <h2 class="section-title">함께한 브랜드</h2>
+    </div>
+    <div class="logo-strip">
+      <span>Samsung</span>
+      <span>Hyundai</span>
+      <span>Naver</span>
+      <span>Kakao</span>
+      <span>CJ ENM</span>
+      <span>Amorepacific</span>
+      <span>LG Electronics</span>
+      <span>Musinsa</span>
+      <span>Coupang</span>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">고객 후기</h2>
+      <p class="section-desc">프로포토와 함께한 고객들의 생생한 후기입니다.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"이력서용 프로필 촬영을 받았는데, 포즈 코칭과 조명이 정말 전문적이었습니다. 보정본도 자연스럽게 나와서 바로 LinkedIn에 올렸어요. 주변에도 추천하고 있습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">K</div>
+          <div>
+            <strong>김태윤</strong>
+            <span>IT 기업 PM · 프로필 프로</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"스타트업 팀 단체 촬영을 맡겼습니다. 20명 촬영인데도 3시간 만에 끝났고, 각자 개성이 살아있으면서도 통일감 있는 결과물을 받았습니다. 재의뢰 예정입니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">L</div>
+          <div>
+            <strong>이지현</strong>
+            <span>스타트업 CEO · 상업 촬영</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"화장품 제품 촬영 50컷을 의뢰했는데, 텍스처와 색감 표현이 정말 뛰어났습니다. 이커머스 전환율이 이전 대비 30% 올랐어요. 납기도 약속보다 하루 빨랐습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">P</div>
+          <div>
+            <strong>박수진</strong>
+            <span>뷰티 브랜드 마케터 · 제품 촬영</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section class="news-section" id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">News & Tips</div>
+      <h2 class="section-title">스튜디오 소식</h2>
+      <p class="section-desc">촬영 팁, 스튜디오 업데이트, 업계 소식을 전해 드립니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&q=80" alt="프로필 촬영 팁">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.28</div>
+          <h3>프로필 촬영 전 체크리스트 — 의상·메이크업·포즈 가이드</h3>
+          <p>촬영 당일 최상의 결과를 위해 미리 준비해야 할 7가지를 김준혁 대표가 정리했습니다. 의상 컬러 선택부터 자연스러운 표정 연출법까지.</p>
+        </div>
+      </article>
+      <article class="news-card">
+        <div class="news-thumb">
+          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&q=80" alt="스튜디오 업그레이드">
+        </div>
+        <div class="news-body">
+          <div class="news-date">2025.05.12</div>
+          <h3>프로포토, Sony α7R V 듀얼 바디 도입 및 스튜디오 확장</h3>
+          <p>6100만 화소 고해상도 촬영 체계를 갖추고, 자연광 스튜디오를 150㎡로 확장했습니다. 대형 출력과 크롭이 필요한 프로젝트에 최적화되었습니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">촬영 예약 전 궁금하신 점을 확인해 보세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">촬영 예약은 어떻게 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">홈페이지 예약 폼, 전화(02-555-0123), 또는 카카오톡 채널(@prophoto)로 문의해 주세요. 희망 일정과 촬영 유형을 알려주시면 24시간 내 견적과 가능 일정을 안내드립니다. 확정 후 계약금(30%) 입금 시 예약이 완료됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">촬영 결과물은 언제 받을 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">프로필 촬영은 촬영일 기준 3~5영업일, 상업·제품 촬영은 5~7영업일 내 1차 보정본을 제공합니다. 긴급 납품이 필요한 경우 사전 협의 시 24~48시간 옵션도 가능합니다. RAW 파일은 패키지에 따라 제공됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">헤어·메이크업은 포함되어 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">프로필 베이직 패키지에는 포함되지 않으며, 프로필 프로 이상 패키지에 헤어·메이크업이 포함됩니다. 별도 의뢰 시 8~15만 원 추가 가능하며, 제휴 아티스트를 연결해 드립니다. 남성 고객은 그루밍 코칭을 기본 제공합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">취소·변경 정책은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">촬영 7일 전까지 무료 취소·일정 변경이 가능합니다. 3~6일 전 50%, 2일 전 80%, 당일 100% 위약금이 발생합니다. 날씨 등 불가피한 사유는 개별 협의합니다. 계약금은 취소 시점에 따라 환불 또는 차감됩니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Booking Form -->
+<section class="booking-section" id="booking">
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-info">
+        <div class="section-label">Booking</div>
+        <h2 class="section-title">촬영 예약 신청</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 담당자가 연락드립니다. 급한 문의는 전화(02-555-0123)로 연락해 주세요.</p>
+        <div class="booking-features">
+          <div class="booking-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>빠른 견적</strong>
+              <span>접수 후 24시간 내 맞춤 견적과 가능 일정을 안내드립니다.</span>
+            </div>
+          </div>
+          <div class="booking-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>무료 사전 상담</strong>
+              <span>촬영 목적과 레퍼런스를 함께 논의하는 15분 전화 상담을 제공합니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="예약 신청이 접수되었습니다! 24시간 내 담당자가 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함 / 회사명</label>
+            <input type="text" id="name" name="name" placeholder="홍길동 / (주)OOO" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" placeholder="hello@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="date">희망 촬영일</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+          <div class="form-group full">
+            <label for="shoot-type">촬영 유형</label>
+            <select id="shoot-type" name="shoot-type" required>
+              <option value="">촬영 유형을 선택해 주세요</option>
+              <option value="profile-basic">프로필 베이직</option>
+              <option value="profile-pro">프로필 프로</option>
+              <option value="commercial">상업 촬영</option>
+              <option value="product">제품 촬영</option>
+              <option value="custom">맞춤 견적 문의</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">촬영 내용</label>
+            <textarea id="message" name="message" rows="5" placeholder="촬영 목적, 인원, 레퍼런스, 예산 등을 간략히 작성해 주세요." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">예약 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Studio Location</div>
+      <h2 class="section-title">스튜디오 오시는 길</h2>
+      <p class="section-desc">성수동 자연광 스튜디오. 주차 및 대중교통 모두 편리합니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>프로포토 PRO PHOTO</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 성동구 연무장15길 42, 프로포토 빌딩 3층<br>(성수동2가, 성수역 도보 7분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>전화: 02-555-0123<br>카카오: @prophoto<br>이메일: hello@prophoto.kr</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>교통 안내</strong>
+            <span>지하철 2호선 성수역 2번 출구 도보 7분<br>버스: 성수역·성수동 주민센터 정류장 하차<br>주차: 건물 지하 1층 (2시간 무료)</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>10:00 – 20:00</td></tr>
+          <tr><td>토요일</td><td>10:00 – 18:00</td></tr>
+          <tr><td>일·공휴일</td><td>11:00 – 17:00 (예약제)</td></tr>
+          <tr><td>야간 촬영</td><td>20:00 – 23:00 (사전 예약)</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>프로포토 PRO PHOTO</strong>
+          <span>서울 성동구 연무장15길 42</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">PRO PHOTO</a>
+      <p>2010년 설립 이래 3,200건 이상의 프로필·상업·제품 촬영을 진행해 온 서울 대표 포토 스튜디오입니다. 빛과 디테일로 당신의 가치를 담아냅니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 성동구 연무장15길 42, 3층</span>
+        <span>📞 02-555-0123</span>
+        <span>✉️ hello@prophoto.kr</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>서비스</h4>
+      <a href="#services">프로필 촬영</a>
+      <a href="#services">상업 촬영</a>
+      <a href="#services">제품 촬영</a>
+      <a href="#packages">촬영 패키지</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#portfolio">포트폴리오</a>
+      <a href="#team">촬영팀</a>
+      <a href="#process">촬영 절차</a>
+      <a href="#news">스튜디오 소식</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>예약 안내</h4>
+      <a href="#booking">촬영 예약</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 10:00 – 20:00</p>
+      <p>토·일 10:00 – 18:00</p>
+      <p>카카오 @prophoto</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 프로포토 PRO PHOTO. All rights reserved.</span>
+    <span>대표 김준혁 · 사업자등록번호 456-78-90123</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

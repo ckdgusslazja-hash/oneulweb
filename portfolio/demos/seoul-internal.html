@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울내과의원 — SEOUL INTERNAL MEDICINE | 소화기·내분비·건강검진</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #F4FBF9;
+  --text: #0F2E2A;
+  --text-muted: #4A6B65;
+  --accent: #0D9488;
+  --accent-light: #CCFBF1;
+  --accent-dark: #0F766E;
+  --accent-text: #fff;
+  --border: #B8E6DE;
+  --nav-bg: rgba(244,251,249,0.96);
+  --footer-bg: #0F2E2A;
+  --card-bg: #fff;
+  --btn-radius: 8px;
+  --card-radius: 14px;
+  --footer-text: rgba(255,255,255,0.65);
+}
+
+.site-nav .logo { display: flex; flex-direction: column; line-height: 1.15; color: var(--accent-dark); }
+.site-nav .logo strong { font-size: 1.05em; letter-spacing: -0.02em; }
+.site-nav .logo span { font-size: 0.58em; font-weight: 500; letter-spacing: 0.22em; color: var(--text-muted); }
+.nav-cta { background: var(--accent); }
+
+.hero {
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 45%, #F4FBF9 100%);
+  padding: clamp(60px, 10vw, 100px) 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 55%;
+  height: 160%;
+  background: radial-gradient(ellipse, rgba(13,148,136,0.1), transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(13,148,136,0.08);
+}
+.hero-badge::before { content: ''; width: 8px; height: 8px; background: #22C55E; border-radius: 50%; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-grid > div > p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 32px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-accent {
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.3); }
+.btn-light {
+  padding: 14px 28px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+.btn-light:hover { border-color: var(--accent); background: var(--accent-light); }
+.hero-visual {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(13,148,136,0.15);
+}
+.hero-visual img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.hero-stats {
+  position: absolute;
+  bottom: 20px; left: 20px; right: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  padding: 14px 12px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.8);
+}
+.hero-stat .num { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--accent); }
+.hero-stat .lbl { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
+
+.trust-strip { background: #fff; border-bottom: 1px solid var(--border); padding: 20px 0; }
+.trust-strip .container { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 4vw, 48px); flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+.trust-item .ico { width: 36px; height: 36px; background: var(--accent-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+.treatments { background: var(--bg); }
+.treatment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.treatment-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  height: 100%;
+}
+.treatment-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,148,136,0.1); border-color: var(--accent); }
+.treatment-card .icon { width: 52px; height: 52px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 18px; }
+.treatment-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.treatment-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 14px; }
+.treatment-card .tag { display: inline-block; padding: 4px 12px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.72rem; font-weight: 600; border-radius: 50px; }
+
+.packages-section { background: #fff; }
+.package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 24px); }
+.package-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.package-card.featured { border-color: var(--accent); box-shadow: 0 12px 40px rgba(13,148,136,0.12); }
+.package-card.featured::before {
+  content: '인기';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 16px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 50px;
+}
+.package-card:hover { transform: translateY(-4px); }
+.package-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.package-card .price { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--accent); margin: 16px 0; }
+.package-card .price small { font-size: 0.75rem; font-weight: 500; color: var(--text-muted); }
+.package-card ul { text-align: left; margin: 20px 0; }
+.package-card li {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.package-card li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.package-card li:last-child { border-bottom: none; }
+
+.chronic-section { background: var(--accent-light); }
+.chronic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 48px); align-items: center; }
+.chronic-visual { border-radius: var(--card-radius); overflow: hidden; box-shadow: 0 20px 50px rgba(13,148,136,0.12); }
+.chronic-visual img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.chronic-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+.chronic-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: #fff;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border);
+}
+.chronic-item .ico { width: 44px; height: 44px; background: var(--accent-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+.chronic-item strong { display: block; font-size: 0.92rem; margin-bottom: 4px; }
+.chronic-item span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+.doctors { background: #fff; }
+.doctor-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--card-radius); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+.doctor-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,148,136,0.1); }
+.doctor-photo { aspect-ratio: 4/3; overflow: hidden; }
+.doctor-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.doctor-card:hover .doctor-photo img { transform: scale(1.04); }
+.doctor-info { padding: clamp(20px, 3vw, 28px); }
+.doctor-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.doctor-info .role { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+.doctor-info .creds { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.doctor-info .spec { display: inline-block; padding: 6px 14px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.75rem; font-weight: 600; border-radius: 6px; }
+.grid-2-doctors { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 4vw, 32px); max-width: 800px; margin: 0 auto; }
+
+.facility-section { background: var(--bg); }
+.facility-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 2vw, 16px); }
+.facility-item { position: relative; border-radius: var(--card-radius); overflow: hidden; aspect-ratio: 1; }
+.facility-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.facility-item:hover img { transform: scale(1.06); }
+.facility-tag { position: absolute; bottom: 12px; left: 12px; padding: 6px 14px; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+
+.equipment { background: #fff; }
+.equipment .info-box { background: var(--bg); border: 1px solid var(--border); text-align: left; padding: clamp(24px, 4vw, 32px); }
+.equipment .info-box .icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 16px; }
+.equipment .info-box h4 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+.equipment .info-box p { font-size: 0.84rem; line-height: 1.75; }
+.equipment .info-grid { grid-template-columns: repeat(4, 1fr); }
+
+.process-section { background: var(--bg); }
+.process-section .process-step::before { background: var(--accent); color: #fff; }
+
+.reviews-section { background: #fff; }
+.review-card { border-color: var(--border); height: 100%; }
+.review-card .treatment-tag { display: inline-block; padding: 3px 10px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.7rem; font-weight: 600; border-radius: 4px; margin-bottom: 12px; }
+
+.faq-section { background: var(--bg); }
+.appointment-section { background: #fff; }
+.appoint-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 5vw, 56px); align-items: start; }
+.appoint-info .section-desc { margin-bottom: 32px; }
+.appoint-features { display: flex; flex-direction: column; gap: 20px; }
+.appoint-feature { display: flex; gap: 16px; align-items: flex-start; }
+.appoint-feature .num { width: 40px; height: 40px; background: var(--accent-light); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+.appoint-feature strong { display: block; font-size: 0.92rem; margin-bottom: 4px; }
+.appoint-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+.appoint-grid .btn-accent { width: 100%; margin-top: 8px; padding: 16px; }
+
+.location-section { background: var(--bg); }
+.location-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(28px, 4vw, 48px); align-items: start; }
+.location-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; color: var(--text); }
+.location-detail { display: flex; gap: 14px; margin-bottom: 20px; }
+.location-detail .ico { width: 40px; height: 40px; background: var(--accent-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.location-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+.insurance-box { margin-top: 24px; padding: 20px; background: #fff; border: 1px solid var(--border); border-radius: var(--card-radius); }
+.insurance-box h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; color: var(--accent-dark); }
+.insurance-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.insurance-list span { padding: 6px 14px; background: var(--accent-light); color: var(--accent-dark); font-size: 0.75rem; font-weight: 600; border-radius: 6px; }
+.insurance-box p { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; line-height: 1.6; }
+
+.footer-brand .logo { font-family: var(--font-display); font-size: 1.2rem; color: #fff; margin-bottom: 16px; display: block; line-height: 1.3; }
+.footer-brand .logo small { display: block; font-size: 0.65em; letter-spacing: 0.18em; color: rgba(255,255,255,0.5); font-weight: 500; margin-top: 4px; }
+.footer-contact { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.footer-contact span { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .treatment-grid, .package-grid { grid-template-columns: repeat(2, 1fr); }
+  .equipment .info-grid { grid-template-columns: repeat(2, 1fr); }
+  .facility-grid { grid-template-columns: repeat(2, 1fr); }
+  .chronic-grid { grid-template-columns: 1fr; }
+  .appoint-grid, .location-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .treatment-grid, .package-grid { grid-template-columns: 1fr; }
+  .equipment .info-grid { grid-template-columns: 1fr; }
+  .grid-2-doctors { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) { .hero-stats { display: none; } }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">
+    <strong>서울내과의원</strong>
+    <span>SEOUL INTERNAL MEDICINE</span>
+  </a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#services">진료과목</a>
+    <a href="#packages">건강검진</a>
+    <a href="#doctors">의료진</a>
+    <a href="#facility">시설</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#appointment" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">서초역 도보 5분 · 내과 전문 12년</div>
+        <h1>몸 속 건강을<br><em>정확하게</em> 돌봅니다</h1>
+        <p>서울내과의원은 소화기·내분비 질환과 건강검진에 특화된 내과 전문 의원입니다. 대학병원 출신 전문의 2인이 만성질환 관리부터 맞춤형 종합검진까지, 환자 한 분 한 분의 생활 습관에 맞춘 진료를 제공합니다.</p>
+        <div class="hero-actions">
+          <a href="#appointment" class="btn-accent">온라인 예약하기</a>
+          <a href="#packages" class="btn-light">검진 패키지 보기</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80" alt="서울내과의원 진료 상담">
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">12+</div><div class="lbl">운영 연수</div></div>
+          <div class="hero-stat"><div class="num">28,000+</div><div class="lbl">누적 환자</div></div>
+          <div class="hero-stat"><div class="num">97%</div><div class="lbl">재방문율</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-item"><div class="ico">🏥</div>보건복지부 등록 의료기관</div>
+    <div class="trust-item"><div class="ico">🔬</div>대학병원급 검진 장비</div>
+    <div class="trust-item"><div class="ico">📋</div>만성질환 통합 관리 프로그램</div>
+    <div class="trust-item"><div class="ico">💊</div>당일 검사 결과 상담</div>
+  </div>
+</div>
+
+<section class="treatments" id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">진료 과목</h2>
+      <p class="section-desc">소화기·내분비 질환 진단과 예방 중심의 내과 전문 진료를 제공합니다.</p>
+    </div>
+    <div class="treatment-grid">
+      <div class="treatment-card">
+        <div class="icon">🫁</div>
+        <h3>소화기 내과</h3>
+        <p>위·대장 내시경, 역류성 식도염, 과민성 대장증후군, 간·담도 질환 등 소화기 질환을 정밀 진단합니다. 수면 내시경으로 편안한 검사 환경을 제공하며, 조직검사와 병리 결과까지 원내에서 신속하게 안내합니다.</p>
+        <span class="tag">수면 위·대장 내시경</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🩺</div>
+        <h3>내분비 · 대사</h3>
+        <p>당뇨, 고혈압, 고지혈증, 갑상선 질환, 비만 등 대사성 질환을 체계적으로 관리합니다. HbA1c, 연속혈당측정(CGM) 상담과 생활습관 교정 프로그램을 병행하여 합병증 예방을 목표로 합니다.</p>
+        <span class="tag">당뇨·갑상선 전문</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">📊</div>
+        <h3>건강검진</h3>
+        <p>국가건강검진, 종합검진, 암 검진, 직장인 맞춤 패키지를 운영합니다. 검진 결과는 당일 또는 익일 전문의 상담과 함께 제공되며, 이상 소견 시 대학병원 연계까지 원스톱으로 안내합니다.</p>
+        <span class="tag">당일 결과 상담</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">💉</div>
+        <h3>만성질환 관리</h3>
+        <p>고혈압·당뇨·고지혈증 환자를 위한 정기 추적 관리 프로그램을 운영합니다. 3개월마다 검사·상담·복약 조정을 진행하며, 카카오 알림으로 검진 일정과 복약 리마인드를 제공합니다.</p>
+        <span class="tag">3개월 추적 프로그램</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🦠</div>
+        <h3>감염 · 호흡기</h3>
+        <p>독감, 폐렴, 기관지염, 만성기침 등 호흡기 질환과 급·만성 감염을 진료합니다. 신속항원검사와 흉부 X-ray를 원내에서 시행하며, 필요 시 항생제·항바이러스 치료를 신속하게 시작합니다.</p>
+        <span class="tag">신속 호흡기 검사</span>
+      </div>
+      <div class="treatment-card">
+        <div class="icon">🧬</div>
+        <h3>예방 접종 · 영양</h3>
+        <p>독감·폐렴구균·대상포진·A형·B형 간염 등 예방 접종과 영양 상담을 제공합니다. 검진 결과에 따른 비타민·미네랄 보충 가이드와 체중 관리 상담도 함께 진행합니다.</p>
+        <span class="tag">맞춤 예방접종</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="packages-section" id="packages">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Health Checkup</div>
+      <h2 class="section-title">건강검진 패키지</h2>
+      <p class="section-desc">연령과 생활 습관에 맞춘 3가지 검진 패키지를 합리적인 가격으로 제공합니다.</p>
+    </div>
+    <div class="package-grid">
+      <div class="package-card">
+        <h3>기본 종합검진</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">30대 · 직장인 기초 검진</p>
+        <div class="price">198,000<small>원</small></div>
+        <ul>
+          <li>기초 혈액·소변 검사</li>
+          <li>간·신장·갑상선 기능</li>
+          <li>흉부 X-ray</li>
+          <li>복부 초음파</li>
+          <li>전문의 결과 상담 (30분)</li>
+        </ul>
+        <a href="#appointment" class="btn-light" style="display:block;text-align:center">예약하기</a>
+      </div>
+      <div class="package-card featured">
+        <h3>프리미엄 종합검진</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">40~50대 · 가족력 있는 분</p>
+        <div class="price">498,000<small>원</small></div>
+        <ul>
+          <li>기본 패키지 전 항목 포함</li>
+          <li>수면 위·대장 내시경</li>
+          <li>심전도 · 동맥경화 검사</li>
+          <li>종양표지자 5종</li>
+          <li>갑상선·유방·전립선 초음파</li>
+          <li>전문의 1:1 상담 (60분)</li>
+        </ul>
+        <a href="#appointment" class="btn-accent" style="display:block;text-align:center">예약하기</a>
+      </div>
+      <div class="package-card">
+        <h3>시니어 맞춤검진</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">60세 이상 · 만성질환 관리</p>
+        <div class="price">358,000<small>원</small></div>
+        <ul>
+          <li>기본·심혈관 검사 풀세트</li>
+          <li>골밀도 검사</li>
+          <li>인지기능 선별검사</li>
+          <li>시력·청력 기초 검사</li>
+          <li>만성질환 관리 계획 수립</li>
+        </ul>
+        <a href="#appointment" class="btn-light" style="display:block;text-align:center">예약하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chronic-section" id="chronic">
+  <div class="container">
+    <div class="chronic-grid">
+      <div class="chronic-visual">
+        <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&q=80" alt="만성질환 관리 상담">
+      </div>
+      <div>
+        <div class="section-label">Chronic Care</div>
+        <h2 class="section-title">만성질환 통합 관리</h2>
+        <p class="section-desc">단순 처방을 넘어, 검사·식이·운동·복약을 하나의 계획으로 관리합니다. 3개월 단위 추적으로 합병증 위험을 낮춥니다.</p>
+        <div class="chronic-list">
+          <div class="chronic-item">
+            <div class="ico">🩸</div>
+            <div>
+              <strong>당뇨 관리 프로그램</strong>
+              <span>HbA1c 목표 설정, CGM 데이터 분석, 저탄수·식이요법 상담. 당뇨성 신증·망막증 조기 발견을 위한 정기 검사 일정을 함께 관리합니다.</span>
+            </div>
+          </div>
+          <div class="chronic-item">
+            <div class="ico">❤️</div>
+            <div>
+              <strong>고혈압 · 심혈관 위험 관리</strong>
+              <span>가정혈압 기록 분석, 24시간 활동 혈압 가이드, 동맥경화·심전도 추적. 뇌졸중·심근경색 위험 인자를 종합 평가합니다.</span>
+            </div>
+          </div>
+          <div class="chronic-item">
+            <div class="ico">📱</div>
+            <div>
+              <strong>디지털 헬스케어 연동</strong>
+              <span>카카오 알림으로 복약·검진 일정을 안내하고, 검사 결과 PDF를 모바일로 제공합니다. 원격 상담(전화)도 예약 가능합니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="doctors" id="doctors">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Medical Team</div>
+      <h2 class="section-title">의료진 소개</h2>
+      <p class="section-desc">서울대·연세대 출신 내과 전문의 2인이 진료와 검진을 책임집니다.</p>
+    </div>
+    <div class="grid-2-doctors">
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80" alt="정민호 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>정민호 원장</h3>
+          <div class="role">대표원장 · 소화기내과 · 건강검진</div>
+          <p class="creds">서울대학교 의과대학 졸업<br>서울대병원 내과 전문의<br>대한소화기학회 정회원</p>
+          <span class="spec">내시경 8,000건+ · 12년 임상</span>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&q=80" alt="한지연 원장">
+        </div>
+        <div class="doctor-info">
+          <h3>한지연 원장</h3>
+          <div class="role">내분비내과 · 만성질환 관리</div>
+          <p class="creds">연세대학교 의과대학 졸업<br>세브란스병원 내분비내과 전문의<br>대한당뇨병학회 정회원</p>
+          <span class="spec">당뇨·갑상선 6,000건+ · CGM 전문</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="equipment" id="equipment">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Technology</div>
+      <h2 class="section-title">검진 · 진단 장비</h2>
+      <p class="section-desc">정확한 진단을 위한 대학병원급 검사 장비를 갖추고 있습니다.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="icon">🔬</div>
+        <h4>수면 내시경 시스템</h4>
+        <p>올림푸스 최신 내시경으로 위·대장 정밀 검사를 시행합니다. 수면 마취 하에 통증 없이 검사하며, 용종 절제술도 당일 시행이 가능합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">📡</div>
+        <h4>초음파 · X-ray</h4>
+        <p>복부·갑상선·유방·전립선 초음파와 디지털 흉부 X-ray를 원내에서 즉시 촬영합니다. 검진 당일 결과 확인이 가능합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🧪</div>
+        <h4>임상검사실</h4>
+        <p>혈액·소변·종양표지자·갑상선·당화혈색소 등 80여 종 검사를 당일 또는 익일 오전까지 결과 제공합니다. 신속항원·인플루엔자 검사도 가능합니다.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">💓</div>
+        <h4>심전도 · 동맥경화</h4>
+        <p>12유도 심전도, 맥파 속도(PWV) 측정으로 심혈관 위험을 평가합니다. 고혈압·당뇨 환자의 정기 추적 검사에 활용합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facility-section" id="facility">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Facility</div>
+      <h2 class="section-title">시설 안내</h2>
+      <p class="section-desc">쾌적하고 프라이버시가 보장되는 진료·검진 공간입니다.</p>
+    </div>
+    <div class="facility-grid">
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&q=80" alt="대기실">
+        <span class="facility-tag">넓은 대기실</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1586773866494-cbb93e8e7f8e?w=400&q=80" alt="진료실">
+        <span class="facility-tag">1인 진료실</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1538108149393-fbbd81893b12?w=400&q=80" alt="내시경실">
+        <span class="facility-tag">수면 내시경실</span>
+      </div>
+      <div class="facility-item">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&q=80" alt="검진실">
+        <span class="facility-tag">종합검진실</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">진료 · 검진 프로세스</h2>
+      <p class="section-desc">예약부터 결과 상담까지 체계적인 4단계 시스템을 운영합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>예약 · 접수</h4>
+        <p>온라인, 전화(02-521-8800), 카카오톡으로 예약합니다. 검진 전 금식·복약 안내를 문자로 보내드립니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>검사 · 진료</h4>
+        <p>예약 시간에 맞춰 검사를 진행합니다. 내시경·초음파·혈액검사를 원내에서 일괄 시행합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>결과 상담</h4>
+        <p>전문의가 검사 결과를 그래프와 함께 설명합니다. 이상 소견 시 추가 검사·치료 계획을 수립합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>사후 관리</h4>
+        <p>만성질환 환자는 3개월 추적 일정을 잡아드립니다. 검진 결과 PDF와 생활습관 가이드를 제공합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">환자 후기</h2>
+      <p class="section-desc">서울내과의원을 방문하신 분들의 생생한 후기입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <span class="treatment-tag">건강검진</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>프리미엄 종합검진을 받았는데, 수면 내시경도 편하고 결과 상담이 정말 꼼꼼했어요. 정민호 원장님이 그래프 보면서 하나하나 설명해 주셔서 이해가 잘 됐습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div><strong>김태희</strong><span>종합검진 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">당뇨 관리</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>당뇨 진단 후 2년째 한지연 원장님께 관리받고 있습니다. CGM 데이터 보시고 식단·운동 조언해 주시는데, HbA1c가 8.2에서 6.4로 내려갔어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div><strong>이준혁</strong><span>만성질환 관리 · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">위 내시경</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>역류성 식도염으로 내시경 받았는데, 수면 마취라 전혀 불편하지 않았습니다. 조직검사 결과도 빠르게 나왔고, 약 조절 후 속쓰림이 많이 나아졌어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div><strong>박서연</strong><span>소화기 내시경 · 2025.05</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">고혈압</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>가정혈압 일지 가져가면 원장님이 꼼꼼히 보시고 약 용량 조절해 주세요. 3개월마다 검사받는 프로그램 덕분에 관리가 체계적이라 믿음이 갑니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">최</div>
+          <div><strong>최영수</strong><span>만성질환 관리 · 2025.02</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">갑상선</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>갑상선 결절 추적 중인데, 초음파·혈액검사를 한 곳에서 받을 수 있어 편합니다. 한지연 원장님 설명이 차분하고 명확해서 불안이 줄었어요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">윤</div>
+          <div><strong>윤미경</strong><span>내분비 진료 · 2025.01</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="treatment-tag">직장인 검진</span>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>토요일 오전 검진 예약해서 반나절 만에 끝냈습니다. 대기 시간 짧고 시설 깨끗해요. 부모님도 시니어 패키지로 모시고 왔는데 만족하셨습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div><strong>정하늘</strong><span>기본 종합검진 · 2025.05</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">진료·검진 전 많이 물어보시는 질문을 모았습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">건강검진 전 금식은 어떻게 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">혈액검사·초음파가 포함된 경우 검진 전날 밤 9시 이후 금식을 권장합니다. 내시경이 포함된 패키지는 전날 저녁부터 유동식, 당일 완전 금식·금수입니다. 복용 중인 약은 예약 시 상담해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">국가건강검진과 종합검진을 같이 받을 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">가능합니다. 국가검진 항목에 추가 검사만 선택하거나, 프리미엄 패키지에 국가검진을 통합할 수 있습니다. 건강보험공단 대상자는 본인 부담금만 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">수면 내시경은 안전한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">전문 마취과 의료진 협진 하에 진행하며, 검사 전 건강 상태를 확인합니다. 당일 가벼운 식사는 2시간 후부터 가능하며, 보호자 동반이 필요할 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">만성질환 관리 프로그램 비용은?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">3개월 추적 프로그램은 월 3만 원(검사·상담 2회 포함)입니다. 건강보험 적용 진료·검사는 별도이며, 상담 시 상세 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차가 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">건물 지하 1~2층 주차장 이용 가능하며, 검진·진료 환자에게 2시간 무료 주차를 제공합니다. 접수 데스크에서 등록해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">검진 결과는 언제 받나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">기본 혈액·소변은 당일, 내시경·조직검사는 5~7일 내 전문의 상담과 함께 제공합니다. 급한 소견은 검진 당일 전화로 먼저 안내합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="appointment-section" id="appointment">
+  <div class="container">
+    <div class="appoint-grid">
+      <div class="appoint-info">
+        <div class="section-label">Appointment</div>
+        <h2 class="section-title">온라인 예약</h2>
+        <p class="section-desc">아래 양식을 작성해 주시면 24시간 이내 접수 담당자가 연락드립니다. 급한 경우 전화(02-521-8800)로 문의해 주세요.</p>
+        <div class="appoint-features">
+          <div class="appoint-feature">
+            <div class="num">1</div>
+            <div>
+              <strong>빠른 예약 확정</strong>
+              <span>접수 후 24시간 이내 예약 일시를 확정해 드립니다.</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">2</div>
+            <div>
+              <strong>검진 전 안내</strong>
+              <span>금식·복약·준비물 안내를 문자로 보내드립니다.</span>
+            </div>
+          </div>
+          <div class="appoint-feature">
+            <div class="num">3</div>
+            <div>
+              <strong>전문의 결과 상담</strong>
+              <span>검진 패키지 고객에게 전문의 1:1 상담을 제공합니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="예약 요청이 접수되었습니다! 24시간 내 연락드릴게요.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="treatment">희망 진료</label>
+            <select id="treatment" name="treatment" required>
+              <option value="">진료·검진을 선택해 주세요</option>
+              <option value="checkup-basic">기본 종합검진</option>
+              <option value="checkup-premium">프리미엄 종합검진</option>
+              <option value="checkup-senior">시니어 맞춤검진</option>
+              <option value="gastro">소화기 · 내시경</option>
+              <option value="endo">내분비 · 당뇨</option>
+              <option value="chronic">만성질환 관리</option>
+              <option value="general">일반 내과 진료</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">희망 날짜</label>
+            <input type="date" id="date" name="date">
+          </div>
+          <div class="form-group">
+            <label for="time">희망 시간</label>
+            <select id="time" name="time">
+              <option value="">시간 선택</option>
+              <option value="09">오전 9:00</option>
+              <option value="10">오전 10:00</option>
+              <option value="11">오전 11:00</option>
+              <option value="14">오후 2:00</option>
+              <option value="15">오후 3:00</option>
+              <option value="sat">토요일 오전 (검진)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="message">증상 · 문의사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="불편 증상, 복용 약물, 이전 검진 이력 등을 적어 주세요."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-accent">예약 신청하기</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길 · 진료시간</h2>
+      <p class="section-desc">서초역 4번 출구 도보 5분, 지하 주차장 완비.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>서울내과의원 SEOUL INTERNAL MEDICINE</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>주소</strong>
+            <span>서울특별시 서초구 서초대로 398, 서울메디컬타워 7층<br>(서초역 4번 출구 도보 5분)</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>연락처</strong>
+            <span>전화: 02-521-8800<br>카카오톡: @서울내과의원<br>이메일: info@seoul-internal.com</span>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚇</div>
+          <div>
+            <strong>교통 안내</strong>
+            <span>지하철 2호선·신분당선 서초역 4번 출구 도보 5분<br>버스: 서초역·서초사거리 정류장<br>주차: 지하 1~2층 (2시간 무료)</span>
+          </div>
+        </div>
+        <table class="hours-table">
+          <tr><td>평일</td><td>09:00 – 18:00</td></tr>
+          <tr><td>토요일</td><td>09:00 – 13:00 (검진·예약)</td></tr>
+          <tr><td>점심시간</td><td>13:00 – 14:00</td></tr>
+          <tr><td>일·공휴일</td><td>휴무</td></tr>
+          <tr><td>검진 상담</td><td>평일 14:00 – 17:00 (예약제)</td></tr>
+        </table>
+        <div class="insurance-box">
+          <h4>건강보험 · 검진 안내</h4>
+          <div class="insurance-list">
+            <span>국가건강검진</span>
+            <span>일반·전문 진료</span>
+            <span>종합검진 패키지</span>
+            <span>만성질환 관리</span>
+            <span>예방 접종</span>
+          </div>
+          <p>※ 급여·비급여 항목은 상담 시 안내합니다. 검진 패키지는 카드·분할 결제 가능합니다.</p>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>서울내과의원</strong>
+          <span>서울 서초구 서초대로 398</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">서울내과의원<small>SEOUL INTERNAL MEDICINE</small></a>
+      <p>2013년 개원 이래 서초에서 신뢰받는 내과 전문 의원입니다. 소화기·내분비·건강검진과 만성질환 통합 관리로 환자분의 건강한 일상을 함께합니다.</p>
+      <div class="footer-contact">
+        <span>📍 서울 서초구 서초대로 398, 서울메디컬타워 7층</span>
+        <span>📞 02-521-8800</span>
+        <span>✉️ info@seoul-internal.com</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>진료 과목</h4>
+      <a href="#services">소화기 내과</a>
+      <a href="#services">내분비 · 대사</a>
+      <a href="#packages">건강검진</a>
+      <a href="#chronic">만성질환 관리</a>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="#doctors">의료진 소개</a>
+      <a href="#equipment">검진 장비</a>
+      <a href="#facility">시설 안내</a>
+      <a href="#reviews">환자 후기</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>예약 · 상담</h4>
+      <a href="#appointment">온라인 예약</a>
+      <a href="#location">오시는 길</a>
+      <p>평일 09:00 – 18:00</p>
+      <p>토요일 09:00 – 13:00</p>
+      <p>일·공휴일 휴무</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 서울내과의원 SEOUL INTERNAL MEDICINE. All rights reserved.</span>
+    <span>대표원장 정민호 · 사업자등록번호 214-88-12345</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

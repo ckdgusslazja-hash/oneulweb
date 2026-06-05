@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitZone Gym — 프리미엄 피트니스 센터</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #0A0A0A;
+  --text: #FAFAFA;
+  --text-muted: #A3A3A3;
+  --accent: #22C55E;
+  --accent-text: #0A0A0A;
+  --border: rgba(255,255,255,0.08);
+  --nav-bg: rgba(10,10,10,0.95);
+  --footer-bg: #0A0A0A;
+  --card-bg: #141414;
+  --btn-radius: 4px;
+  --card-radius: 12px;
+  --logo-weight: 400;
+  --logo-spacing: 0.08em;
+}
+
+body { background: var(--bg); }
+
+.site-nav .logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.nav-cta {
+  background: var(--accent);
+  color: var(--accent-text);
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(500px, 85vh, 680px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg { position: absolute; inset: 0; }
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.6) 60%, transparent 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(40px, 8vw, 80px) clamp(20px, 4vw, 48px);
+  max-width: 600px;
+}
+
+.hero-tag {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 6rem);
+  line-height: 0.95;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+
+.hero h1 span { color: var(--accent); }
+
+.hero p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn-green {
+  padding: 16px 36px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  border-radius: var(--btn-radius);
+  display: inline-block;
+  transition: transform 0.25s;
+}
+
+.btn-green:hover { transform: translateY(-2px); }
+
+.btn-dark {
+  padding: 16px 36px;
+  border: 2px solid #333;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  border-radius: var(--btn-radius);
+  display: inline-block;
+}
+
+/* Stats bar */
+.stats-bar {
+  background: var(--accent);
+  color: var(--accent-text);
+  padding: clamp(28px, 5vw, 40px) 0;
+}
+
+.stats-bar .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 32px);
+  text-align: center;
+}
+
+.stat-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-item span {
+  font-size: clamp(0.78rem, 1.5vw, 0.88rem);
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+/* Section titles */
+.section-header.center .section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 0.05em;
+}
+
+/* Programs */
+.programs { background: var(--bg); }
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.program-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.program-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.program-card .prog-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.program-card .prog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.program-card:hover .prog-img img { transform: scale(1.05); }
+
+.program-card .prog-body { padding: clamp(20px, 3vw, 28px); }
+
+.program-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.program-card .prog-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.program-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.program-card .prog-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.program-card .prog-meta strong { color: var(--accent); }
+
+/* Membership */
+.membership { background: #111; }
+
+.plan-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  position: relative;
+  transition: all 0.3s;
+}
+
+.plan-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+.plan-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 40px rgba(34,197,94,0.12);
+}
+
+.plan-card.featured::before {
+  content: 'BEST';
+  position: absolute;
+  top: 16px; right: 16px;
+  background: var(--accent);
+  color: var(--accent-text);
+  padding: 4px 10px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.plan-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.plan-card .desc { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; }
+
+.plan-card .price {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.plan-card .price span { font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-body); }
+
+.plan-card li {
+  padding: 10px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.plan-card li::before { content: '✓ '; color: var(--accent); }
+
+.compare-wrap {
+  margin-top: clamp(40px, 6vw, 56px);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.compare-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 16px 20px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.compare-table thead th {
+  background: var(--card-bg);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
+
+.compare-table thead th:first-child { text-align: left; }
+
+.compare-table tbody th {
+  text-align: left;
+  font-weight: 500;
+  background: rgba(255,255,255,0.02);
+  color: var(--text-muted);
+}
+
+.compare-table .yes { color: var(--accent); font-weight: 700; }
+.compare-table .no { color: #555; }
+.compare-table .featured-col { background: rgba(34,197,94,0.06); }
+
+/* Facility */
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: clamp(32px, 5vw, 48px);
+}
+
+.facility-grid img {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.facility-info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 2vw, 20px);
+}
+
+.facility-info .info-box {
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.facility-info .info-box h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+/* Trainers */
+.trainers { background: #111; }
+
+.trainer-card { text-align: center; }
+
+.trainer-img {
+  aspect-ratio: 3/4;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.trainer-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.trainer-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.trainer-card .specialty {
+  font-size: 0.82rem;
+  color: var(--accent);
+  margin: 4px 0 8px;
+}
+
+.trainer-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+
+/* Schedule */
+.schedule-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+}
+
+.schedule-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 14px 12px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.schedule-table thead th {
+  background: rgba(34,197,94,0.1);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.schedule-table tbody th {
+  background: rgba(255,255,255,0.03);
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.schedule-table .class-name {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.schedule-table .class-trainer {
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+
+.schedule-table td.empty { color: #333; }
+
+/* Reviews */
+.reviews { background: #111; }
+
+/* FAQ */
+.faq-section .faq-item { background: var(--card-bg); }
+
+/* Trial form */
+.trial-section {
+  background: linear-gradient(180deg, var(--bg) 0%, #111 100%);
+}
+
+.trial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+
+.trial-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.trial-content h2 span { color: var(--accent); }
+
+.trial-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.trial-perks li {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding-left: 24px;
+  position: relative;
+}
+
+.trial-perks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.form-card { background: var(--card-bg); }
+
+/* Location */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+  color: var(--accent);
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 14px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.contact-list .icon { font-size: 1.2rem; flex-shrink: 0; }
+
+.contact-list strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.82rem;
+  margin-bottom: 2px;
+}
+
+.hours-wrap h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.map-box {
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  border: 1px solid var(--border);
+}
+
+.map-box::before {
+  background:
+    linear-gradient(rgba(34,197,94,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,197,94,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.map-pin {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+}
+
+.map-pin strong { color: var(--text); }
+.map-pin span { color: var(--text-muted); }
+
+/* Footer */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.55);
+  transition: all 0.25s;
+}
+
+.footer-social a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .program-grid { grid-template-columns: repeat(2, 1fr); }
+  .facility-info { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .hero-bg::after {
+    background: linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%);
+  }
+  .hero { align-items: flex-end; min-height: 70vh; }
+  .facility-grid { grid-template-columns: repeat(2, 1fr); }
+  .program-grid,
+  .trial-grid,
+  .location-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions a { text-align: center; width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .stats-bar .container { grid-template-columns: 1fr 1fr; }
+  .program-grid { grid-template-columns: 1fr; }
+  .facility-info { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="site-nav">
+  <a href="#top" class="logo">FITZONE</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#programs">프로그램</a>
+    <a href="#facility">시설</a>
+    <a href="#trainers">트레이너</a>
+    <a href="#schedule">스케줄</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#membership">멤버십</a>
+    <a href="#trial" class="nav-cta">체험신청</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=80" alt="프리미엄 피트니스 센터 내부">
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">PREMIUM FITNESS · 강남</div>
+    <h1>PUSH YOUR<br><span>LIMITS</span></h1>
+    <p>최신 프리미엄 장비와 국가대표 출신 전문 트레이너. FitZone에서 새로운 한계에 도전하고, 당신만의 최고의 몸을 만들어 보세요.</p>
+    <div class="hero-actions">
+      <a href="#trial" class="btn-green">무료 체험 신청</a>
+      <a href="#facility" class="btn-dark">시설 둘러보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stat-item"><strong>5,000+</strong><span>누적 회원</span></div>
+    <div class="stat-item"><strong>12</strong><span>전문 트레이너</span></div>
+    <div class="stat-item"><strong>1,200</strong><span>평 면적</span></div>
+    <div class="stat-item"><strong>10</strong><span>년 운영</span></div>
+  </div>
+</div>
+
+<!-- Programs -->
+<section class="programs" id="programs">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Programs</div>
+      <h2 class="section-title">TRAINING PROGRAMS</h2>
+      <p class="section-desc">목표와 체력 수준에 맞춘 6가지 전문 프로그램. 1:1 맞춤 상담으로 최적의 루틴을 설계해 드립니다.</p>
+    </div>
+    <div class="program-grid">
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="퍼스널 트레이닝">
+        </div>
+        <div class="prog-body">
+          <span class="prog-tag">1:1 PT</span>
+          <h3>퍼스널 트레이닝</h3>
+          <p>체형 분석과 목표 설정 후 맞춤 운동·영양 플랜 제공. 근력·체지방·재활까지 전문 트레이너가 1:1로 관리합니다.</p>
+          <div class="prog-meta">
+            <span><strong>50분</strong> / 회</span>
+            <span>주 2–4회 권장</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="그룹 수업">
+        </div>
+        <div class="prog-body">
+          <span class="prog-tag">GROUP</span>
+          <h3>그룹 수업</h3>
+          <p>에어로빅, 스피닝, Zumba 등 다양한 그룹 클래스. 에너지 넘치는 분위기 속에서 함께 운동하는 재미를 느껴 보세요.</p>
+          <div class="prog-meta">
+            <span><strong>45분</strong> / 회</span>
+            <span>일 8회 운영</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" alt="요가">
+        </div>
+        <div class="prog-body">
+          <span class="prog-tag">YOGA</span>
+          <h3>요가</h3>
+          <p>빈야사, 하타, 릴렉세이션 요가 등 레벨별 수업. 유연성·균형·마음의 안정을 동시에 잡는 올인원 프로그램입니다.</p>
+          <div class="prog-meta">
+            <span><strong>60분</strong> / 회</span>
+            <span>초·중·고급</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="필라테스">
+        </div>
+        <div class="prog-body">
+          <span class="prog-tag">PILATES</span>
+          <h3>필라테스</h3>
+          <p>리포머·캐딜락·매트 기반 소도구 수업. 코어 강화, 자세 교정, 재활 운동에 효과적이며 그룹·프라이빗 모두 가능합니다.</p>
+          <div class="prog-meta">
+            <span><strong>50분</strong> / 회</span>
+            <span>최대 6인</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1583454110551-21f2efe2b61d?w=600&q=80" alt="크로스핏">
+        </div>
+        <div class="prog-body">
+          <span class="prog-tag">CROSSFIT</span>
+          <h3>크로스핏</h3>
+          <p>WOD 기반 고강도 인터벌 트레이닝. 근력·지구력·순발력을 종합적으로 향상시키는 실전형 프로그램입니다.</p>
+          <div class="prog-meta">
+            <span><strong>55분</strong> / 회</span>
+            <span>레벨 테스트 필수</span>
+          </div>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="다이어트">
+        </div>
+        <div class="prog-body">
+          <span class="prog-tag">DIET</span>
+          <h3>다이어트</h3>
+          <p>체성분 분석 + 식단 코칭 + 유산소·근력 복합 루틴. 8주·12주 패키지로 건강하게 목표 체중에 도달합니다.</p>
+          <div class="prog-meta">
+            <span><strong>8주</strong> 패키지</span>
+            <span>주 3회 PT 포함</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Membership -->
+<section class="membership" id="membership">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Membership</div>
+      <h2 class="section-title">MEMBERSHIP PLANS</h2>
+      <p class="section-desc">라이프스타일에 맞는 3가지 멤버십. 가입 시 체성분 분석과 1:1 상담이 무료로 제공됩니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="plan-card">
+        <h3>BASIC</h3>
+        <div class="desc">기구 이용 + 라커룸</div>
+        <div class="price">₩55,000<span>/월</span></div>
+        <ul>
+          <li>전체 기구 이용</li>
+          <li>라커룸 & 샤워실</li>
+          <li>그룹 수업 2회/월</li>
+          <li>체성분 분석 1회</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <h3>PREMIUM</h3>
+        <div class="desc">PT 4회 + 그룹 수업 무제한</div>
+        <div class="price">₩120,000<span>/월</span></div>
+        <ul>
+          <li>PT 4회 포함</li>
+          <li>그룹 수업 무제한</li>
+          <li>영양 상담 1회</li>
+          <li>수건 & 운동복 대여</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <h3>VIP</h3>
+        <div class="desc">무제한 PT + 전용 라운지</div>
+        <div class="price">₩250,000<span>/월</span></div>
+        <ul>
+          <li>PT 무제한</li>
+          <li>VIP 전용 라운지</li>
+          <li>24시간 이용</li>
+          <li>주차 무제한</li>
+        </ul>
+      </div>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>혜택 비교</th>
+            <th>BASIC</th>
+            <th class="featured-col">PREMIUM</th>
+            <th>VIP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>월 이용료</th>
+            <td>₩55,000</td>
+            <td class="featured-col">₩120,000</td>
+            <td>₩250,000</td>
+          </tr>
+          <tr>
+            <th>기구 이용</th>
+            <td class="yes">✓</td>
+            <td class="featured-col yes">✓</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <th>PT 세션</th>
+            <td>별도 구매</td>
+            <td class="featured-col">4회/월</td>
+            <td>무제한</td>
+          </tr>
+          <tr>
+            <th>그룹 수업</th>
+            <td>2회/월</td>
+            <td class="featured-col">무제한</td>
+            <td>무제한</td>
+          </tr>
+          <tr>
+            <th>영양 상담</th>
+            <td class="no">—</td>
+            <td class="featured-col yes">1회/월</td>
+            <td class="yes">무제한</td>
+          </tr>
+          <tr>
+            <th>수건·운동복</th>
+            <td class="no">—</td>
+            <td class="featured-col yes">✓</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <th>이용 시간</th>
+            <td>06:00–24:00</td>
+            <td class="featured-col">06:00–24:00</td>
+            <td>24시간</td>
+          </tr>
+          <tr>
+            <th>주차</th>
+            <td>2시간 무료</td>
+            <td class="featured-col">4시간 무료</td>
+            <td>무제한</td>
+          </tr>
+          <tr>
+            <th>VIP 라운지</th>
+            <td class="no">—</td>
+            <td class="featured-col no">—</td>
+            <td class="yes">✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Facility -->
+<section id="facility">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Facility</div>
+      <h2 class="section-title">WORLD-CLASS FACILITY</h2>
+      <p class="section-desc">1,200평 규모의 프리미엄 공간. 최신 장비와 쾌적한 편의 시설로 최상의 운동 환경을 제공합니다.</p>
+    </div>
+    <div class="facility-grid">
+      <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&q=80" alt="웨이트 존">
+      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80" alt="프리웨이트 존">
+      <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&q=80" alt="유산소 존">
+      <img src="https://images.unsplash.com/photo-1593079831268-3381b0f4c1eb?w=400&q=80" alt="크로스핏 박스">
+      <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=400&q=80" alt="요가 스튜디오">
+      <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2a4a?w=400&q=80" alt="필라테스 룸">
+      <img src="https://images.unsplash.com/photo-1623874514711-0f321325f318?w=400&q=80" alt="라커룸">
+      <img src="https://images.unsplash.com/photo-1622163642998-1ea32b0b56b4?w=400&q=80" alt="VIP 라운지">
+    </div>
+    <div class="facility-info">
+      <div class="info-box">
+        <div class="icon">🅿️</div>
+        <h4>주차</h4>
+        <p>지하 2층 80대 수용. 회원 등급별 2–무제한 시간 무료 주차 지원.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🚿</div>
+        <h4>샤워실</h4>
+        <p>남·녀 각 12칸 개별 샤워부스. 어메니티·헤어드라이어 완비.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🔐</div>
+        <h4>라커</h4>
+        <p>개인 전자 라커 200개. 일일·월 정기 이용 가능, VIP 전용 라커 별도.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">📶</div>
+        <h4>WiFi</h4>
+        <p>전 구역 고속 무료 WiFi. 운동 중 스트리밍·음악 감상 자유롭게.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">❄️</div>
+        <h4>냉·난방</h4>
+        <p>4계절 쾌적 온도 유지. 환기 시스템으로 쾌적한 공기질 관리.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">💧</div>
+        <h4>정수기</h4>
+        <p>전 층 정수기·얼음 정수기 비치. 운동 전후 수분 보충 편리.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">👕</div>
+        <h4>운동복 대여</h4>
+        <p>프리미엄·VIP 회원 수건·운동복 무료 대여. 세탁·소독 매일 실시.</p>
+      </div>
+      <div class="info-box">
+        <div class="icon">🏋️</div>
+        <h4>프리미엄 장비</h4>
+        <p>Technogym·Life Fitness 최신 라인업. 월 1회 장비 점검·교체.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trainers -->
+<section class="trainers" id="trainers">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Trainers</div>
+      <h2 class="section-title">EXPERT TRAINERS</h2>
+      <p class="section-desc">국가대표·국제 자격증 보유 12명의 전문 트레이너가 목표 달성을 함께합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="trainer-card">
+        <div class="trainer-img"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&q=80" alt="박태현 트레이너"></div>
+        <h3>박태현</h3>
+        <p class="specialty">보디빌딩 · 근비대</p>
+        <p>전 국가대표 보디빌더. 15년 경력, 체형 분석·대회 준비 전문.</p>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-img"><img src="https://images.unsplash.com/photo-1594381898411-846e7d193bfb?w=400&q=80" alt="최유진 트레이너"></div>
+        <h3>최유진</h3>
+        <p class="specialty">필라테스 · 재활</p>
+        <p>STOTT PILATES 마스터. 10년 경력, 코어·자세 교정·산전산후 케어.</p>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-img"><img src="https://images.unsplash.com/photo-1583454110551-21f2efe2b61d?w=400&q=80" alt="정민호 트레이너"></div>
+        <h3>정민호</h3>
+        <p class="specialty">크로스핏 · 기능성</p>
+        <p>CrossFit L2 인증. 12년 경력, WOD 설계·경기력 향상 전문.</p>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-img"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&q=80" alt="한소영 트레이너"></div>
+        <h3>한소영</h3>
+        <p class="specialty">요가 · 명상</p>
+        <p>RYT-500 인증. 8년 경력, 빈야사·하타·테라피 요가 지도.</p>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-img"><img src="https://images.unsplash.com/photo-1567013127542-d32e29f3978f?w=400&q=80" alt="김준서 트레이너"></div>
+        <h3>김준서</h3>
+        <p class="specialty">다이어트 · 체지방</p>
+        <p>스포츠영양사 1급. 9년 경력, 체성분 기반 다이어트 코칭.</p>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-img"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" alt="이하은 트레이너"></div>
+        <h3>이하은</h3>
+        <p class="specialty">그룹 수업 · 스피닝</p>
+        <p>ACE 그룹피트니스 인증. 7년 경력, 에너지 넘치는 그룹 클래스 진행.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Schedule -->
+<section id="schedule">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Schedule</div>
+      <h2 class="section-title">WEEKLY CLASS SCHEDULE</h2>
+      <p class="section-desc">월–일 시간대별 그룹 수업 스케줄. 앱에서 실시간 예약·잔여석 확인이 가능합니다.</p>
+    </div>
+    <div class="schedule-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>시간</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+            <th>일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>07:00</th>
+            <td><span class="class-name">모닝 요가</span><span class="class-trainer">한소영</span></td>
+            <td class="empty">—</td>
+            <td><span class="class-name">모닝 요가</span><span class="class-trainer">한소영</span></td>
+            <td class="empty">—</td>
+            <td><span class="class-name">모닝 요가</span><span class="class-trainer">한소영</span></td>
+            <td><span class="class-name">선라이즈 요가</span><span class="class-trainer">한소영</span></td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <th>10:00</th>
+            <td><span class="class-name">필라테스</span><span class="class-trainer">최유진</span></td>
+            <td><span class="class-name">필라테스</span><span class="class-trainer">최유진</span></td>
+            <td class="empty">—</td>
+            <td><span class="class-name">필라테스</span><span class="class-trainer">최유진</span></td>
+            <td><span class="class-name">필라테스</span><span class="class-trainer">최유진</span></td>
+            <td><span class="class-name">매트 필라테스</span><span class="class-trainer">최유진</span></td>
+            <td><span class="class-name">릴렉스 요가</span><span class="class-trainer">한소영</span></td>
+          </tr>
+          <tr>
+            <th>12:30</th>
+            <td><span class="class-name">점심 스피닝</span><span class="class-trainer">이하은</span></td>
+            <td class="empty">—</td>
+            <td><span class="class-name">점심 스피닝</span><span class="class-trainer">이하은</span></td>
+            <td class="empty">—</td>
+            <td><span class="class-name">점심 스피닝</span><span class="class-trainer">이하은</span></td>
+            <td class="empty">—</td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <th>18:00</th>
+            <td><span class="class-name">크로스핏</span><span class="class-trainer">정민호</span></td>
+            <td><span class="class-name">크로스핏</span><span class="class-trainer">정민호</span></td>
+            <td><span class="class-name">크로스핏</span><span class="class-trainer">정민호</span></td>
+            <td><span class="class-name">크로스핏</span><span class="class-trainer">정민호</span></td>
+            <td><span class="class-name">크로스핏</span><span class="class-trainer">정민호</span></td>
+            <td class="empty">—</td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <th>19:30</th>
+            <td><span class="class-name">다이어트 PT</span><span class="class-trainer">김준서</span></td>
+            <td><span class="class-name">Zumba</span><span class="class-trainer">이하은</span></td>
+            <td><span class="class-name">다이어트 PT</span><span class="class-trainer">김준서</span></td>
+            <td><span class="class-name">Zumba</span><span class="class-trainer">이하은</span></td>
+            <td><span class="class-name">다이어트 PT</span><span class="class-trainer">김준서</span></td>
+            <td><span class="class-name">바디빌딩 클래스</span><span class="class-trainer">박태현</span></td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <th>21:00</th>
+            <td><span class="class-name">나이트 요가</span><span class="class-trainer">한소영</span></td>
+            <td><span class="class-name">나이트 요가</span><span class="class-trainer">한소영</span></td>
+            <td><span class="class-name">나이트 요가</span><span class="class-trainer">한소영</span></td>
+            <td><span class="class-name">나이트 요가</span><span class="class-trainer">한소영</span></td>
+            <td><span class="class-name">나이트 요가</span><span class="class-trainer">한소영</span></td>
+            <td class="empty">—</td>
+            <td class="empty">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">MEMBER REVIEWS</h2>
+      <p class="section-desc">FitZone과 함께 변화를 경험한 회원들의 생생한 후기입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>3개월 만에 체지방 8% 감량! 김준서 트레이너의 식단·운동 코칭이 정말 체계적이에요. 시설도 깨끗하고 분위기 최고입니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">지</div>
+          <div><strong>박지현</strong><span>다이어트 3개월 · PREMIUM</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>크로스핏 입문자인데 정민호 코치님이 기초부터 꼼꼼히 봐주셔서 부상 없이 실력이 늘었어요. 회원들 분위기도 너무 좋습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">성</div>
+          <div><strong>이성민</strong><span>크로스핏 6개월 · BASIC</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>요가 수업이 정말 다양해요. 한소영 선생님 수업은 몸도 마음도 편해지는 느낌. 샤워실·라커도 깔끔해서 출근 전후로 자주 옵니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">수</div>
+          <div><strong>최수연</strong><span>요가 1년 · PREMIUM</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>허리 디스크 이후 운동이 두려웠는데 최유진 트레이너의 필라테스 재활 프로그램 덕분에 일상생활이 편해졌어요. 강력 추천합니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">호</div>
+          <div><strong>정대호</strong><span>필라테스 재활 · VIP</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>박태현 트레이너와 1:1 PT 6개월, 근육량 4kg 증가! 장비 상태도 최상이고 VIP 라운지는 정말 프라이빗해서 만족도가 높아요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">윤</div>
+          <div><strong>윤재영</strong><span>PT 6개월 · VIP</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>이하은 트레이너의 스피닝·Zumba 수업이 너무 신나요! 그룹 수업 분위기가 활기차서 운동이 습관이 됐습니다. 직원분들도 친절해요.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">나</div>
+          <div><strong>강나래</strong><span>그룹 수업 4개월 · PREMIUM</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">FitZone 이용 전 궁금한 점을 확인해 보세요.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">무료 체험은 어떻게 신청하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">홈페이지 하단 체험 신청 폼 또는 전화(02-3333-4444)로 신청 가능합니다. 첫 방문 시 시설 투어, 체성분 분석, PT 1회(50분)가 무료로 제공됩니다. 사전 예약 필수이며, 주말은 오전 시간대를 권장합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">회원권 중도 해지·환불이 가능한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">월 회원권은 1개월 전 해지 통보 시 다음 달부터 해지됩니다. 연 회원권은 잔여 기간에 대해 위약금(10%) 공제 후 환불 가능합니다. PT 패키지는 미사용 회차에 대해 90% 환불됩니다. 자세한 사항은 데스크에 문의해 주세요.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">운동복·수건·샤워 용품을 지참해야 하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">운동복과 운동화는 개인 지참이 원칙입니다. PREMIUM·VIP 회원은 수건·운동복 무료 대여가 가능합니다. 샤워실에는 바디워시·샴푸·컨디셔너가 비치되어 있으며, 개인 세면도구를 가져오셔도 됩니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">주차는 어떻게 이용하나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">건물 지하 1–2층 주차장을 이용합니다. BASIC 2시간, PREMIUM 4시간, VIP 무제한 무료 주차입니다. 데스크에서 차량 번호 등록 후 출차 시 자동 정산이 적용됩니다. 만차 시 인근 공영주차장 안내를 드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">그룹 수업은 예약이 필요한가요?</button>
+        <div class="faq-a"><div class="faq-a-inner">PREMIUM·VIP 회원은 FitZone 앱에서 수업 예약 후 참여합니다. BASIC 회원은 월 2회 예약 가능하며, 잔여석이 있을 경우 현장 대기 참여도 가능합니다. 인기 수업(크로스핏, 스피닝)은 사전 예약을 권장합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">운영 시간과 휴무일은 어떻게 되나요?</button>
+        <div class="faq-a"><div class="faq-a-inner">일반 회원 이용 시간은 매일 06:00–24:00입니다. VIP 회원은 24시간 이용 가능합니다. 설·추석 당일 휴무, 그 외 공휴일은 09:00–18:00 단축 운영합니다. 매월 첫째 주 월요일은 시설 점검으로 14:00부터 오픈합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Free Trial Form -->
+<section class="trial-section" id="trial">
+  <div class="container">
+    <div class="trial-grid">
+      <div class="trial-content">
+        <div class="section-label">Free Trial</div>
+        <h2>첫 방문 <span>무료 체험</span></h2>
+        <p class="section-desc">시설 투어 + 체성분 분석 + PT 1회를 무료로 체험해 보세요. 부담 없이 FitZone의 프리미엄 환경을 직접 경험할 수 있습니다.</p>
+        <ul class="trial-perks">
+          <li>PT 1회(50분) 무료 체험</li>
+          <li>InBody 체성분 분석 무료</li>
+          <li>1:1 목표 상담 (15분)</li>
+          <li>당일 가입 시 등록비 면제</li>
+        </ul>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="무료 체험 신청이 완료되었습니다! 24시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="trial-name">이름</label>
+              <input type="text" id="trial-name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="trial-phone">연락처</label>
+              <input type="tel" id="trial-phone" name="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="trial-date">희망 날짜</label>
+              <input type="date" id="trial-date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="trial-time">희망 시간</label>
+              <select id="trial-time" name="time" required>
+                <option value="">선택</option>
+                <option value="07:00">07:00</option>
+                <option value="10:00">10:00</option>
+                <option value="14:00">14:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:30">19:30</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="trial-program">관심 프로그램</label>
+              <select id="trial-program" name="program" required>
+                <option value="">선택</option>
+                <option value="pt">퍼스널 트레이닝</option>
+                <option value="group">그룹 수업</option>
+                <option value="yoga">요가</option>
+                <option value="pilates">필라테스</option>
+                <option value="crossfit">크로스핏</option>
+                <option value="diet">다이어트</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="trial-message">문의 사항</label>
+              <textarea id="trial-message" name="message" placeholder="운동 경험, 목표, 부상 이력 등 자유롭게 적어 주세요." rows="3"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-green" style="width:100%;margin-top:8px;border:none;cursor:pointer">무료 체험 신청하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">오시는 길 & 운영 시간</h2>
+      <p class="section-desc">강남역 3번 출구에서 도보 7분. 지하철 2호선·신분당선 강남역 이용 시 편리합니다.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>FITZONE GYM</h3>
+        <ul class="contact-list">
+          <li>
+            <span class="icon">📍</span>
+            <div>
+              <strong>주소</strong>
+              서울 강남구 테헤란로 456, FitZone 빌딩 B1–2F
+            </div>
+          </li>
+          <li>
+            <span class="icon">📞</span>
+            <div>
+              <strong>전화</strong>
+              02-3333-4444
+            </div>
+          </li>
+          <li>
+            <span class="icon">✉️</span>
+            <div>
+              <strong>이메일</strong>
+              hello@fitzone.kr
+            </div>
+          </li>
+          <li>
+            <span class="icon">🅿️</span>
+            <div>
+              <strong>주차</strong>
+              건물 지하 1–2층 · 회원 등급별 2–무제한 무료
+            </div>
+          </li>
+        </ul>
+        <div class="hours-wrap">
+          <h4>운영 시간</h4>
+          <table class="hours-table">
+            <tr><td>월 – 금 (일반)</td><td>06:00 – 24:00</td></tr>
+            <tr><td>토 – 일 (일반)</td><td>07:00 – 22:00</td></tr>
+            <tr><td>VIP 회원</td><td>24시간 연중무휴</td></tr>
+            <tr><td>공휴일</td><td>09:00 – 18:00</td></tr>
+            <tr><td>시설 점검</td><td>매월 첫째 주 월 14:00 오픈</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>FitZone Gym</strong>
+          <span>서울 강남구 테헤란로 456</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">FITZONE</span>
+      <p>10년간 5,000명 이상의 회원과 함께한 강남 프리미엄 피트니스. 최고의 장비, 최고의 트레이너, 최고의 결과를 약속합니다.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="KakaoTalk">KT</a>
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="Blog">BL</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>프로그램</h4>
+      <a href="#programs">퍼스널 트레이닝</a>
+      <a href="#programs">그룹 수업</a>
+      <a href="#programs">요가 · 필라테스</a>
+      <a href="#programs">크로스핏</a>
+      <a href="#programs">다이어트</a>
+    </div>
+    <div class="footer-col">
+      <h4>안내</h4>
+      <a href="#membership">멤버십</a>
+      <a href="#facility">시설 안내</a>
+      <a href="#trainers">트레이너</a>
+      <a href="#schedule">수업 스케줄</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>02-3333-4444</p>
+      <p>hello@fitzone.kr</p>
+      <p>서울 강남구 테헤란로 456</p>
+      <a href="#trial">무료 체험 신청</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 FitZone Gym. All rights reserved.</span>
+    <span>사업자등록번호 456-78-90123</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

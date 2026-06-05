@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>삼원식품 SAMWON FOODS — 건강한 식탁을 만드는 식품제조 전문기업</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Gowun Batang', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFF8F0;
+  --text: #2C1810;
+  --text-muted: #7A5C4A;
+  --accent: #B33A2E;
+  --accent-2: #D35400;
+  --accent-cream: #F5E6D3;
+  --accent-warm: #E8C4A0;
+  --accent-text: #fff;
+  --border: #E8D5C4;
+  --nav-bg: rgba(255,248,240,0.97);
+  --footer-bg: #2C1810;
+  --card-bg: #fff;
+  --btn-radius: 6px;
+  --card-radius: 10px;
+  --title-weight: 700;
+  --logo-weight: 700;
+  --footer-text: rgba(255,255,255,0.58);
+}
+
+body { background: var(--bg); }
+
+.site-nav .logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  gap: 2px;
+  color: var(--accent);
+}
+
+.site-nav .logo strong {
+  font-family: var(--font-display);
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.site-nav .logo span {
+  font-size: 0.52em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+
+.nav-cta { background: var(--accent); color: #fff; }
+.section-label { color: var(--accent-2); }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 85vh, 720px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(44,24,16,0.88) 0%, rgba(179,58,46,0.72) 45%, rgba(44,24,16,0.42) 100%);
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: clamp(80px, 12vw, 120px) 0 clamp(60px, 8vw, 80px);
+}
+
+.hero-content { max-width: 680px; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  background: rgba(211,84,0,0.18);
+  border: 1px solid rgba(232,196,160,0.4);
+  color: var(--accent-cream);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+  border-radius: 50px;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent-2);
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent-warm);
+}
+
+.hero-desc {
+  font-size: clamp(0.92rem, 2vw, 1.08rem);
+  color: rgba(255,255,255,0.82);
+  line-height: 1.85;
+  margin-bottom: 32px;
+  max-width: 540px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+  padding: 15px 30px;
+  background: var(--accent-2);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(211,84,0,0.4);
+}
+
+.btn-hero-outline {
+  padding: 15px 30px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.btn-hero-outline:hover {
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.08);
+}
+
+/* Trust strip */
+.trust-strip {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(20px, 3vw, 28px) 0;
+}
+
+.trust-strip .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 2vw, 24px);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  justify-content: center;
+}
+
+.trust-item .ico {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-cream);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Stats */
+.stats-band {
+  background: var(--accent);
+  padding: clamp(40px, 6vw, 56px) 0;
+}
+
+.stats-band::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent-warm), var(--accent-2));
+  margin-bottom: -4px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 32px);
+}
+
+.stat-item {
+  text-align: center;
+  padding: clamp(16px, 3vw, 24px);
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-item .num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-item .num span {
+  font-size: 0.55em;
+  color: var(--accent-warm);
+}
+
+.stat-item .lbl {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+/* About */
+.about-section { background: #fff; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.about-img {
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-img-badge {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: var(--accent);
+  color: #fff;
+  padding: 20px 28px;
+  border-left: 4px solid var(--accent-2);
+}
+
+.about-img-badge strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.about-img-badge span { font-size: 0.78rem; opacity: 0.85; }
+
+.about-text .section-desc { max-width: none; margin-bottom: 20px; }
+
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.value-box {
+  padding: 20px 16px;
+  background: var(--bg);
+  border-top: 3px solid var(--accent);
+  text-align: center;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+}
+
+.value-box h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.value-box p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Products */
+.products-section { background: var(--bg); }
+
+.product-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(179,58,46,0.1);
+}
+
+.product-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.product-card:hover .product-img img { transform: scale(1.05); }
+
+.product-img .tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 5px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 4px;
+}
+
+.product-body { padding: clamp(20px, 3vw, 28px); }
+
+.product-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.product-body p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.product-body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.product-body li {
+  font-size: 0.78rem;
+  color: var(--text);
+  padding-left: 14px;
+  position: relative;
+}
+
+.product-body li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-2);
+}
+
+/* Quality */
+.quality-section { background: #fff; }
+
+.quality-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.cert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cert-item {
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--card-radius);
+  transition: box-shadow 0.3s;
+}
+
+.cert-item:hover { box-shadow: 0 8px 24px rgba(179,58,46,0.08); }
+
+.cert-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  background: var(--accent-cream);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.cert-item h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.cert-item p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.cert-badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.cert-badge {
+  padding: 24px 16px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.cert-badge:hover { transform: translateY(-3px); }
+
+.cert-badge .ico { font-size: 1.8rem; margin-bottom: 10px; }
+
+.cert-badge h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.cert-badge p {
+  font-size: 0.7rem;
+  opacity: 0.75;
+  line-height: 1.5;
+}
+
+/* Facility */
+.facility-section { background: var(--bg); }
+
+.facility-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.facility-img {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  aspect-ratio: 16/10;
+}
+
+.facility-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.facility-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.facility-stat {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+}
+
+.facility-stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.facility-stat span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.facility-points {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.facility-point {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+
+.facility-point .num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.facility-point strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.facility-point span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* OEM */
+.oem-section { background: #fff; }
+
+.oem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.oem-card {
+  padding: clamp(28px, 4vw, 36px);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.oem-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.oem-card .ico {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+}
+
+.oem-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.oem-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.oem-card ul {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.oem-card li {
+  font-size: 0.78rem;
+  color: var(--text);
+  padding-left: 14px;
+  position: relative;
+}
+
+.oem-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-2);
+  font-size: 0.7rem;
+}
+
+.oem-process {
+  margin-top: 48px;
+  padding: clamp(32px, 5vw, 48px);
+  background: linear-gradient(135deg, var(--accent) 0%, #8B2E24 100%);
+  border-radius: var(--card-radius);
+  color: #fff;
+}
+
+.oem-process h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.process-step {
+  text-align: center;
+  position: relative;
+}
+
+.process-step .step-num {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin: 0 auto 12px;
+}
+
+.process-step h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.process-step p {
+  font-size: 0.72rem;
+  opacity: 0.8;
+  line-height: 1.55;
+}
+
+/* Distribution */
+.dist-section { background: var(--bg); }
+
+.dist-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+}
+
+.dist-img { aspect-ratio: 16/9; overflow: hidden; }
+.dist-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.dist-body { padding: 24px; }
+
+.dist-body h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.dist-body p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Team */
+.team-section { background: #fff; }
+
+.team-card {
+  text-align: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.team-card:hover { transform: translateY(-4px); }
+
+.team-photo {
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-info { padding: 24px; }
+
+.team-info h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.team-info .role {
+  font-size: 0.78rem;
+  color: var(--accent-2);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.team-info p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* FAQ */
+.faq-section { background: var(--bg); }
+
+/* CTA */
+.recruit-cta {
+  background: linear-gradient(135deg, #2C1810 0%, var(--accent) 60%, #8B2E24 100%);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.recruit-cta .section-label { color: var(--accent-warm); }
+.recruit-cta .section-title { color: #fff; }
+.recruit-cta .section-desc { color: rgba(255,255,255,0.75); margin: 0 auto 32px; }
+
+.recruit-inner { max-width: 640px; margin: 0 auto; }
+
+.btn-recruit {
+  display: inline-flex;
+  padding: 16px 36px;
+  background: var(--accent-2);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-recruit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(211,84,0,0.45);
+}
+
+/* Contact */
+.contact-section { background: #fff; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.contact-info h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.contact-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.contact-detail .ico {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: var(--accent-cream);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.contact-detail strong {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+}
+
+.contact-detail span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.form-card .btn-primary {
+  width: 100%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.form-card .btn-primary:hover { background: var(--accent-2); }
+
+.map-box { border: 1px solid var(--border); margin-top: 24px; }
+
+/* Footer */
+.site-footer .footer-brand .logo { color: #fff; font-family: var(--font-display); }
+.footer-col a:hover { color: var(--accent-warm); }
+
+.footer-cert {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.footer-cert span {
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.45);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .trust-strip .container { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item { border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+  .about-grid, .quality-grid, .facility-grid, .contact-grid { grid-template-columns: 1fr; }
+  .about-values { grid-template-columns: 1fr; }
+  .oem-grid { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .cert-badges { grid-template-columns: 1fr; }
+  .facility-stats { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .trust-strip .container { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item { border-right: none !important; }
+  .process-steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">
+    <strong>삼원식품</strong>
+    <span>SAMWON FOODS</span>
+  </a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#about">회사소개</a>
+    <a href="#products">제품라인</a>
+    <a href="#quality">품질인증</a>
+    <a href="#facility">생산시설</a>
+    <a href="#oem">OEM/ODM</a>
+    <a href="#distribution">유통채널</a>
+    <a href="#contact" class="nav-cta">문의</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80" alt="신선한 식재료와 가공식품">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">HACCP 인증 · ISO 22000 · 식품제조업 등록</div>
+      <h1>건강한 식탁을 만드는<br><em>식품제조의 기준</em></h1>
+      <p class="hero-desc">1992년 설립 이래 냉동·가공식품, 즉석밥, 소스·양념 분야에서 32년간 축적된 제조 노하우로 국내외 180여 유통사와 함께합니다. HACCP 기반 철저한 품질관리와 맞춤형 OEM/ODM 서비스를 제공합니다.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn-hero-primary">제품라인 보기</a>
+        <a href="#oem" class="btn-hero-outline">OEM/ODM 문의</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-item"><div class="ico">🏭</div>HACCP · ISO 22000 인증 공장</div>
+    <div class="trust-item"><div class="ico">❄️</div>-40℃ 급속냉동 시스템</div>
+    <div class="trust-item"><div class="ico">🔬</div>자체 품질검사실 운영</div>
+    <div class="trust-item"><div class="ico">🌏</div>수출 12개국 공급 실적</div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="num">32<span>년</span></div>
+        <div class="lbl">식품제조 역사</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">280<span>+</span></div>
+        <div class="lbl">등록 제품 SKU</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">12,000<span>㎡</span></div>
+        <div class="lbl">HACCP 인증 생산시설</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">98.6<span>%</span></div>
+        <div class="lbl">고객사 재계약률</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80" alt="삼원식품 생산 공장">
+        <div class="about-img-badge">
+          <strong>Since 1992</strong>
+          <span>32년의 식품제조 역사</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">회사소개</h2>
+        <p class="section-desc">삼원식품은 냉동·가공식품, 즉석밥, 소스·양념, 반찬류를 전문으로 하는 식품제조기업입니다. 원료 입고부터 출하까지 전 공정 HACCP 관리체계를 운영하며, 대형마트 PB, 외식 프랜차이즈, 급식 납품, 해외 수출까지 다양한 채널에 안정적으로 공급합니다.</p>
+        <p class="section-desc">경기 이천 본사 공장과 충북 음성 2공장을 운영하며, 연간 1.8만 톤 규모의 생산능력을 보유하고 있습니다. 식품공학 전문 인력 28명이 상주하는 R&D센터에서 신제품 개발과 레시피 최적화를 지원합니다.</p>
+        <div class="about-values">
+          <div class="value-box">
+            <h4>안전</h4>
+            <p>HACCP 기반 전공정 위생관리</p>
+          </div>
+          <div class="value-box">
+            <h4>신선</h4>
+            <p>원료 산지 직거래·급속냉동</p>
+          </div>
+          <div class="value-box">
+            <h4>협력</h4>
+            <p>고객 맞춤 OEM/ODM 파트너십</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Product Line</div>
+      <h2 class="section-title">제품라인</h2>
+      <p class="section-desc">냉동·가공식품부터 즉석밥, 소스·양념까지 280여 SKU의 다양한 제품 포트폴리오를 보유하고 있습니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=700&q=80" alt="냉동 가공식품">
+          <span class="tag">FROZEN</span>
+        </div>
+        <div class="product-body">
+          <h3>냉동 가공식품</h3>
+          <p>만두, 떡갈비, 돈까스, 해물류 등 가정간편식(HMR) 및 외식용 냉동식품을 생산합니다. -40℃ 급속냉동으로 신선도와 식감을 극대화합니다.</p>
+          <ul>
+            <li>만두·떡갈비·돈까스 시리즈</li>
+            <li>해물·수산 가공품</li>
+            <li>외식 프랜차이즈 전용 냉동식</li>
+            <li>PB 납품 맞춤 개발</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1516684732162-798a0062be99?w=700&q=80" alt="즉석밥·레토르트">
+          <span class="tag">READY</span>
+        </div>
+        <div class="product-body">
+          <h3>즉석밥 · 레토르트</h3>
+          <p>전자레인지 2분 조리 즉석밥, 컵밥, 레토르트 국·찌개, 즉석 죽 등 편의식품 라인업입니다. 대형마트·편의점·군납 등 다채널 공급 실적이 풍부합니다.</p>
+          <ul>
+            <li>현미·잡곡·흑미 즉석밥</li>
+            <li>컵밥·도시락 시리즈</li>
+            <li>레토르트 국·찌개·탕</li>
+            <li>급식·군납 대량 납품</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1596040033229-a0b451a73fe1?w=700&q=80" alt="소스·양념">
+          <span class="tag">SAUCE</span>
+        </div>
+        <div class="product-body">
+          <h3>소스 · 양념 · 드레싱</h3>
+          <p>불고기·갈비·치킨 양념, 샐러드 드레싱, 파스타 소스 등 B2B·B2C 겸용 소스류를 제조합니다. 소량 시제품부터 대량 생산까지 유연하게 대응합니다.</p>
+          <ul>
+            <li>육류·해산물 양념 소스</li>
+            <li>샐러드·드레싱 라인</li>
+            <li>외식 프랜차이즈 전용 소스</li>
+            <li>저나트륨·저당 맞춤 개발</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700&q=80" alt="반찬·밀키트">
+          <span class="tag">SIDE</span>
+        </div>
+        <div class="product-body">
+          <h3>반찬 · 밀키트</h3>
+          <p>나물류, 장조림, 절임 반찬과 2~4인분 밀키트를 생산합니다. 밀키트 전문 브랜드 OEM과 자사 PB 브랜드 '삼원키친'을 동시 운영합니다.</p>
+          <ul>
+            <li>나물·장조림·절임 반찬</li>
+            <li>2~4인분 밀키트 세트</li>
+            <li>프리미엄 선물세트</li>
+            <li>밀키트 브랜드 OEM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quality -->
+<section class="quality-section" id="quality">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Quality Assurance</div>
+      <h2 class="section-title">품질인증</h2>
+      <p class="section-desc">국내외 식품 안전 기준을 충족하는 인증 체계와 자체 품질검사 시스템으로 안심할 수 있는 제품을 만듭니다.</p>
+    </div>
+    <div class="quality-grid">
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-icon">🔬</div>
+          <div>
+            <h4>전공정 HACCP 관리</h4>
+            <p>원료 입고, 전처리, 가공, 포장, 보관, 출하 6단계별 위해요소 분석(CCP)을 실시하며, 온도·pH·미생물 검사 기록을 전산 관리합니다.</p>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">🧪</div>
+          <div>
+            <h4>자체 품질검사실</h4>
+            <p>미생물, 잔류농약, 중금속, 이물질 검사 장비를 갖춘 품질검사실에서 원료·반제품·완제품 3단계 검사를 매일 수행합니다.</p>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">📋</div>
+          <div>
+            <h4>이력추적 시스템</h4>
+            <p>원료 LOT부터 완제품 바코드까지 1시간 내 역추적이 가능한 ERP 연동 이력관리 시스템을 운영합니다. 리콜 대응 매뉴얼도 정기 점검합니다.</p>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">🌿</div>
+          <div>
+            <h4>친환경·지속가능 경영</h4>
+            <p>친환경 포장재 전환(2024년 68%), 식품폐기물 92% 재활용, 탄소배출 저감 설비 투자 등 ESG 경영을 실천하고 있습니다.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="cert-badges">
+          <div class="cert-badge">
+            <div class="ico">✅</div>
+            <h4>HACCP</h4>
+            <p>식품안전관리인증<br>이천·음성 2개소</p>
+          </div>
+          <div class="cert-badge">
+            <div class="ico">🌐</div>
+            <h4>ISO 22000</h4>
+            <p>식품안전경영시스템<br>국제인증</p>
+          </div>
+          <div class="cert-badge">
+            <div class="ico">🇺🇸</div>
+            <h4>FDA 등록</h4>
+            <p>미국 식품의약국<br>시설 등록 완료</p>
+          </div>
+          <div class="cert-badge">
+            <div class="ico">🏅</div>
+            <h4>대한민국식품대상</h4>
+            <p>식품의약품안전처<br>장관 표창 3회</p>
+          </div>
+          <div class="cert-badge">
+            <div class="ico">⭐</div>
+            <h4>우수식품제조업체</h4>
+            <p>농림축산식품부<br>5년 연속 선정</p>
+          </div>
+          <div class="cert-badge">
+            <div class="ico">🔬</div>
+            <h4>기업부설연구소</h4>
+            <p>식품공학 R&D<br>인정 연구소</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Facility -->
+<section class="facility-section" id="facility">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Production Facility</div>
+      <h2 class="section-title">생산시설</h2>
+      <p class="section-desc">HACCP 인증 2개 공장, 총 12,000㎡ 규모의 최신 식품제조 시설에서 안전하고 효율적인 생산을 수행합니다.</p>
+    </div>
+    <div class="facility-grid">
+      <div class="facility-img">
+        <img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=900&q=80" alt="삼원식품 생산라인">
+      </div>
+      <div>
+        <div class="facility-stats">
+          <div class="facility-stat">
+            <strong>12,000㎡</strong>
+            <span>총 생산시설 면적</span>
+          </div>
+          <div class="facility-stat">
+            <strong>1.8만톤</strong>
+            <span>연간 생산능력</span>
+          </div>
+          <div class="facility-stat">
+            <strong>-40℃</strong>
+            <span>급속냉동 시스템</span>
+          </div>
+          <div class="facility-stat">
+            <strong>6라인</strong>
+            <span>자동화 생산라인</span>
+          </div>
+        </div>
+        <div class="facility-points">
+          <div class="facility-point">
+            <div class="num">01</div>
+            <div>
+              <strong>이천 본사 공장 (8,200㎡)</strong>
+              <span>냉동 가공식품·즉석밥 메인 생산기지. 4개 자동화 라인, -40℃ 급속냉동 터널 2기, 냉동창고 3,500㎡ 보유.</span>
+            </div>
+          </div>
+          <div class="facility-point">
+            <div class="num">02</div>
+            <div>
+              <strong>음성 2공장 (3,800㎡)</strong>
+              <span>소스·양념·반찬류 전문 공장. 무균 충전 시스템, 레토르트 살균기, 소량 다품종 생산에 최적화된 유연 라인.</span>
+            </div>
+          </div>
+          <div class="facility-point">
+            <div class="num">03</div>
+            <div>
+              <strong>품질검사 · R&D센터</strong>
+              <span>이천 본사 내 600㎡ 규모 품질검사실과 R&D센터. 시제품 개발부터 대량생산 전환까지 원스톱 지원.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OEM/ODM -->
+<section class="oem-section" id="oem">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">OEM / ODM</div>
+      <h2 class="section-title">OEM · ODM 서비스</h2>
+      <p class="section-desc">브랜드사·유통사·외식업체를 위한 맞춤형 식품 제조 파트너십. 레시피 개발부터 포장·인증까지 원스톱 지원합니다.</p>
+    </div>
+    <div class="oem-grid">
+      <div class="oem-card">
+        <div class="ico">📐</div>
+        <h3>레시피 개발 (ODM)</h3>
+        <p>식품공학 전문 연구진이 고객사 컨셉에 맞는 레시피를 설계·시제품 제작합니다.</p>
+        <ul>
+          <li>맛·식감·원가 최적화</li>
+          <li>영양성분·알레르기 표시</li>
+          <li>시제품 2주 내 제공</li>
+          <li>대량생산 전환 지원</li>
+        </ul>
+      </div>
+      <div class="oem-card">
+        <div class="ico">🏭</div>
+        <h3>위탁생산 (OEM)</h3>
+        <p>고객사 레시피·브랜드를 기반으로 HACCP 인증 시설에서 안정적으로 대량 생산합니다.</p>
+        <ul>
+          <li>MOQ 협의 가능 (소량 OK)</li>
+          <li>PB·프랜차이즈 전용 생산</li>
+          <li>납기 준수율 99.2%</li>
+          <li>재고·물류 연계 지원</li>
+        </ul>
+      </div>
+      <div class="oem-card">
+        <div class="ico">📦</div>
+        <h3>포장 · 인증 지원</h3>
+        <p>포장 디자인, 영양표시, HACCP·수출 인증, 물류까지 제조 이후 전 과정을 지원합니다.</p>
+        <ul>
+          <li>포장재 추천·친환경 옵션</li>
+          <li>식품표시광고법 검토</li>
+          <li>수출 서류·인증 대행</li>
+          <li>3PL 물류 연계</li>
+        </ul>
+      </div>
+    </div>
+    <div class="oem-process">
+      <h3>OEM/ODM 진행 프로세스</h3>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <h4>상담·기획</h4>
+          <p>제품 컨셉, 타깃, 예산, MOQ 협의</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <h4>레시피 개발</h4>
+          <p>시제품 제작·시식·피드백 반영</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <h4>인증·포장</h4>
+          <p>표시사항, 포장 디자인, 인증 준비</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <h4>시생산</h4>
+          <p>파일럿 생산·품질 검증</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">5</div>
+          <h4>본생산·출하</h4>
+          <p>대량생산·물류·A/S 지원</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Distribution -->
+<section class="dist-section" id="distribution">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Distribution</div>
+      <h2 class="section-title">유통채널</h2>
+      <p class="section-desc">대형마트 PB, 외식 프랜차이즈, 급식, 편의점, 해외 수출 등 다양한 채널에 안정적으로 공급합니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="dist-card">
+        <div class="dist-img">
+          <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&q=80" alt="대형마트 PB">
+        </div>
+        <div class="dist-body">
+          <h3>대형마트 · 할인점 PB</h3>
+          <p>이마트, 롯데마트, 홈플러스 등 주요 유통사 PB 납품. 즉석밥·냉동식품·반찬류 120여 SKU 공급 중.</p>
+        </div>
+      </div>
+      <div class="dist-card">
+        <div class="dist-img">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="외식 프랜차이즈">
+        </div>
+        <div class="dist-body">
+          <h3>외식 · 프랜차이즈</h3>
+          <p>전국 340여 매장 프랜차이즈에 전용 소스·냉동식 납품. 메뉴 표준화와 원가 절감을 동시에 실현합니다.</p>
+        </div>
+      </div>
+      <div class="dist-card">
+        <div class="dist-img">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80" alt="해외 수출">
+        </div>
+        <div class="dist-body">
+          <h3>해외 수출 · K-Food</h3>
+          <p>미국, 일본, 호주, 동남아 12개국 수출. FDA·JAS 인증 완료 제품으로 K-Food 글로벌 시장에 진출합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">경영진 · 핵심 인력</h2>
+      <p class="section-desc">식품공학·경영 전문가들이 안전하고 혁신적인 식품제조 문화를 이끌어갑니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="대표이사">
+        </div>
+        <div class="team-info">
+          <h3>김삼원</h3>
+          <div class="role">대표이사 · CEO</div>
+          <p>서울대 식품공학 박사. 32년 식품제조 경력. 대한민국식품대상 수상.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="생산본부장">
+        </div>
+        <div class="team-info">
+          <h3>이정화</h3>
+          <div class="role">생산본부장</div>
+          <p>HACCP 전문가. 20년 식품공장 운영 경력. 생산 효율·품질관리 총괄.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="R&D센터장">
+        </div>
+        <div class="team-info">
+          <h3>박연구</h3>
+          <div class="role">R&D센터장</div>
+          <p>연세대 식품영양학 석사. 신제품 180여 종 개발. OEM 레시피 전문.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="영업본부장">
+        </div>
+        <div class="team-info">
+          <h3>최유통</h3>
+          <div class="role">영업본부장</div>
+          <p>대형 유통·외식 채널 15년 경력. PB·프랜차이즈 파트너십 총괄.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">OEM/ODM, 품질인증, 납품 관련 자주 받는 문의를 정리했습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">OEM/ODM 최소 주문 수량(MOQ)은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <p>제품 유형에 따라 다르지만, 일반적으로 냉동식품 500kg, 소스류 200L, 즉석밥 1,000팩부터 협의 가능합니다. 신규 브랜드·스타트업의 경우 시생산 단위로 유연하게 대응하고 있습니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">시제품 개발 기간은 얼마나 걸리나요?</button>
+        <div class="faq-a">
+          <p>기본 레시피 응용 시 2~3주, 완전 신규 개발 시 4~8주 소요됩니다. 시제품 제공 후 2회까지 무료 수정을 지원하며, 이후 본생산 전환까지 평균 3개월 내 완료합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">수출용 인증(FDA, 할랄 등)도 지원하나요?</button>
+        <div class="faq-a">
+          <p>네, FDA 시설등록은 완료되어 있으며, 제품별 FDA·JAS·할랄 인증 대행도 지원합니다. 수출 대상국에 맞는 포장·표시사항 검토와 서류 준비를 함께 진행합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">공장 견학이나 시식이 가능한가요?</button>
+        <div class="faq-a">
+          <p>사전 예약 시 이천 본사 공장 견학과 시제품 시식이 가능합니다. 위생관리를 위해 견학 인원은 10명 이내, 평일 오전 시간대를 권장합니다. 영업팀(031-123-4567)으로 문의해주세요.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">친환경·저나트륨 제품 개발도 가능한가요?</button>
+        <div class="faq-a">
+          <p>R&D센터에서 저나트륨, 저당, 플랜트베이스, 친환경 포장 등 트렌드에 맞는 제품 개발을 지원합니다. 2024년 신제품의 42%가 건강·친환경 컨셉 제품입니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="recruit-cta cta-band">
+  <div class="container">
+    <div class="recruit-inner">
+      <div class="section-label">Partnership</div>
+      <h2 class="section-title">함께 성장할 식품 파트너를 찾습니다</h2>
+      <p class="section-desc">PB 납품, 프랜차이즈 전용 식품, 밀키트 브랜드, 해외 수출 등 다양한 협력 방식을 제안합니다. 레시피 하나부터 대량생산까지, 삼원식품이 함께합니다.</p>
+      <a href="#contact" class="btn-recruit">사업 제휴 · OEM 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">문의</h2>
+      <p class="section-desc">OEM/ODM, PB 납품, 수출, 견학 등 모든 문의를 환영합니다. 영업 담당자가 1영업일 내 회신드립니다.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>연락처 · 오시는 길</h3>
+        <div class="contact-detail">
+          <div class="ico">📍</div>
+          <div>
+            <strong>본사 · 1공장</strong>
+            <span>경기도 이천시 부발읍 삼원로 128, 삼원식품</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">📞</div>
+          <div>
+            <strong>대표전화</strong>
+            <span>031-123-4567 (평일 09:00–18:00)</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">✉️</div>
+          <div>
+            <strong>이메일</strong>
+            <span>contact@samwon-foods.co.kr</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="ico">🏭</div>
+          <div>
+            <strong>영업 · OEM 문의</strong>
+            <span>영업팀 031-123-4570 · OEM 031-123-4580</span>
+          </div>
+        </div>
+        <div class="map-box">
+          <div class="map-pin">
+            <strong>삼원식품 이천 본사</strong>
+            <span>경부고속도로 이천IC 10분 · 방문견학 사전예약</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="문의가 접수되었습니다. 영업 담당자가 빠른 시일 내에 연락드리겠습니다.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">성함 / 회사명</label>
+              <input type="text" id="name" placeholder="홍길동 / (주)OO푸드" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="email">이메일</label>
+              <input type="email" id="email" placeholder="email@company.com" required>
+            </div>
+            <div class="form-group">
+              <label for="type">문의 유형</label>
+              <select id="type" required>
+                <option value="">선택해주세요</option>
+                <option>OEM/ODM 제조 문의</option>
+                <option>PB · 유통 납품</option>
+                <option>수출 · 해외 인증</option>
+                <option>공장 견학 · 시식</option>
+                <option>기타</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">문의 내용</label>
+              <textarea id="message" rows="5" placeholder="제품 종류, 예상 수량, 일정 등을 자유롭게 작성해주세요." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">문의 접수하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">삼원식품</span>
+      <p>1992년 설립 이래 HACCP 기반 안전한 식품제조로 국민 식탁에 신뢰를 더해온 식품제조 전문기업입니다. 냉동·가공식품, OEM/ODM, K-Food 수출까지 책임집니다.</p>
+      <div class="footer-cert">
+        <span>HACCP</span>
+        <span>ISO 22000</span>
+        <span>FDA 등록</span>
+        <span>우수식품제조업체</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>회사</h4>
+      <a href="#about">회사소개</a>
+      <a href="#team">경영진</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" data-toast="품질경영 페이지 준비 중입니다.">품질경영</a>
+    </div>
+    <div class="footer-col">
+      <h4>사업</h4>
+      <a href="#products">제품라인</a>
+      <a href="#oem">OEM/ODM</a>
+      <a href="#distribution">유통채널</a>
+      <a href="#facility">생산시설</a>
+    </div>
+    <div class="footer-col">
+      <h4>문의</h4>
+      <p>031-123-4567</p>
+      <p>contact@samwon-foods.co.kr</p>
+      <p>경기 이천시 부발읍 삼원로 128</p>
+      <a href="#contact">온라인 문의</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 삼원식품 SAMWON FOODS. All rights reserved.</span>
+    <span>사업자등록번호 234-56-78901 · 대표이사 김삼원</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

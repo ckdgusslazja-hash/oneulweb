@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스튜디오 하늘 STUDIO HANEUL — 프리미엄 웨딩 & 포트레이트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFBF7;
+  --bg-blush: #FDF5F2;
+  --text: #3D322E;
+  --text-muted: #8B7568;
+  --accent: #B8866B;
+  --accent-dark: #9A6F58;
+  --accent-text: #fff;
+  --border: #EDE0D8;
+  --nav-bg: rgba(255,251,247,0.94);
+  --footer-bg: #3D322E;
+  --card-bg: #fff;
+  --btn-radius: 2px;
+  --card-radius: 4px;
+  --title-weight: 400;
+  --logo-weight: 400;
+  --logo-spacing: 0.12em;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(61,50,46,0.25) 0%,
+    rgba(61,50,46,0.45) 50%,
+    rgba(61,50,46,0.72) 100%
+  );
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: clamp(48px, 10vw, 100px) clamp(20px, 4vw, 48px);
+  color: #fff;
+  max-width: 720px;
+}
+
+.hero-inner .label {
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  margin-bottom: 20px;
+  opacity: 0.92;
+  font-weight: 300;
+}
+
+.hero-inner h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.hero-inner .sub-en {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  letter-spacing: 0.28em;
+  font-weight: 300;
+  opacity: 0.88;
+  margin-bottom: 24px;
+}
+
+.hero-inner p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  opacity: 0.9;
+  line-height: 1.85;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-hero {
+  display: inline-block;
+  padding: 14px 36px;
+  border: 1px solid rgba(255,255,255,0.85);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  transition: all 0.3s;
+}
+
+.btn-hero:hover { background: #fff; color: var(--text); }
+
+.btn-hero-fill {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-hero-fill:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: #fff;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.7);
+  writing-mode: vertical-rl;
+}
+
+/* Intro band */
+.intro-band {
+  background: var(--bg-blush);
+  text-align: center;
+  padding: clamp(48px, 8vw, 72px) 24px;
+}
+
+.intro-band blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--text);
+  max-width: 640px;
+  margin: 0 auto 16px;
+}
+
+.intro-band cite {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 0.08em;
+}
+
+/* Masonry portfolio */
+.portfolio { background: var(--bg); }
+
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: clamp(10px, 2vw, 14px);
+}
+
+.masonry-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  background: var(--border);
+}
+
+.masonry-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.masonry-item:hover img { transform: scale(1.04); }
+
+.masonry-item .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(61,50,46,0.65) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px 20px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.masonry-item:hover .overlay { opacity: 1; }
+
+.masonry-item .overlay span {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.masonry-item .overlay strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.masonry-item.tall { grid-row: span 2; }
+.masonry-item.wide { grid-column: span 2; }
+
+/* Packages */
+.packages { background: var(--bg-blush); }
+
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+  align-items: stretch;
+}
+
+.pkg-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pkg-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(61,50,46,0.08);
+}
+
+.pkg-card.featured {
+  border-color: var(--accent);
+  position: relative;
+}
+
+.pkg-card.featured::before {
+  content: 'BEST';
+  position: absolute;
+  top: 0;
+  right: 24px;
+  transform: translateY(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+
+.pkg-tier {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.pkg-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.pkg-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.pkg-price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.pkg-price span {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.pkg-duration {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pkg-features {
+  flex: 1;
+  margin-bottom: 28px;
+}
+
+.pkg-features li {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.pkg-features li:last-child { border-bottom: none; }
+
+.pkg-features li::before {
+  content: '✦';
+  color: var(--accent);
+  font-size: 0.55rem;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.pkg-card .btn { width: 100%; }
+
+/* Studio tour */
+.studio-wrap {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.studio-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.studio-gallery .main-img {
+  grid-column: span 2;
+  aspect-ratio: 16/10;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.studio-gallery .sub-img {
+  aspect-ratio: 4/3;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.studio-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.studio-info h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.studio-info > p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.facility-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.facility-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: var(--bg-blush);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+}
+
+.facility-item .icon {
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.facility-item h4 {
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.facility-item p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Process */
+.process { background: var(--bg-blush); }
+
+.process-steps::before {
+  background: var(--accent);
+}
+
+/* Reviews */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 3vw, 24px);
+}
+
+.review-card blockquote {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.75;
+}
+
+/* FAQ */
+.faq { background: var(--bg-blush); }
+
+/* Booking */
+.booking { background: var(--bg); }
+
+.booking-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.booking-info h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.booking-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.booking-perks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.booking-perks li::before {
+  content: '✦';
+  color: var(--accent);
+  font-size: 0.7rem;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* Location */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 48px);
+  align-items: start;
+}
+
+.location-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.contact-list .icon {
+  width: 36px;
+  height: 36px;
+  background: var(--bg-blush);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.contact-list strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.82rem;
+  margin-bottom: 2px;
+}
+
+.hours-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px;
+}
+
+.hours-wrap h4 {
+  font-size: 0.88rem;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+/* Footer */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  transition: all 0.25s;
+}
+
+.footer-social a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.footer-awards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-awards span {
+  font-size: 0.72rem;
+  padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 900px) {
+  .masonry-grid { grid-template-columns: repeat(2, 1fr); }
+  .masonry-item.wide { grid-column: span 1; }
+  .pkg-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .studio-wrap { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .booking-wrap { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .masonry-grid,
+  .reviews-grid { grid-template-columns: 1fr; }
+  .masonry-item.tall { grid-row: span 1; }
+  .studio-gallery { grid-template-columns: 1fr; }
+  .studio-gallery .main-img { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">스튜디오 하늘</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#portfolio">포트폴리오</a>
+    <a href="#packages">패키지</a>
+    <a href="#studio">스튜디오</a>
+    <a href="#reviews">후기</a>
+    <a href="#faq">FAQ</a>
+    <a href="#booking" class="nav-cta">예약</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=85" alt="웨딩 커플 — 스튜디오 하늘">
+  </div>
+  <div class="hero-inner">
+    <div class="label">PREMIUM WEDDING & PORTRAIT</div>
+    <h1>스튜디오 하늘</h1>
+    <p class="sub-en">STUDIO HANEUL</p>
+    <p>가장 빛나는 순간을, 영원히 남는 이야기로.<br>프리미엄 웨딩 & 포트레이트 전문 스튜디오가 당신의 하루를 담습니다.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-hero btn-hero-fill">촬영 예약하기</a>
+      <a href="#portfolio" class="btn-hero">포트폴리오 보기</a>
+    </div>
+  </div>
+  <span class="hero-scroll">SCROLL</span>
+</section>
+
+<!-- Intro -->
+<section class="intro-band">
+  <blockquote>“사진은 순간을 담지만, 우리가 만드는 것은 그날의 온전한 감정입니다.”</blockquote>
+  <cite>— 스튜디오 하늘 대표 작가 김하늘</cite>
+</section>
+
+<!-- Portfolio -->
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">웨딩 포트폴리오</h2>
+      <p class="section-desc">본식, 스냅, 프리웨딩까지 — 스튜디오 하늘이 기록한 실제 웨딩의 아름다운 순간들입니다. 자연스러운 빛과 감성적인 구도로 두 분만의 이야기를 담았습니다.</p>
+    </div>
+    <div class="masonry-grid">
+      <div class="masonry-item tall">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=700&q=85" alt="웨딩 부케 클로즈업">
+        <div class="overlay"><span>WEDDING</span><strong>부케 & 디테일</strong></div>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1465495976277-0e6609a11777?w=600&q=85" alt="신랑 신부 첫 입장">
+        <div class="overlay"><span>CEREMONY</span><strong>본식 입장</strong></div>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1522673609728-f5066d0f4b07?w=600&q=85" alt="웨딩 링 교환">
+        <div class="overlay"><span>CEREMONY</span><strong>반지 교환</strong></div>
+      </div>
+      <div class="masonry-item wide">
+        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&q=85" alt="야외 웨딩 스냅">
+        <div class="overlay"><span>SNAP</span><strong>야외 스냅</strong></div>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1523438883739-a1017c3fbb64?w=600&q=85" alt="신부 포트레이트">
+        <div class="overlay"><span>PORTRAIT</span><strong>신부 단독</strong></div>
+      </div>
+      <div class="masonry-item tall">
+        <img src="https://images.unsplash.com/photo-1606216794074-1797fc5c3e61?w=700&q=85" alt="웨딩 드레스">
+        <div class="overlay"><span>PRE-WEDDING</span><strong>프리웨딩</strong></div>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1464366400600-71642895f3d7?w=600&q=85" alt="웨딩 리셉션">
+        <div class="overlay"><span>RECEPTION</span><strong>피로연</strong></div>
+      </div>
+      <div class="masonry-item">
+        <img src="https://images.unsplash.com/photo-1537633553425-a0e946a51e1f?w=600&q=85" alt="커플 포트레이트">
+        <div class="overlay"><span>PORTRAIT</span><strong>커플 포트레이트</strong></div>
+      </div>
+      <div class="masonry-item wide">
+        <img src="https://images.unsplash.com/photo-1591604466104-64763f3e0a7a?w=900&q=85" alt="선셋 웨딩">
+        <div class="overlay"><span>SNAP</span><strong>선셋 웨딩</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packages -->
+<section class="packages" id="packages">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Packages</div>
+      <h2 class="section-title">촬영 패키지</h2>
+      <p class="section-desc">예식 규모와 원하시는 스타일에 맞춘 세 가지 패키지를 준비했습니다. 모든 패키지에 전문 보정과 고급 앨범 옵션이 포함됩니다.</p>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <div class="pkg-tier">SNAP</div>
+        <h3>스냅</h3>
+        <p class="pkg-desc">가볍고 자연스러운 웨딩 스냅. 친밀한 예식이나 2차 파티에 적합합니다.</p>
+        <div class="pkg-price">₩890,000 <span>부터</span></div>
+        <p class="pkg-duration">촬영 4시간 · 작가 1인</p>
+        <ul class="pkg-features">
+          <li>본식 또는 피로연 스냅 촬영 (4시간)</li>
+          <li>원본 데이터 USB 제공 (300컷+)</li>
+          <li>전문 컬러 보정 80장</li>
+          <li>웨딩 갤러리 온라인 뷰어 (6개월)</li>
+          <li>긴급 스냅 컷 10장 (당일 미리보기)</li>
+          <li>촬영 전 화상 상담 1회</li>
+        </ul>
+        <a href="#booking" class="btn btn-outline" data-toast="스냅 패키지 예약 페이지로 이동합니다.">상담 신청</a>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-tier">CEREMONY</div>
+        <h3>본식</h3>
+        <p class="pkg-desc">웨딩의 모든 순간을 빠짐없이. 가장 많은 커플이 선택하는 시그니처 패키지입니다.</p>
+        <div class="pkg-price">₩1,890,000 <span>부터</span></div>
+        <p class="pkg-duration">촬영 8시간 · 작가 2인</p>
+        <ul class="pkg-features">
+          <li>본식 전 준비실 ~ 피로연 종료 (8시간)</li>
+          <li>메인 작가 + 서브 작가 2인 촬영</li>
+          <li>원본 데이터 USB (600컷+) + 클라우드 백업</li>
+          <li>전문 보정 200장 + 앨범용 30장 추가 보정</li>
+          <li>10×10 인치 프리미엄 앨범 1권 (30p)</li>
+          <li>20×30cm 액자 1점 (신부 단독 or 커플)</li>
+          <li>하이라이트 슬라이드쇼 영상 (3~5분)</li>
+          <li>촬영 전 대면 상담 + 리허설 가이드</li>
+        </ul>
+        <a href="#booking" class="btn btn-primary">예약하기</a>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-tier">PREMIUM</div>
+        <h3>프리미엄</h3>
+        <p class="pkg-desc">프리웨딩부터 본식, 애프터파티까지. 하루 전체를 영화처럼 기록하는 풀 패키지.</p>
+        <div class="pkg-price">₩3,490,000 <span>부터</span></div>
+        <p class="pkg-duration">촬영 2일 · 작가 2인 + 영상</p>
+        <ul class="pkg-features">
+          <li>프리웨딩 1일 (6시간) + 본식 1일 (10시간)</li>
+          <li>사진 작가 2인 + 시네마 영상 작가 1인</li>
+          <li>원본 전체 (1,200컷+) + 시네마틱 영상 8~12분</li>
+          <li>전문 보정 400장 + 앨범용 50장 마스터 보정</li>
+          <li>12×12 인치 럭셔리 앨범 2권 (각 40p)</li>
+          <li>30×40cm 캔버스 액자 + 20×30cm 액자 각 1점</li>
+          <li>웨딩북 PDF + 전용 갤러리 1년</li>
+          <li>VIP 전용 드레스룸 · 촬영 코디네이터 배정</li>
+          <li>당일 SNS용 티저 컷 20장 (2시간 내 전달)</li>
+        </ul>
+        <a href="#booking" class="btn btn-outline" data-toast="프리미엄 패키지 상담을 예약합니다.">VIP 상담</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Studio Tour -->
+<section id="studio">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Studio</div>
+      <h2 class="section-title">스튜디오 투어</h2>
+      <p class="section-desc">자연광이 가득한 프라이빗 스튜디오와 편안한 대기 공간. 촬영 전후까지 편안한 경험을 위해 설계했습니다.</p>
+    </div>
+    <div class="studio-wrap">
+      <div class="studio-gallery">
+        <div class="main-img">
+          <img src="https://images.unsplash.com/photo-1493863641943-9b68992a692d?w=900&q=85" alt="메인 촬영 스튜디오">
+        </div>
+        <div class="sub-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=85" alt="드레스룸">
+        </div>
+        <div class="sub-img">
+          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=85" alt="보정실">
+        </div>
+      </div>
+      <div class="studio-info">
+        <h3>빛과 공간이 만드는 이야기</h3>
+        <p>서울 한남동에 위치한 스튜디오 하늘은 120평 규모의 독립형 공간입니다. 남향 대형 창으로 들어오는 부드러운 자연광, 5m 천고의 메인 홀, 그리고 프라이빗 드레스룸·메이크업 존을 갖추고 있어 본식 전 리허설부터 프리웨딩까지 원스톱으로 진행할 수 있습니다.</p>
+        <div class="facility-list">
+          <div class="facility-item">
+            <span class="icon">☀</span>
+            <div>
+              <h4>자연광 메인 홀</h4>
+              <p>5m 천고 · 남향 통창 · 4면 반사판 시스템 · 실내 정원 세트</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <span class="icon">👗</span>
+            <div>
+              <h4>VIP 드레스룸</h4>
+              <p>개인 락커 · 전신 거울 · 스팀 다리미 · 파트너 대기실 연결</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <span class="icon">🎬</span>
+            <div>
+              <h4>시네마 세트룸</h4>
+              <p>다크톤·화이트톤 배경 전환 · 조명 12구 세트 · 영상 촬영 가능</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <span class="icon">☕</span>
+            <div>
+              <h4>라운지 & 상담실</h4>
+              <p>프리미엄 커피 · 샴페인 서비스(본식 당일) · 1:1 패키지 상담</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">촬영 프로세스</h2>
+      <p class="section-desc">예약부터 납품까지, 체계적인 4단계로 두 분의 소중한 순간을 완벽하게 기록합니다.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <h4>상담</h4>
+        <p>예식 일정, 촬영 스타일, 패키지를 함께 논의합니다. 대면·화상 상담 후 맞춤 촬영 플랜을 제안해 드립니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>촬영</h4>
+        <p>사전 리허설 가이드와 함께 당일 촬영을 진행합니다. 자연스러운 포즈 코칭으로 편안한 표정을 이끌어냅니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>보정</h4>
+        <p>전담 보정 작가가 톤앤매너를 통일해 선별·보정합니다. 1차 시안 확인 후 피드백을 반영합니다.</p>
+      </div>
+      <div class="process-step">
+        <h4>납품</h4>
+        <p>USB·클라우드·앨범·액자를 약속 기한 내 납품합니다. 프리미엄 패키지는 갤러리 1년 호스팅이 포함됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">고객 후기</h2>
+      <p class="section-desc">스튜디오 하늘과 함께한 신랑·신부님들의 진솔한 이야기입니다.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"본식 사진이 너무 자연스러워요. 억지로 포즈 잡는 느낌 없이 그날의 감정이 그대로 담겼습니다. 앨범 퀄리티도 최고예요."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">김</div>
+          <div>
+            <strong>김서연 · 박준호</strong>
+            <span>본식 패키지 · 2025.03</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"프리웨딩 촬영이 날씨 걱정 없이 스튜디오에서 진행돼서 편했어요. 작가님이 분위기를 잘 살려주셔서 사진마다 영화 같아요."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">이</div>
+          <div>
+            <strong>이하은 · 최민재</strong>
+            <span>프리미엄 패키지 · 2024.11</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"스냅 패키지인데도 보정 퀄리티가 놀라웠어요. 당일 티저 사진 덕분에 SNS에 바로 올릴 수 있어서 친구들 반응이 폭발적이었습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">정</div>
+          <div>
+            <strong>정유진 · 한승우</strong>
+            <span>스냅 패키지 · 2025.01</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"상담부터 납품까지 일정이 꼼꼼했어요. 보정 시안에서 요청한 부분을 정확히 반영해 주셔서 결과물에 100% 만족합니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">박</div>
+          <div>
+            <strong>박지원 · 송태양</strong>
+            <span>본식 패키지 · 2024.09</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"시네마 영상이 정말 감동적이에요. 본식 영상을 돌려볼 때마다 그날의 떨림이 다시 살아납니다. 프리미엄 선택 잘했어요."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">윤</div>
+          <div>
+            <strong>윤채아 · 임도현</strong>
+            <span>프리미엄 패키지 · 2024.06</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"드레스룸이 넓고 편해서 촬영 전 긴장이 많이 풀렸어요. 작가님 두 분이 각도를 다르게 잡아주셔서 선택지가 풍부했습니다."</blockquote>
+        <div class="review-author">
+          <div class="review-avatar">조</div>
+          <div>
+            <strong>조예린 · 강현우</strong>
+            <span>본식 패키지 · 2025.02</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-desc">예약, 촬영, 납품에 대해 궁금하신 점을 모았습니다.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" type="button">예약은 얼마나 미리 해야 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">성수기(4~6월, 9~11월)는 예식 6~8개월 전, 비수기는 3~4개월 전 예약을 권장합니다. 스냅 단독은 1~2개월 전에도 가능하나, 일정 확인 후 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">촬영 결과물은 언제 받을 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">스냅 패키지 원본·보정본은 촬영 후 3~4주, 본식 패키지는 5~6주, 프리미엄 패키지는 7~8주 내 납품됩니다. 앨범·액자는 보정 확정 후 추가 2~3주 소요됩니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">야외 촬영 시 날씨가 안 좋으면 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">중대형 우천·강풍 시 스튜디오 촬영으로 전환하거나 일정 조율을 도와드립니다. 가벼운 비·흐림은 오히려 감성적인 톤으로 연출 가능하며, 상담 시 백업 플랜을 함께 준비합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">추가 보정이나 앨범 페이지를 더 살 수 있나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 보정 추가는 장당 15,000원, 앨범 페이지 추가는 10p 기준 180,000원부터 가능합니다. 시안 확인 단계에서 견적을 안내해 드립니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">계약금과 환불 규정은 어떻게 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">계약 시 패키지 금액의 30%를 계약금으로 받으며, 촬영 30일 전 취소 시 50%, 14일 전 80%, 7일 전 이후 환불이 어렵습니다. 일정 변경은 1회 무료(30일 전까지) 가능합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Booking -->
+<section class="booking" id="booking">
+  <div class="container">
+    <div class="booking-wrap">
+      <div class="booking-info">
+        <div class="section-label">Booking</div>
+        <h3>촬영 예약 문의</h3>
+        <p class="section-desc">예식 일정과 희망 패키지를 남겨 주시면 24시간 내 담당자가 연락드립니다. 대면 상담 예약 시 스튜디오 투어와 음료가 무료로 제공됩니다.</p>
+        <ul class="booking-perks">
+          <li>상담·견적·일정 확인 — 모두 무료</li>
+          <li>계약 시 프리웨딩 10% 할인 쿠폰 (본식 패키지 이상)</li>
+          <li>추천 예식장 리스트 & 촬영 동선 가이드 제공</li>
+          <li>본식 당일 비상 연락망 24시간 운영</li>
+        </ul>
+      </div>
+      <div class="form-card">
+        <form class="demo-form" data-success="예약 문의가 접수되었습니다! 24시간 내 연락드릴게요.">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="wedding-date">예식일</label>
+              <input type="date" id="wedding-date" name="wedding-date" required>
+            </div>
+            <div class="form-group">
+              <label for="package">패키지</label>
+              <select id="package" name="package" required>
+                <option value="">패키지 선택</option>
+                <option value="snap">스냅 — ₩890,000~</option>
+                <option value="ceremony">본식 — ₩1,890,000~</option>
+                <option value="premium">프리미엄 — ₩3,490,000~</option>
+                <option value="consult">상담 후 결정</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">성함</label>
+              <input type="text" id="name" name="name" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">연락처</label>
+              <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">문의 내용 (선택)</label>
+            <textarea id="message" name="message" placeholder="예식 장소, 희망 촬영 스타일, 궁금한 점을 적어 주세요."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">예약 문의하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location -->
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-desc">한남동 프라이빗 스튜디오 · 주차 및 대중교통 안내</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>스튜디오 하늘 STUDIO HANEUL</h3>
+        <ul class="contact-list">
+          <li>
+            <span class="icon">📍</span>
+            <div>
+              <strong>주소</strong>
+              서울 용산구 한남대로 42, 스튜디오 하늘 B1·1F
+            </div>
+          </li>
+          <li>
+            <span class="icon">📞</span>
+            <div>
+              <strong>전화</strong>
+              02-794-2020
+            </div>
+          </li>
+          <li>
+            <span class="icon">✉️</span>
+            <div>
+              <strong>이메일</strong>
+              hello@studiohaneul.kr
+            </div>
+          </li>
+          <li>
+            <span class="icon">🅿️</span>
+            <div>
+              <strong>주차</strong>
+              건물 지하 주차장 · 촬영 고객 4시간 무료
+            </div>
+          </li>
+        </ul>
+        <div class="hours-wrap">
+          <h4>상담 · 스튜디오 운영</h4>
+          <table class="hours-table">
+            <tr><td>화요일 – 일요일</td><td>10:00 – 19:00</td></tr>
+            <tr><td>월요일</td><td>정기 휴무</td></tr>
+            <tr><td>본식 촬영 당일</td><td>예약 시간 기준 전일 연장</td></tr>
+            <tr><td>상담 예약</td><td>전화 · 온라인 24시간 접수</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-pin">
+          <strong>스튜디오 하늘</strong>
+          <span>서울 용산구 한남대로 42 · 한남역 도보 8분</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">스튜디오 하늘</span>
+      <p>가장 소중한 순간을, 가장 아름답게. 12년간 2,400쌍 이상의 웨딩을 기록해 온 프리미엄 웨딩 & 포트레이트 스튜디오입니다.</p>
+      <div class="footer-awards">
+        <span>2024 웨딩벨스 베스트 스튜디오</span>
+        <span>한국포토협회 인증</span>
+        <span>ISO 9001</span>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram" data-toast="Instagram — portfolio demo">IG</a>
+        <a href="#" aria-label="KakaoTalk" data-toast="카카오톡 채널 — portfolio demo">KT</a>
+        <a href="#" aria-label="Blog" data-toast="네이버 블로그 — portfolio demo">BL</a>
+        <a href="#" aria-label="YouTube" data-toast="YouTube — portfolio demo">YT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>포트폴리오</h4>
+      <a href="#portfolio">웨딩 갤러리</a>
+      <a href="#portfolio">본식 스냅</a>
+      <a href="#portfolio">프리웨딩</a>
+      <a href="#portfolio">피로연</a>
+      <a href="#portfolio">포트레이트</a>
+    </div>
+    <div class="footer-col">
+      <h4>서비스</h4>
+      <a href="#packages">스냅 패키지</a>
+      <a href="#packages">본식 패키지</a>
+      <a href="#packages">프리미엄 패키지</a>
+      <a href="#studio">스튜디오 투어</a>
+      <a href="#process">촬영 프로세스</a>
+    </div>
+    <div class="footer-col">
+      <h4>문의</h4>
+      <p>02-794-2020</p>
+      <p>hello@studiohaneul.kr</p>
+      <p>서울 용산구 한남대로 42</p>
+      <a href="#booking">온라인 예약 →</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a href="#location">오시는 길</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 스튜디오 하늘 STUDIO HANEUL. All rights reserved.</span>
+    <span>사업자등록번호 210-88-65432 · 대표 김하늘 · 통신판매업 2020-서울용산-1024</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

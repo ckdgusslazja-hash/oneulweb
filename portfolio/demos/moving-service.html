@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>무빙365 — 이사·입주청소 전문</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root {
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Pretendard', sans-serif;
+  --bg: #FFFFFF;
+  --text: #1E293B;
+  --text-muted: #64748B;
+  --accent: #EA580C;
+  --accent-blue: #2563EB;
+  --accent-soft: #FFF7ED;
+  --accent-text: #fff;
+  --border: #E2E8F0;
+  --nav-bg: rgba(255,255,255,0.97);
+  --footer-bg: #1E293B;
+  --card-bg: #F8FAFC;
+  --btn-radius: 10px;
+  --card-radius: 12px;
+  --footer-text: rgba(255,255,255,0.6);
+  --title-weight: 800;
+}
+
+.site-nav .logo { color: var(--accent); font-weight: 800; }
+.nav-cta { background: linear-gradient(135deg, var(--accent), #F97316); color: #fff; }
+
+.hero {
+  background: linear-gradient(135deg, #1E40AF 0%, #2563EB 40%, #EA580C 100%);
+  color: #fff;
+  padding: clamp(60px, 10vw, 100px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '📦';
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(8rem, 20vw, 14rem);
+  opacity: 0.08;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.hero p {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: rgba(255,255,255,0.9);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-orange {
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: var(--btn-radius);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.btn-orange:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(234,88,12,0.4);
+}
+
+.btn-ghost {
+  padding: 14px 28px;
+  border: 2px solid rgba(255,255,255,0.4);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  transition: background 0.25s;
+}
+
+.btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+.quote-box {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: var(--card-radius);
+  padding: clamp(24px, 4vw, 32px);
+}
+
+.quote-box h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quote-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  font-size: 0.85rem;
+}
+
+.quote-row:last-child { border-bottom: none; font-weight: 700; font-size: 1rem; color: #FDE68A; }
+
+.area-card {
+  padding: clamp(28px, 4vw, 32px);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  text-align: center;
+  transition: all 0.3s;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.area-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent));
+}
+
+.area-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(37,99,235,0.1);
+  border-color: var(--accent-blue);
+}
+
+.area-card .icon { font-size: 2.2rem; margin-bottom: 14px; }
+.area-card h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+.area-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; }
+
+.why-section { background: var(--accent-soft); }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.why-box {
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: var(--card-radius);
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(234,88,12,0.06);
+  transition: transform 0.3s;
+}
+
+.why-box:hover { transform: translateY(-4px); }
+
+.why-box .icon {
+  width: 56px; height: 56px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.why-box h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+.why-box p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+
+.package-card {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: clamp(28px, 4vw, 36px);
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+  height: 100%;
+}
+
+.package-card.featured {
+  border-color: var(--accent);
+  position: relative;
+}
+
+.package-card.featured::before {
+  content: 'BEST';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.package-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+
+.package-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+.package-card h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+.package-card .price { font-size: 1.6rem; font-weight: 800; color: var(--accent); margin: 16px 0; }
+.package-card .price span { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); }
+.package-card ul { text-align: left; margin: 20px 0; }
+.package-card li { font-size: 0.82rem; color: var(--text-muted); padding: 8px 0; border-bottom: 1px solid var(--border); }
+.package-card li::before { content: '✓ '; color: var(--accent-blue); font-weight: 700; }
+
+.process-section { background: var(--card-bg); }
+.process-section .process-step::before {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent));
+  color: #fff;
+}
+
+.gallery-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.gallery-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.gallery-thumb { aspect-ratio: 16/10; overflow: hidden; }
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-body { padding: 20px; }
+.gallery-body h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.gallery-body p { font-size: 0.8rem; color: var(--text-muted); }
+
+.checklist-section { background: #fff; }
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.checklist-col h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--accent);
+}
+
+.checklist-col.blue h4 { border-color: var(--accent-blue); }
+
+.checklist-col li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.checklist-col li::before { content: '□ '; color: var(--accent); font-weight: 700; }
+
+.team-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 24px;
+  text-align: center;
+}
+
+.team-card .avatar {
+  width: 72px; height: 72px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.team-card h4 { font-weight: 700; margin-bottom: 4px; }
+.team-card .role { font-size: 0.8rem; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+.team-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+
+.faq-section { background: var(--accent-soft); }
+.faq-item.open .faq-q { color: var(--accent); }
+.faq-item .faq-q::after { color: var(--accent-blue); }
+
+.consult-section { background: linear-gradient(180deg, #fff 0%, var(--accent-soft) 100%); }
+
+.consult-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(32px, 5vw, 56px);
+}
+
+.consult-feature {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.consult-feature .num {
+  width: 32px; height: 32px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.consult-feature strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.consult-feature span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.form-card .btn-orange { width: 100%; border: none; cursor: pointer; margin-top: 8px; }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.location-info h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 20px; }
+
+.location-detail {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.location-detail .ico {
+  width: 44px; height: 44px;
+  background: var(--accent-soft);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+.location-detail strong { display: block; font-size: 0.88rem; margin-bottom: 4px; }
+.location-detail span { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+.site-footer .footer-brand .logo { color: #fff; }
+.footer-col a:hover { color: #FDBA74; }
+
+.urgent-banner {
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.urgent-banner a { color: #FDE68A; text-decoration: underline; margin-left: 8px; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .consult-grid { grid-template-columns: 1fr; }
+  .location-grid { grid-template-columns: 1fr; }
+  .checklist-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .why-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="urgent-banner">
+  🚚 당일·익일 이사 가능 지역: 서울·경기 · 긴급 예약 <a href="tel:1588-3650">1588-3650</a>
+</div>
+
+<nav class="site-nav">
+  <a href="#top" class="logo">무빙365</a>
+  <button class="nav-toggle" aria-label="메뉴"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="#services">서비스</a>
+    <a href="#packages">요금안내</a>
+    <a href="#process">이사절차</a>
+    <a href="#gallery">시공사진</a>
+    <a href="#faq">FAQ</a>
+    <a href="#quote" class="nav-cta">견적신청</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">MOVING SERVICE · 이사·입주청소</div>
+        <h1>안전하고 빠른<br>이사의 기준</h1>
+        <p>가정이사·원룸·사무실이전·보관이사·입주청소를 원스톱으로 제공합니다. 직영 인력·차량, 파손 보험 가입, 실시간 위치 공유로 믿고 맡기세요. 견적 0원, 방문 견적 후 확정가 약속.</p>
+        <div class="hero-actions">
+          <a href="#quote" class="btn-orange">무료 견적 받기</a>
+          <a href="#packages" class="btn-ghost">요금표 보기</a>
+        </div>
+      </div>
+      <div class="quote-box">
+        <h3>📋 예상 견적 (참고)</h3>
+        <div class="quote-row"><span>원룸 이사 (10평)</span><span>35~50만 원</span></div>
+        <div class="quote-row"><span>투룸 (20평)</span><span>55~80만 원</span></div>
+        <div class="quote-row"><span>쓰리룸 (30평)</span><span>90~130만 원</span></div>
+        <div class="quote-row"><span>입주청소 (20평)</span><span>25~40만 원</span></div>
+        <div class="quote-row"><span>정확한 견적</span><span>방문 후 확정</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">이사·청소 서비스</h2>
+      <p class="section-desc" style="margin:0 auto">상황에 맞는 서비스를 선택하세요. 복합 패키지 할인이 적용됩니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="area-card">
+        <div class="icon">🏠</div>
+        <h3>가정이사</h3>
+        <p>아파트·빌라·단독주택 전입·전출. 가구·가전 포장·해체·조립, 엘리베이터·사다리차 신청 대행, 입주청소 연계 패키지.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">🛏️</div>
+        <h3>원룸·소형</h3>
+        <p>원룸·고시원·오피스텔 소형 이사. 당일·익일 예약, 기본 차량 1톤·2톤, 짐 박스 제공 옵션.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">🏢</div>
+        <h3>사무실이전</h3>
+        <p>야간·주말 이전, 서버·복합기·서류 박스 라벨링, 책상 조립·배선 정리. 공장·창고 이전도 상담 가능.</p>
+      </div>
+      <div class="area-card">
+        <div class="icon">✨</div>
+        <h3>입주·이사청소</h3>
+        <p>입주 전 맞춤 청소, 이사 후 정리 청소. 주방·욕실·창문·에어컨 분해 세척, 유해 물질 안심 코팅 옵션.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Why Moving365</div>
+      <h2 class="section-title">무빙365를 선택하는 이유</h2>
+      <p class="section-desc">15년, 28,000건 이상의 이사 경험으로 검증된 서비스입니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-box">
+        <div class="icon">🛡️</div>
+        <h4>파손 보험</h4>
+        <p>화물적재물 보험·파손 보장 가입. 사고 시 신속 보상 프로세스, 사진·영상으로 입증 자료 확보.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">👷</div>
+        <h4>직영 인력</h4>
+        <p>외주 없이 교육된 직영 팀장·기사가 담당. 평균 경력 7년, uniform·명찰 착용, 금연·금주 원칙.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">💰</div>
+        <h4>확정가 약속</h4>
+        <p>방문 견적 후 추가 비용 없는 확정가 계약. 현장 추가 짐은 사전 협의 후에만 반영.</p>
+      </div>
+      <div class="why-box">
+        <div class="icon">📱</div>
+        <h4>실시간 추적</h4>
+        <p>이사 당일 차량 GPS·팀장 연락처 공유. 카카오 알림톡으로 출발·도착·완료 안내.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Packages</div>
+      <h2 class="section-title">요금 패키지</h2>
+      <p class="section-desc">평수·거리·층수·엘리베이터 여부에 따라 변동됩니다. 아래는 서울 기준 참고가입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="package-card">
+        <div class="icon">📦</div>
+        <h3>라이트</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">원룸·소형</p>
+        <div class="price">35<span>만 원~</span></div>
+        <ul>
+          <li>2톤 차량 1대</li>
+          <li>기사 2인·기본 포장</li>
+          <li>서울 시내 20km</li>
+          <li>사다리차 별도</li>
+          <li>당일 예약 +20%</li>
+        </ul>
+        <a href="#quote" class="btn btn-outline btn-sm" data-toast="라이트 패키지 견적 신청이 접수되었습니다.">견적 신청</a>
+      </div>
+      <div class="package-card featured">
+        <div class="icon">🏡</div>
+        <h3>스탠다드</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">투룸·쓰리룸</p>
+        <div class="price">80<span>만 원~</span></div>
+        <ul>
+          <li>5톤 차량·기사 3~4인</li>
+          <li>가구 해체·조립 포함</li>
+          <li>에어컨·TV 전문 포장</li>
+          <li>입주청소 10% 할인</li>
+          <li>확정가 계약</li>
+        </ul>
+        <a href="#quote" class="btn btn-primary btn-sm" style="background:var(--accent)" data-toast="스탠다드 패키지 견적 신청이 접수되었습니다.">견적 신청</a>
+      </div>
+      <div class="package-card">
+        <div class="icon">🏢</div>
+        <h3>프리미엄</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted)">대형·사무실</p>
+        <div class="price">협의</div>
+        <ul>
+          <li>복수 차량·전담 PM</li>
+          <li>야간·주말 이전</li>
+          <li>보관 이사·장기 보관</li>
+          <li>귀중품 별도 포장</li>
+          <li>사후 A/S 1주</li>
+        </ul>
+        <a href="#quote" class="btn btn-outline btn-sm" data-toast="프리미엄 패키지 견적 신청이 접수되었습니다.">견적 신청</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">이사 진행 절차</h2>
+      <p class="section-desc">예약부터 완료까지 5단계로 안내합니다.</p>
+    </div>
+    <div class="process-steps" style="grid-template-columns:repeat(5,1fr)">
+      <div class="process-step">
+        <h4>견적·예약</h4>
+        <p>전화·온라인 접수 후 방문 또는 영상 견적. 일정·차량·인력 확정, 계약서·확정가 서명.</p>
+      </div>
+      <div class="process-step">
+        <h4>포장·준비</h4>
+        <p>이사 1~2일 전 박스·테이프 배송(옵션). 당일 아침 가구·가전 포장·해체 진행.</p>
+      </div>
+      <div class="process-step">
+        <h4>상차·운송</h4>
+        <p>짐 목록 체크 후 상차, GPS 추적 운송. 경유 없이 직행(협의 시 경유 가능).</p>
+      </div>
+      <div class="process-step">
+        <h4>하차·배치</h4>
+        <p>지정 방·위치에 배치, 가구 조립·연결. 고객과 함께 파손·누락 확인.</p>
+      </div>
+      <div class="process-step">
+        <h4>마무리·청소</h4>
+        <p>잔 짐 정리, 입주청소(옵션) 진행. 완료 확인서 서명, A/S 연락처 안내.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">시공 사진</h2>
+      <p class="section-desc">실제 이사·청소 현장입니다.</p>
+    </div>
+    <div class="grid-3">
+      <div class="gallery-card">
+        <div class="gallery-thumb">
+          <img src="https://images.unsplash.com/photo-1600518464441-56d805a5ec0b?w=600&q=80" alt="포장">
+        </div>
+        <div class="gallery-body">
+          <h3>가구 전문 포장</h3>
+          <p>이불·에어캡 이중 포장 · 강남 아파트 32평</p>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <div class="gallery-thumb">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="상차">
+        </div>
+        <div class="gallery-body">
+          <h3>5톤 차량 상차</h3>
+          <p>직영 차량 · 분당·판교 이전</p>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <div class="gallery-thumb">
+          <img src="https://images.unsplash.com/photo-1581578731544-c64695cc6952?w=600&q=80" alt="청소">
+        </div>
+        <div class="gallery-body">
+          <h3>입주청소 완료</h3>
+          <p>주방·욕실 포함 · 신축 아파트 24평</p>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <div class="gallery-thumb">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="사무실">
+        </div>
+        <div class="gallery-body">
+          <h3>사무실 야간 이전</h3>
+          <p>20인 규모 · 강남 오피스</p>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <div class="gallery-thumb">
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa0a6a3?w=600&q=80" alt="원룸">
+        </div>
+        <div class="gallery-body">
+          <h3>원룸 당일 이사</h3>
+          <p>2톤 1대 · 홍대·합정</p>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <div class="gallery-thumb">
+          <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=600&q=80" alt="보관">
+        </div>
+        <div class="gallery-body">
+          <h3>보관 이사</h3>
+          <p>3개월 보관 · 김포 물류센터</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="checklist-section" id="checklist">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Checklist</div>
+      <h2 class="section-title">이사 전·후 체크리스트</h2>
+      <p class="section-desc">놓치기 쉬운 항목을 미리 확인하세요.</p>
+    </div>
+    <div class="checklist-grid">
+      <div class="checklist-col">
+        <h4>이사 2주 전</h4>
+        <ul>
+          <li>입주·전출 신고 일정 확인</li>
+          <li>인터넷·TV·가스 이전 예약</li>
+          <li>엘리베이터·주차 사용 신청</li>
+          <li>귀중품·현금 별도 보관</li>
+          <li>냉장고·세탁기 문 고정</li>
+          <li>방문 견적·확정가 계약</li>
+        </ul>
+      </div>
+      <div class="checklist-col blue">
+        <h4>이사 당일·이후</h4>
+        <ul>
+          <li>짐 목록 대조·파손 확인</li>
+          <li>가스·전기 안전 점검</li>
+          <li>우편물 전달 신청</li>
+          <li>입주청소·환기</li>
+          <li>이사 완료 확인서 보관</li>
+          <li>A/S 문의 (2주 이내)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">전문 이사팀</h2>
+      <p class="section-desc">팀장님께서 현장을 직접 총괄합니다.</p>
+    </div>
+    <div class="grid-4">
+      <div class="team-card">
+        <div class="avatar">👨‍✈️</div>
+        <h4>박성호</h4>
+        <div class="role">운영본부장</div>
+        <p>이사 18년 · 8,000건+<br>고객 만족 4.9</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">🔧</div>
+        <h4>김태영</h4>
+        <div class="role">가구·가전 팀장</div>
+        <p>조립·해체 전문<br>에어컨 이전 자격</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">✨</div>
+        <h4>이수진</h4>
+        <div class="role">청소팀장</div>
+        <p>입주청소 10년<br>친환경 세제 사용</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">📋</div>
+        <h4>정민우</h4>
+        <div class="role">견적·CS 매니저</div>
+        <p>방문 견적·분쟁 조정<br>365일 상담</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Tips</div>
+      <h2 class="section-title">이사 정보</h2>
+      <p class="section-desc">계절별 팁과 무빙365 소식입니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="news-card" style="border:1px solid var(--border);border-radius:var(--card-radius);overflow:hidden">
+        <div style="aspect-ratio:16/9;overflow:hidden">
+          <img src="https://images.unsplash.com/photo-1600518464441-56d805a5ec0b?w=600&q=80" alt="성수기" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div style="padding:24px">
+          <div style="font-size:0.72rem;color:var(--accent);font-weight:600;margin-bottom:8px">2025.05.18</div>
+          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:10px">이사 성수기(2~4월) 예약은 2주 전에</h3>
+          <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7">성수기 요금·일정이 빠르게 마감됩니다. 여유 있게 방문 견적을 받으세요.</p>
+        </div>
+      </article>
+      <article class="news-card" style="border:1px solid var(--border);border-radius:var(--card-radius);overflow:hidden">
+        <div style="aspect-ratio:16/9;overflow:hidden">
+          <img src="https://images.unsplash.com/photo-1581578731544-c64695cc6952?w=600&q=80" alt="청소" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div style="padding:24px">
+          <div style="font-size:0.72rem;color:var(--accent);font-weight:600;margin-bottom:8px">2025.04.30</div>
+          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:10px">입주청소 vs 이사청소 차이</h3>
+          <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7">범위·시간·비용 비교와 패키지 할인 조건을 안내합니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section" id="reviews" style="background:var(--card-bg);padding:clamp(60px,10vw,100px) 0">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Reviews</div>
+      <h2 class="section-title">고객 후기</h2>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>견적 받을 때랑 실제 금액이 똑같았어요. 팀장님이 꼼꼼하게 체크해 주셔서 그릇 하나 안 깨졌습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar" style="background:var(--accent)">최</div>
+          <div><strong>최○○</strong><span>분당 32평 · 2025.04</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>원룸 당일 이사인데 오후 3시에 끝났어요. 입주청소까지 해서 하루 만에 새집처럼 들어왔습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar" style="background:var(--accent-blue)">한</div>
+          <div><strong>한○○</strong><span>마포 원룸 · 2025.03</span></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>사무실 주말 이전이라 직원들 출근에 지장 없었어요. 책상 위치까지 도면 보고 배치해 주셨습니다.</blockquote>
+        <div class="review-author">
+          <div class="review-avatar" style="background:var(--accent)">윤</div>
+          <div><strong>윤○○</strong><span>역삼 오피스 · 2025.02</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container container-sm">
+    <div class="section-header center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">견적은 어떻게 받나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">온라인·전화 접수 후 방문 견적(무료) 또는 영상 견적을 진행합니다. 평수·짐량·거리·층수·사다리차 필요 여부를 반영해 확정가를 제시합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">당일·익일 예약이 가능한가요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">서울·경기 일부 지역은 당일·익일 가능합니다(잔여 차량 있을 시). 긴급 요금이 적용될 수 있으며, 1588-3650으로 문의해 주세요.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">파손되면 어떻게 하나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">화물적재물 보험 및 자체 파손 보장에 가입되어 있습니다. 현장에서 사진 촬영·확인서 작성 후, 3영업일 이내 보상 절차를 안내합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">엘리베이터·사다리차 비용은?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">엘리베이터 사용료는 관리사무소 규정에 따르며, 견적 시 안내합니다. 사다리차는 층수·시간에 따라 15~40만 원대이며, 필요 시에만 청구합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">짐을 직접 포장해도 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">가능합니다. 고객 포장 시 박스만 제공하는 할인 패키지도 있습니다. 가구·가전·TV는 전문 포장을 권장합니다.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">보관 이사도 되나요?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">김포·양주 물류센터에서 1개월~12개월 보관이 가능합니다. 입출고 일정·보관비는 별도 견적입니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="consult-section" id="quote">
+  <div class="container">
+    <div class="consult-grid">
+      <div class="consult-info">
+        <div class="section-label">Free Quote</div>
+        <h2 class="section-title">무료 견적 신청</h2>
+        <p class="section-desc">24시간 이내 연락, 방문 견적 일정을 잡아 드립니다.</p>
+        <div class="consult-feature">
+          <div class="num">1</div>
+          <div><strong>0원 견적</strong><span>방문·영상 견적 모두 무료</span></div>
+        </div>
+        <div class="consult-feature">
+          <div class="num">2</div>
+          <div><strong>확정가</strong><span>현장 추가 비용 사전 동의 원칙</span></div>
+        </div>
+        <div class="consult-feature">
+          <div class="num">3</div>
+          <div><strong>패키지 할인</strong><span>이사+청소 동시 신청 시 최대 15%</span></div>
+        </div>
+      </div>
+      <form class="form-card demo-form" data-success="견적 신청이 접수되었습니다! 24시간 내 연락드립니다.">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">성함</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+          </div>
+          <div class="form-group full">
+            <label for="move-type">이사 유형</label>
+            <select id="move-type" name="move-type" required>
+              <option value="">선택</option>
+              <option value="studio">원룸·소형</option>
+              <option value="home">가정이사</option>
+              <option value="office">사무실</option>
+              <option value="clean">입주청소만</option>
+              <option value="storage">보관이사</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="from">출발지</label>
+            <input type="text" id="from" name="from" placeholder="예: 서울 마포구">
+          </div>
+          <div class="form-group">
+            <label for="to">도착지</label>
+            <input type="text" id="to" name="to" placeholder="예: 경기 성남시">
+          </div>
+          <div class="form-group full">
+            <label for="move-date">희망 이사일</label>
+            <input type="date" id="move-date" name="move-date">
+          </div>
+          <div class="form-group full">
+            <label for="message">추가 사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="평수, 엘리베이터, 사다리차, 짐량 등"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-orange">무료 견적 신청</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">센터·차고지</h2>
+    </div>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>무빙365 본사</h3>
+        <div class="location-detail">
+          <div class="ico">📍</div>
+          <div><strong>주소</strong><span>경기 김포시 고촌면 물류로 88<br>(김포 차고지·보관센터)</span></div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">📞</div>
+          <div><strong>연락처</strong><span>1588-3650 (365일 08~20시)<br>긴급: 010-3650-3650</span></div>
+        </div>
+        <div class="location-detail">
+          <div class="ico">🚚</div>
+          <div><strong>서비스 지역</strong><span>서울·경기·인천 전역<br>충청·강원 일부 (상담)</span></div>
+        </div>
+        <table class="hours-table">
+          <tr><td>상담</td><td>08:00 – 20:00</td></tr>
+          <tr><td>이사 작업</td><td>06:00 – 22:00</td></tr>
+        </table>
+      </div>
+      <div class="map-box">
+        <div class="map-pin"><strong>무빙365</strong><span>경기 김포시 고촌면</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo">무빙365</a>
+      <p>MOVING SERVICE — 2010년 설립. 안전·신속·합리적 이사의 기준을 만듭니다.</p>
+      <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:0.82rem;color:rgba(255,255,255,0.55)">📞 1588-3650</span>
+        <span style="font-size:0.82rem;color:rgba(255,255,255,0.55)">✉️ help@moving365.kr</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>서비스</h4>
+      <a href="#services">가정이사</a>
+      <a href="#services">원룸</a>
+      <a href="#services">사무실</a>
+      <a href="#services">입주청소</a>
+    </div>
+    <div class="footer-col">
+      <h4>안내</h4>
+      <a href="#packages">요금</a>
+      <a href="#process">절차</a>
+      <a href="#checklist">체크리스트</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>견적</h4>
+      <a href="#quote">무료 견적</a>
+      <a href="#location">오시는 길</a>
+      <p>화물운송 종사자격 보유</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 무빙365. All rights reserved.</span>
+    <span>대표 박성호 · 사업자 345-67-89012</span>
+  </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>
