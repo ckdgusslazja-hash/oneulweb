@@ -93,7 +93,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 88px;
 }
 
 .logo {
@@ -108,30 +108,30 @@ ul {
 
 .logo-img {
   display: block;
-  height: 48px;
+  height: 72px;
   width: auto;
 }
 
 .logo-img--footer {
   background: #fff;
-  border-radius: 10px;
-  padding: 6px 10px;
-  height: 52px;
+  border-radius: 12px;
+  padding: 8px 14px;
+  height: 78px;
 }
 
 .hero-brand {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .hero-logo {
   display: block;
-  height: 60px;
+  height: 100px;
   width: auto;
 }
 
 .preview-logo-img {
   display: block;
-  height: 28px;
+  height: 44px;
   width: auto;
 }
 
@@ -1578,15 +1578,15 @@ section {
   }
 
   .hero-logo {
-    height: 52px;
+    height: 80px;
   }
 
   .logo-img {
-    height: 42px;
+    height: 58px;
   }
 
   .logo-img--footer {
-    height: 46px;
+    height: 66px;
   }
 
   .hero-desc {
@@ -1640,7 +1640,7 @@ section {
   .nav {
     display: none;
     position: absolute;
-    top: 72px;
+    top: 88px;
     left: 0;
     right: 0;
     background: white;
