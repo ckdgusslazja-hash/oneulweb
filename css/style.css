@@ -1289,6 +1289,8 @@ section {
 .contact-info > p {
   color: var(--text-muted);
   margin-bottom: 32px;
+  word-break: keep-all;
+  line-height: 1.65;
 }
 
 .contact-methods {
@@ -1735,6 +1737,23 @@ section {
 
   .contact-live-wrap {
     margin: 0 0 28px;
+  }
+
+  .contact-info > h3,
+  .contact-info > p {
+    text-align: center;
+  }
+
+  .contact-info > p {
+    font-size: 1rem;
+    line-height: 1.75;
+    padding: 0 16px;
+    margin-bottom: 28px;
+  }
+
+  .contact-methods {
+    max-width: 360px;
+    margin: 0 auto;
   }
 
   .cta-live-text,
