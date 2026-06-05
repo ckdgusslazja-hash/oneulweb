@@ -16,7 +16,6 @@
   transform-origin: top left;
   pointer-events: none;
   user-select: none;
-  will-change: transform;
 }
 
 .portfolio-overlay {

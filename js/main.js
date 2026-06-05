@@ -17,8 +17,15 @@ function initHeader() {
   const header = document.querySelector('.header');
   if (!header) return;
 
+  let ticking = false;
+
   const handleScroll = () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+      ticking = false;
+    });
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
@@ -66,22 +73,75 @@ function initScrollAnimations() {
   elements.forEach(el => observer.observe(el));
 }
 
-// Portfolio iframe scaling
+// Portfolio iframe scaling + lazy load (67 previews)
 function initPortfolioIframes() {
   const thumbs = document.querySelectorAll('.portfolio-thumb');
   if (!thumbs.length) return;
 
-  const resize = () => {
-    thumbs.forEach(thumb => {
-      const iframe = thumb.querySelector('iframe');
-      if (!iframe) return;
-      const scale = thumb.offsetWidth / 1440;
-      iframe.style.transform = `scale(${scale})`;
-    });
+  const IFRAME_WIDTH = 1440;
+  const LOAD_MARGIN = '320px 0px';
+
+  const scaleThumb = (thumb) => {
+    const iframe = thumb.querySelector('iframe');
+    if (!iframe || !iframe.src) return;
+    const scale = thumb.offsetWidth / IFRAME_WIDTH;
+    iframe.style.transform = `scale(${scale})`;
   };
 
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
+  const loadIframe = (iframe) => {
+    const src = iframe.dataset.src;
+    if (!src || iframe.getAttribute('src')) return;
+
+    iframe.src = src;
+    iframe.addEventListener('load', () => scaleThumb(iframe.closest('.portfolio-thumb')), { once: true });
+  };
+
+  thumbs.forEach((thumb) => {
+    const iframe = thumb.querySelector('iframe');
+    if (!iframe) return;
+
+    const src = iframe.getAttribute('src');
+    if (src) {
+      iframe.dataset.src = src;
+      iframe.removeAttribute('src');
+    }
+
+    if (iframe.dataset.src) {
+      const rect = thumb.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 320 && rect.bottom > -320) {
+        loadIframe(iframe);
+      }
+    } else if (iframe.src) {
+      scaleThumb(thumb);
+    }
+  });
+
+  const lazyObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const iframe = entry.target.querySelector('iframe');
+        if (iframe) loadIframe(iframe);
+        lazyObserver.unobserve(entry.target);
+      });
+    },
+    { rootMargin: LOAD_MARGIN }
+  );
+
+  thumbs.forEach((thumb) => {
+    const iframe = thumb.querySelector('iframe');
+    if (iframe?.dataset.src && !iframe.getAttribute('src')) {
+      lazyObserver.observe(thumb);
+    }
+  });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      thumbs.forEach(scaleThumb);
+    }, 120);
+  }, { passive: true });
 }
 
 // Showcase device controls on detail pages
@@ -240,16 +300,37 @@ function initContactForm() {
 
 // Smooth scroll for anchor links
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  const header = document.querySelector('.header');
+  let scrollEndTimer;
+
+  const getOffset = () => (header?.offsetHeight ?? 88) + 8;
+
+  const finishNavScroll = () => {
+    document.documentElement.classList.remove('is-nav-scrolling');
+  };
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
       const targetId = anchor.getAttribute('href');
-      if (targetId === '#') return;
+      if (!targetId || targetId === '#') return;
 
       const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (!target) return;
+
+      e.preventDefault();
+      document.documentElement.classList.add('is-nav-scrolling');
+
+      const top = target.getBoundingClientRect().top + window.scrollY - getOffset();
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+
+      clearTimeout(scrollEndTimer);
+      const onScrollEnd = () => {
+        finishNavScroll();
+        window.removeEventListener('scrollend', onScrollEnd);
+      };
+
+      window.addEventListener('scrollend', onScrollEnd, { once: true });
+      scrollEndTimer = setTimeout(onScrollEnd, 1200);
     });
   });
 }
@@ -260,20 +341,40 @@ function initSmoothScroll() {
   const navLinks = document.querySelectorAll('.nav a[href^="#"]');
   if (!sections.length || !navLinks.length) return;
 
+  const ratios = new Map();
+  let activeId = '';
+
+  const setActive = (id) => {
+    if (!id || id === activeId) return;
+    activeId = id;
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+    });
+  };
+
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-          });
+      if (document.documentElement.classList.contains('is-nav-scrolling')) return;
+
+      entries.forEach((entry) => {
+        ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+      });
+
+      let bestId = '';
+      let bestRatio = 0;
+      ratios.forEach((ratio, id) => {
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = id;
         }
       });
+
+      if (bestId) setActive(bestId);
     },
-    { threshold: 0.3 }
+    { threshold: [0, 0.15, 0.3, 0.45, 0.6], rootMargin: '-88px 0px -42% 0px' }
   );
 
-  sections.forEach(section => observer.observe(section));
+  sections.forEach((section) => observer.observe(section));
 })();
 
 // CTA & Contact live consultation feed (synced)
