@@ -172,12 +172,23 @@ function initPortfolioFilter() {
   });
 }
 
-// Contact form
+// Contact form → Formspree
+const FORMSPREE_URL = 'https://formspree.io/f/xvznzgro';
+
 function initContactForm() {
   const form = document.querySelector('.contact-form form');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  const statusEl = document.getElementById('form-status');
+
+  const showStatus = (message, type) => {
+    if (!statusEl) return;
+    statusEl.hidden = !message;
+    statusEl.textContent = message || '';
+    statusEl.className = `form-status${type ? ` form-status--${type}` : ''}`;
+  };
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const btn = form.querySelector('button[type="submit"]');
@@ -185,18 +196,44 @@ function initContactForm() {
 
     btn.textContent = '전송 중...';
     btn.disabled = true;
+    showStatus('');
 
-    setTimeout(() => {
+    try {
+      const response = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || '문의 전송에 실패했습니다.');
+      }
+
       btn.textContent = '문의가 접수되었습니다! ✓';
       btn.style.background = '#22c55e';
+      showStatus('24시간 내에 연락드리겠습니다.', 'success');
       form.reset();
 
       setTimeout(() => {
         btn.textContent = originalText;
         btn.style.background = '';
         btn.disabled = false;
-      }, 3000);
-    }, 1500);
+        showStatus('');
+      }, 4000);
+    } catch (err) {
+      btn.textContent = '다시 시도해 주세요';
+      btn.style.background = '#ef4444';
+      showStatus(err.message || '전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+        showStatus('');
+      }, 4000);
+    }
   });
 }
 

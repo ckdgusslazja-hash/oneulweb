@@ -1,4 +1,4 @@
-/* 오늘웹 - 홈페이지 제작 서비스 */
+/* WebCraft Studio - 홈페이지 제작 서비스 */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
@@ -1141,6 +1141,16 @@ section {
   border-radius: var(--radius);
   padding: 40px;
 }
+
+.form-status {
+  margin-top: 16px;
+  font-size: 0.88rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.form-status--success { color: #16a34a; }
+.form-status--error { color: #dc2626; }
 
 .form-group {
   margin-bottom: 20px;
