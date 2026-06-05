@@ -281,15 +281,64 @@ function initConsultationTicker() {
   const textEl = document.querySelector('.cta-live-text');
   if (!textEl) return;
 
-  const maskedNames = [
-    '김*민', '이*수', '박*현', '최*진', '정*영', '강*호', '조*준', '윤*서',
-    '장*우', '임*윤', '한*나', '오*희', '서*동', '신*태', '권*성', '황*미',
-    '송*경', '류*환', '배*철', '노*원', '문*혁', '양*지', '홍*연', '백*승'
+  const SURNAMES = [
+    '김', '이', '박', '최', '정', '강', '조', '윤', '장', '임', '한', '오', '서', '신', '권',
+    '황', '안', '송', '류', '배', '노', '문', '양', '홍', '백', '유', '남', '심', '하', '곽',
+    '성', '차', '주', '우', '구', '민', '진', '나', '엄', '원', '천', '변', '라', '표', '반'
   ];
+
+  const GIVEN = [
+    '민', '수', '현', '진', '영', '호', '준', '서', '우', '윤', '나', '희', '동', '태', '성',
+    '지', '혁', '연', '미', '경', '환', '철', '원', '승', '빈', '솔', '람', '헌', '주', '석',
+    '열', '린', '강', '율', '채', '안', '비', '해', '솜', '아', '은', '정', '혜', '교', '찬',
+    '인', '두', '산', '훈', '재', '경', '원', '희', '담', '결', '윤', '범', '형', '규', '상'
+  ];
+
+  const BATCH_SIZE = 60;
 
   function formatDate(date) {
     return `${date.getMonth() + 1}/${date.getDate()}`;
   }
+
+  function createRng(seed) {
+    let s = seed >>> 0;
+    return () => {
+      s = (s + 0x6D2B79F5) >>> 0;
+      let t = Math.imul(s ^ (s >>> 15), s | 1);
+      t = (t + Math.imul(t ^ (t >>> 7), t | 61)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function dailySeed() {
+    const d = new Date();
+    return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  }
+
+  function generateMaskedNames(count, seedOffset) {
+    const rng = createRng(dailySeed() + seedOffset);
+    const names = new Set();
+    let guard = 0;
+    while (names.size < count && guard < count * 30) {
+      guard += 1;
+      const surname = SURNAMES[Math.floor(rng() * SURNAMES.length)];
+      const given = GIVEN[Math.floor(rng() * GIVEN.length)];
+      names.add(`${surname}*${given}`);
+    }
+    return [...names];
+  }
+
+  function shuffle(arr, seedOffset) {
+    const rng = createRng(dailySeed() + seedOffset + 1);
+    const list = [...arr];
+    for (let i = list.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(rng() * (i + 1));
+      [list[i], list[j]] = [list[j], list[i]];
+    }
+    return list;
+  }
+
+  let cycle = 0;
 
   function buildMessages() {
     const today = new Date();
@@ -297,8 +346,10 @@ function initConsultationTicker() {
     yesterday.setDate(yesterday.getDate() - 1);
     const dates = [formatDate(today), formatDate(yesterday)];
 
-    const shuffled = [...maskedNames].sort(() => Math.random() - 0.5);
-    return shuffled.map((name, i) => {
+    const seed = cycle * 997;
+    const names = shuffle(generateMaskedNames(BATCH_SIZE, seed), seed);
+
+    return names.map((name, i) => {
       const date = dates[i % 2];
       return `${date} ${name} 님이 상담접수하였습니다`;
     });
@@ -311,7 +362,10 @@ function initConsultationTicker() {
     textEl.classList.add('is-fading');
     setTimeout(() => {
       index = (index + 1) % messages.length;
-      if (index === 0) messages = buildMessages();
+      if (index === 0) {
+        cycle += 1;
+        messages = buildMessages();
+      }
       textEl.textContent = messages[index];
       textEl.classList.remove('is-fading');
     }, 350);
