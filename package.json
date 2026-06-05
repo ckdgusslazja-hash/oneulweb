@@ -4,7 +4,10 @@
   "private": true,
   "description": "오늘웹 — AI 홈페이지 제작 서비스 (oneulweb.com)",
   "scripts": {
-    "deploy": "vercel --prod",
+    "push": "powershell -ExecutionPolicy Bypass -File scripts/push-github.ps1",
+    "watch": "powershell -ExecutionPolicy Bypass -File scripts/watch-deploy.ps1",
+    "hooks:install": "powershell -ExecutionPolicy Bypass -File scripts/install-git-hooks.ps1",
+    "deploy": "powershell -ExecutionPolicy Bypass -File scripts/push-github.ps1",
     "deploy:preview": "vercel"
   }
 }
