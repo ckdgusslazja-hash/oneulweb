@@ -583,6 +583,12 @@ section {
 .section-header p {
   color: var(--text-muted);
   font-size: 1.1rem;
+  word-break: keep-all;
+  line-height: 1.6;
+}
+
+.br-mobile {
+  display: none;
 }
 
 /* ===== TRUST BAR ===== */
@@ -1661,6 +1667,20 @@ section {
 
   .header-cta .btn-ghost {
     display: none;
+  }
+
+  .br-mobile {
+    display: block;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+    padding: 0 4px;
+  }
+
+  .section-header p {
+    font-size: 1rem;
+    line-height: 1.7;
   }
 
   .services-grid,
