@@ -132,6 +132,44 @@ ul {
   height: 72px;
 }
 
+.logo--footer {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.logo--footer .logo-icon-img {
+  display: block;
+  height: 56px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.logo-footer-wordmark {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+
+.logo-footer-ko {
+  font-family: 'Outfit', 'Pretendard', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.logo-footer-en {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.52);
+  letter-spacing: 0.26em;
+  line-height: 1;
+}
+
 .hero-brand {
   margin-bottom: 24px;
 }
@@ -1611,6 +1649,14 @@ section {
     height: 58px;
   }
 
+  .logo--footer .logo-icon-img {
+    height: 48px;
+  }
+
+  .logo-footer-ko {
+    font-size: 1.2rem;
+  }
+
   .hero-desc {
     margin-left: auto;
     margin-right: auto;
@@ -1711,6 +1757,19 @@ section {
 
   .footer .logo-img--footer {
     max-width: none;
+  }
+
+  .logo--footer .logo-icon-img {
+    height: 44px;
+  }
+
+  .logo-footer-ko {
+    font-size: 1.1rem;
+  }
+
+  .logo-footer-en {
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
   }
 
   .header-cta {
