@@ -1,4 +1,4 @@
-// WebCraft Studio - Main JavaScript
+// 오늘웹 - Main JavaScript
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
