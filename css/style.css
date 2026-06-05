@@ -113,10 +113,7 @@ ul {
 }
 
 .logo-img--footer {
-  background: #fff;
-  border-radius: 12px;
-  padding: 8px 14px;
-  height: 78px;
+  height: 72px;
 }
 
 .hero-brand {
@@ -1592,7 +1589,7 @@ section {
   }
 
   .logo-img--footer {
-    height: 66px;
+    height: 58px;
   }
 
   .hero-desc {
