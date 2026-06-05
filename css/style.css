@@ -1,4 +1,4 @@
-/* WebCraft Studio - 홈페이지 제작 서비스 */
+/* oneulweb — 홈페이지 제작 서비스 */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
@@ -99,51 +99,94 @@ ul {
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
+  transition: opacity var(--transition);
+}
+
+.logo:hover {
+  opacity: 0.88;
+}
+
+.logo-mark {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: var(--gradient);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+}
+
+.logo-mark::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f97316, #fdba74);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+.logo-wordmark {
   font-family: 'Outfit', sans-serif;
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.lw-base {
+  color: var(--text);
+}
+
+.lw-accent {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-weight: 800;
 }
 
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-  gap: 2px;
+.logo--footer .lw-base {
+  color: #fff;
 }
 
-.logo-en {
-  font-size: 1.35rem;
-  letter-spacing: -0.02em;
+.logo--footer .logo-mark {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.logo-ko {
-  font-family: 'Pretendard', sans-serif;
-  font-size: 0.62rem;
-  font-weight: 500;
-  color: var(--text-light);
-  letter-spacing: 0.02em;
+.preview-logo span {
+  background: linear-gradient(135deg, #818cf8, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.footer .logo-ko {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.logo-ko-inline {
-  font-size: 0.85em;
-  font-weight: 500;
-  opacity: 0.75;
-}
-
+/* portfolio 서브페이지 호환 */
 .logo-icon {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
   background: var(--gradient);
-  border-radius: 10px;
+  border-radius: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
 }
 
 .nav {
