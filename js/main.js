@@ -93,18 +93,49 @@ function initShowcaseControls() {
   const container = wrap.querySelector('.showcase-iframe-container');
   if (!iframe || !buttons.length || !container) return;
 
+  const MOBILE_WIDTH = 390;
+  const MOBILE_HEIGHT = 844;
+  const DESKTOP_HEIGHT = 900;
+
+  const applyIframeViewport = (width, height) => {
+    iframe.style.width = typeof width === 'number' ? `${width}px` : width;
+    iframe.style.height = `${height}px`;
+    iframe.style.transform = '';
+    iframe.style.transformOrigin = '';
+    iframe.setAttribute('scrolling', 'yes');
+  };
+
+  const syncMobileScale = () => {
+    const frameWidth = wrap.classList.contains('mobile-preview')
+      ? Math.min(MOBILE_WIDTH, container.clientWidth || MOBILE_WIDTH)
+      : null;
+    if (!frameWidth) return;
+
+    const frameHeight = window.innerWidth <= 768 ? 693 : MOBILE_HEIGHT;
+    const scale = (container.clientWidth || frameWidth) / frameWidth;
+    if (scale < 0.999) {
+      iframe.style.width = `${frameWidth}px`;
+      iframe.style.height = `${frameHeight}px`;
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.transformOrigin = 'top left';
+      container.style.height = `${Math.round(frameHeight * scale)}px`;
+    } else {
+      container.style.height = '';
+      applyIframeViewport(frameWidth, frameHeight);
+    }
+  };
+
   const setDesktop = () => {
     wrap.classList.remove('mobile-preview');
-    iframe.style.width = '100%';
-    iframe.style.height = '5000px';
+    container.style.height = '';
+    applyIframeViewport('100%', DESKTOP_HEIGHT);
     container.scrollTop = 0;
   };
 
   const setMobile = () => {
     wrap.classList.add('mobile-preview');
-    iframe.style.width = '100%';
-    iframe.style.height = '6000px';
     container.scrollTop = 0;
+    syncMobileScale();
   };
 
   buttons.forEach(btn => {
@@ -117,6 +148,10 @@ function initShowcaseControls() {
         setDesktop();
       }
     });
+  });
+
+  window.addEventListener('resize', () => {
+    if (wrap.classList.contains('mobile-preview')) syncMobileScale();
   });
 }
 
