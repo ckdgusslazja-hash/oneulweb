@@ -1645,7 +1645,7 @@ section {
   .nav {
     display: none;
     position: absolute;
-    top: 88px;
+    top: 64px;
     left: 0;
     right: 0;
     background: white;
@@ -1662,10 +1662,49 @@ section {
 
   .mobile-toggle {
     display: flex;
+    flex-shrink: 0;
+    margin-left: 2px;
   }
 
   .header-cta .btn-ghost {
     display: none;
+  }
+
+  .header-inner {
+    height: 64px;
+    gap: 10px;
+  }
+
+  .logo {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .logo-img {
+    height: 34px;
+    width: auto;
+    max-width: min(100%, 148px);
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .header-cta {
+    flex-shrink: 0;
+  }
+
+  .header-cta .btn-primary {
+    padding: 8px 14px;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.28);
+  }
+
+  .hero {
+    padding-top: 96px;
+  }
+
+  .hero-logo {
+    height: 64px;
   }
 
   .br-mobile {
@@ -1765,5 +1804,30 @@ section {
 
   .floating-card {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner {
+    height: 58px;
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 30px;
+    max-width: 120px;
+  }
+
+  .header-cta .btn-primary {
+    padding: 7px 12px;
+    font-size: 0.75rem;
+  }
+
+  .nav {
+    top: 58px;
+  }
+
+  .hero {
+    padding-top: 88px;
   }
 }
