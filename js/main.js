@@ -276,10 +276,10 @@ function initSmoothScroll() {
   sections.forEach(section => observer.observe(section));
 })();
 
-// CTA live consultation feed
+// CTA & Contact live consultation feed (synced)
 function initConsultationTicker() {
-  const textEl = document.querySelector('.cta-live-text');
-  if (!textEl) return;
+  const textEls = document.querySelectorAll('.live-feed-text');
+  if (!textEls.length) return;
 
   const SURNAMES = [
     '김', '이', '박', '최', '정', '강', '조', '윤', '장', '임', '한', '오', '서', '신', '권',
@@ -359,18 +359,21 @@ function initConsultationTicker() {
   let index = 0;
 
   const showNext = () => {
-    textEl.classList.add('is-fading');
+    textEls.forEach(el => el.classList.add('is-fading'));
     setTimeout(() => {
       index = (index + 1) % messages.length;
       if (index === 0) {
         cycle += 1;
         messages = buildMessages();
       }
-      textEl.textContent = messages[index];
-      textEl.classList.remove('is-fading');
+      const next = messages[index];
+      textEls.forEach(el => {
+        el.textContent = next;
+        el.classList.remove('is-fading');
+      });
     }, 350);
   };
 
-  textEl.textContent = messages[0];
+  textEls.forEach(el => { el.textContent = messages[0]; });
   setInterval(showNext, 3200);
 }
