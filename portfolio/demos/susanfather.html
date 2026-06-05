@@ -3,205 +3,357 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>수산아빠 — 신선 농수산물 온라인 쇼핑몰</title>
+<title>수산아빠 | 신선 농수산물 온라인 쇼핑몰</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="shared.css">
 <style>
-:root {
-  --bg: #f7f9f8;
-  --text: #1a1f1c;
-  --text-muted: #5c6b62;
-  --accent: #1a6b4a;
-  --accent-light: #238f63;
-  --accent-gold: #e8a838;
-  --border: #e2ebe6;
-  --nav-bg: rgba(255,255,255,0.96);
-  --card-bg: #fff;
-  --btn-radius: 12px;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#1a6b4a;--primary-light:#238f63;--accent:#e8a838;
+  --bg:#f7f9f8;--surface:#fff;--text:#1a1f1c;--muted:#5c6b62;
+  --border:#e2ebe6;--danger:#e53935;
+  --gutter:20px;--radius-sm:8px;--radius-md:14px;--radius-full:9999px;
+  --font:'Pretendard',-apple-system,sans-serif;
 }
-body { background: var(--bg); color: var(--text); }
-.site-nav { background: var(--nav-bg); border-color: var(--border); }
-.site-nav .logo { color: var(--accent); font-weight: 800; }
-.nav-links a { color: var(--text-muted); }
-.nav-cta { background: var(--accent); }
-.hero {
-  padding: clamp(40px, 6vw, 64px) 0;
-  background: linear-gradient(180deg, #e8f5ef 0%, var(--bg) 100%);
-}
-.hero-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: center;
-}
-.hero-badge {
-  display: inline-block;
-  padding: 6px 12px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 0.76rem;
-  color: var(--accent);
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-.hero h1 {
-  font-size: clamp(1.85rem, 4vw, 2.6rem);
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 14px;
-}
-.hero h1 em { font-style: normal; color: var(--accent); }
-.hero p { color: var(--text-muted); line-height: 1.7; margin-bottom: 22px; }
-.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn-primary {
-  padding: 13px 22px;
-  border-radius: var(--btn-radius);
-  background: var(--accent);
-  color: #fff;
-  font-weight: 600;
-}
-.btn-outline {
-  padding: 13px 22px;
-  border-radius: var(--btn-radius);
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  font-weight: 600;
-  background: #fff;
-}
-.hero-visual {
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: var(--shadow-md, 0 12px 40px rgba(26,107,74,0.14));
-  aspect-ratio: 4/3;
-  background: #ddd;
-}
-.hero-visual img { width: 100%; height: 100%; object-fit: cover; }
-.categories { padding: 48px 0 24px; }
-.categories h2, .products h2 { font-size: 1.35rem; margin-bottom: 20px; }
-.cat-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-.cat {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px 12px;
-  text-align: center;
-  font-size: 0.88rem;
-  font-weight: 600;
-}
-.cat span { display: block; font-size: 1.5rem; margin-bottom: 8px; }
-.products { padding: 24px 0 56px; }
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-.product {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-}
-.product img { aspect-ratio: 1; object-fit: cover; width: 100%; }
-.product-info { padding: 14px; }
-.product-info h3 { font-size: 0.88rem; margin-bottom: 6px; }
-.product-info .price { color: var(--accent); font-weight: 700; font-size: 0.95rem; }
-.product-info .price small { color: var(--text-muted); font-weight: 400; font-size: 0.76rem; }
-.trust {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-.live-note {
-  text-align: center;
-  padding: 18px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border);
-  background: #fff;
-}
-@media (max-width: 768px) {
-  .hero-inner, .cat-grid, .product-grid { grid-template-columns: 1fr 1fr; }
-  .hero-visual { display: none; }
-}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* Header */
+.sf-header{display:flex;align-items:center;justify-content:space-between;padding:12px var(--gutter) 10px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.sf-header__logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;color:var(--primary)}
+.sf-header__logo img{width:44px;height:44px;object-fit:contain}
+.sf-notif{width:40px;height:40px;border-radius:var(--radius-sm);background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:1.1rem;position:relative}
+.sf-notif::after{content:'';position:absolute;top:8px;right:8px;width:8px;height:8px;background:var(--danger);border-radius:50%;border:2px solid #fff}
+
+/* Search */
+.sf-search-wrap{padding:0 var(--gutter) 12px;background:var(--surface)}
+.sf-search{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 12px;background:#f5f5f5;border-radius:var(--radius-full);border:1px solid #eee}
+.sf-search input{flex:1;border:none;background:transparent;font-size:0.95rem;outline:none;min-width:0}
+.sf-search input::placeholder{color:#999}
+.sf-search__btn{padding:8px 16px;background:var(--primary);color:#fff;font-size:0.85rem;font-weight:700;border-radius:var(--radius-full)}
+
+/* Banner */
+.sf-banner{position:relative;margin:0 var(--gutter) 16px;border-radius:14px;min-height:168px;overflow:hidden;color:#fff;background:#1a3d2e;box-shadow:0 8px 24px rgba(26,61,46,.12)}
+.sf-banner__photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% center}
+.sf-banner__overlay{position:absolute;inset:0;background:linear-gradient(102deg,rgba(10,28,20,.88) 0%,rgba(10,28,20,.55) 38%,rgba(10,28,20,.12) 62%,transparent 78%);pointer-events:none}
+.sf-banner__content{position:relative;z-index:2;display:block;width:100%;min-height:168px;padding:22px 52px 40px 20px;text-align:left;color:inherit}
+.sf-banner__tag{font-size:.68rem;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.82)}
+.sf-banner__badge{display:inline-flex;padding:4px 10px;border-radius:6px;font-size:.72rem;font-weight:800;color:#fff;background:linear-gradient(135deg,#e53935,#ff7043);box-shadow:0 2px 8px rgba(229,57,53,.35);margin:6px 0}
+.sf-banner__title{font-size:1.28rem;font-weight:800;line-height:1.3;margin:4px 0;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+.sf-banner__sub{font-size:.82rem;color:rgba(255,255,255,.9);margin:0}
+.sf-banner__cta{display:inline-flex;align-items:center;margin-top:10px;padding:8px 14px;font-size:.78rem;font-weight:700;color:#1a3d2e;background:#fff;border-radius:var(--radius-full);box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.sf-banner__dots{position:absolute;bottom:12px;left:0;right:0;z-index:3;display:flex;justify-content:center;gap:6px}
+.sf-banner__dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45);padding:0}
+.sf-banner__dot.active{background:#fff;width:16px;border-radius:var(--radius-full)}
+.sf-banner__arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);color:#1a3d2e;font-size:1.35rem;font-weight:700;z-index:3;box-shadow:0 2px 10px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center}
+.sf-banner__arrow--prev{left:10px}.sf-banner__arrow--next{right:10px}
+
+/* Categories */
+.sf-cats{display:grid;grid-template-columns:repeat(5,1fr);gap:4px 8px;padding:8px var(--gutter) 20px;background:var(--surface)}
+.sf-cat{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 4px;border-radius:var(--radius-sm)}
+.sf-cat__icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.75rem;background:linear-gradient(145deg,#f8faf9,#eef5f1);border-radius:16px;box-shadow:0 2px 8px rgba(26,107,74,.08)}
+.sf-cat.active .sf-cat__icon{background:linear-gradient(145deg,rgba(26,107,74,.15),rgba(35,143,99,.2));box-shadow:0 0 0 2px var(--primary)}
+.sf-cat__name{font-size:.7rem;font-weight:600;text-align:center;line-height:1.2;word-break:keep-all}
+.sf-cat.active .sf-cat__name{color:var(--primary)}
+
+/* Promo */
+.sf-promo{display:flex;align-items:center;gap:12px;margin:0 var(--gutter) 20px;padding:14px 18px;border-radius:var(--radius-md);background:linear-gradient(90deg,#1a6b4a,#e8a838);color:#fff;width:calc(100% - var(--gutter)*2)}
+.sf-promo__emoji{font-size:2rem}
+.sf-promo__text{flex:1;display:flex;flex-direction:column;gap:2px}
+.sf-promo__text strong{font-size:.95rem}
+.sf-promo__text span{font-size:.8rem;opacity:.9}
+.sf-promo__arrow{font-size:1.5rem;opacity:.9}
+
+/* Row sections */
+.sf-row{padding:0 0 20px;border-bottom:8px solid #f5f5f5;background:var(--surface)}
+.sf-row--ta{background:linear-gradient(180deg,#fff8f6,#fff 72%)}
+.sf-row__head{display:flex;align-items:center;justify-content:space-between;padding:16px var(--gutter) 12px}
+.sf-row__title{font-size:1.05rem;font-weight:800;line-height:1.35}
+.sf-row__more{font-size:.85rem;font-weight:600;color:var(--primary)}
+.sf-row__sub{margin:-4px var(--gutter) 10px;font-size:.78rem;color:var(--muted)}
+.sf-scroll{display:flex;gap:10px;overflow-x:auto;padding:0 var(--gutter) 4px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.sf-scroll::-webkit-scrollbar{display:none}
+
+/* Horizontal cards */
+.h-card{flex:0 0 148px;scroll-snap-align:start}
+.h-card__inner{width:100%;text-align:left;display:flex;flex-direction:column}
+.h-card__img{width:148px;height:148px;border-radius:8px;overflow:hidden;background:#f8f8f8;margin-bottom:10px;position:relative}
+.h-card__img img{width:100%;height:100%;object-fit:cover}
+.h-card__rank{position:absolute;top:6px;left:6px;z-index:2;min-width:26px;height:26px;padding:0 7px;display:inline-flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:800;color:#fff;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.h-card__rank--1{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.h-card__rank--2{background:linear-gradient(135deg,#9ca3af,#6b7280)}
+.h-card__rank--3{background:linear-gradient(135deg,#cd7f32,#a16207)}
+.h-card__name{font-size:.8rem;font-weight:500;line-height:1.35;color:#222;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.2em}
+.h-card__viewing{display:flex;align-items:center;gap:5px;margin:0 0 6px;font-size:.72rem;font-weight:600;color:#2f9e44}
+.h-card__viewing-pulse{width:6px;height:6px;border-radius:50%;background:#40c057;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(64,192,87,.45)}50%{box-shadow:0 0 0 4px rgba(64,192,87,0)}}
+.h-card__orig{font-size:.72rem;color:#888;margin-bottom:4px}
+.h-card__orig-label{color:var(--danger);margin-right:4px}
+.h-card__orig-price{text-decoration:line-through}
+.h-card__price{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+.h-card__pct{display:inline-flex;align-items:center;justify-content:center;min-width:32px;padding:2px 5px;background:var(--danger);color:#fff;font-size:.75rem;font-weight:800;border-radius:3px}
+.h-card__amount{font-size:1.05rem;font-weight:800;color:var(--danger);letter-spacing:-.02em}
+.h-card__ship{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:.68rem;margin-bottom:6px}
+.h-card__ship-badge{color:var(--primary);font-weight:700}
+.h-card__ship-date{color:var(--primary);font-weight:600}
+.h-card__rating{display:flex;align-items:center;gap:4px;font-size:.72rem}
+.h-card__stars{color:#ff922b;letter-spacing:-1px}
+.h-card__reviews{color:#888}
+
+/* Time attack timer */
+.sf-timer{display:inline-flex;align-items:center;gap:4px;margin-left:8px;padding:3px 8px;background:#fff0ee;border-radius:6px;font-size:.78rem;font-weight:700;color:var(--danger)}
+
+/* Product grid */
+.sf-list{padding:20px 0 32px;background:var(--surface)}
+.sf-list__head{display:flex;align-items:baseline;gap:8px;padding:0 var(--gutter) 14px}
+.sf-list__head h2{font-size:1.05rem;font-weight:800}
+.sf-list__count{font-size:.85rem;font-weight:500;color:var(--muted)}
+.sf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 var(--gutter)}
+.p-card{background:var(--surface);border-radius:var(--radius-md);overflow:hidden;box-shadow:0 1px 3px rgba(26,107,74,.06);border:1px solid var(--border)}
+.p-card__visual{aspect-ratio:1;position:relative;overflow:hidden;background:#f8f8f8}
+.p-card__visual img{width:100%;height:100%;object-fit:cover}
+.p-card__badge{position:absolute;top:8px;left:8px;padding:3px 7px;background:var(--accent);color:#fff;font-size:.62rem;font-weight:700;border-radius:var(--radius-full)}
+.p-card__body{padding:10px}
+.p-card__origin{font-size:.65rem;color:var(--muted);margin-bottom:2px}
+.p-card__name{font-size:.82rem;font-weight:700;line-height:1.35;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.p-card__rating{font-size:.68rem;color:var(--muted);margin-bottom:6px}
+.p-card__price{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.p-card__current{font-size:.92rem;font-weight:800;color:var(--danger)}
+.p-card__orig{font-size:.68rem;color:#999;text-decoration:line-through}
+.p-card__btn{margin-top:8px;width:100%;padding:9px;background:var(--primary);color:#fff;font-size:.78rem;font-weight:700;border-radius:var(--radius-sm)}
+
+/* Bottom nav hint */
+.sf-bottom{display:flex;justify-content:space-around;padding:10px var(--gutter) 14px;background:var(--surface);border-top:1px solid var(--border);font-size:.65rem;color:var(--muted)}
+.sf-bottom span{display:flex;flex-direction:column;align-items:center;gap:4px}
+.sf-bottom .active{color:var(--primary);font-weight:700}
+.sf-bottom__icon{font-size:1.15rem}
+
+.sf-footer{text-align:center;padding:16px;font-size:.75rem;color:var(--muted);background:#eef2ef}
 </style>
 </head>
 <body>
-<nav class="site-nav">
-  <div class="logo">수산아빠</div>
-  <div class="nav-links">
-    <a href="#">홈</a>
-    <a href="#">장바구니</a>
-    <a href="#">마이페이지</a>
-    <a href="#" class="nav-cta">베스트</a>
+
+<header class="sf-header">
+  <a class="sf-header__logo" href="#" data-toast="데모: 홈">
+    <img src="https://susanfather.com/images/logo.png" alt="수산아빠" width="44" height="44" onerror="this.style.display='none'">
+    <span>수산아빠</span>
+  </a>
+  <button type="button" class="sf-notif" data-toast="데모: 알림">🔔</button>
+</header>
+
+<div class="sf-search-wrap">
+  <div class="sf-search">
+    <span style="opacity:.6;font-size:1rem;padding-left:4px">🔍</span>
+    <input type="search" placeholder="농수산물을 검색하세요!" readonly>
+    <button type="button" class="sf-search__btn" data-toast="데모: 검색">검색</button>
   </div>
+</div>
+
+<section class="sf-banner" aria-label="메인 프로모션">
+  <img class="sf-banner__photo" src="https://susanfather.com/images/products/fr1.png" alt="" loading="eager" onerror="this.style.display='none'">
+  <div class="sf-banner__overlay"></div>
+  <button type="button" class="sf-banner__arrow sf-banner__arrow--prev" data-toast="데모: 이전 배너">‹</button>
+  <div class="sf-banner__content">
+    <div>
+      <span class="sf-banner__tag">제철과일</span><br>
+      <span class="sf-banner__badge">17% 할인</span>
+      <h2 class="sf-banner__title">제주 감귤 산지직송</h2>
+      <p class="sf-banner__sub">당일 수확 · 당도 12브릭스</p>
+      <span class="sf-banner__cta">지금 보러가기 ›</span>
+    </div>
+  </div>
+  <button type="button" class="sf-banner__arrow sf-banner__arrow--next" data-toast="데모: 다음 배너">›</button>
+  <div class="sf-banner__dots">
+    <span class="sf-banner__dot active"></span><span class="sf-banner__dot"></span><span class="sf-banner__dot"></span>
+  </div>
+</section>
+
+<nav class="sf-cats" aria-label="식품 카테고리">
+  <div class="sf-cat active"><div class="sf-cat__icon">🏠</div><span class="sf-cat__name">전체</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">🍊</div><span class="sf-cat__name">제철과일</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">🥬</div><span class="sf-cat__name">신선채소</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">🐟</div><span class="sf-cat__name">수산물</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">🦑</div><span class="sf-cat__name">건어물</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">🥚</div><span class="sf-cat__name">정육·계란</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">🌾</div><span class="sf-cat__name">곡물·쌀</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">🌱</div><span class="sf-cat__name">유기농</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">🚚</div><span class="sf-cat__name">산지직송</span></div>
+  <div class="sf-cat"><div class="sf-cat__icon">⚡</div><span class="sf-cat__name">타임어택</span></div>
 </nav>
 
-<section class="hero">
-  <div class="container hero-inner">
-    <div>
-      <div class="hero-badge">산지직송 · susanfather.com</div>
-      <h1>아빠가 고른<br><em>신선 농수산물</em></h1>
-      <p>제철 과일, 신선 채소, 수산물, 쌀·곡물을 산지에서 직송합니다. 당일·익일 배송으로 식탁까지 신선하게.</p>
-      <div class="hero-actions">
-        <a href="#" class="btn-primary" data-toast="데모: 베스트 상품">베스트 보러가기</a>
-        <a href="#" class="btn-outline" data-toast="데모: 회원가입">회원가입</a>
+<button type="button" class="sf-promo" data-toast="데모: 산지 특가">
+  <span class="sf-promo__emoji">🌿</span>
+  <div class="sf-promo__text"><strong>농어촌 직거래 장터</strong><span>이번 주 산지 특가 · 선착순 100명</span></div>
+  <span class="sf-promo__arrow">›</span>
+</button>
+
+<section class="sf-row">
+  <div class="sf-row__head">
+    <h2 class="sf-row__title">🏆 이번 주 베스트 TOP</h2>
+    <span class="sf-row__more">더보기 ›</span>
+  </div>
+  <p class="sf-row__sub">실시간 판매량 · 리뷰 기준 주간 랭킹</p>
+  <div class="sf-scroll">
+    <article class="h-card">
+      <div class="h-card__inner">
+        <div class="h-card__img">
+          <span class="h-card__rank h-card__rank--1">1</span>
+          <img src="https://susanfather.com/images/products/fr1.png" alt="제주 감귤" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1603833666108-5631e94968dd?w=300&q=80'">
+        </div>
+        <p class="h-card__name">제주 감귤, 5kg 박스</p>
+        <p class="h-card__viewing"><span class="h-card__viewing-pulse"></span>142명이 보는 중</p>
+        <p class="h-card__orig"><span class="h-card__orig-label">산지특가</span><span class="h-card__orig-price">35,000원</span></p>
+        <p class="h-card__price"><span class="h-card__pct">17%</span><span class="h-card__amount">28,900원</span></p>
+        <p class="h-card__ship"><span class="h-card__ship-badge">🚀 산지직송</span><span class="h-card__ship-date">내일 도착</span></p>
+        <p class="h-card__rating"><span class="h-card__stars">★★★★★</span><span class="h-card__reviews">(128)</span></p>
       </div>
-      <div class="trust">
-        <span>✓ 산지직송</span>
-        <span>✓ 신선 보장</span>
-        <span>✓ 카카오 상담</span>
+    </article>
+    <article class="h-card">
+      <div class="h-card__inner">
+        <div class="h-card__img">
+          <span class="h-card__rank h-card__rank--2">2</span>
+          <img src="https://susanfather.com/images/products/sf1.png" alt="광어회" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1534043464124-3be1887ad4c8?w=300&q=80'">
+        </div>
+        <p class="h-card__name">국내산 광어회, 500g</p>
+        <p class="h-card__viewing"><span class="h-card__viewing-pulse"></span>89명이 보는 중</p>
+        <p class="h-card__orig"><span class="h-card__orig-label">산지특가</span><span class="h-card__orig-price">52,000원</span></p>
+        <p class="h-card__price"><span class="h-card__pct">13%</span><span class="h-card__amount">45,000원</span></p>
+        <p class="h-card__ship"><span class="h-card__ship-badge">🚀 산지직송</span><span class="h-card__ship-date">내일 도착</span></p>
+        <p class="h-card__rating"><span class="h-card__stars">★★★★☆</span><span class="h-card__reviews">(64)</span></p>
       </div>
-    </div>
-    <div class="hero-visual">
-      <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&q=80" alt="신선 채소">
-    </div>
+    </article>
+    <article class="h-card">
+      <div class="h-card__inner">
+        <div class="h-card__img">
+          <span class="h-card__rank h-card__rank--3">3</span>
+          <img src="https://susanfather.com/images/products/gr1.png" alt="햅쌀" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300&q=80'">
+        </div>
+        <p class="h-card__name">유기농 햅쌀, 10kg</p>
+        <p class="h-card__viewing"><span class="h-card__viewing-pulse"></span>256명이 보는 중</p>
+        <p class="h-card__orig"><span class="h-card__orig-label">유기농특가</span><span class="h-card__orig-price">42,000원</span></p>
+        <p class="h-card__price"><span class="h-card__pct">8%</span><span class="h-card__amount">38,500원</span></p>
+        <p class="h-card__ship"><span class="h-card__ship-badge">🚀 산지직송</span><span class="h-card__ship-date">무료배송</span></p>
+        <p class="h-card__rating"><span class="h-card__stars">★★★★★</span><span class="h-card__reviews">(312)</span></p>
+      </div>
+    </article>
+    <article class="h-card">
+      <div class="h-card__inner">
+        <div class="h-card__img">
+          <img src="https://susanfather.com/images/products/vg1.png" alt="채소" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300&q=80'">
+        </div>
+        <p class="h-card__name">GAP 인증 상추, 1kg</p>
+        <p class="h-card__orig"><span class="h-card__orig-label">산지특가</span><span class="h-card__orig-price">8,900원</span></p>
+        <p class="h-card__price"><span class="h-card__pct">11%</span><span class="h-card__amount">7,900원</span></p>
+        <p class="h-card__ship"><span class="h-card__ship-badge">🚀 산지직송</span><span class="h-card__ship-date">당일 발송</span></p>
+        <p class="h-card__rating"><span class="h-card__stars">★★★★☆</span><span class="h-card__reviews">(45)</span></p>
+      </div>
+    </article>
   </div>
 </section>
 
-<section class="categories">
-  <div class="container">
-    <h2>카테고리</h2>
-    <div class="cat-grid">
-      <div class="cat"><span>🍎</span>제철 과일</div>
-      <div class="cat"><span>🥬</span>신선 채소</div>
-      <div class="cat"><span>🐟</span>수산물</div>
-      <div class="cat"><span>🌾</span>쌀·곡물</div>
-    </div>
+<section class="sf-row sf-row--ta">
+  <div class="sf-row__head">
+    <h2 class="sf-row__title">⚡ 오늘의 타임어택 <span class="sf-timer">⏱ 05:42:18</span></h2>
+    <span class="sf-row__more">전체 ›</span>
+  </div>
+  <div class="sf-scroll">
+    <article class="h-card">
+      <div class="h-card__inner">
+        <div class="h-card__img"><img src="https://susanfather.com/images/products/sf2.png" alt="생굴" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1559847844-d72189136410?w=300&q=80'"></div>
+        <p class="h-card__name">통영 생굴, 1kg</p>
+        <p class="h-card__price"><span class="h-card__pct">22%</span><span class="h-card__amount">16,900원</span></p>
+        <p class="h-card__ship"><span class="h-card__ship-badge">🚀 산지직송</span></p>
+      </div>
+    </article>
+    <article class="h-card">
+      <div class="h-card__inner">
+        <div class="h-card__img"><img src="https://susanfather.com/images/products/fr2.png" alt="사과" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1619566636852-adf3ef000950?w=300&q=80'"></div>
+        <p class="h-card__name">청송 부사, 3kg</p>
+        <p class="h-card__price"><span class="h-card__pct">19%</span><span class="h-card__amount">24,900원</span></p>
+      </div>
+    </article>
+    <article class="h-card">
+      <div class="h-card__inner">
+        <div class="h-card__img"><img src="https://susanfather.com/images/products/dr1.png" alt="건어물" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1559339352-11d035aa65de?w=300&q=80'"></div>
+        <p class="h-card__name">완도 건미역, 500g</p>
+        <p class="h-card__price"><span class="h-card__pct">15%</span><span class="h-card__amount">12,800원</span></p>
+      </div>
+    </article>
   </div>
 </section>
 
-<section class="products">
-  <div class="container">
-    <h2>베스트 상품</h2>
-    <div class="product-grid">
-      <article class="product">
-        <img src="https://images.unsplash.com/photo-1619566636852-adf3ef000950?w=400&q=80" alt="사과">
-        <div class="product-info"><h3>문경 사과 5kg</h3><p class="price">32,000원 <small>산지직송</small></p></div>
-      </article>
-      <article class="product">
-        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b13a?w=400&q=80" alt="연어">
-        <div class="product-info"><h3>노르웨이 연어</h3><p class="price">18,900원 <small>신선</small></p></div>
-      </article>
-      <article class="product">
-        <img src="https://images.unsplash.com/photo-1595855759920-865aebd56dc3?w=400&q=80" alt="쌀">
-        <div class="product-info"><h3>이천쌀 10kg</h3><p class="price">45,000원 <small>당일발송</small></p></div>
-      </article>
-      <article class="product">
-        <img src="https://images.unsplash.com/photo-1546094097-3a4a1a5301c4?w=400&q=80" alt="토마토">
-        <div class="product-info"><h3>완숙 토마토 3kg</h3><p class="price">12,500원 <small>제철</small></p></div>
-      </article>
-    </div>
+<section class="sf-list">
+  <div class="sf-list__head">
+    <h2>🔥 지금 인기 상품</h2>
+    <span class="sf-list__count">24개</span>
+  </div>
+  <div class="sf-grid">
+    <article class="p-card">
+      <div class="p-card__visual">
+        <span class="p-card__badge">베스트</span>
+        <img src="https://susanfather.com/images/products/fr1.png" alt="" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1603833666108-5631e94968dd?w=400&q=80'">
+      </div>
+      <div class="p-card__body">
+        <p class="p-card__origin">제주 서귀포</p>
+        <h3 class="p-card__name">제주 감귤 5kg 박스</h3>
+        <p class="p-card__rating">★ 4.9 · 리뷰 128</p>
+        <div class="p-card__price"><span class="p-card__current">28,900원</span><span class="p-card__orig">35,000원</span></div>
+        <button type="button" class="p-card__btn" data-toast="데모: 장바구니 담기">장바구니</button>
+      </div>
+    </article>
+    <article class="p-card">
+      <div class="p-card__visual">
+        <span class="p-card__badge">신선</span>
+        <img src="https://susanfather.com/images/products/sf1.png" alt="" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1534043464124-3be1887ad4c8?w=400&q=80'">
+      </div>
+      <div class="p-card__body">
+        <p class="p-card__origin">전남 완도</p>
+        <h3 class="p-card__name">국내산 광어회 500g</h3>
+        <p class="p-card__rating">★ 4.8 · 리뷰 64</p>
+        <div class="p-card__price"><span class="p-card__current">45,000원</span><span class="p-card__orig">52,000원</span></div>
+        <button type="button" class="p-card__btn" data-toast="데모: 장바구니 담기">장바구니</button>
+      </div>
+    </article>
+    <article class="p-card">
+      <div class="p-card__visual">
+        <span class="p-card__badge">유기농</span>
+        <img src="https://susanfather.com/images/products/gr1.png" alt="" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80'">
+      </div>
+      <div class="p-card__body">
+        <p class="p-card__origin">경기 이천</p>
+        <h3 class="p-card__name">유기농 햅쌀 10kg</h3>
+        <p class="p-card__rating">★ 4.9 · 리뷰 312</p>
+        <div class="p-card__price"><span class="p-card__current">38,500원</span><span class="p-card__orig">42,000원</span></div>
+        <button type="button" class="p-card__btn" data-toast="데모: 장바구니 담기">장바구니</button>
+      </div>
+    </article>
+    <article class="p-card">
+      <div class="p-card__visual">
+        <span class="p-card__badge">제철</span>
+        <img src="https://susanfather.com/images/products/vg1.png" alt="" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80'">
+      </div>
+      <div class="p-card__body">
+        <p class="p-card__origin">강원 평창</p>
+        <h3 class="p-card__name">GAP 인증 상추 1kg</h3>
+        <p class="p-card__rating">★ 4.7 · 리뷰 45</p>
+        <div class="p-card__price"><span class="p-card__current">7,900원</span><span class="p-card__orig">8,900원</span></div>
+        <button type="button" class="p-card__btn" data-toast="데모: 장바구니 담기">장바구니</button>
+      </div>
+    </article>
   </div>
 </section>
-<p class="live-note">실제 운영 쇼핑몰 · susanfather.com</p>
+
+<nav class="sf-bottom" aria-label="하단 메뉴">
+  <span class="active"><span class="sf-bottom__icon">🏠</span>홈</span>
+  <span><span class="sf-bottom__icon">▦</span>카테고리</span>
+  <span><span class="sf-bottom__icon">🔍</span>검색</span>
+  <span><span class="sf-bottom__icon">👤</span>마이</span>
+  <span><span class="sf-bottom__icon">🛒</span>장바구니</span>
+</nav>
+
+<p class="sf-footer">susanfather.com · 실제 운영 쇼핑몰 미리보기</p>
+
 <script src="demo.js"></script>
 </body>
 </html>

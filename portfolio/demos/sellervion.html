@@ -8,162 +8,458 @@
 <link rel="stylesheet" href="shared.css">
 <style>
 :root {
-  --bg: #0b1628;
-  --text: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent: #3b82f6;
-  --accent-2: #2563eb;
-  --border: rgba(255,255,255,0.08);
-  --nav-bg: rgba(11,22,40,0.94);
-  --card-bg: #132238;
-  --btn-radius: 10px;
+  --navy: #0b1628;
+  --navy-mid: #1e3a5f;
+  --blue: #2563eb;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --radius: 16px;
 }
-body { background: var(--bg); color: var(--text); }
-.site-nav { background: var(--nav-bg); border-color: var(--border); }
-.site-nav .logo { color: #fff; }
-.nav-links a { color: var(--text-muted); }
-.nav-links a:hover { color: #fff; }
-.nav-cta { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-.hero {
-  position: relative;
-  padding: clamp(48px, 8vw, 88px) 0 clamp(56px, 7vw, 80px);
-  overflow: hidden;
+body { font-family: 'Pretendard', sans-serif; color: var(--text); background: #fff; }
+
+/* Nav */
+.sv-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(20px,4vw,48px); height: 64px;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
 }
-.hero-glow {
-  position: absolute;
-  inset: 0;
+.sv-logo { font-size: 1.25rem; font-weight: 800; color: var(--navy-mid); letter-spacing: -0.02em; }
+.sv-nav-links { display: flex; align-items: center; gap: clamp(12px,2vw,28px); }
+.sv-nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--muted); transition: color .2s; }
+.sv-nav-links a:hover { color: var(--text); }
+.sv-nav-cta {
+  padding: 9px 18px; border-radius: 10px; font-size: 0.84rem; font-weight: 600;
+  background: var(--navy-mid); color: #fff !important;
+}
+
+/* Hero */
+.sv-hero {
+  position: relative; overflow: hidden;
+  background: var(--navy); color: #fff;
+  padding: clamp(56px,8vw,96px) 0 clamp(64px,9vw,112px);
+}
+.sv-hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(59,130,246,0.22), transparent),
-    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(16,185,129,0.08), transparent);
-  pointer-events: none;
+    radial-gradient(ellipse 70% 55% at 50% -10%, rgba(59,130,246,0.28), transparent),
+    radial-gradient(ellipse 45% 40% at 90% 90%, rgba(16,185,129,0.1), transparent);
 }
-.hero-inner { position: relative; text-align: center; max-width: 760px; margin: 0 auto; }
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  font-size: 0.78rem;
-  color: #bfdbfe;
-  margin-bottom: 24px;
+.sv-hero-grid {
+  position: absolute; inset: 0; opacity: 0.35; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
-.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; }
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  margin-bottom: 18px;
+.sv-hero-inner { position: relative; text-align: center; max-width: 820px; margin: 0 auto; padding: 0 24px; }
+.sv-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06);
+  font-size: 0.8rem; color: #bfdbfe; margin-bottom: 28px;
 }
-.hero h1 em { font-style: normal; color: #60a5fa; }
-.hero p { color: var(--text-muted); font-size: 1.02rem; line-height: 1.75; margin-bottom: 28px; }
-.hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
-.btn-primary {
-  padding: 14px 26px;
-  border-radius: var(--btn-radius);
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  color: #fff;
-  font-weight: 600;
-  box-shadow: 0 8px 28px rgba(37,99,235,0.35);
+.sv-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #34d399; }
+.sv-hero h1 {
+  font-size: clamp(2.1rem,5.5vw,3.75rem); font-weight: 800;
+  line-height: 1.12; letter-spacing: -0.03em; margin-bottom: 22px;
 }
-.btn-outline {
-  padding: 14px 26px;
-  border-radius: var(--btn-radius);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #fff;
-  font-weight: 600;
+.sv-hero h1 .grad {
+  background: linear-gradient(90deg, #93c5fd, #e0f2fe, #a5f3fc);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  max-width: 900px;
-  margin: 0 auto;
+.sv-hero-desc {
+  max-width: 640px; margin: 0 auto 32px;
+  font-size: clamp(0.95rem,2vw,1.12rem); line-height: 1.75; color: #cbd5e1;
 }
-.step {
-  background: var(--card-bg);
+.sv-hero-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.sv-btn-white {
+  padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 0.95rem;
+  background: #fff; color: var(--navy); box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.sv-btn-outline {
+  padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 0.95rem;
+  border: 1px solid rgba(255,255,255,0.25); color: #fff;
+}
+.sv-hero-note { font-size: 0.84rem; color: #94a3b8; }
+
+/* Trust */
+.sv-trust { padding: 48px 0; border-bottom: 1px solid var(--border); background: #fff; }
+.sv-trust-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.sv-trust-card {
+  padding: 22px 20px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: #f8fafc;
+}
+.sv-trust-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy-mid); margin-bottom: 8px; }
+.sv-trust-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
+
+/* Section common */
+.sv-section { padding: clamp(56px,8vw,88px) 0; }
+.sv-section.alt { background: #f8fafc; }
+.sv-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); }
+.sv-title { font-size: clamp(1.6rem,3.5vw,2.35rem); font-weight: 800; letter-spacing: -0.03em; margin: 10px 0 12px; }
+.sv-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 560px; }
+.sv-center { text-align: center; }
+.sv-center .sv-desc { margin: 0 auto; }
+
+/* Margin highlight */
+.sv-margin {
+  max-width: 880px; margin: 36px auto 0; padding: 0 24px;
+}
+.sv-margin-box {
+  display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+  padding: 24px 28px; border-radius: 20px;
+  border: 2px solid #6ee7b7; background: linear-gradient(135deg, #ecfdf5, #fff, #ecfdf5);
+  box-shadow: 0 4px 24px rgba(16,185,129,0.08);
+}
+.sv-margin-icon {
+  width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
+  background: #059669; color: #fff; font-size: 1.4rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(5,150,105,0.3);
+}
+.sv-margin-box h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; }
+.sv-margin-box p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+.sv-margin-list { margin-left: auto; font-size: 0.86rem; color: #065f46; }
+.sv-margin-list li { margin-bottom: 4px; font-weight: 600; }
+
+/* Product cards */
+.sv-products { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 1200px; margin: 40px auto 0; padding: 0 24px; }
+.sv-product {
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); background: #fff;
+  box-shadow: 0 2px 12px rgba(15,23,42,0.04);
+  transition: box-shadow .25s, border-color .25s;
+}
+.sv-product:hover { box-shadow: 0 12px 40px rgba(15,23,42,0.08); border-color: #a7f3d0; }
+.sv-product-visual {
+  aspect-ratio: 4/3; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #f1f5f9, #e0f2fe);
+}
+.sv-product-visual.emerald { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+.sv-product-visual.blue { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+.sv-product-visual.amber { background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+.sv-product-visual .cat { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #94a3b8; }
+.sv-product-visual .name { font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-top: 8px; }
+.sv-product-status {
+  position: absolute; top: 12px; left: 12px;
+  padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;
+}
+.sv-product-status.emerald { background: #d1fae5; color: #065f46; }
+.sv-product-status.blue { background: #dbeafe; color: #1e40af; }
+.sv-product-status.amber { background: #fef3c7; color: #92400e; }
+.sv-product-tag {
+  position: absolute; bottom: 12px; left: 12px; right: 12px;
+  padding: 8px; border-radius: 8px; text-align: center;
+  background: rgba(5,150,105,0.92); color: #fff; font-size: 0.72rem; font-weight: 700;
+}
+.sv-product-body { padding: 20px; }
+.sv-calc {
+  padding: 12px 14px; border-radius: 12px; margin-bottom: 16px;
+  border: 1px solid #a7f3d0; background: #ecfdf5;
+}
+.sv-calc strong { display: block; font-size: 0.78rem; color: #047857; margin-bottom: 4px; }
+.sv-calc span { font-size: 0.84rem; color: #065f46; font-weight: 500; line-height: 1.45; }
+.sv-dl { font-size: 0.84rem; }
+.sv-dl dt { color: #94a3b8; font-size: 0.72rem; font-weight: 600; margin-bottom: 2px; }
+.sv-dl dd { color: #334155; font-weight: 500; margin-bottom: 12px; line-height: 1.45; }
+.sv-dl dd.price { color: var(--navy-mid); font-weight: 700; }
+
+/* Steps */
+.sv-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 1200px; margin: 40px auto 0; padding: 0 24px; }
+.sv-step {
+  position: relative; padding: 28px 24px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: #fff;
+}
+.sv-step-num { font-size: 2.5rem; font-weight: 800; color: #f1f5f9; line-height: 1; }
+.sv-step h3 { font-size: 1.05rem; font-weight: 700; margin: 8px 0 6px; }
+.sv-step p { font-size: 0.84rem; color: var(--muted); line-height: 1.55; }
+
+/* Features */
+.sv-features { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 1200px; margin: 40px auto 0; padding: 0 24px; }
+.sv-feature {
+  display: flex; gap: 16px; padding: 22px 20px; border-radius: var(--radius);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px 16px;
-  text-align: left;
+  background: linear-gradient(135deg, #fff, #f8fafc);
 }
-.step strong { display: block; font-size: 0.72rem; color: #60a5fa; margin-bottom: 6px; }
-.step span { font-size: 0.88rem; font-weight: 600; }
-.step p { font-size: 0.76rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
-.features { padding: 56px 0 64px; background: #091222; }
-.features h2 { text-align: center; font-size: 1.5rem; margin-bottom: 28px; }
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+.sv-feature-icon {
+  width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+  background: var(--navy-mid); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
 }
-.feature {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px 18px;
+.sv-feature h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.sv-feature p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+
+/* Seller targets */
+.sv-targets { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; max-width: 1200px; margin: 36px auto 0; padding: 0 24px; }
+.sv-target {
+  padding: 22px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: #fff;
+  box-shadow: 0 2px 8px rgba(15,23,42,0.03);
 }
-.feature .icon { font-size: 1.4rem; margin-bottom: 10px; }
-.feature h3 { font-size: 0.95rem; margin-bottom: 8px; }
-.feature p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
-.live-note {
-  text-align: center;
-  padding: 20px;
-  font-size: 0.82rem;
-  color: #64748b;
-  border-top: 1px solid var(--border);
+.sv-target h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+.sv-target p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+/* FAQ */
+.sv-faq { max-width: 720px; margin: 36px auto 0; padding: 0 24px; }
+.sv-faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; background: #fff; }
+.sv-faq-q {
+  width: 100%; text-align: left; padding: 18px 20px; font-size: 0.92rem; font-weight: 600;
+  display: flex; justify-content: space-between; align-items: center;
 }
-@media (max-width: 768px) {
-  .steps, .feature-grid { grid-template-columns: 1fr; }
+.sv-faq-q::after { content: '+'; color: var(--blue); font-size: 1.2rem; }
+.sv-faq-item.open .sv-faq-q::after { content: '−'; }
+.sv-faq-a { max-height: 0; overflow: hidden; transition: max-height .35s; }
+.sv-faq-item.open .sv-faq-a { max-height: 200px; }
+.sv-faq-a p { padding: 0 20px 18px; font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
+
+/* CTA bands */
+.sv-reward {
+  max-width: 1120px; margin: 0 auto 48px; padding: 0 24px;
+}
+.sv-reward-box {
+  position: relative; overflow: hidden; border-radius: 24px; text-align: center;
+  padding: clamp(48px,7vw,72px) 32px;
+  background: linear-gradient(135deg, #1e3a5f, #1a4a7a, #2563eb); color: #fff;
+}
+.sv-reward-box .grid-bg {
+  position: absolute; inset: 0; opacity: 0.25; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.sv-reward-inner { position: relative; max-width: 560px; margin: 0 auto; }
+.sv-reward-box h2 { font-size: clamp(1.5rem,3vw,2.1rem); font-weight: 800; margin: 16px 0 12px; }
+.sv-reward-box p { font-size: 0.95rem; line-height: 1.75; color: rgba(219,234,254,0.95); }
+
+.sv-supplier {
+  max-width: 880px; margin: 0 auto; padding: 40px 32px; text-align: center;
+  border: 1px solid var(--border); border-radius: var(--radius); background: #fff;
+}
+.sv-supplier h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 10px; }
+.sv-supplier p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; max-width: 520px; margin: 0 auto 20px; }
+
+/* Footer */
+.sv-footer {
+  background: var(--navy); color: #94a3b8; padding: 40px 24px 28px; text-align: center;
+  font-size: 0.84rem;
+}
+.sv-footer strong { color: #fff; font-size: 1rem; display: block; margin-bottom: 8px; }
+
+@media (max-width: 1024px) {
+  .sv-trust-grid, .sv-products, .sv-features { grid-template-columns: repeat(2,1fr); }
+  .sv-targets { grid-template-columns: repeat(2,1fr); }
+  .sv-steps { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 640px) {
+  .sv-nav-links a:not(.sv-nav-cta) { display: none; }
+  .sv-trust-grid, .sv-products, .sv-features, .sv-targets, .sv-steps { grid-template-columns: 1fr; }
+  .sv-margin-box { flex-direction: column; }
+  .sv-margin-list { margin-left: 0; }
 }
 </style>
 </head>
 <body>
-<nav class="site-nav">
-  <div class="logo">셀러비온</div>
-  <div class="nav-links">
-    <a href="#">상품</a>
-    <a href="#">셀러 신청</a>
-    <a href="#">공급자 입점</a>
-    <a href="#" class="nav-cta">셀러센터</a>
-  </div>
-</nav>
 
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="container hero-inner">
-    <div class="hero-badge"><span class="dot"></span> B2B 위탁판매 · sellervion.shop</div>
-    <h1>팔 상품이 필요한<br><em>온라인 셀러</em>를 위한 플랫폼</h1>
-    <p>재고 없이 위탁판매를 시작하세요. 승인 후 공급가·판매자료를 확인하고, 주문부터 배송·정산까지 셀러센터에서 관리합니다.</p>
-    <div class="hero-actions">
-      <a href="#" class="btn-primary" data-toast="데모: 셀러 신청 페이지">셀러 신청하기</a>
-      <a href="#" class="btn-outline" data-toast="데모: 상품 목록">상품 둘러보기</a>
+<header class="sv-nav">
+  <div class="sv-logo">셀러비온</div>
+  <nav class="sv-nav-links">
+    <a href="#" data-toast="데모: 상품 목록">상품</a>
+    <a href="#" data-toast="데모: 셀러 가이드">가이드</a>
+    <a href="#" data-toast="데모: FAQ">FAQ</a>
+    <a href="#" data-toast="데모: 공급자 입점">공급자 입점</a>
+    <a href="#" class="sv-nav-cta" data-toast="데모: 셀러센터 로그인">셀러센터</a>
+  </nav>
+</header>
+
+<section class="sv-hero">
+  <div class="sv-hero-glow"></div>
+  <div class="sv-hero-grid"></div>
+  <div class="sv-hero-inner">
+    <div class="sv-badge"><span class="dot"></span> B2B 위탁판매 · sellervion.shop</div>
+    <h1>팔 상품이 필요한<br><span class="grad">셀러를 위한</span><br>위탁판매 플랫폼</h1>
+    <p class="sv-hero-desc">인스타그램, 블로그, 스마트스토어, 공동구매 셀러가 재고 없이 판매를 시작할 수 있도록 상품 소싱, 판매자료, 주문, 배송 구조를 연결해주는 B2B 플랫폼입니다.</p>
+    <div class="sv-hero-btns">
+      <a href="#" class="sv-btn-white" data-toast="데모: 셀러 신청">셀러로 시작하기</a>
+      <a href="#" class="sv-btn-outline" data-toast="데모: 공급자 입점">공급자 입점하기</a>
     </div>
-    <div class="steps">
-      <div class="step"><strong>01</strong><span>셀러 신청</span><p>온라인으로 간편 신청</p></div>
-      <div class="step"><strong>02</strong><span>관리자 승인</span><p>검토 후 계정 활성화</p></div>
-      <div class="step"><strong>03</strong><span>채널 판매</span><p>주문 등록·배송·정산</p></div>
+    <p class="sv-hero-note">승인된 셀러만 공급가와 판매자료를 확인할 수 있습니다.</p>
+  </div>
+</section>
+
+<section class="sv-trust">
+  <div class="sv-trust-grid">
+    <div class="sv-trust-card"><h3>승인제 셀러 운영</h3><p>누구나 바로 상품을 볼 수 있는 구조가 아니라, 승인된 셀러만 공급가와 자료를 확인할 수 있습니다.</p></div>
+    <div class="sv-trust-card"><h3>공급가 비공개</h3><p>상품별 공급가는 로그인 및 승인 후 확인 가능하도록 운영해 공급자의 가격 노출 부담을 줄입니다.</p></div>
+    <div class="sv-trust-card"><h3>재고 없는 판매 시작</h3><p>셀러는 직접 재고를 보유하지 않고, 상품 홍보와 주문 등록 중심으로 판매를 시작할 수 있습니다.</p></div>
+    <div class="sv-trust-card"><h3>상품별 마진 계산기</h3><p>승인된 셀러는 각 상품마다 채널 수수료·목표 마진을 넣어 필요한 판매가와 순익을 확인할 수 있습니다.</p></div>
+  </div>
+</section>
+
+<section class="sv-section alt">
+  <div class="sv-center" style="padding:0 24px;">
+    <p class="sv-label">Products</p>
+    <h2 class="sv-title">위탁판매 상품 라인업</h2>
+    <p class="sv-desc">카테고리별 상품을 셀러 채널에 맞게 판매할 수 있습니다. 공급가·판매자료와 함께 상품별 마진 계산기가 제공됩니다.</p>
+  </div>
+  <div class="sv-margin">
+    <div class="sv-margin-box">
+      <div class="sv-margin-icon">%</div>
+      <div>
+        <p class="sv-label" style="color:#059669;">Seller Tool</p>
+        <h3>상품별 마진 계산기</h3>
+        <p>셀러 승인 후, 각 상품마다 채널 수수료와 목표 마진을 입력하면 필요한 판매가와 예상 순익을 바로 확인할 수 있습니다.</p>
+      </div>
+      <ul class="sv-margin-list">
+        <li>✓ 상품마다 개별 제공</li>
+        <li>✓ 판매가·순익 자동 계산</li>
+        <li style="font-weight:400;opacity:.85;">승인 후 이용</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sv-products">
+    <article class="sv-product">
+      <div class="sv-product-visual emerald">
+        <span class="sv-product-status emerald">셀러 모집중</span>
+        <div style="text-align:center"><p class="cat">식품</p><p class="name">산지직송 홍게</p></div>
+        <span class="sv-product-tag">마진 계산기 제공 상품</span>
+      </div>
+      <div class="sv-product-body">
+        <div class="sv-calc"><strong>마진 계산기</strong><span>승인 후 이 상품의 공급가 기준으로 판매가·순익 계산</span></div>
+        <dl class="sv-dl">
+          <dt>판매 방식</dt><dd>위탁판매 / 공동구매 가능</dd>
+          <dt>공급가</dt><dd class="price">승인 후 공개</dd>
+          <dt>배송</dt><dd>산지 직송</dd>
+        </dl>
+      </div>
+    </article>
+    <article class="sv-product">
+      <div class="sv-product-visual blue">
+        <span class="sv-product-status blue">입점 협의중</span>
+        <div style="text-align:center"><p class="cat">건강간식</p><p class="name">다이어트 젤리</p></div>
+        <span class="sv-product-tag">마진 계산기 제공 상품</span>
+      </div>
+      <div class="sv-product-body">
+        <div class="sv-calc"><strong>마진 계산기</strong><span>승인 후 이 상품의 공급가 기준으로 판매가·순익 계산</span></div>
+        <dl class="sv-dl">
+          <dt>판매 방식</dt><dd>공동구매 / SNS 판매 가능</dd>
+          <dt>공급가</dt><dd class="price">승인 후 공개</dd>
+          <dt>배송</dt><dd>택배 출고</dd>
+        </dl>
+      </div>
+    </article>
+    <article class="sv-product">
+      <div class="sv-product-visual amber">
+        <span class="sv-product-status amber">셀러 모집 예정</span>
+        <div style="text-align:center"><p class="cat">간편식</p><p class="name">곤약바</p></div>
+        <span class="sv-product-tag">마진 계산기 제공 상품</span>
+      </div>
+      <div class="sv-product-body">
+        <div class="sv-calc"><strong>마진 계산기</strong><span>승인 후 이 상품의 공급가 기준으로 판매가·순익 계산</span></div>
+        <dl class="sv-dl">
+          <dt>판매 방식</dt><dd>블로그 / 인스타 판매 가능</dd>
+          <dt>공급가</dt><dd class="price">승인 후 공개</dd>
+          <dt>배송</dt><dd>택배 출고</dd>
+        </dl>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sv-section">
+  <div class="sv-center" style="padding:0 24px;">
+    <p class="sv-label">For Sellers</p>
+    <h2 class="sv-title">이런 셀러에게 적합합니다</h2>
+    <p class="sv-desc">채널은 있지만 판매할 상품이 부족한 분께 상품 소싱과 판매 구조를 연결해 드립니다.</p>
+  </div>
+  <div class="sv-targets">
+    <div class="sv-target"><h3>인스타그램 셀러</h3><p>팔로워나 지인이 있지만 판매할 상품이 부족한 분</p></div>
+    <div class="sv-target"><h3>블로그 운영자</h3><p>리뷰형 콘텐츠나 정보성 글을 통해 상품 판매를 연결하고 싶은 분</p></div>
+    <div class="sv-target"><h3>스마트스토어 셀러</h3><p>직접 재고를 쌓지 않고 새로운 상품군을 테스트하고 싶은 분</p></div>
+    <div class="sv-target"><h3>공동구매 운영자</h3><p>단기간 주문을 모아 판매하고 정산하는 구조를 원하는 분</p></div>
+  </div>
+</section>
+
+<section class="sv-section alt">
+  <div class="sv-center" style="padding:0 24px;">
+    <p class="sv-label">How it works</p>
+    <h2 class="sv-title">판매 흐름</h2>
+    <p class="sv-desc">신청부터 주문·출고까지 6단계로 연결됩니다</p>
+  </div>
+  <div class="sv-steps">
+    <div class="sv-step"><div class="sv-step-num">01</div><h3>셀러 신청</h3><p>온라인으로 간편 신청</p></div>
+    <div class="sv-step"><div class="sv-step-num">02</div><h3>관리자 승인</h3><p>검토 후 계정 활성화</p></div>
+    <div class="sv-step"><div class="sv-step-num">03</div><h3>상품 확인</h3><p>공급가·판매자료 열람</p></div>
+    <div class="sv-step"><div class="sv-step-num">04</div><h3>채널 판매</h3><p>내 채널에서 소비자 판매</p></div>
+    <div class="sv-step"><div class="sv-step-num">05</div><h3>주문 등록</h3><p>사이트에 주문 접수</p></div>
+    <div class="sv-step"><div class="sv-step-num">06</div><h3>배송·정산</h3><p>주문 기반 출고·정산</p></div>
+  </div>
+</section>
+
+<section class="sv-section">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <p class="sv-label">Features</p>
+    <h2 class="sv-title">제공 기능</h2>
+    <p class="sv-desc">셀러는 판매에 집중하고, 공급자는 가격 보호와 채널 관리를 고려한 구조로 운영됩니다.</p>
+  </div>
+  <div class="sv-features">
+    <div class="sv-feature"><div class="sv-feature-icon">🏷️</div><div><h3>상품 소싱</h3><p>카테고리별 위탁판매 상품 라인업</p></div></div>
+    <div class="sv-feature"><div class="sv-feature-icon">🔒</div><div><h3>공급가 비공개</h3><p>승인된 셀러만 공급가 확인</p></div></div>
+    <div class="sv-feature"><div class="sv-feature-icon">📐</div><div><h3>상품별 마진 계산기</h3><p>채널 수수료·목표 마진으로 판매가·순익 확인</p></div></div>
+    <div class="sv-feature"><div class="sv-feature-icon">🖼️</div><div><h3>판매자료 제공</h3><p>상세페이지·홍보 문구·이미지</p></div></div>
+    <div class="sv-feature"><div class="sv-feature-icon">📋</div><div><h3>주문·배송</h3><p>주문 등록부터 출고까지 연결</p></div></div>
+    <div class="sv-feature"><div class="sv-feature-icon">📊</div><div><h3>셀러센터</h3><p>주문·리워드·상품 한곳에서 관리</p></div></div>
+  </div>
+</section>
+
+<section class="sv-section alt">
+  <div class="sv-center" style="padding:0 24px;">
+    <p class="sv-label">FAQ</p>
+    <h2 class="sv-title">자주 묻는 질문</h2>
+  </div>
+  <div class="sv-faq">
+    <div class="sv-faq-item open">
+      <button type="button" class="sv-faq-q" onclick="this.parentElement.classList.toggle('open')">공급가는 어디서 확인하나요?</button>
+      <div class="sv-faq-a"><p>공급가는 셀러 신청 후 승인된 회원에게만 공개됩니다. 상품별 공급가와 권장 판매가는 승인 후 확인할 수 있습니다.</p></div>
+    </div>
+    <div class="sv-faq-item">
+      <button type="button" class="sv-faq-q" onclick="this.parentElement.classList.toggle('open')">판매가는 제가 정하나요?</button>
+      <div class="sv-faq-a"><p>기본적으로 셀러가 판매가를 설정할 수 있지만, 공급자 보호를 위해 상품별 최소 판매가 기준이 있을 수 있습니다.</p></div>
+    </div>
+    <div class="sv-faq-item">
+      <button type="button" class="sv-faq-q" onclick="this.parentElement.classList.toggle('open')">주문은 어떻게 등록하나요?</button>
+      <div class="sv-faq-a"><p>셀러가 판매 후 주문 정보를 등록하면, 공급자 또는 운영자가 확인 후 출고를 진행하는 방식입니다.</p></div>
     </div>
   </div>
 </section>
 
-<section class="features">
-  <div class="container">
-    <h2>플랫폼 핵심 기능</h2>
-    <div class="feature-grid">
-      <div class="feature"><div class="icon">🏷️</div><h3>상품 소싱</h3><p>카테고리별 위탁판매 상품 라인업</p></div>
-      <div class="feature"><div class="icon">🔒</div><h3>공급가 비공개</h3><p>승인된 셀러만 공급가 확인</p></div>
-      <div class="feature"><div class="icon">📐</div><h3>마진 계산기</h3><p>채널 수수료·목표 마진 반영</p></div>
-      <div class="feature"><div class="icon">🖼️</div><h3>판매자료 제공</h3><p>상세페이지·홍보 문구·이미지</p></div>
-      <div class="feature"><div class="icon">📋</div><h3>주문·배송</h3><p>주문 등록부터 출고까지 연결</p></div>
-      <div class="feature"><div class="icon">📊</div><h3>셀러센터</h3><p>주문·리워드·상품 한곳에서 관리</p></div>
+<div class="sv-reward">
+  <div class="sv-reward-box">
+    <div class="grid-bg"></div>
+    <div class="sv-reward-inner">
+      <span style="display:inline-block;padding:4px 14px;border-radius:999px;background:rgba(255,255,255,0.1);font-size:0.78rem;color:#bfdbfe;">Referral Reward</span>
+      <h2>판매 기반 추천 리워드</h2>
+      <p>직접 추천한 셀러의 <strong style="color:#fff;">실제 판매</strong>가 발생했을 때, 운영 정책에 따라 1단계 추천인에게만 리워드가 적용됩니다.</p>
     </div>
   </div>
-</section>
-<p class="live-note">실제 운영 사이트 · sellervion.shop</p>
+</div>
+
+<div style="max-width:880px;margin:0 auto 56px;padding:0 24px;">
+  <div class="sv-supplier">
+    <h2>상품은 있지만 판매 채널이 부족한 공급자를 모집합니다</h2>
+    <p>승인된 셀러를 통해 상품을 유통하고, 공급가 보호와 판매 채널 관리를 고려한 입점 상담을 받을 수 있습니다.</p>
+    <a href="#" class="sv-btn-white" style="display:inline-block;background:var(--navy-mid);color:#fff;" data-toast="데모: 공급자 입점 문의">공급자 입점 문의하기</a>
+  </div>
+</div>
+
+<footer class="sv-footer">
+  <strong>셀러비온</strong>
+  sellervion.shop · B2B 위탁판매 플랫폼<br>
+  <span style="margin-top:12px;display:block;opacity:.7;">실제 운영 사이트 미리보기</span>
+</footer>
+
 <script src="demo.js"></script>
 </body>
 </html>
