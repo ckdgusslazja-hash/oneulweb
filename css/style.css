@@ -102,7 +102,36 @@ ul {
   gap: 10px;
   font-family: 'Outfit', sans-serif;
   font-weight: 800;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  gap: 2px;
+}
+
+.logo-en {
   font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+.logo-ko {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 0.02em;
+}
+
+.footer .logo-ko {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.logo-ko-inline {
+  font-size: 0.85em;
+  font-weight: 500;
+  opacity: 0.75;
 }
 
 .logo-icon {
