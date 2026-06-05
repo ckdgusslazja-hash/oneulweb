@@ -124,6 +124,8 @@ ul {
   display: block;
   height: 72px;
   width: auto;
+  max-width: none;
+  object-fit: contain;
 }
 
 .logo-img--footer {
@@ -1699,12 +1701,16 @@ section {
     min-width: 0;
   }
 
-  .logo-img {
+  .header .logo-img {
     height: 34px;
     width: auto;
     max-width: min(100%, 148px);
     object-fit: contain;
     object-position: left center;
+  }
+
+  .footer .logo-img--footer {
+    max-width: none;
   }
 
   .header-cta {
