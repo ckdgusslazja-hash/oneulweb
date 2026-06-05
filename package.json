@@ -7,6 +7,7 @@
     "push": "powershell -ExecutionPolicy Bypass -File scripts/push-github.ps1",
     "watch": "powershell -ExecutionPolicy Bypass -File scripts/watch-deploy.ps1",
     "hooks:install": "powershell -ExecutionPolicy Bypass -File scripts/install-git-hooks.ps1",
+    "seo": "powershell -ExecutionPolicy Bypass -File scripts/patch-portfolio-seo.ps1; powershell -ExecutionPolicy Bypass -File scripts/generate-sitemap.ps1",
     "deploy": "powershell -ExecutionPolicy Bypass -File scripts/push-github.ps1",
     "deploy:preview": "vercel"
   }
