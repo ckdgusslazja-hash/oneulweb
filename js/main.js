@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initSmoothScroll();
   initShowcaseControls();
+  initConsultationTicker();
 });
 
 // Header scroll effect
@@ -274,3 +275,48 @@ function initSmoothScroll() {
 
   sections.forEach(section => observer.observe(section));
 })();
+
+// CTA live consultation feed
+function initConsultationTicker() {
+  const textEl = document.querySelector('.cta-live-text');
+  if (!textEl) return;
+
+  const maskedNames = [
+    '김*민', '이*수', '박*현', '최*진', '정*영', '강*호', '조*준', '윤*서',
+    '장*우', '임*윤', '한*나', '오*희', '서*동', '신*태', '권*성', '황*미',
+    '송*경', '류*환', '배*철', '노*원', '문*혁', '양*지', '홍*연', '백*승'
+  ];
+
+  function formatDate(date) {
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  }
+
+  function buildMessages() {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const dates = [formatDate(today), formatDate(yesterday)];
+
+    const shuffled = [...maskedNames].sort(() => Math.random() - 0.5);
+    return shuffled.map((name, i) => {
+      const date = dates[i % 2];
+      return `${date} ${name} 님이 상담접수하였습니다`;
+    });
+  }
+
+  let messages = buildMessages();
+  let index = 0;
+
+  const showNext = () => {
+    textEl.classList.add('is-fading');
+    setTimeout(() => {
+      index = (index + 1) % messages.length;
+      if (index === 0) messages = buildMessages();
+      textEl.textContent = messages[index];
+      textEl.classList.remove('is-fading');
+    }, 350);
+  };
+
+  textEl.textContent = messages[0];
+  setInterval(showNext, 3200);
+}
