@@ -464,7 +464,11 @@ ul {
   transition: var(--transition);
 }
 
-.hero-mockup:hover {
+.hero-mockup--phone {
+  display: none;
+}
+
+.hero-mockup--desktop:hover {
   transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
 }
 
@@ -1888,6 +1892,194 @@ section {
 
   .floating-card {
     display: none;
+  }
+
+  .hero-mockup--desktop {
+    display: none;
+  }
+
+  .hero-mockup--phone {
+    display: block;
+    transform: none;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .hero-visual {
+    max-width: 300px;
+    margin: 32px auto 0;
+  }
+
+  .phone-frame {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border-radius: 38px;
+    padding: 10px;
+    box-shadow: 0 28px 56px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  }
+
+  .phone-notch {
+    width: 88px;
+    height: 24px;
+    background: #0f172a;
+    border-radius: 0 0 16px 16px;
+    margin: -2px auto 6px;
+  }
+
+  .phone-screen {
+    background: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px 4px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .phone-signal {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 10px;
+  }
+
+  .phone-signal span {
+    display: block;
+    width: 3px;
+    background: var(--text);
+    border-radius: 1px;
+  }
+
+  .phone-signal span:nth-child(1) { height: 4px; opacity: 0.4; }
+  .phone-signal span:nth-child(2) { height: 7px; opacity: 0.7; }
+  .phone-signal span:nth-child(3) { height: 10px; }
+
+  .phone-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .phone-logo-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .phone-brand {
+    flex: 1;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .phone-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .phone-hamburger span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text-muted);
+    border-radius: 2px;
+  }
+
+  .phone-hero {
+    flex: 1;
+    padding: 28px 20px 20px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(79, 70, 229, 0.07) 0%, rgba(249, 115, 22, 0.04) 100%);
+  }
+
+  .phone-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    margin-bottom: 14px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: rgba(79, 70, 229, 0.1);
+    border-radius: 999px;
+  }
+
+  .phone-hero h3 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .phone-hero p {
+    font-size: 0.72rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+
+  .phone-cta {
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
+    padding: 11px 20px;
+    background: var(--gradient);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+  }
+
+  .phone-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 14px 12px 16px;
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+  }
+
+  .phone-stat {
+    text-align: center;
+    padding: 8px 4px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .phone-stat strong {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+
+  .phone-stat span {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.58rem;
+    color: var(--text-muted);
+    line-height: 1.2;
   }
 }
 
