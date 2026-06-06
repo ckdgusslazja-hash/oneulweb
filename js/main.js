@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPortfolioFilter();
   initPortfolioIframes();
   initContactForm();
+  initPhoneInput();
   initSmoothScroll();
   initShowcaseControls();
   initConsultationTicker();
@@ -235,6 +236,39 @@ function initPortfolioFilter() {
 
 // Contact form → Formspree
 const FORMSPREE_URL = 'https://formspree.io/f/xvznzgro';
+
+function formatPhoneNumber(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+
+  if (digits.startsWith('02')) {
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 5) return `${digits.slice(0, 2)}-${digits.slice(2)}`;
+    if (digits.length <= 9) return `${digits.slice(0, 2)}-${digits.slice(2, 5)}-${digits.slice(5)}`;
+    return `${digits.slice(0, 2)}-${digits.slice(2, 6)}-${digits.slice(6, 10)}`;
+  }
+
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+  return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7, 11)}`;
+}
+
+function initPhoneInput() {
+  const phoneInput = document.getElementById('phone');
+  if (!phoneInput) return;
+
+  phoneInput.addEventListener('input', () => {
+    const formatted = formatPhoneNumber(phoneInput.value);
+    if (phoneInput.value !== formatted) {
+      phoneInput.value = formatted;
+    }
+  });
+
+  phoneInput.addEventListener('keydown', (e) => {
+    const allowed = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End'];
+    if (allowed.includes(e.key) || e.ctrlKey || e.metaKey) return;
+    if (!/^\d$/.test(e.key)) e.preventDefault();
+  });
+}
 
 function initContactForm() {
   const form = document.querySelector('.contact-form form');
