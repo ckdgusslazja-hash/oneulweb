@@ -1131,6 +1131,62 @@ section {
   color: var(--text-muted);
 }
 
+.portfolio-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  background: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.page-btn.active {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: white;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-btn--arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.page-info {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+.portfolio-card[hidden] {
+  display: none !important;
+}
+
 /* Portfolio thumb themes */
 .thumb-cafe { background: linear-gradient(135deg, #fef3c7, #fde68a); }
 .thumb-tech { background: linear-gradient(135deg, #dbeafe, #93c5fd); }

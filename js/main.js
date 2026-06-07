@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMobileNav();
   initScrollAnimations();
-  initPortfolioFilter();
   initPortfolioIframes();
+  initPortfolioGallery();
   initContactForm();
   initPhoneInput();
   initSmoothScroll();
@@ -74,28 +74,70 @@ function initScrollAnimations() {
   elements.forEach(el => observer.observe(el));
 }
 
-// Portfolio iframe scaling + lazy load (67 previews)
+// Portfolio iframe scaling + lazy load
+const PORTFOLIO_IFRAME_WIDTH = 1440;
+const PORTFOLIO_LOAD_MARGIN = '320px 0px';
+let portfolioLazyObserver = null;
+
+function scalePortfolioThumb(thumb) {
+  const iframe = thumb.querySelector('iframe');
+  if (!iframe || !iframe.src) return;
+  const scale = thumb.offsetWidth / PORTFOLIO_IFRAME_WIDTH;
+  iframe.style.transform = `scale(${scale})`;
+}
+
+function loadPortfolioIframe(thumb) {
+  const iframe = thumb.querySelector('iframe');
+  if (!iframe) return;
+
+  const src = iframe.dataset.src;
+  if (!src || iframe.getAttribute('src')) {
+    scalePortfolioThumb(thumb);
+    return;
+  }
+
+  iframe.src = src;
+  iframe.addEventListener('load', () => scalePortfolioThumb(thumb), { once: true });
+}
+
+function unloadPortfolioIframe(thumb) {
+  const iframe = thumb.querySelector('iframe');
+  if (!iframe?.src) return;
+  iframe.dataset.src = iframe.src;
+  iframe.removeAttribute('src');
+}
+
+function observePortfolioThumb(thumb) {
+  if (!portfolioLazyObserver) return;
+  const iframe = thumb.querySelector('iframe');
+  if (iframe?.dataset.src && !iframe.getAttribute('src')) {
+    portfolioLazyObserver.observe(thumb);
+  }
+}
+
+function unobservePortfolioThumb(thumb) {
+  portfolioLazyObserver?.unobserve(thumb);
+}
+
+function refreshVisiblePortfolioIframes() {
+  document.querySelectorAll('.portfolio-card:not([hidden]) .portfolio-thumb').forEach((thumb) => {
+    const rect = thumb.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 320 && rect.bottom > -320) {
+      loadPortfolioIframe(thumb);
+    } else {
+      observePortfolioThumb(thumb);
+    }
+  });
+
+  document.querySelectorAll('.portfolio-card[hidden] .portfolio-thumb').forEach((thumb) => {
+    unobservePortfolioThumb(thumb);
+    unloadPortfolioIframe(thumb);
+  });
+}
+
 function initPortfolioIframes() {
   const thumbs = document.querySelectorAll('.portfolio-thumb');
   if (!thumbs.length) return;
-
-  const IFRAME_WIDTH = 1440;
-  const LOAD_MARGIN = '320px 0px';
-
-  const scaleThumb = (thumb) => {
-    const iframe = thumb.querySelector('iframe');
-    if (!iframe || !iframe.src) return;
-    const scale = thumb.offsetWidth / IFRAME_WIDTH;
-    iframe.style.transform = `scale(${scale})`;
-  };
-
-  const loadIframe = (iframe) => {
-    const src = iframe.dataset.src;
-    if (!src || iframe.getAttribute('src')) return;
-
-    iframe.src = src;
-    iframe.addEventListener('load', () => scaleThumb(iframe.closest('.portfolio-thumb')), { once: true });
-  };
 
   thumbs.forEach((thumb) => {
     const iframe = thumb.querySelector('iframe');
@@ -106,41 +148,26 @@ function initPortfolioIframes() {
       iframe.dataset.src = src;
       iframe.removeAttribute('src');
     }
-
-    if (iframe.dataset.src) {
-      const rect = thumb.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 320 && rect.bottom > -320) {
-        loadIframe(iframe);
-      }
-    } else if (iframe.src) {
-      scaleThumb(thumb);
-    }
   });
 
-  const lazyObserver = new IntersectionObserver(
+  portfolioLazyObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        const iframe = entry.target.querySelector('iframe');
-        if (iframe) loadIframe(iframe);
-        lazyObserver.unobserve(entry.target);
+        loadPortfolioIframe(entry.target);
+        portfolioLazyObserver.unobserve(entry.target);
       });
     },
-    { rootMargin: LOAD_MARGIN }
+    { rootMargin: PORTFOLIO_LOAD_MARGIN }
   );
-
-  thumbs.forEach((thumb) => {
-    const iframe = thumb.querySelector('iframe');
-    if (iframe?.dataset.src && !iframe.getAttribute('src')) {
-      lazyObserver.observe(thumb);
-    }
-  });
 
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      thumbs.forEach(scaleThumb);
+      document.querySelectorAll('.portfolio-thumb iframe[src]').forEach((iframe) => {
+        scalePortfolioThumb(iframe.closest('.portfolio-thumb'));
+      });
     }, 120);
   }, { passive: true });
 }
@@ -210,28 +237,104 @@ function initShowcaseControls() {
   else setDesktop();
 }
 
-// Portfolio filter
-function initPortfolioFilter() {
+// Portfolio filter + pagination (6 per page)
+const PORTFOLIO_PER_PAGE = 6;
+
+function initPortfolioGallery() {
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.portfolio-card');
-  if (!filterBtns.length || !cards.length) return;
+  const cards = [...document.querySelectorAll('.portfolio-card')];
+  const paginationEl = document.getElementById('portfolio-pagination');
+  if (!cards.length || !paginationEl) return;
 
-  filterBtns.forEach(btn => {
+  let activeFilter = 'all';
+  let currentPage = 1;
+
+  const getFilteredCards = () =>
+    cards.filter((card) => activeFilter === 'all' || card.dataset.category === activeFilter);
+
+  const render = () => {
+    const filtered = getFilteredCards();
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PORTFOLIO_PER_PAGE));
+
+    if (currentPage > totalPages) currentPage = 1;
+
+    const start = (currentPage - 1) * PORTFOLIO_PER_PAGE;
+    const visibleSet = new Set(filtered.slice(start, start + PORTFOLIO_PER_PAGE));
+
+    cards.forEach((card) => {
+      const visible = visibleSet.has(card);
+      card.hidden = !visible;
+    });
+
+    renderPagination(paginationEl, totalPages, filtered.length, currentPage);
+    refreshVisiblePortfolioIframes();
+  };
+
+  const goToPage = (page) => {
+    currentPage = page;
+    render();
+    paginationEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
+      filterBtns.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
-
-      const filter = btn.dataset.filter;
-
-      cards.forEach(card => {
-        const category = card.dataset.category;
-        const show = filter === 'all' || category === filter;
-        card.style.display = show ? '' : 'none';
-        card.style.opacity = show ? '1' : '0';
-        card.style.transform = show ? '' : 'scale(0.95)';
-      });
+      activeFilter = btn.dataset.filter;
+      currentPage = 1;
+      render();
     });
   });
+
+  paginationEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.page-btn');
+    if (!btn || btn.disabled) return;
+
+    const page = btn.dataset.page;
+    if (page === 'prev') goToPage(currentPage - 1);
+    else if (page === 'next') goToPage(currentPage + 1);
+    else goToPage(Number(page));
+  });
+
+  render();
+}
+
+function renderPagination(container, totalPages, totalItems, page) {
+  container.innerHTML = '';
+
+  const prev = document.createElement('button');
+  prev.type = 'button';
+  prev.className = 'page-btn page-btn--arrow';
+  prev.dataset.page = 'prev';
+  prev.setAttribute('aria-label', '이전 페이지');
+  prev.textContent = '‹';
+  prev.disabled = totalPages <= 1 || page === 1;
+  container.appendChild(prev);
+
+  for (let i = 1; i <= totalPages; i += 1) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `page-btn${i === page ? ' active' : ''}`;
+    btn.dataset.page = String(i);
+    btn.textContent = String(i);
+    btn.setAttribute('aria-label', `${i}페이지`);
+    btn.setAttribute('aria-current', i === page ? 'page' : 'false');
+    container.appendChild(btn);
+  }
+
+  const next = document.createElement('button');
+  next.type = 'button';
+  next.className = 'page-btn page-btn--arrow';
+  next.dataset.page = 'next';
+  next.setAttribute('aria-label', '다음 페이지');
+  next.textContent = '›';
+  next.disabled = totalPages <= 1 || page === totalPages;
+  container.appendChild(next);
+
+  const info = document.createElement('span');
+  info.className = 'page-info';
+  info.textContent = `총 ${totalItems}개 · ${page}/${totalPages}페이지`;
+  container.appendChild(info);
 }
 
 // Contact form → Formspree
