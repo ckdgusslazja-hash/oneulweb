@@ -1669,6 +1669,38 @@ section {
   color: var(--primary-light);
 }
 
+.footer-business {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 28px 0 8px;
+  margin-bottom: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px 32px;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-business p {
+  margin: 0;
+}
+
+.footer-business span {
+  display: inline-block;
+  min-width: 7.5em;
+  color: rgba(255, 255, 255, 0.38);
+  margin-right: 6px;
+}
+
+.footer-business a {
+  color: rgba(255, 255, 255, 0.55);
+  transition: var(--transition);
+}
+
+.footer-business a:hover {
+  color: var(--primary-light);
+}
+
 /* ===== LEGAL PAGES ===== */
 .legal-page {
   padding: 120px 0 80px;
