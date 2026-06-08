@@ -1613,7 +1613,7 @@ section {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr repeat(4, 1fr);
+  grid-template-columns: 2fr repeat(3, 1fr);
   gap: 48px;
   margin-bottom: 48px;
 }
